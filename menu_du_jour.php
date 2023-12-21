@@ -14,11 +14,13 @@
     <main>
     <?php 
 $db = new PDO('mysql:host=localhost;dbname=ent;port=3306','root','');
+// première requete pour avoir tous les menus de la base de données, sauf le dernier
 $requete ="SELECT * FROM crous ORDER BY date ASC LIMIT 1, " . PHP_INT_MAX;
 $stmt=$db->prepare($requete);
 $stmt->execute();
 $tableauResult=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// seconde requete pour avoir seulement le dernier élement de la bdd
 $requeteDernier = "SELECT * FROM crous ORDER BY date ASC LIMIT 1";
 $stmtDernier = $db->prepare($requeteDernier);
 $stmtDernier->execute();
@@ -34,7 +36,8 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                       </svg>
                     <span class="visually-hidden">Previous</span>
                   </button>
-                <h2>24/11</h2>
+                  <!-- afficher la date au format jj-mm (chatGPT) -->
+                <h2 class="m-0"><?php echo date('d-m', strtotime($dernierElement['date'])); ?></h2>
                   <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right carousel-control-next-icon" viewBox="0 0 16 16" style="color:black">
                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
@@ -42,7 +45,7 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                     <span class="visually-hidden">Next</span>
                   </button>
             </div>
-            <div class="carousel-inner shadow rounded-4">
+            <div class="carousel-inner shadow-sm rounded-4">
                 <!-- première slide -->
                 <div class="card carousel-item active">
                     <div>

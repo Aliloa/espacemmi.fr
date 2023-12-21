@@ -14,9 +14,33 @@ html {
 body {
     background-color: #F4F7FE;
 }
+
+/* PAGE PRESENTATION */
+.presentation p {
+    background-color: var(--Leviolet);
+    color: white;
+    padding: 20px;
+    margin: 10px;
+}
+.infos {
+    padding: 15px;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+.menu_hebdomadaire button {
+    background-color: var(--Leviolet);
+    color: white;
+    max-width: 180px;
+    align-self: flex-end;
+}
+
+.horaires .border {
+    border: solid 2px #F4F7FE !important;
+}
+/* PAGE MENU */
 .carousel-inner {
-    width: 20rem;
-    /* background-color: white; */
     border: none;
     margin: auto;
 }
