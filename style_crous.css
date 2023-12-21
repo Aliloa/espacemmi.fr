@@ -1,0 +1,52 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+:root {
+    --Leviolet: #6C63FF;
+  }
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #F4F7FE;
+}
+.carousel-inner {
+    width: 20rem;
+    /* background-color: white; */
+    border: none;
+    margin: auto;
+}
+.today .card {
+    /* color: white; */
+    text-align: center;
+}
+.today img {
+    height: 9rem;
+    object-fit: cover;
+}
+.today h3 {
+    margin: 0;
+    margin-top: 5px;
+    font-size: 1rem;
+}
+.entre {
+    margin-top: 20px !important;
+}
+.border {
+    border: solid #F4F7FE !important;
+    opacity: 1;
+}
+.date {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.date button {
+    position:relative !important;
+}
