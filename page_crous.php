@@ -11,15 +11,16 @@
     <nav>
         <!-- Pas à moi de le faire? -->
     </nav>
+    <div class="header_main">
     <header class="container presentation">
-        <p class="rounded-5">Bienvenue sur la page officielle du Centre Régional des Œuvres Universitaires et Scolaires (CROUS) dédiée aux Restaurants Universitaires à Créteil.</p>
+        <p class="rounded-4">Bienvenue sur la page officielle du Centre Régional des Œuvres Universitaires et Scolaires (CROUS) dédiée aux Restaurants Universitaires à Créteil.</p>
 </header>
-    <main>
-<section class="container menu_hebdomadaire my-5">
-    <h1>Menu hebdomadaire</h1>
-    <div class="card rounded-4 shadow-sm">
+    <main class="container">
+<section class="menu_hebdomadaire">
+    <h1 class="fs-4 fw-bold ms-3">Menu hebdomadaire</h1>
+    <div class="card rounded-4 shadow">
     <div class="infos d-flex flex-column">
-        <h2 class="fs-4 fw-bold">Restaurant universitaire EISEE:</h2>
+        <h2 class="fs-5 fw-bold">Restaurant universitaire EISEE:</h2>
         <div class="d-flex justify-content-between">
         <p>PAIEMENT POSSIBLE: <br>
 Carte bancaire <br>
@@ -29,7 +30,7 @@ IZLY</p>
     </div>
     <hr class="border border-3 m-1">
     <div class="infos d-flex flex-column">
-        <h2 class="fs-4 fw-bold">Restaurant universitaire Copernic:</h2>
+        <h2 class="fs-5 fw-bold">Restaurant universitaire Copernic:</h2>
         <div class="d-flex justify-content-between">
         <p>PAIEMENT POSSIBLE: <br>
 Carte bancaire <br>
@@ -39,7 +40,7 @@ IZLY</p>
     </div>
     <hr class="border border-3 m-1">
     <div class="infos d-flex flex-column">
-        <h2 class="fs-4 fw-bold">Menu de la caféteria</h2>
+        <h2 class="fs-5 fw-bold">Menu de la caféteria</h2>
         <div class="d-flex justify-content-between">
         <p>PAIEMENT POSSIBLE: <br>
 Carte bancaire <br>
@@ -51,16 +52,20 @@ IZLY</p>
 </section>
 
 <!-- La carte -->
-<section class="container my-5">
-    <h1>Découvrez nos Restaurants Universitaires</h1>
+<section class="decouvrez_resto">
+    <h1 class="fs-4 fw-bold">Découvrez nos Restaurants Universitaires</h1>
     <div>
         Ajouter une map
+        <img src="images/carte.png" alt=""  style="width:100%;">
     </div>
 </section>
 
-<section class="container horaires my-5">
-<div class="card shadow-sm rounded-4">
-    <h1 class="p-3 fs-3 fw-bold">Horaires des Restaurants :</h1>
+    </main>
+    </div>
+
+    <aside class="container horaires">
+<div class="card shadow rounded-4">
+    <h1 class="p-3 fs-4 fw-bold">Horaires des Restaurants :</h1>
 
     <div class="d-flex justify-content-between px-3">
         <p>Lundi:</p>
@@ -98,9 +103,8 @@ IZLY</p>
     </div>
 
 </div>
-</section>
+</aside>
 
-    </main>
     <footer>
         <!-- Pas ma partie -->
     </footer>

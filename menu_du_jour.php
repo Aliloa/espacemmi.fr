@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style_crous.css" />
+    <link rel="stylesheet" type="text/css" href="style_menu.css" />
     <title>Espace mmi menu</title>
 </head>
 <body>
@@ -45,7 +45,7 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                     <span class="visually-hidden">Next</span>
                   </button>
             </div>
-            <div class="carousel-inner shadow-sm rounded-4">
+            <div class="carousel-inner shadow rounded-4">
                 <!-- première slide -->
                 <div class="card carousel-item active">
                     <div>
