@@ -27,7 +27,7 @@ $stmtDernier->execute();
 $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
 ?>
 <!-- Carousel version mobile, avec Bootstrap -->
-        <section class="container today carousel slide" id="carouselExample" >
+        <section class="container today carousel slide mobile" id="carouselExample" >
             <!-- Date avec les boutons -->
             <div class="date">
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -103,6 +103,92 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                     }
                     ?>
             </div>
+        </section>
+
+        <!-- VERSION DESKTOP -->
+        <section class="container today desktop">
+            <div class="menu_ajd">
+                <div>
+                    <h2 class="fs-5">24/11</h2>
+                </div>
+            <div class="card shadow violet">
+                    <div>
+                        <img src=" <?php
+                            echo $dernierElement['image_plat'];
+                        ?>" alt="" class="card-img-top">
+                        <h3 class="fw-bold entre">Entrée</h3>
+                        <p>
+                            <?php
+                            $dernierElement['entre'] = str_replace(', ', '<br>', $dernierElement['entre']);
+                            echo $dernierElement['entre'];
+                        ?>
+                        </p>
+                    </div>
+                    <hr class="border border-3">
+                    <div>
+                        <h3 class="fw-bold">Plat</h3>
+                        <p> <?php
+                            $dernierElement['plat'] = str_replace(', ', '<br>', $dernierElement['plat']);
+                            echo $dernierElement['plat'];
+                        ?></p>
+                    </div>
+                    <hr class="border border-3">
+                    <div>
+                        <h3 class="fw-bold">Dessert</h3>
+                        <p> <?php
+                            $dernierElement['dessert'] = str_replace(', ', '<br>', $dernierElement['dessert']);
+                            echo $dernierElement['dessert'];
+                        ?></p>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="row row-cols-2 tous_les_menu">
+            <?php
+                    foreach ($tableauResult as $result){
+                        $result['plat'] = str_replace(', ', '<br>', $result['plat']);
+                        echo "<div class='menu_autre'>";
+                        echo "<div>
+                        <h2 class='fs-5'>" . $result['date']. "</h2>
+                    </div>";
+                    echo "<div class='card shadow'>";
+                    echo "<div>
+                    <img src=" . $result['image_plat']. " alt='' class='card-img-top'>
+                    <h3 class='fw-bold entre'>Entrée</h3>
+                    <p>" . $result['plat']. "<br>
+                    ...
+                    </p>
+                    <button class='btn rounded-5'>voir plus</button>
+                </div>";
+                echo "</div>
+                </div>";
+                    }
+                    ?>
+                    
+            <!-- <div class="menu_autre">
+                <div>
+                    <h2 class="fs-5">24/11</h2>
+                </div>
+            <div class="card shadow">
+                    <div>
+                        <img src=" <?php
+                            echo $dernierElement['image_plat'];
+                        ?>" alt="" class="card-img-top">
+                        <h3 class="fw-bold entre">Entrée</h3>
+                        <p>
+                            <?php
+                            $dernierElement['entre'] = str_replace(', ', '<br>', $dernierElement['entre']);
+                            echo $dernierElement['entre'];
+                        ?> <br>
+                        ...
+                        </p>
+                        <button class="btn rounded-5">voir plus</button>
+                    </div>
+                    </div>
+            </div> -->
+
+            </div>
+
         </section>
     </main>
     <footer>

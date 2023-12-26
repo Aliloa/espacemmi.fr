@@ -22,6 +22,10 @@ body {
     border: solid #F4F7FE !important;
     opacity: 1;
 }
+main {
+    max-width: 1100px;
+    margin: auto;
+}
 /* PAGE MENU */
 .carousel-inner {
     border: none;
@@ -53,4 +57,59 @@ body {
 }
 .date button {
     position:relative !important;
+}
+
+/* DESKTOP */
+.desktop {
+    display: none;
+    gap: 30px;
+}
+.desktop .card {
+    height: 94%;
+}
+.menu_ajd {
+    width: 35%;
+    min-width: 250px;
+}
+.menu_autre {
+    width: 50%;
+    min-width: 220px;
+    padding-bottom:15px ;
+}
+.violet {
+    background-color: var(--Leviolet);
+    color: white;
+    border: none;
+}
+.desktop button {
+    background-color: var(--Leviolet);
+    color: white;
+    max-width: 180px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 10px;
+}
+.menu_autre .card {
+    height: fit-content;
+}
+.menu_autre img {
+    height: 6rem;
+}
+.menu_autre p {
+margin: 0 !important;
+}
+.tous_les_menu {
+    width: 80%;
+}
+h2 {
+    margin: 0 !important;
+}
+
+@media screen and (min-width: 769px) {
+    .desktop {
+        display: flex;
+    }
+    .mobile {
+        display: none;
+    }
 }
