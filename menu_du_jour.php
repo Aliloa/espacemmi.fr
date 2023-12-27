@@ -29,7 +29,6 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
 <!-- Carousel version mobile, avec Bootstrap -->
         <section class="container today carousel slide mobile" id="carouselExample" >
             <!-- Date avec les boutons -->
-            <div class="date">
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left carousel-control-prev-icon" viewBox="0 0 16 16" style="color:black">
                         <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
@@ -37,17 +36,17 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                     <span class="visually-hidden">Previous</span>
                   </button>
                   <!-- afficher la date au format jj-mm (chatGPT) -->
-                <h2 class="m-0"><?php echo date('d-m', strtotime($dernierElement['date'])); ?></h2>
                   <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right carousel-control-next-icon" viewBox="0 0 16 16" style="color:black">
                         <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
                       </svg>
                     <span class="visually-hidden">Next</span>
                   </button>
-            </div>
             <div class="carousel-inner shadow rounded-4">
                 <!-- première slide -->
-                <div class="card carousel-item active">
+                <div class="carousel-item active">
+                <h2 class="m-0 date"><?php echo date('d/m', strtotime($dernierElement['date'])); ?></h2>
+                 <div class="card">
                     <div>
                         <img src=" <?php
                             echo $dernierElement['image_plat'];
@@ -77,13 +76,17 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                         ?></p>
                     </div>
                     </div>
+                </div>
+                
                     <!-- Toutes kes autres slides -->
                     <?php
                     foreach ($tableauResult as $result){
                         $result['entre'] = str_replace(', ', '<br>', $result['entre']);
                         $result['plat'] = str_replace(', ', '<br>', $result['plat']);
                         $result['dessert'] = str_replace(', ', '<br>', $result['dessert']);
-                        echo "<div class='card carousel-item'>";
+                        echo "<div class='carousel-item'>";
+                        echo "<h2 class='m-0 date'>" .date('d/m', strtotime($result['date'])) . "</h2>";
+                        echo "<div class='card'>";
                         echo "<div>
                         <img src='" . $result['image_plat'] . "' alt='' class='card-img-top'>
                         <h3 class='fw-bold entre'>Entrée</h3>
@@ -99,7 +102,8 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                 <h3 class='fw-bold'>Dessert</h3>
                 <p>".$result['dessert']."</p>
             </div>";
-            echo "</div>";
+            echo "</div>
+            </div>";
                     }
                     ?>
             </div>
@@ -149,12 +153,12 @@ $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                         $result['plat'] = str_replace(', ', '<br>', $result['plat']);
                         echo "<div class='menu_autre'>";
                         echo "<div>
-                        <h2 class='fs-5'>" . $result['date']. "</h2>
+                        <h2 class='fs-5'>" . date("d/m", strtotime($result['date'])). "</h2>
                     </div>";
                     echo "<div class='card shadow'>";
                     echo "<div>
                     <img src=" . $result['image_plat']. " alt='' class='card-img-top'>
-                    <h3 class='fw-bold entre'>Entrée</h3>
+                    <h3 class='fw-bold entre'>Plat</h3>
                     <p>" . $result['plat']. "<br>
                     ...
                     </p>
