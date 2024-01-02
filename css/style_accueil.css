@@ -4,6 +4,8 @@
 body {
     margin: 0;
     background-color: var(--bg);
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
 }
 
 :root {
@@ -16,19 +18,44 @@ body {
 
 }
 
+*::-webkit-scrollbar {
+    width: 1px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: var(--main);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--main);
+}
+
 a {
     text-decoration: none;
     color: var(--black);
+    transition: 0.5s ease;
 }
 
-li{
+a:hover {
+    opacity: 0.6;
+
+}
+
+li {
     list-style-type: none;
 }
 
-header a{
+header a {
     font: 400 1rem "Inter", sans-serif;
 }
 
+h1, h2 {
+    font-size: 1rem;
+}
+
+h2{
+    margin: 0;
+}
 
 .menu {
     display: flex;
@@ -70,10 +97,11 @@ ul li:nth-child(5) a {
 .burger {
     display: none;
     background-color: var(--main);
-    position: absolute;
+    position: fixed;
+    overflow-y: scroll;
     top: 0;
     left: 0;
-    min-height: 100%;
+    height: 100vh;
     width: 85%;
     z-index: 2;
 }
@@ -84,60 +112,58 @@ ul li:nth-child(5) a {
     text-decoration: none;
 }
 
+.burger h2{
+    font-weight: 500 ;
+}
+
 #burger-menu {
     cursor: pointer;
     font-size: 20px;
 }
 
-.burger ul{
+.burger ul {
     border-top: 11px solid var(--bg);
     border-bottom: 11px solid var(--bg);
     margin: 0;
 }
 
-.choix-2 a{
+.choix-2 a {
     line-height: 30px;
 }
 
 
-.photo-1{
+.photo-1 {
     width: 85px;
     height: 85px;
     background-color: var(--bg);
     border-radius: 50%;
 }
 
-.profil-1{
+.profil-1 {
     display: flex;
     align-items: center;
     padding: 1rem 0rem 0rem 1rem;
 }
 
-.profil-2{
-    font-family: "Inter";
+.profil-2 h1 {
+    margin-top: 0;
 }
 
-.profil-2 h1{
- font-size: 1rem;
- margin-top: 0;
-}
-
-.profil-2 p{
+.profil-2 p {
     margin: 0;
-    color: var(--grey) ;
+    color: var(--grey);
     font-weight: 500;
 }
 
-.profil-3{
+.profil-3 {
     padding-left: 2rem;
-    font-family: "Inter";
 }
 
-.profil-3 h2{
+.profil-3 h2 {
     font-size: 0.75rem;
 }
 
-.profil-3 p{
+.profil-3 p {
     font-size: 0.625rem;
     border-radius: 10px;
     background-color: var(--bg);
@@ -145,38 +171,38 @@ ul li:nth-child(5) a {
     padding: 1rem;
 }
 
-.kelis{
+.kelis {
     padding-bottom: 1rem;
 }
 
 
-.tools{
+.tools {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
-.tool{
+.tool {
     display: flex;
     gap: 10px;
-    font-family: "Inter";
     align-items: center;
     padding-left: 1.5rem;
-    border-bottom:  1px solid var(--bg);
-    border-right:  1px solid var(--bg);
+    border-bottom: 1px solid var(--bg);
+    border-right: 1px solid var(--bg);
     height: 80px;
 }
 
 
 
-.tool p{
+.tool p {
     font-size: 0.75rem;
 }
 
-.tool img{
+.tool img {
     height: 18px;
 }
 
-.choix, .icon-photo {
+.choix,
+.icon-photo {
     display: none;
 }
 
@@ -223,15 +249,107 @@ input:hover {
     height: 1rem;
 }
 
+.bloc-1 {
+    background-color: var(--purple);
+    margin: 2rem;
+    color: var(--bg);
+    padding: 2rem;
+    border-radius: 28px;
+    display: flex;
+}
+
+.bloc-1 p {
+    font-size: 0.75rem;
+    font-weight: 300;
+    width: 60vw;
+}
+
+.bloc-1 img {
+    height: 100px;
+    position: absolute;
+    right: 10px;
+    top: 225px;
+}
+
+
+.bloc-2{
+    background-color: var(--main);
+    margin: 4rem 0;
+    height: 240px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25)
+
+}
+
+.bloc-3{
+    margin: 2rem;
+}
+
+.bloc-3 h1{
+    padding: 0 2rem;
+}
+
+.bloc-3 a{
+    text-align: end;
+    transition: 0.5s ease;
+}
+
+.bloc-3 a:hover{
+   color: var(--purple);
+   opacity: 1;
+}
+
+.bloc-3 p{
+    font-size: 0.75rem;
+}
+
+.bloc-cours{
+    background-color: var(--main);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 10px; 
+}
+
+.bloc-cours p{
+    margin: 0;
+}
+
+.bloc-cours img{
+    object-fit: cover;
+    height: 20px;
+}
+
+
+
+
+
+
+
+footer {
+    background-color: #000;
+    text-align: center;
+    padding: 45px 0;
+    margin-top: 70px;
+}
+
+footer a{
+    color: var(--main);
+    font-weight: 300;
+}
 
 
 
 /* Responsive */
 
 @media screen and (min-width: 375px) {
-   .kelis p, .burger h1, .burger h2{
-    font-size: 1rem;
-   }
+
+    .profil-2 p,
+    .burger h1,
+    .burger h2 {
+        font-size: 1rem;
+    }
 
 }
 
@@ -245,10 +363,10 @@ input:hover {
         padding: 2rem 0rem 0rem 2rem;
     }
 
-    .tool{
+    .tool {
         padding-left: 2rem;
     }
- 
+
 }
 
 
@@ -262,17 +380,19 @@ input:hover {
 
 @media screen and (min-width: 1024px) {
 
-    .navigation{
+    .navigation {
         display: flex;
         gap: 25px;
     }
 
-    .menu{
+    .menu {
         margin: 40px 15px;
     }
 
 
-    .menu span, .burger, .overlay {
+    .menu span,
+    .burger,
+    .overlay {
         display: none !important;
     }
 
@@ -285,7 +405,7 @@ input:hover {
         width: 15vw;
     }
 
-    .icon-photo{
+    .icon-photo {
         display: flex;
         gap: 1.5rem;
         align-items: center;
@@ -298,15 +418,15 @@ input:hover {
         border-radius: 50%;
     }
 
-    .logo{
-        cursor:pointer;
+    .logo {
+        cursor: pointer;
         height: 20px;
     }
 }
 
 @media screen and (min-width: 1080px) {
 
-    .navigation{
+    .navigation {
         gap: 2rem;
     }
 
@@ -317,7 +437,7 @@ input:hover {
         margin: 40px 55px;
     }
 
-    .navigation{
+    .navigation {
         gap: 3.5rem;
     }
 
@@ -325,9 +445,9 @@ input:hover {
 }
 
 @media screen and (min-width: 1440px) {
-   .navigation{
-    gap: 8.5rem;
-   }
+    .navigation {
+        gap: 8.5rem;
+    }
 
 
 }

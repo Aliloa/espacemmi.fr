@@ -138,9 +138,61 @@ session_start();
     <main>
 
 
+    <div class="container">
+
+        <div class="bloc-1">
+            <div>
+                <h1> Bonjour Loana, sympa de vous revoir !</h1>
+                <p>Bienvenue sur l'EntMMi, votre espace dédié au Multimédia et à l'Informatique. Explorez, et découvrez les dernières informations disponibles.</p>
+            </div>
+
+            <img src="img/1-perso.png" alt="">
+        </div>
+
+        <div class="bloc-2">
+
+        <!-- emploi du temps -->
+
+        </div>
+
+        <div class="bloc-3">
+
+            <h1>Vos derniers cours ajoutés</h1>
+            <a href="cours.php"><p>voir plus</p></a>
+
+            <?php
+                include("connexion.php");
+                $requete = "SELECT * FROM cours ORDER BY id_cours DESC LIMIT 2 ";
+                $stmt = $db->query($requete);
+                $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
 
 
+                foreach ($resultat as $cours) {
+                    echo "<div class=\"bloc-cours\">
+                            <img src=\"{$cours["img"]}\" alt=\"\">
+            
+                            <div>
+                                <h2>{$cours["cours"]}</h2>
+                                <p> Crée par {$cours["prof"]}</p>
+                            </div>
+                        </div>
+                    ";
+                }
+            ?>
 
+
+        </div>
+
+        <div class="bloc-4"></div>
+        
+        <div class="bloc-5"></div>
+
+        <div class="bloc-6"></div>
+
+        <div class="bloc-7"></div>
+
+        <div class="bloc-8"></div>
+    </div>
 
 
 
@@ -160,7 +212,9 @@ session_start();
     </main>
 
 
-
+    <footer>
+        <a href="mentions_legales.html"><p> Mentions légales </p></a>
+    </footer>
 
 
 </body>
