@@ -34,7 +34,7 @@
                             <p>PAIEMENT POSSIBLE: <br>
                                 Carte bancaire <br>
                                 IZLY</p>
-                            <button class="btn rounded-5"><a href="menu_du_jour.php">Voir le menu</a></button>
+                            <button class="btn"><a href="menu_du_jour.php">Voir le menu</a></button>
                         </div>
                     </div>
                     <hr class="border border-3 m-1">
@@ -44,7 +44,7 @@
                             <p>PAIEMENT POSSIBLE: <br>
                                 Carte bancaire <br>
                                 IZLY</p>
-                            <button class="btn rounded-5"><a href="menu_du_jour.php">Voir le menu</a></button>
+                            <button class="btn"><a href="menu_du_jour.php">Voir le menu</a></button>
                         </div>
                     </div>
                     <hr class="border border-3 m-1">
@@ -54,7 +54,7 @@
                             <p>PAIEMENT POSSIBLE: <br>
                                 Carte bancaire <br>
                                 IZLY</p>
-                            <button class="btn rounded-5"><a href="menu_du_jour.php">Voir le menu</a></button>
+                            <button class="btn"><a href="documents/menu.pdf">Voir le menu</a></button>
                         </div>
                     </div>
                 </div>
