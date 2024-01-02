@@ -2,7 +2,7 @@
 
 session_start();
 
-include("connexionbd.php");
+include("connexion.php");
 
 $requete = "INSERT INTO utilisateurs (login, mot_de_passe) VALUES (:login, :mot_de_passe)";
 $stmt = $db->prepare($requete);

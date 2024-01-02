@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-include("connexionbd.php");
+include("connexion.php");
 
-$db->query('SET NAMES utf8');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST["login"];
