@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt_verif_user->fetch();
         if (password_verify($password, $result["mot_de_passe"])) {
             $_SESSION["login"] = $result["login"];
-            echo "<p>Bien connectée " . $result["login"] . "</p>";
+            header("Location: accueil.php");
         } else {
             echo "mauvais mot de passe";
         }
