@@ -1,0 +1,82 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+:root {
+    --Leviolet: #6C63FF;
+  }
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #F4F7FE;
+}
+.shadow {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
+}
+.border {
+    border: solid #F4F7FE !important;
+    opacity: 1;
+}
+/* PAGE PRESENTATION */
+.presentation p {
+    background-color: var(--Leviolet);
+    color: white;
+    padding: 20px;
+}
+section, aside {
+    margin-top: 3rem;
+}
+.infos {
+    padding: 15px;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+.menu_hebdomadaire button {
+    background-color: var(--Leviolet);
+    color: white;
+    max-width: 180px;
+    align-self: flex-end;
+}
+
+.horaires .border {
+    border: solid 2px #F4F7FE !important;
+}
+.horaires .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+@media screen and (min-width: 769px) {
+    body {
+        display: flex;
+        justify-content: center;
+    }
+    main {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 50px;
+    }
+    section, aside {
+        margin: 0 !important;
+    }
+    aside {
+        max-width: 20% !important;
+        min-width: 215px;
+        height: 90vh !important;
+        min-height: 470px !important;
+    }
+    .menu_hebdomadaire {
+        width: 40%;
+        min-width: 310px;
+    }
+    .decouvrez_resto {
+        width: 60%;
+    }
+}
