@@ -1,0 +1,160 @@
+*,
+*::before,
+*::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+body {
+    background-color: #F5F6FB;
+    font-family: 'DM Sans', sans-serif;
+  
+}
+
+.main{
+    display: flex;
+    position: fixed;
+    background-color: #fff;
+    justify-content: space-between;
+    gap: 50px;
+
+}
+
+
+
+.logo1{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+
+}
+.logo1,.logo img{
+margin: 30px;
+}
+
+.logo1 a {
+    color: aliceblue;
+    text-decoration: none;
+    border: solid aliceblue;
+    padding: 10px;
+    border-radius: 10px;
+    margin:20px;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+
+
+}
+
+.logo1 .links-container {
+    display: flex;
+    align-items: flex-end;
+}
+
+
+.logo1 a:hover{
+    background-color: aliceblue;
+    color:rgb(92,45,203) ;
+}
+
+.image1 img{
+  width:450px;
+  margin-top: 30%;
+  
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    height: 100vh;
+    width: 520px;
+
+}
+
+
+.formulaire h1 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.main1{
+    background: rgb(92,45,203);
+    background: linear-gradient(90deg, rgba(92,45,203,1) 13%, rgba(94,74,250,1) 100%);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+}
+
+.information_main{
+    text-align: left;
+    color: aliceblue;
+    width: 600px;
+
+    padding: 20px;
+
+}
+
+.information_main h1{
+    font-family: 'Inter', sans-serif;
+
+}
+.information_main h2{
+    font-family: 'DM Sans', sans-serif;
+        font-size: 1rem;
+
+}
+
+.information_main img{
+    position: absolute;
+    right: 0;
+    top: 20%;
+    margin: 40px;
+    width: 650px;
+}
+
+.information_main p{
+    font-family: 'DM Sans', sans-serif;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 3rem;
+    box-sizing: border-box;
+    border: 1px solid #c9bfbf;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    
+}
+
+button {
+    background-color: #604CF9;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+button:hover {
+    background-color: aliceblue;
+    border:solid #604CF9;
+    color: #604CF9;
+    
+
+}
+
+span {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #604CF9;
+    font-size: 1rem;
+}
+
