@@ -1,9 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace MMI | Accueil</title>
+    <title>Espace MMI | Mot de passe</title>
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" href="css/style_inscription.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,37 +14,33 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Inter:wght@500&display=swap" rel="stylesheet">
 
 
+
 </head>
 <body>
-<div class="main1">
+
+<div class="main">
 <div class="logo">
-    <img src="img/logo_petit.png">
-    <img src="img/Logo.png">
+<img src="img/favicon.png" width="30px">
+    <img src="img/logo(2).png">
 
-   
 </div>
 
-    <div class="information_main">
-    <h1>Bienvenue sur le site Intranet MMI</h1>
-    <h2>L'ENT Eiffel est maintenant disponible sur le site intranet étudiant et enseignant.</h2>
-
-<p>Explorez nos ressources pédagogiques, échangez avec vos pairs, et découvrez les services offerts par le CROUS. Notre communauté aspire à promouvoir l'excellence académique, la créativité, et le bien-être de tous ses membres.</p>
 
 
-<div class="links-container">
-        <a href="connexion_page.php">Connexion</a>
-        <a href="inscription_page.php">Inscription</a>
+    <div class="mail_message">
+    <h1>Envoie du mail</h1>
+    <p>Merci, vous avez reçu un email permettant de changer votre mot de passe !</p>
+
+
+    <div class="bouton1">
+    <a href="index.php">Revenir à l'accueil</a>
     </div>
-   <div class="image1">
-    <img src="img/image_index.png">
-   </div> 
+</form>
     </div>
-
-    
-
-    
+    <div class="image3">
+    <img src="img/main_image.png">
 </div>
-    
+</div>
 
 <footer>
         <div class="mentions-legales" onclick="openModal()">Mentions Légales</div>
@@ -65,6 +64,5 @@
             document.getElementById('myModal').style.display = 'none';
         }
     </script>
-
 </body>
 </html>

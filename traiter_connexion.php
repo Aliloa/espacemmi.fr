@@ -27,6 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<a href='inscription_page.php'>Créez un compte</a>";
     }
 } else {
-    echo "Invalid request method.";
+    echo "Veuillez remplir le formulaire";
 }
 ?>
