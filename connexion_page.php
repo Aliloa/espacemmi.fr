@@ -10,14 +10,13 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Inter:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style_inscription.css">
+    <!-- <link rel="stylesheet" href="css/style_inscription.css"> -->
     <link rel="icon" href="img/favicon.png">
 
 </head>
 <body>
     <div class="main">
     <div class="logo">
-    <img src="img/favicon.png" width="30px">
     <a href="index.php"><img src="img/logo(2).png"></a>
 </div>
 

@@ -38,9 +38,8 @@ session_start();
 
 <div class="main">
 <div class="logo">
-<img src="img/favicon.png" width="30px">
 
-    <img src="img/logo(2).png">
+  <a href="index.php"><img src="img/logo(2).png"></a>
 
 </div>
 
