@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 02 jan. 2024 à 20:05
+-- Généré le : mer. 03 jan. 2024 à 22:01
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -78,30 +78,56 @@ INSERT INTO `crous` (`id`, `entre`, `plat`, `dessert`, `date`, `image_plat`) VAL
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `forum`
+--
+
+DROP TABLE IF EXISTS `forum`;
+CREATE TABLE IF NOT EXISTS `forum` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `login` varchar(50) NOT NULL,
+  `commentaire` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `forum`
+--
+
+INSERT INTO `forum` (`id`, `login`, `commentaire`) VALUES
+(1, 'kelis', 'pitié qu\'on en finisse de cet ent maudit'),
+(2, 'user_broken', 'comment vesqui un devoir coeff 10 svp ?');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `utilisateurs`
 --
 
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
-  `login` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `prenom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_utilisateurs` int NOT NULL AUTO_INCREMENT,
   `mot_de_passe` varchar(255) NOT NULL,
-  PRIMARY KEY (`id_utilisateurs`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `photoprofil` text NOT NULL,
+  `role` varchar(800) NOT NULL,
+  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `promotion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `bio` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`id_utilisateurs`),
+  UNIQUE KEY `nom` (`nom`),
+  UNIQUE KEY `prenom` (`prenom`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`login`, `id_utilisateurs`, `mot_de_passe`) VALUES
-('loana.chalach', 1, '$2y$10$1mhX1X9WpFmpqnfmVAYYc.NEUGAOl6fD2T/57w16GIqrWUCVKzSQO'),
-('loana.chalach', 2, '$2y$10$KEtXbV1eHYYKraJo39HeouPDGxRB/I9L0SoecYxFPqJO1d783QXx.'),
-('lolo', 3, '$2y$10$nQB2aG.qbFowrU.A1qbqbOo1J.UCWR3pmAvjh9U00UhUZ4hO8sV2u'),
-('lolo', 4, '$2y$10$dILRNr2b86WMr3nwo/xMf.CDiuWpdrnrSFPzpP50VRihKR1U60VRO'),
-('loanacha', 5, '$2y$10$3xWP6KntZaUWICjDoZ1yAuIgQDmsyUoVtbn3K9uDgHWjTTNYPW2B.'),
-('alinaspicot@gmail.com', 6, '$2y$10$/q8TvQre1/VFWB5FQhkF1ObMYilYUkLezOPylxSHEDMZhM2r4Hg3W'),
-('alinaspicot@gmail.com', 7, '$2y$10$b2oJw34seok5jQRhf7ylP.CEV8DkXYLAg.xDgkjTJKrDtwNhVPUHe'),
-('alinaspicot@gmail.com', 8, '$2y$10$HQqF3ed/.ZH8EdyAs7YqaO3gEDdHm11n9DQScO9ywY7CIJQf18VWe');
+INSERT INTO `utilisateurs` (`nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
+('FATIMARAJAN', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'default.png', 'eleve', 'fatimarajananchana@gmail.com', 'mmi2', NULL),
+('CHARPENTIER', 'Gaëlle', 14, '$2y$10$mlXzRJslQ48Qop1SHycqD.5hnC6oVYPSUMWfXYCekHRwe7cIQMxn2', 'default.png', 'professeur', 'gaelle@gmail.com', NULL, NULL),
+('ZHYLA', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'membre_crous', 'alina@gmail.com', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

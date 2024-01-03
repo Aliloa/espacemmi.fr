@@ -24,14 +24,21 @@ session_start();
 
 <div class="formulaire">
 <form action="traiter_connexion.php" method="POST">
+<?php
+if (isset($_GET["erreur"])) {
+    echo "Vous vous êtes trompés, veuillez recommencez";
+    // echo "<a href='inscription_page.php?erreur=login'>Créez un compte</a>";
+
+}
+?>
 <h1>Connexion</h1>
 
-    <label for="login">Login</label>
-    <input type="text" id="login" name="login" required>
+    <label for="mail">Email</label>
+    <input type="email" id="mail" name="mail" required>
     <label for="password">Mot de passe</label>
     <input type="password" id="password" name="password" required>
     <div class="bouton1">
-    <a href="traiter_connexion.php">Se connecter</a>
+    <input type='submit' value='Se connecter'>
     </div>
     <span>Vous avez oublié votre mot de passe ? Alors retrouvez le <a href="mdp_page.php">ici !</a></span>
 
