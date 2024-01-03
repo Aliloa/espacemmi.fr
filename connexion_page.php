@@ -17,14 +17,14 @@ session_start();
 <body>
     <div class="main">
     <div class="logo">
-    <img src="img/logo(2).png">
+    <a href="index.php"><img src="img/logo(2).png"></a>
 </div>
 
 <div class="image1">
     <img src="img/main_image.png">
 </div>
 <div class="formulaire">
-<form action="traiter_connexion.php" method="post">
+<form action="traiter_connexion.php" method="POST">
 <h1>Connexion</h1>
 <br>
 <br>

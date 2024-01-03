@@ -46,20 +46,39 @@ session_start();
 </div>
 
 <div class="formulaire">
-<form action="traiter_inscription.php" method="post">
+<form action="traiteformulaire.php" method="post">
 <h1>Inscription</h1>
 <br>
 <br>
     <label for="login">Login</label>
     <input type="text" id="login" name="login" required>
 
+  <legend>Choisissez votre rôle</legend>
+  
+
+  <div>
+    <input class="radio" type="radio" id="eleve" name="drone" value="huey" checked />
+    <label class="choix" for="eleve">Étudiant.e</label>
+  </div>
+
+  <div>
+    <input class="radio" type="radio" id="prof" name="drone" value="dewey" />
+    <label class="choix" for="prof">Professeur.e</label>
+  </div>
+
+  <div>
+    <input class="radio" type="radio" id="crous" name="drone" value="louie" />
+    <label class="choix" for="crous">Membre du CROUS</label>
+  </div>
+
     <label for="password">Entrez un mot de passe</label>
     <input type="password" id="password" name="password" required>
+
 
     <label for="password2">Répétez le même mot de passe</label>
     <input type="password" id="password2" name="password2" required>
 
-    <button type="submit">S'inscrire</button>
+    <button type="submit" name='soumettre'>S'inscrire</button>
 </form>
 </div>
 </div>
