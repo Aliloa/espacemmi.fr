@@ -71,7 +71,7 @@ session_start();
 
                 <nav class="burger">
 
-                    <!-- PHP/ MODIFIEZ LA STRUCTURE POUR ADAPTER A L UTILISATEUR   -->
+                    <!-- PHP/ STRUCTURE POUR ADAPTER A L UTILISATEUR   -->
                     <div class="kelis">
                         <div class="profil-1">
                             <a href="parametres.php">
