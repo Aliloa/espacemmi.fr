@@ -17,28 +17,53 @@ session_start();
 <body>
     <div class="main">
     <div class="logo">
+    <img src="img/favicon.png" width="30px">
     <a href="index.php"><img src="img/logo(2).png"></a>
 </div>
 
-<div class="image1">
-    <img src="img/main_image.png">
-</div>
+
 <div class="formulaire">
 <form action="traiter_connexion.php" method="POST">
 <h1>Connexion</h1>
-<br>
-<br>
+
     <label for="login">Login</label>
     <input type="text" id="login" name="login" required>
-
     <label for="password">Mot de passe</label>
     <input type="password" id="password" name="password" required>
-    <span><a href="mdp_page.php">Mot de passe oublié?</a></span>
-    <button type="submit">Se connecter</button>
+    <div class="bouton1">
+    <a href="traiter_connexion.php">Se connecter</a>
+    </div>
+    <span>Vous avez oublié votre mot de passe ? Alors retrouvez le <a href="mdp_page.php">ici !</a></span>
+
 
 </form>
+
+</div>
+<div class="image2">
+    <img src="img/main_image.png">
 </div>
     </div>
+    <footer>
+        <div class="mentions-legales" onclick="openModal()">Mentions Légales</div>
+    </footer>
 
+     <!-- Modal -->
+     <div id="myModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation();">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Mentions Légales</h2>
+            <p>Ajoutez ici le contenu de vos mentions légales.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
