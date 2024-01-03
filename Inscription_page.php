@@ -38,18 +38,18 @@ session_start();
 
 <div class="main">
 <div class="logo">
+<img src="img/favicon.png" width="30px">
+
     <img src="img/logo(2).png">
+
 </div>
 
-<div class="image1">
-    <img src="img/main_image.png">
-</div>
+
 
 <div class="formulaire">
 <form action="traiter_inscription.php" method="post">
 <h1>Inscription</h1>
-<br>
-<br>
+
     <label for="login">Login</label>
     <input type="text" id="login" name="login" required>
 
@@ -58,13 +58,38 @@ session_start();
 
     <label for="password2">Répétez le même mot de passe</label>
     <input type="password" id="password2" name="password2" required>
-
-    <button type="submit">S'inscrire</button>
+    <div class="bouton">
+    <a href="traiter_inscription.php">S'inscrire</a>
+    </div>
 </form>
 </div>
+<div class="image2">
+<img src="img/main_image.png" style="pointer-events: none; background-color: transparent;">
+</div>
 </div>
 
+<footer>
+        <div class="mentions-legales" onclick="openModal()">Mentions Légales</div>
+    </footer>
 
+     <!-- Modal -->
+     <div id="myModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation();">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Mentions Légales</h2>
+            <p>Ajoutez ici le contenu de vos mentions légales.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>

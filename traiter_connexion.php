@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-include("connexionbd.php");
+include("connexion.php");
 
-$db->query('SET NAMES utf8');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST["login"];
@@ -28,6 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<a href='inscription_page.php'>Créez un compte</a>";
     }
 } else {
-    echo "Invalid request method.";
+    echo "Veuillez remplir le formulaire";
 }
 ?>
