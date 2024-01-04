@@ -43,17 +43,15 @@
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <img class='logo' src='./img/1-lettre.svg' alt='page d' accueil'>
-                    <img class='logo' src='./img/1-notif.svg' alt='page d' accueil'>
-                    <img class='logo' src='./img/1-moon.svg' alt='page d' accueil'>
+                    <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
+                    <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
+                    <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
 
                     <?php
                     include('connexion.php');
-                    if (isset($_SESSION['login'])) {
-                        echo 'bonjour <span style=\'color: red\'>' . $_SESSION['login'] . '</span>';
-                    }
+
 
                     $stmt = $db->query('SELECT * FROM utilisateurs');
                     $result = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -122,7 +120,17 @@
         <div class='container'>
             <div class='bloc-1'>
                 <div>
-                    <h1>Bonjour Loana, sympa de vous revoir !</h1>
+                    <?php
+                    include('connexion.php');
+                    $requete = "SELECT * FROM utilisateurs";
+                    $stmt = $db->query($requete);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    // if (isset($_SESSION['login'])) {
+                        echo "<h1>Bonjour {$result['prenom']}, sympa de vous revoir !</h1>";
+                    // }
+              
+                    ?>
+                    <!-- <h1>Bonjour Loana, sympa de vous revoir !</h1> -->
                     <p>Bienvenue sur l'EntMMi, votre espace dédié au Multimédia et à l'Informatique. Explorez, et
                         découvrez les dernières informations disponibles.</p>
                 </div>
@@ -159,13 +167,13 @@
                 </a>
                 <?php
                 include('connexion.php');
-                $requete = "SELECT * FROM forum ORDER BY id ";
+                $requete = "SELECT * FROM forum, utilisateurs WHERE ext_utilisateur = id_utilisateurs  ORDER BY id";
                 $stmt = $db->query($requete);
                 $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 foreach ($resultat as $forum) {
                     echo "<div class='cours'>
                             <div>
-                                <h2>{$forum["login"]}</h2>
+                                <h2>{$forum["nom"]} {$forum["prenom"]}</h2>
                                 <p>{$forum["commentaire"]}</p>
                             </div>
                         </div>";
