@@ -63,6 +63,9 @@ session_start();
         function closeModal() {
             document.getElementById('myModal').style.display = 'none';
         }
+
+
+       
     </script>
 </body>
 </html>
