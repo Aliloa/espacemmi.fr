@@ -48,17 +48,17 @@
                     <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
-
-                    <?php
-                    include('connexion.php');
-
-
-                    $stmt = $db->query('SELECT * FROM utilisateurs');
-                    $result = $stmt->fetchall(PDO::FETCH_ASSOC);
-                    // var_dump($result);
-                    ?>
                     <div class='photo-2'>
-                        <img src='' alt=''>
+
+                        <?php
+                        include('connexion.php');
+
+                        $stmt = $db->query('SELECT * FROM utilisateurs');
+                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                        // if (isset($_SESSION['login'])) {
+                            echo " <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt=''></a>";
+                        // }
+                        ?>
                     </div>
                     <!-- FIN PHP-->
                 </div>
@@ -126,9 +126,9 @@
                     $stmt = $db->query($requete);
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);
                     // if (isset($_SESSION['login'])) {
-                        echo "<h1>Bonjour {$result['prenom']}, sympa de vous revoir !</h1>";
+                    echo "<h1>Bonjour {$result['prenom']}, sympa de vous revoir !</h1>";
                     // }
-              
+                    
                     ?>
                     <!-- <h1>Bonjour Loana, sympa de vous revoir !</h1> -->
                     <p>Bienvenue sur l'EntMMi, votre espace dédié au Multimédia et à l'Informatique. Explorez, et
