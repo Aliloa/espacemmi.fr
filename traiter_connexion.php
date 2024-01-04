@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->fetch();
         if (password_verify($_POST["password"], $result["mot_de_passe"])) {
             $_SESSION["login"] = $result["mail"];
-            $_SESSION["prenom"] = $result["prenom"];
+            $_SESSION["id"] = $result["id_utilisateurs"];
             header("Location: accueil.php");
         } else {
             header('Location:connexion_page.php?erreur=mdp');
