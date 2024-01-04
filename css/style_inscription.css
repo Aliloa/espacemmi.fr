@@ -486,6 +486,14 @@ input {
     
 }
 
+.choix{
+    margin: 0.3rem;
+}
+
+.radio{
+    margin: 0.4rem;
+}
+
 .bouton a {
     background-color: #604CF9;
     color: #fff;

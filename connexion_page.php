@@ -10,28 +10,34 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Inter:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style_inscription.css">
+    <!-- <link rel="stylesheet" href="css/style_inscription.css"> -->
     <link rel="icon" href="img/favicon.png">
 
 </head>
 <body>
     <div class="main">
     <div class="logo">
-    <img src="img/favicon.png" width="30px">
-    <img src="img/logo(2).png">
+    <a href="index.php"><img src="img/logo(2).png"></a>
 </div>
 
 
 <div class="formulaire">
-<form action="traiter_connexion.php" method="post">
+<form action="traiter_connexion.php" method="POST">
+<?php
+if (isset($_GET["erreur"])) {
+    echo "Vous vous êtes trompés, veuillez recommencez";
+    // echo "<a href='inscription_page.php?erreur=login'>Créez un compte</a>";
+
+}
+?>
 <h1>Connexion</h1>
 
-    <label for="login">Login</label>
-    <input type="text" id="login" name="login" required>
+    <label for="mail">Email</label>
+    <input type="email" id="mail" name="mail" required>
     <label for="password">Mot de passe</label>
     <input type="password" id="password" name="password" required>
     <div class="bouton1">
-    <a href="traiter_connexion.php">Se connecter</a>
+    <input type='submit' value='Se connecter'>
     </div>
     <span>Vous avez oublié votre mot de passe ? Alors retrouvez le <a href="mdp_page.php">ici !</a></span>
 
