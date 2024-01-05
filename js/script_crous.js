@@ -59,4 +59,4 @@ function decaleGauche () {
 }
 
 bouton_droite.addEventListener('click', decaleDroite);
-bouton_gauche.addEventListener('click', decaleGauche)
+bouton_gauche.addEventListener('click', decaleGauche);
