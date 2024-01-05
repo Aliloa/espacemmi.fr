@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/style_crous.css" />
+    
     <title>Espace MMI | Menu</title>
     <link rel="icon" href="img/favicon.png">
 
@@ -13,17 +14,14 @@
 <body>
 
 
-    <nav>
-        <!-- Pas à moi de le faire? -->
-    </nav>
-
+<div class="flex_tout">
 
     <div class="header_main">
 
-        <header class="container presentation">
+        <div class="container presentation">
             <p>Bienvenue sur la page officielle du Centre Régional des Œuvres Universitaires et
                 Scolaires (CROUS) dédiée aux Restaurants Universitaires à Créteil.</p>
-        </header>
+        </div>
 
         <main class="container">
 
@@ -119,7 +117,7 @@
         </div>
     </aside>
 
-
+    </div>
 
     <footer>
         <!-- Pas ma partie -->

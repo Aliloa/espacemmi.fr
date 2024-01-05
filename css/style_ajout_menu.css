@@ -1,0 +1,28 @@
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    gap: 15px;
+    border: none;
+}
+
+input[type="text"] {
+    margin-bottom: 15px;
+    max-width: 500px;
+}
+input[type="date"] {
+    max-width: 500px;
+}
+
+.image_date {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 600px) {
+.flex {
+    flex-direction: row;
+}
+}

@@ -19,7 +19,7 @@
 
     <main>
 
-
+    <a href="ajouter_menu.php"><button>Ajouter menu</button></a>
         <?php
             include("connexion.php");
             // première requete pour avoir tous les menus de la base de données, sauf le dernier
@@ -38,7 +38,6 @@
 
         <!-- Carousel version mobile, avec Bootstrap -->
         <section class="today mobile">
-
 
 
 
