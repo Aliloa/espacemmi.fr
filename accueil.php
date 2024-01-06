@@ -167,7 +167,7 @@
                 </a>
                 <?php
                 include('connexion.php');
-                $requete = "SELECT * FROM forum, utilisateurs WHERE ext_utilisateur = id_utilisateurs  ORDER BY id";
+                $requete = "SELECT * FROM forum,utilisateurs WHERE ext_utilisateur = id_utilisateurs  ORDER BY id";
                 $stmt = $db->query($requete);
                 $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 foreach ($resultat as $forum) {
