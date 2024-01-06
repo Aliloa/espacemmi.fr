@@ -16,7 +16,7 @@ include("connexion.php");
 <h1>Travail à faire</h1>
 
 <?php
-    $requete = "SELECT * FROM travail_a_faire";
+    $requete = "SELECT * FROM travail_a_faire ORDER BY date DESC";
     $stmt = $db->query($requete);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -25,13 +25,15 @@ include("connexion.php");
         echo "<h2>{$result['travail']}</h2>";
         echo "<h3>{$result['enseignant']}</h3>";
         echo "<p>{$result['date']}</p>";
+        echo "<p>{$result['heure']}</p>";
+
         echo "</div>";
     }
 ?>
 
 <h1>Controle à venir</h1>
 <?php
-    $requete = "SELECT * FROM controle";
+    $requete = "SELECT * FROM controle ORDER BY date DESC ";
     $stmt = $db->query($requete);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,6 +42,8 @@ include("connexion.php");
         echo "<h2>{$result['controle']}</h2>";
         echo "<h3>{$result['enseignant']}</h3>";
         echo "<p>{$result['date']}</p>";
+        echo "<p>{$result['heure']}</p>";
+
         echo "</div>";
     }
 ?>
@@ -60,6 +64,20 @@ include("connexion.php");
 ?>
 
 <h1>Mes moyennes</h1>
+
+<?php
+$requete = "SELECT * FROM notes ";
+$stmt = $db->query($requete);
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($results as $result) {
+    echo "<div class='result-container'>";
+    echo "<h2>{$result['matiere']}</h2>";
+    echo "<h3>{$result['notes']}</h3>";
+    echo "<p>{$result['professeur']}</p>";
+    echo "</div>";
+}
+?>
 
 </body>
 </html>
