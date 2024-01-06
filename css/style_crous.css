@@ -65,7 +65,7 @@ a {
     padding: 5px;
 }
 @media screen and (min-width: 769px) {
-    body {
+    .flex_tout {
         display: flex;
         justify-content: center;
     }
