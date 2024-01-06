@@ -13,23 +13,31 @@ include("connexion.php");
 
 </head>
 <body>
-<h1>Travail à faire</h1>
 
 <?php
-    $requete = "SELECT * FROM travail_a_faire ORDER BY date DESC";
-    $stmt = $db->query($requete);
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($results as $result) {
-        echo "<div class='result-container'>";
-        echo "<h2>{$result['travail']}</h2>";
-        echo "<h3>{$result['enseignant']}</h3>";
-        echo "<p>{$result['date']}</p>";
-        echo "<p>{$result['heure']}</p>";
-
-        echo "</div>";
-    }
+$requete = "SELECT * FROM travail_a_faire ORDER BY date DESC LIMIT 5";
+$stmt = $db->query($requete);
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<div class='result-container'>
+    <h1>Travail à faire</h1>
+    <div class='bloc-1'>
+        <?php foreach ($results as $result) { ?>
+            <div class='matiere-date'>
+                <h2><?php echo $result['travail']; ?></h2>
+                <p class='small-date'><?php echo "Rendu: {$result['date']}"; ?></p>
+            </div>
+            <h3><?php echo $result['enseignant']; ?></h3>
+            <br>
+        <?php } ?>
+    </div>
+</div>
+
+
+
+
+
 
 <h1>Controle à venir</h1>
 <?php

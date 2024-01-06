@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
 *,
 *::after,
 *::before {
@@ -7,23 +9,73 @@
 
 html{
     background-color: #F4F7FE;
+    font-family: 'Inter', sans-serif;
+
+
 }
 
 
 .result-container{
-        width: 100%;
-        margin: 0 auto;
-        display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+    max-width: 90vw;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+
       
 }
 
-.one {
+.bloc-1 {
    
-    border: solid;
     border-radius: 30px ;
     background-color: white;
-
+    grid-column: 1;
+    grid-row: 2/3;
+    padding: 20px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    width: 380px;
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+    height: 222px;
+   
   }
+
+  .bloc-1::-webkit-scrollbar {
+    width: 10px;
+}
+
+.bloc-1::-webkit-scrollbar-thumb {
+    background-color: #733bf7;
+    /* border-radius: 10px; */
+}
+
+  .matiere-date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.matiere-date p {
+    font-size: 0.8rem;
+}
+
+ .bloc-1 h2{
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding-right: 25px;
+
+ } 
+
+
+
+.bloc-1 h3{
+    color: rgb(138, 138, 138);
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-top: 1px;
+
+}
+
+
+
+
+
