@@ -10,6 +10,10 @@
 </head>
 
 <body>
+<?php
+    session_start();
+    ?>
+
      <!-- Logo Accueil -->
      <a href='accueil.php'><img src='./img/logo.svg' alt='page d' accueil'></a>
 
@@ -65,9 +69,6 @@
         <!-- FIN PHP-->
     </div>
 </nav>
-    <?php
-    session_start();
-    ?>
 
 
     <?php
@@ -89,9 +90,18 @@
     ?>
 
     <form action="traiteprofil.php" method="POST" enctype="multipart/form-data">
-        <div id="photo">
-            <input type="file" name="fichier" size="30"> <br>Pour ajouter une photo de profil
+        <div>
+            <input type="file" name="fichier" size="30" required> <br>Pour ajouter une photo de profil
             <input type="submit" name="upload" value="Uploader"><br> <br>
+        </div>
+    </form>
+
+
+    <form action="traiteprofil.php" method="POST">
+        <div>
+            <label for="bio">Votre biographie</label>
+            <input type="text" id='bio' name="bio" required> <br>
+            <input type="submit" name="changerbio" value="Uploader"><br> <br>
         </div>
     </form>
 

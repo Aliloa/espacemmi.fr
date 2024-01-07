@@ -20,16 +20,29 @@ if (isset($_POST['upload'])) {
     if (!move_uploaded_file($tmp_file, $content_dir . $name_file)){
         exit("Impossible de copier le fichier dans $content_dir");
     }
-    
-    header('Location:parametres.php?modification_success');
-
 
     $requete = "UPDATE utilisateurs SET photoprofil = :upload WHERE login='{$_SESSION["login"]}'";
     $stmt = $db->prepare($requete);
     $stmt->bindValue(":upload", $name_file, PDO::PARAM_STR);
     $stmt->execute();
-    echo $requete;
+
+    header('Location:parametres.php?modification_success');
+    exit();
 }    
+
+
+if (isset($_POST['changerbio'])) {
+
+    $requete = "UPDATE utilisateurs SET bio = :newbio WHERE login=:login";
+    $stmt = $db->prepare($requete);
+    $stmt->bindValue(":newbio", $_POST['bio'], PDO::PARAM_STR);
+    $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
+    $stmt->execute();
+
+    header('Location:parametres.php?modification_success');
+    exit(); 
+
+}
 // header('Location:parametres.php?erreur=inconnu');
 
 ?>
