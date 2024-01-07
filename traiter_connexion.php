@@ -16,13 +16,15 @@ include("connexion.php");
         $result = $stmt->fetch();
         if (password_verify($_GET["password"], $result["mot_de_passe"])) {
             $_SESSION["login"] = $result["login"];
-            // if (isset ($result["photoprofil"])){
-            //     $_SESSION["photo"] = $result["photoprofil"];
-            // }
+            if (isset ($_SESSION["login"]) && $_SESSION["login"] === 'Admin'){
+                header("Location: administration.php");
+                exit();
+            }
             header("Location: accueil.php");
+            exit();
         } else {
             header('Location:connexion_page.php?erreur=mdp');
-
+            exit();
         }
     } else {
         header('Location:connexion_page.php?erreur=user_not_found');

@@ -12,12 +12,16 @@
 <body>
     <?php
     session_start();
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
     ?>
     <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
-            <a href='accueil.php'><img src='./img/logo.svg' alt='page d' accueil'></a>
+            <a href='accueil.php'><img src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
 
             <!-- Navigation desktop -->
             <nav class='navigation'>
@@ -231,21 +235,6 @@
 
 
             <div class='bloc-7'>
-                <!-- <div class='kelis-2'>
-                    <img src='img/1-icon.png' alt=''>
-                    <p>kelis.keren</p>
-                    <p class='p'>En ligne</p>
-                </div>
-                <div class='kelis-2'>
-                    <img src='img/2-icon.png' alt=''>
-                    <p>anchana</p>
-                    <p class='p'>En ligne</p>
-                </div>
-                <div class='kelis-2'>
-                    <img src='img/3-icon.png' alt=''>
-                    <p>alina</p>
-                    <p class='p'>En ligne</p>
-                </div> -->
 
                 <?php
                 include('connexion.php');
