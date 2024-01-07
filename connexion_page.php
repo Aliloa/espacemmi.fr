@@ -10,7 +10,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Inter:wght@500&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="css/style_inscription.css"> -->
+    <link rel="stylesheet" href="css/style_inscription.css">
     <link rel="icon" href="img/favicon.png">
 
 </head>
@@ -22,7 +22,7 @@ session_start();
 
 
 <div class="formulaire">
-<form action="traiter_connexion.php" method="POST">
+<form action="traiter_connexion.php" method="GET">
 <?php
 if (isset($_GET["erreur"])) {
     echo "Vous vous êtes trompés, veuillez recommencez";
@@ -32,8 +32,8 @@ if (isset($_GET["erreur"])) {
 ?>
 <h1>Connexion</h1>
 
-    <label for="mail">Email</label>
-    <input type="email" id="mail" name="mail" required>
+    <label for="mail">Login</label>
+    <input type="text" id="mail" name="login_user" required>
     <label for="password">Mot de passe</label>
     <input type="password" id="password" name="password" required>
     <div class="bouton1">

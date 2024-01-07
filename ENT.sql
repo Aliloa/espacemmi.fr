@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 03 jan. 2024 à 22:01
+-- Généré le : dim. 07 jan. 2024 à 16:22
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -20,6 +20,54 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `ent`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `abscence_retard`
+--
+
+DROP TABLE IF EXISTS `abscence_retard`;
+CREATE TABLE IF NOT EXISTS `abscence_retard` (
+  `id_abs` int NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `nombre` time NOT NULL,
+  `cours` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_abs`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `abscence_retard`
+--
+
+INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `cours`) VALUES
+(1, 'absence', '2023-12-13', '02:00:00', ''),
+(2, 'absence', '2024-01-07', '02:00:00', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `controle`
+--
+
+DROP TABLE IF EXISTS `controle`;
+CREATE TABLE IF NOT EXISTS `controle` (
+  `controle` varchar(255) NOT NULL,
+  `id_controle` int NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `enseignant` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_controle`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `controle`
+--
+
+INSERT INTO `controle` (`controle`, `id_controle`, `date`, `enseignant`) VALUES
+('Culture numérique', 4, '2024-01-09', 'Bilel Benbouzid'),
+('Traitement de l\'information ', 5, '2023-11-13', 'Florence Bister'),
+('Marketing', 6, '2024-01-25', 'Leyla Jaoued Abassi');
 
 -- --------------------------------------------------------
 
@@ -78,24 +126,59 @@ INSERT INTO `crous` (`id`, `entre`, `plat`, `dessert`, `date`, `image_plat`) VAL
 -- --------------------------------------------------------
 
 --
--- Structure de la table `forum`
+-- Structure de la table `notes`
 --
 
-DROP TABLE IF EXISTS `forum`;
-CREATE TABLE IF NOT EXISTS `forum` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(50) NOT NULL,
-  `commentaire` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `notes`;
+CREATE TABLE IF NOT EXISTS `notes` (
+  `notes` varchar(255) NOT NULL,
+  `id_note` int NOT NULL AUTO_INCREMENT,
+  `matiere` varchar(255) NOT NULL,
+  `professeur` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_note`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Déchargement des données de la table `forum`
+-- Déchargement des données de la table `notes`
 --
 
-INSERT INTO `forum` (`id`, `login`, `commentaire`) VALUES
-(1, 'kelis', 'pitié qu\'on en finisse de cet ent maudit'),
-(2, 'user_broken', 'comment vesqui un devoir coeff 10 svp ?');
+INSERT INTO `notes` (`notes`, `id_note`, `matiere`, `professeur`) VALUES
+('18', 1, 'Anglais', 'Alexandre Leroy'),
+('12', 2, 'Représentation et Traitement de l\'information', 'Florence Bister'),
+('9', 3, 'Gestion de projet', ''),
+('10', 4, 'Ux design', ''),
+('20', 5, 'Communication et rhétorique', ''),
+('14', 6, 'Marketing', ''),
+('12', 7, 'Intégration web', ''),
+('8', 8, 'Développement web back', ''),
+('17', 9, 'Anglais web', ''),
+('8', 10, 'Droit', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `travail_a_faire`
+--
+
+DROP TABLE IF EXISTS `travail_a_faire`;
+CREATE TABLE IF NOT EXISTS `travail_a_faire` (
+  `id_travail` int NOT NULL AUTO_INCREMENT,
+  `travail` varchar(225) NOT NULL,
+  `date` date NOT NULL,
+  `enseignant` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_travail`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `travail_a_faire`
+--
+
+INSERT INTO `travail_a_faire` (`id_travail`, `travail`, `date`, `enseignant`) VALUES
+(3, 'Miniblog', '2023-12-24', 'Renaud Epstein'),
+(4, 'Tracking et motion design', '2023-12-22', 'Anne Tasso'),
+(5, 'Campagne publicitaire', '2023-12-10', 'Frédéric Poisson'),
+(6, 'Mockup ENT', '2023-11-22', 'Fatima Laoufi'),
+(7, 'Note d’intention personnelle', '2024-01-12', 'Leyla Jaoued Abassi');
 
 -- --------------------------------------------------------
 
@@ -105,6 +188,7 @@ INSERT INTO `forum` (`id`, `login`, `commentaire`) VALUES
 
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `login` varchar(100) NOT NULL,
   `nom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `prenom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_utilisateurs` int NOT NULL AUTO_INCREMENT,
@@ -117,17 +201,19 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   PRIMARY KEY (`id_utilisateurs`),
   UNIQUE KEY `nom` (`nom`),
   UNIQUE KEY `prenom` (`prenom`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `login` (`login`)
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
-('FATIMARAJAN', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'default.png', 'eleve', 'fatimarajananchana@gmail.com', 'mmi2', NULL),
-('CHARPENTIER', 'Gaëlle', 14, '$2y$10$mlXzRJslQ48Qop1SHycqD.5hnC6oVYPSUMWfXYCekHRwe7cIQMxn2', 'default.png', 'professeur', 'gaelle@gmail.com', NULL, NULL),
-('ZHYLA', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'membre_crous', 'alina@gmail.com', NULL, NULL);
+INSERT INTO `utilisateurs` (`login`, `nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
+('Anchu', 'FATIMARAJAN', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'eleve', 'anchana.mlp@gmail.com', 'MMI2', NULL),
+('Gaelle', 'CHARPENTIER', 'Gaëlle', 14, '$2y$10$mlXzRJslQ48Qop1SHycqD.5hnC6oVYPSUMWfXYCekHRwe7cIQMxn2', 'default.png', 'professeur', 'gaelle@gmail.com', NULL, 'hey j\'aime les chats'),
+('Alilo', 'ZHYLA', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'membre_crous', 'alina@gmail.com', NULL, NULL),
+('kelis', 'OSHOFFA', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'eleve', 'keliskeren@gmail.com', 'mmi2', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

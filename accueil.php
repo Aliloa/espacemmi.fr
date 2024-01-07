@@ -12,7 +12,6 @@
 <body>
     <?php
     session_start();
-
     ?>
     <header>
         <div class='menu'>
@@ -53,12 +52,21 @@
                         <?php
                         include('connexion.php');
 
-                        $stmt = $db->query('SELECT * FROM utilisateurs');
-                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                        // if (isset($_SESSION['login'])) {
-                            echo " <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt=''></a>";
-                        // }
+                        if (isset($_SESSION["login"])) {
+                            $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
+                            $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+                            $stmt->execute();
+
+                            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            if ($result) {
+                                echo "<a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
+                            } else {
+                                header('Location:index.php?erreur=access_denied');
+                            }
+                        }
                         ?>
+
                     </div>
                     <!-- FIN PHP-->
                 </div>
@@ -69,50 +77,69 @@
                 <span id='burger-menu'> <img src='./img/menu.svg' alt='menu'></span>
                 <nav class='burger'>
                     <!-- PHP/ STRUCTURE POUR ADAPTER A L UTILISATEUR   -->
+                    <?php
+                    include('connexion.php');
+
+                    if (isset($_SESSION["login"])) {
+                        $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
+                        $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+                        $stmt->execute();
+                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                        echo "
                     <div class='kelis'>
                         <div class='profil-1'>
                             <a href='parametres.php'>
-                                <div class='photo-1'></div>
+                                <div class='photo-1'>
+                                <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
+                                </div>
                             </a>
-                            <div class='profil-2'>
-                                <h1>Loana Chalach</h1>
-                                <p>MMI 2</p>
-                            </div>
+                            <div class='profil-2'>";
+
+
+                        echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
+                        echo "<p>{$result['promotion']}</p>";
+
+                        echo "       </div>
                         </div>
                         <div class='profil-3'>
-                            <h2>À propos</h2>
-                            <p>Moi dans la vie, j'aime bien la nourriture</p>
-                        </div>
-                    </div>
-                    <!-- FIN PHP   -->
-                    <ul class='choix-2'>
-                        <li><a href=''>Mes cours</a></li>
-                        <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
-                        <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
-                        <li><a href='page_crous.php'>Crous</a></li>
-                        <li><a href=''>Déconnexion</a></li>
-                    </ul>
-                    <div class='tools'>
-                        <div class='tool'>
-                            <img src='img/1-notif.svg' alt=''>
-                            <p>Notifications</p>
-                        </div>
-                        <div class='tool'>
-                            <img src='img/1-param.png' alt=''>
-                            <p>Paramètres</p>
-                        </div>
-                        <div class='tool'>
-                            <img src='img/1-lettre.svg' alt=''>
-                            <p>Messagerie</p>
-                        </div>
-                        <div class='tool'>
-                            <img src='img/1-moon.svg' alt=''>
-                            <p>Mode sombre</p>
-                        </div>
-                    </div>
-                </nav>
-                <div class='overlay'></div>
+                        <h2>À propos</h2>";
+                        echo "<p>{$result['bio']}</p>";
+
+                    }
+                    ?>
+
+                    <!-- <p>Moi dans la vie, j'aime bien la nourriture</p> -->
             </div>
+        </div>
+        <!-- FIN PHP   -->
+        <ul class='choix-2'>
+            <li><a href=''>Mes cours</a></li>
+            <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
+            <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
+            <li><a href='page_crous.php'>Crous</a></li>
+            <li><a href=''>Déconnexion</a></li>
+        </ul>
+        <div class='tools'>
+            <div class='tool'>
+                <img src='img/1-notif.svg' alt=''>
+                <p>Notifications</p>
+            </div>
+            <div class='tool'>
+                <img src='img/1-param.png' alt=''>
+                <p>Paramètres</p>
+            </div>
+            <div class='tool'>
+                <img src='img/1-lettre.svg' alt=''>
+                <p>Messagerie</p>
+            </div>
+            <div class='tool'>
+                <img src='img/1-moon.svg' alt=''>
+                <p>Mode sombre</p>
+            </div>
+        </div>
+        </nav>
+        <div class='overlay'></div>
+        </div>
         </div>
     </header>
 
@@ -122,15 +149,15 @@
                 <div>
                     <?php
                     include('connexion.php');
-                    $requete = "SELECT * FROM utilisateurs";
-                    $stmt = $db->query($requete);
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    // if (isset($_SESSION['login'])) {
-                    echo "<h1>Bonjour {$result['prenom']}, sympa de vous revoir !</h1>";
-                    // }
-                    
+
+                    if (isset($_SESSION["login"])) {
+                        $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
+                        $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+                        $stmt->execute();
+                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                        echo "<h1>Bonjour {$result['prenom']}, sympa de vous revoir !</h1>";
+                    }
                     ?>
-                    <!-- <h1>Bonjour Loana, sympa de vous revoir !</h1> -->
                     <p>Bienvenue sur l'EntMMi, votre espace dédié au Multimédia et à l'Informatique. Explorez, et
                         découvrez les dernières informations disponibles.</p>
                 </div>
@@ -162,23 +189,17 @@
             </div>
             <div class='bloc-4'>
                 <h1>Forum</h1>
-                <a href='forum.php'>
+                <a href='#'>
                     <p class='vp'>voir plus</p>
                 </a>
-                <?php
-                include('connexion.php');
-                $requete = "SELECT * FROM forum,utilisateurs WHERE ext_utilisateur = id_utilisateurs  ORDER BY id";
-                $stmt = $db->query($requete);
-                $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-                foreach ($resultat as $forum) {
-                    echo "<div class='cours'>
-                            <div>
-                                <h2>{$forum["nom"]} {$forum["prenom"]}</h2>
-                                <p>{$forum["commentaire"]}</p>
-                            </div>
-                        </div>";
-                }
-                ?>
+
+                <div class='cours'>
+                    <div>
+                        <h2>FATIMARAJAN Anchana</h2>
+                        <p>ent maudit puree</p>
+                    </div>
+                </div>
+
             </div>
             <div class='bloc-5'>
                 <h1>Vos dernières notes</h1>
@@ -207,8 +228,10 @@
                 }
                 ?>
             </div>
+
+
             <div class='bloc-7'>
-                <div class='kelis-2'>
+                <!-- <div class='kelis-2'>
                     <img src='img/1-icon.png' alt=''>
                     <p>kelis.keren</p>
                     <p class='p'>En ligne</p>
@@ -222,8 +245,30 @@
                     <img src='img/3-icon.png' alt=''>
                     <p>alina</p>
                     <p class='p'>En ligne</p>
-                </div>
+                </div> -->
+
+                <?php
+                include('connexion.php');
+                $requete = "SELECT * FROM utilisateurs ORDER BY login = :login DESC, login LIMIT 3";
+                $stmt = $db->prepare($requete);
+                $stmt->bindParam(':login', $_SESSION['login'], PDO::PARAM_STR);
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($result as $user) {
+                    echo "<div class='kelis-2'>
+            <img src='upload/{$user['photoprofil']}' alt=''>
+            <p>{$user['login']}</p>
+            <p class='p'>En ligne</p>
+          </div>";
+                }
+                ?>
+
             </div>
+
+
+
+
         </div>
     </main>
 

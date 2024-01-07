@@ -89,13 +89,13 @@ session_start();
     <div id="champPromotion" style="display: none;">
         <label>Votre promotion :</label>
         <label for="mmi1">MMI1</label>
-        <input type="radio" name="promotion" id="mmi1" value="mmi1">
+        <input type="radio" name="promotion" id="mmi1" value="MMI1">
 
         <label for="mmi2">MMI2</label>
-        <input type="radio" name="promotion" id="mmi2" value="mmi2">
+        <input type="radio" name="promotion" id="mmi2" value="MMI2">
 
         <label for="mmi3">MMI3</label>
-        <input type="radio" name="promotion" id="mmi3" value="mmi3">
+        <input type="radio" name="promotion" id="mmi3" value="MMI3">
     </div>
 
     <br>
