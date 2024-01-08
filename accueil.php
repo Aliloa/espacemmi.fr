@@ -217,8 +217,22 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <div class='graphique'>
-                    <!-- graphique -->
+                <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
+
+                <!-- <script>
+                    const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+                    </script> -->
             </div>
             <div class='bloc-6'>
                 <h1>Menu du jour</h1>
