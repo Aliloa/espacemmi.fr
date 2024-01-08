@@ -9,6 +9,45 @@
 </head>
 
 <body>
+    <style>
+        .popup-visible {
+  z-index: 999;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #252525;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  line-height: 2.5rem;
+  color: #D1CECE;
+  text-align: center;
+  border-radius: 22px;
+}
+
+.popup-visible img {
+  cursor: pointer;
+  width: 30px !important;
+  height: 30px !important;
+  position: absolute;
+  filter: contrast(0%);
+  top: 10px;
+  right: 10px;
+}
+
+.croix {
+  position: fixed;
+
+}
+
+.mention-ptit{
+  cursor: pointer;
+}
+    </style>
 <?php
     session_start();
     if (!isset($_SESSION['login'])) {
@@ -145,16 +184,25 @@
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
     foreach ($result as $users) {
         if ($users['login'] !== 'Admin') {
 
             echo "
-            <p>{$users['login']}, {$users['nom']}, {$users['prenom']}, {$users['email']}, {$users['role']} {$users['promotion']} </p>";
+            <p>{$users['id_utilisateurs']}, {$users['login']}, {$users['nom']}, {$users['prenom']}, {$users['email']}, {$users['role']} {$users['promotion']} </p>
+            <a href='javascript:void(0);' class='btn btn-danger mention-ptit' onclick='afficherPopupConfirmation({$users["id_utilisateurs"]})'>Supprimer</a>
+                
+            <div class='popup-visible'>
+                <img src='img/croix.png' alt='fermer' class='fermer'>
+                <div class='mention'>
+                    <p>Êtes-vous sûr de vouloir effacer définitivement {$users["login"]} ?</p>
+                    <a href='traitesuppression.php?id={$users["id_utilisateurs"]}' class='btn btn-warning' id='lienSuppression'>Oui</a>
+                    <a href='javascript:void(0);' class='btn btn-secondary' onclick='annulerSuppression()'>Non</a>
+                </div>
+            </div>";
         }
     }
+?>
 
-    ?>
 
 
 <form action="deconnexion.php" action='GET'>
@@ -203,6 +251,33 @@
             champPromotion.style.display = (boutonSelectionne && boutonSelectionne.value === "Étudiant.e") ? "block" : "none";
         }
     </script>
+
+<script>
+    let popup = document.querySelector('.popup-visible');
+
+    function afficherPopupConfirmation(userId) {
+        let lienSuppression = document.getElementById('lienSuppression');
+        lienSuppression.href = 'traitesuppression.php?id=' + userId;
+
+        popup.style.display = 'block';
+    }
+
+    function fermerPopup() {
+        popup.style.display = 'none';
+    }
+
+    function annulerSuppression() {
+        fermerPopup();
+    }
+
+    let fermer = document.querySelector('.fermer');
+    fermer.addEventListener('click', function () {
+        fermerPopup();
+    });
+</script>
+
+
+
 </body>
 
 </html>

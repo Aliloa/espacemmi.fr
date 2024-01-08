@@ -1,8 +1,3 @@
-<?php
-session_start();
-include("connexion.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +20,7 @@ include("connexion.php");
     ?>
 
     <?php
+    include("connexion.php");
     $requete = "SELECT * FROM travail_a_faire ORDER BY date DESC";
     $stmt = $db->query($requete);
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -18,7 +18,7 @@ if ($stmt->rowCount()) {
             header("Location: administration.php");
             exit();
         } elseif (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
-            header("Location: parametres.php");
+            header("Location: backofficeprof.php");
             exit();
         } elseif (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
             header("Location: page_crous.php");

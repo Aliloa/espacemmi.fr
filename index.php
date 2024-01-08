@@ -30,7 +30,6 @@
 
 <div class="links-container">
         <a href="connexion_page.php">Connexion</a>
-        <a href="inscription_page.php">Inscription</a>
     </div>
    <div class="image1">
     <img src="img/image_index.png">

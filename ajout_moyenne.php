@@ -1,6 +1,10 @@
 <?php
-session_start();
-?>
+    session_start();
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
+    ?>  
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,7 +24,7 @@ session_start();
 <input type="input" id="matiere" name="matiere" required>
 <label for="note">Note</label>
 <input type="input" id="note" name="note" required>
-<input type='submit' value='Se connecter'>
+<input type='submit' value='Publier'>
 
 </form>
 </div>
