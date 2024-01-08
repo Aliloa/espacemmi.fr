@@ -61,13 +61,11 @@
                             $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
                             $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
                             $stmt->execute();
-
                             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                             if ($result) {
-                                echo "<a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
-                            } else {
-                                header('Location:index.php?erreur=access_denied');
+                                echo "
+                                <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
                             }
                         }
                         ?>

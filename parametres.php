@@ -12,6 +12,10 @@
 <body>
 <?php
     session_start();
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
     ?>
 
      <!-- Logo Accueil -->
@@ -112,7 +116,6 @@
         <input type="submit" name="deconnect" value="Se déconnecter">
     </form>
 
-    <!-- <a href="index.php">Se déconnecter</a> -->
 
 </body>
 <script src="js/script_accueil.js"></script>

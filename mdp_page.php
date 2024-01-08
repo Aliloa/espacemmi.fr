@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +14,13 @@ session_start();
 
 </head>
 <body>
+<?php
+    session_start();
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
+    ?>
 
 <div class="main">
 <div class="logo">
