@@ -43,7 +43,7 @@
         <input type="submit" name="deconnect" value="Se déconnecter">
     </form>
 
-    <?php
+    <!-- <hp
     include("connexion.php");
     $requete = 'SELECT * FROM grossematiere';
     $stmt = $db->query($requete);
@@ -57,7 +57,27 @@
 
         <img src='matiere/{$matiere["illustration"]}' alt=''>";
     }
+?> -->
+
+<?php
+include("connexion.php");
+
+if (isset($_SESSION["login"])) {
+    $requete = "SELECT * FROM grossematiere INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs WHERE utilisateurs.login = :login AND utilisateurs.role = 'Enseignant.e'";
+
+    $stmt = $db->prepare($requete);
+    $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
+    $stmt->execute();
+    
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $matiere) {
+        echo "<p>{$matiere['nom_mat']}</p>
+              <img src='matiere/{$matiere["illustration"]}' alt=''>";
+    }
+}
 ?>
+
 
 </body>
 </html>

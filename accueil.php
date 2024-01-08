@@ -175,23 +175,27 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <?php
-                include('connexion.php');
-                $requete = "SELECT * FROM cours, utilisateurs ORDER BY id_cours DESC LIMIT 2 ";
-                
-                $stmt = $db->query($requete);
-                $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-                foreach ($resultat as $cours) {
-                    $chemindoc = "documents/" . $cours["document"];
+    include('connexion.php');
+    $requete = "SELECT cours.*, utilisateurs.nom, utilisateurs.prenom
+                FROM cours
+                INNER JOIN utilisateurs ON cours.externe_prof = utilisateurs.id_utilisateurs
+                ORDER BY id_cours DESC LIMIT 2";
 
-                    echo "<div class='cours'>
-                            <div>
-                               <a href='{$chemindoc}' download> <h2>{$cours["cours"]}</h2> </a>
-                                <p> Crée par {$cours["externe_prof"]}</p>
-                            </div>
-                        </div>";
-                }
+    $stmt = $db->query($requete);
+    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                ?>
+    foreach ($resultat as $cours) {
+        $chemindoc = "documents/" . $cours["document"];
+
+        echo "<div class='cours'>
+                <div>
+                    <a href='{$chemindoc}' download><h2>{$cours["cours"]}</h2></a>
+                    <p>Créé par {$cours["nom"]} {$cours["prenom"]}</p>
+                </div>
+              </div>";
+    }
+?>
+
             </div>
             <div class='bloc-4'>
                 <h1>Forum</h1>

@@ -25,27 +25,30 @@
 
 
         <label for="co">Coefficient</label>
-        <input type="number" id="co" name="coef" required min="0" max="20">
+        <input type="number" id="co" name="coef" min="0" max="20">
 
         <h1>Choisissez la matière pour votre prochain cours :</h1>
         <label for="matiere">Matière :</label>
         <select name="matierechoisi" id="matiere" required>
 
+        
             <?php
             include("connexion.php");
+
             if (isset($_SESSION["login"])) {
-                $requete = 'SELECT * FROM grossematiere, utilisateurs WHERE login=:login';
+                $requete = 'SELECT * FROM grossematiere WHERE prof_ext = :idProfesseur';
                 $stmt = $db->prepare($requete);
-                $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+                $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
                 $stmt->execute();
 
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                var_dump($result);
+
                 foreach ($result as $matiere) {
                     echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
                 }
             }
             ?>
+
 
         </select>
 
@@ -80,10 +83,9 @@
 
         foreach ($resultat as $cours) {
             echo "<p>{$cours['cours']} - Matière : {$cours['nom_mat']}</p>";
-            // Vous pouvez ajouter d'autres détails du cours ici si nécessaire
         }
     }
-?>
+    ?>
 
 
 

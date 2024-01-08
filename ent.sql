@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 08 jan. 2024 à 11:10
+-- Généré le : lun. 08 jan. 2024 à 22:29
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
 --
 
 INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `ext_cours`, `prof`, `justificatif`) VALUES
-(1, 'absence', '2023-12-13', '02:00:00', '', 0, ''),
-(2, 'absence', '2024-01-07', '02:00:00', '', 0, '');
+(1, 'absence', '2023-12-13', '02:00:00', '2', 0, ''),
+(2, 'absence', '2024-01-07', '02:00:00', '3', 0, '');
 
 -- --------------------------------------------------------
 
@@ -82,24 +82,27 @@ DROP TABLE IF EXISTS `cours`;
 CREATE TABLE IF NOT EXISTS `cours` (
   `id_cours` int NOT NULL AUTO_INCREMENT,
   `cours` varchar(50) NOT NULL,
+  `document` text NOT NULL,
   `prof` varchar(50) NOT NULL,
-  `img` varchar(50) NOT NULL,
   `externe_prof` int NOT NULL,
-  `coef` int NOT NULL,
+  `coef` int DEFAULT NULL,
+  `ext_matiere` int NOT NULL,
   PRIMARY KEY (`id_cours`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cours`
 --
 
-INSERT INTO `cours` (`id_cours`, `cours`, `prof`, `img`, `externe_prof`, `coef`) VALUES
-(1, 'Protocole SAE 3.02', 'Renault Einpstein', 'img/1-dev.png', 0, 0),
-(2, 'Marketing POST 8890', 'Leyla Jaoued', 'img/1-comp.png', 0, 0),
-(3, 'Protocole Narratif Bande Son', 'Karim Pierrre Chabane', 'img/1-conc', 0, 0),
-(4, 'Display Grid', 'Gaelle Charpentier', 'img/1-dev.png', 0, 0),
-(5, 'Consigne production sonore', 'Tony Houziaux', 'img/1-conc', 0, 0),
-(6, 'Hébergement', '', '', 20, 2);
+INSERT INTO `cours` (`id_cours`, `cours`, `document`, `prof`, `externe_prof`, `coef`, `ext_matiere`) VALUES
+(1, 'Protocole SAE 3.02', '', 'Renault Einpstein', 0, 0, 0),
+(2, 'Marketing POST 8890', '', 'Leyla Jaoued', 0, 0, 0),
+(3, 'Protocole Narratif Bande Son', '', 'Karim Pierrre Chabane', 0, 0, 0),
+(4, 'Display Grid', '', 'Gaelle Charpentier', 0, NULL, 0),
+(5, 'Consigne production sonore', '', 'Tony Houziaux', 0, 0, 0),
+(10, 'Consignes SAE 301', 'SAÉ 301 V1_2023.pdf', '', 20, 15, 3),
+(9, 'marketing', 'post-5345-Principe de marketing.pptx', '', 20, 15, 5),
+(11, 'Display Grid', 'TP2-grid.zip', '', 21, 0, 6);
 
 -- --------------------------------------------------------
 
@@ -129,6 +132,33 @@ INSERT INTO `crous` (`id`, `entre`, `plat`, `dessert`, `date`, `image_plat`) VAL
 (7, 'Carpaccio de saumon aux agrumes, Salade de chèvre chaud au miel', 'Filet de boeuf, Risotto aux champignons, Poulet rôti', 'Tiramisu aux fruits rouges, Crème brûlée à la vanille, Fondant au chocolat', '2023-12-30', 'https://img.cuisineaz.com/660x660/2017/09/04/i132139-risotto-aux-champignons-au-companion.jpeg'),
 (8, 'Velouté de potiron à la crème fraîche, Bruschetta à la tomate et mozzarella', 'Pâtes carbonara, Magret de canard à l\'orange, Poisson en croûte d\'amandes', 'Mousse au chocolat noir, Tarte aux pommes caramélisées, Sorbet au citron', '2023-12-31', 'https://img.cuisineaz.com/1024x1024/2015/10/12/i6388-magret-de-canard-a-l-orange-au-miel.jpg'),
 (9, 'salade aux oeufs, pates, tomate', 'pates bolo, poisson, porc', 'chocolat, vanille, caramel', '2024-01-10', 'https://www.potimarron.com/images/wishlists/img/spaghettis-bolognaise-maison-DWMmS.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `grossematiere`
+--
+
+DROP TABLE IF EXISTS `grossematiere`;
+CREATE TABLE IF NOT EXISTS `grossematiere` (
+  `id_matiere` int NOT NULL AUTO_INCREMENT,
+  `nom_mat` text NOT NULL,
+  `coefficient` int NOT NULL,
+  `illustration` text NOT NULL,
+  `prof_ext` int NOT NULL,
+  PRIMARY KEY (`id_matiere`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `grossematiere`
+--
+
+INSERT INTO `grossematiere` (`id_matiere`, `nom_mat`, `coefficient`, `illustration`, `prof_ext`) VALUES
+(2, 'Hébergement', 5, 'matiere_m.berthet.png', 20),
+(3, 'superjoie', 4, 'matiere_m.berthet.png', 20),
+(4, 'franchement', 20, 'matiere_m.berthetfranchement.png', 20),
+(5, 'omggg', 4, 'matiere_m.berthet_omggg.png', 20),
+(6, 'Intégration web', 3, 'matiere_c.gaelle_Intégration web.png', 21);
 
 -- --------------------------------------------------------
 
@@ -213,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   UNIQUE KEY `prenom` (`prenom`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
@@ -221,13 +251,13 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`login`, `nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
 ('Anchu', 'FATIMARAJAN', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'titititi'),
-('Gaelle', 'CHARPENTIER', 'Gaëlle', 14, '$2y$10$mlXzRJslQ48Qop1SHycqD.5hnC6oVYPSUMWfXYCekHRwe7cIQMxn2', 'default.png', 'Enseignant.e', 'gaelle@gmail.com', NULL, 'hey j\'aime les chats'),
 ('Alilo', 'ZHYLA', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'Membre du CROUS', 'alina@gmail.com', NULL, NULL),
 ('kelis', 'OSHOFFA', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'mmi2', NULL),
+('c.gaelle', 'CHARPENTIER', 'Gaëlle', 21, '$2y$10$cF.Hon4PfAh9z6oLQvL0F.B11NA57.974N2yVdZEJEJQfa9.SX9N6', 'default.png', 'Enseignant.e', 'gaelle.charpentier@univ-eiffel.fr', NULL, NULL),
 ('Admin', 'Admin', 'Admin', 17, '$2y$10$PwueylyOGxe1/ma1GyfN4OdjAC65xPB247Fr1p6ztobzzyxQJb9LK', 'default.png', 'Enseignant.e', 'fatimarajananchana@gmail.com', NULL, NULL),
 ('c.loana', 'CHALACH', 'Loana', 18, '$2y$10$2BHq1NZWGm9gkS8IXxQ40e5wE6C8BHSAAAocvZkSzk7NXyo2AAGA.', 'default.png', 'Étudiant.e', 'loana@gmail.com', 'MMI2', NULL),
 ('t.zozo', 'zozo', 'toto', 19, '$2y$10$ygH4rBN/t41kPUPazVGmP.1k7B5izxzpBm8M.i2nYHj0jy0FuwCfi', 'default.png', 'Membre du CROUS', 'toto@gmail.com', NULL, NULL),
-('m.berthet', 'maa', 'berthet', 20, '$2y$10$xsKquIGhkz/d2S7OMU4bZezkGP7cyF9i61hBdeUDcuxlI87me.epW', 'default.png', 'Enseignant.e', 'mat@gmail.com', NULL, NULL);
+('m.berthet', 'Matthieu', 'Berthet', 20, '$2y$10$xsKquIGhkz/d2S7OMU4bZezkGP7cyF9i61hBdeUDcuxlI87me.epW', 'default.png', 'Enseignant.e', 'mat@gmail.com', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
