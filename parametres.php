@@ -112,7 +112,6 @@
         <input type="submit" name="deconnect" value="Se déconnecter">
     </form>
 
-    <!-- <a href="index.php">Se déconnecter</a> -->
 
 </body>
 

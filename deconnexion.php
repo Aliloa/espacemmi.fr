@@ -6,7 +6,7 @@ if (isset($_GET['deconnect'])) {
 
 session_destroy();
 $_SESSION = array();
-header('Location:index.php?deconnexion');
+header('Location:index.php?deconnected');
 exit();
 }
 ?>

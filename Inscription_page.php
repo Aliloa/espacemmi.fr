@@ -46,11 +46,9 @@ session_start();
 
 
 <div class="formulaire">
-<form action="traiteinscription.php" method="post">
+<form action="traiteinscription.php" method="POST">
 <h1>Inscription</h1>
 
-    <!-- <label for="login">Login</label>
-    <input type="text" id="login" name="login" required> -->
 
 
 
@@ -85,7 +83,6 @@ session_start();
 </fieldset>
 
 
-    <!-- Champ de promotion pour les étudiants -->
     <div id="champPromotion" style="display: none;">
         <label>Votre promotion :</label>
         <label for="mmi1">MMI1</label>

@@ -11,14 +11,17 @@
 
 <body>
     <?php
+    
     session_start();
     include("connexion.php");
+
+    
 
     if (isset($_POST['soumettre'])) {
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
         $email = $_POST['email'];
-        // $login = $_POST['login'];
+        $login = $_POST['login'];
         $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $role = $_POST['role'];
         $promotion = $_POST['promotion'];
@@ -29,10 +32,11 @@
 
 
 
-    $testlogin = "SELECT * FROM utilisateurs WHERE nom=:nom AND prenom = :prenom";
+    $testlogin = "SELECT * FROM utilisateurs WHERE nom=:nom AND prenom = :prenom AND login = :login";
     $stmt = $db->prepare($testlogin);
     $stmt->bindValue(":nom", $nom, PDO::PARAM_STR);
     $stmt->bindValue(":prenom", $prenom, PDO::PARAM_STR);
+    $stmt->bindValue(":login", $login, PDO::PARAM_STR);
     $stmt->execute();
     if ($stmt->rowCount()) {
         echo "Ce login n'est pas disponible";
@@ -40,8 +44,9 @@
         header('Location:Inscription_page.php?erreur=login');
     }
 
-    $requete = "INSERT INTO utilisateurs (nom, prenom, mot_de_passe, photoprofil, role, email, promotion) VALUES (:nom, :prenom, :mdp, :photo, :role, :email, :promotion)";
+    $requete = "INSERT INTO utilisateurs (login, nom, prenom, mot_de_passe, photoprofil, role, email, promotion) VALUES (:login, :nom, :prenom, :mdp, :photo, :role, :email, :promotion)";
     $stmt = $db->prepare($requete);
+    $stmt->bindValue(":login", $login, PDO::PARAM_STR);
     $stmt->bindValue(":nom", $nom, PDO::PARAM_STR);
     $stmt->bindValue(":prenom", $prenom, PDO::PARAM_STR);
     $stmt->bindValue(":mdp", $mdp, PDO::PARAM_STR);
@@ -53,7 +58,7 @@
     $stmt->execute();
     
     if ($stmt->rowCount()) {
-        header('Location:connexion_page.php');
+        header('Location:administration.php?added_successfully');
     } else {
         echo "ça n'a pas marché veuillez recommencer.";
         die($stmt);
