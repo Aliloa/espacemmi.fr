@@ -18,6 +18,8 @@
 
 <a href="absenceprof.php">Ajouter les absences</a>
 
+<a href="ajoutnotes.php">Ajouter des notes</a>
+
 
 <a href="ajout_matiere.php">Ajouter une matière</a>
 

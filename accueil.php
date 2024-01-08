@@ -190,7 +190,7 @@
         echo "<div class='cours'>
                 <div>
                     <a href='{$chemindoc}' download><h2>{$cours["cours"]}</h2></a>
-                    <p>Créé par {$cours["nom"]} {$cours["prenom"]}</p>
+                    <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
                 </div>
               </div>";
     }

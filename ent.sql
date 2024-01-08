@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 08 jan. 2024 à 22:29
+-- Généré le : lun. 08 jan. 2024 à 22:55
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -83,26 +83,22 @@ CREATE TABLE IF NOT EXISTS `cours` (
   `id_cours` int NOT NULL AUTO_INCREMENT,
   `cours` varchar(50) NOT NULL,
   `document` text NOT NULL,
-  `prof` varchar(50) NOT NULL,
   `externe_prof` int NOT NULL,
   `coef` int DEFAULT NULL,
   `ext_matiere` int NOT NULL,
   PRIMARY KEY (`id_cours`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cours`
 --
 
-INSERT INTO `cours` (`id_cours`, `cours`, `document`, `prof`, `externe_prof`, `coef`, `ext_matiere`) VALUES
-(1, 'Protocole SAE 3.02', '', 'Renault Einpstein', 0, 0, 0),
-(2, 'Marketing POST 8890', '', 'Leyla Jaoued', 0, 0, 0),
-(3, 'Protocole Narratif Bande Son', '', 'Karim Pierrre Chabane', 0, 0, 0),
-(4, 'Display Grid', '', 'Gaelle Charpentier', 0, NULL, 0),
-(5, 'Consigne production sonore', '', 'Tony Houziaux', 0, 0, 0),
-(10, 'Consignes SAE 301', 'SAÉ 301 V1_2023.pdf', '', 20, 15, 3),
-(9, 'marketing', 'post-5345-Principe de marketing.pptx', '', 20, 15, 5),
-(11, 'Display Grid', 'TP2-grid.zip', '', 21, 0, 6);
+INSERT INTO `cours` (`id_cours`, `cours`, `document`, `externe_prof`, `coef`, `ext_matiere`) VALUES
+(14, 'TP mini projet', 'TP miniblog_S3_2023.pdf', 22, NULL, 9),
+(12, 'Marketing POST 8890', 'post-5345-Principe de marketing(1).pptx', 23, NULL, 7),
+(13, 'Consigne production sonore', 'SAE_3.02_-_Les_sons_de_lhorrifique_en_BD__de_lillustration_de_roman.pdf', 24, NULL, 8),
+(11, 'Display Grid', 'TP2-grid.zip', 21, 0, 6),
+(15, 'Protocole SAE 3.02', 'SAÉ 301 V1_2023-1.pdf', 22, NULL, 9);
 
 -- --------------------------------------------------------
 
@@ -147,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `grossematiere` (
   `illustration` text NOT NULL,
   `prof_ext` int NOT NULL,
   PRIMARY KEY (`id_matiere`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `grossematiere`
@@ -158,7 +154,10 @@ INSERT INTO `grossematiere` (`id_matiere`, `nom_mat`, `coefficient`, `illustrati
 (3, 'superjoie', 4, 'matiere_m.berthet.png', 20),
 (4, 'franchement', 20, 'matiere_m.berthetfranchement.png', 20),
 (5, 'omggg', 4, 'matiere_m.berthet_omggg.png', 20),
-(6, 'Intégration web', 3, 'matiere_c.gaelle_Intégration web.png', 21);
+(6, 'Intégration web', 3, 'matiere_c.gaelle_Intégration web.png', 21),
+(7, 'Marketing', 3, 'matiere_j.leyla_Marketing.png', 23),
+(8, 'Sound design', 1, 'matiere_h.tony_Sound design.png', 24),
+(9, 'Développement back', 3, 'matiere_e.renaud_Dev back.png', 22);
 
 -- --------------------------------------------------------
 
@@ -243,21 +242,23 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   UNIQUE KEY `prenom` (`prenom`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`login`, `nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
-('Anchu', 'FATIMARAJAN', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'titititi'),
-('Alilo', 'ZHYLA', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'Membre du CROUS', 'alina@gmail.com', NULL, NULL),
-('kelis', 'OSHOFFA', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'mmi2', NULL),
-('c.gaelle', 'CHARPENTIER', 'Gaëlle', 21, '$2y$10$cF.Hon4PfAh9z6oLQvL0F.B11NA57.974N2yVdZEJEJQfa9.SX9N6', 'default.png', 'Enseignant.e', 'gaelle.charpentier@univ-eiffel.fr', NULL, NULL),
+('Anchu', 'Fatimarajan', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'titititi'),
+('Alilo', 'Zhyla', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'Membre du CROUS', 'alina@gmail.com', NULL, NULL),
+('kelis', 'Oshoffa', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'mmi2', NULL),
+('c.gaelle', 'Charpentier', 'Gaëlle', 21, '$2y$10$cF.Hon4PfAh9z6oLQvL0F.B11NA57.974N2yVdZEJEJQfa9.SX9N6', 'default.png', 'Enseignant.e', 'gaelle.charpentier@univ-eiffel.fr', NULL, NULL),
 ('Admin', 'Admin', 'Admin', 17, '$2y$10$PwueylyOGxe1/ma1GyfN4OdjAC65xPB247Fr1p6ztobzzyxQJb9LK', 'default.png', 'Enseignant.e', 'fatimarajananchana@gmail.com', NULL, NULL),
-('c.loana', 'CHALACH', 'Loana', 18, '$2y$10$2BHq1NZWGm9gkS8IXxQ40e5wE6C8BHSAAAocvZkSzk7NXyo2AAGA.', 'default.png', 'Étudiant.e', 'loana@gmail.com', 'MMI2', NULL),
-('t.zozo', 'zozo', 'toto', 19, '$2y$10$ygH4rBN/t41kPUPazVGmP.1k7B5izxzpBm8M.i2nYHj0jy0FuwCfi', 'default.png', 'Membre du CROUS', 'toto@gmail.com', NULL, NULL),
-('m.berthet', 'Matthieu', 'Berthet', 20, '$2y$10$xsKquIGhkz/d2S7OMU4bZezkGP7cyF9i61hBdeUDcuxlI87me.epW', 'default.png', 'Enseignant.e', 'mat@gmail.com', NULL, NULL);
+('c.loana', 'Chalach', 'Loana', 18, '$2y$10$2BHq1NZWGm9gkS8IXxQ40e5wE6C8BHSAAAocvZkSzk7NXyo2AAGA.', 'default.png', 'Étudiant.e', 'loana@gmail.com', 'MMI2', NULL),
+('b.matthieu', 'Berthet', 'Matthieu', 20, '$2y$10$xsKquIGhkz/d2S7OMU4bZezkGP7cyF9i61hBdeUDcuxlI87me.epW', 'default.png', 'Enseignant.e', 'matthieu.berthet@univ-eiffel.fr', NULL, NULL),
+('e.renaud', 'Renaud', 'Eppstein', 22, '$2y$10$5V5zeXlfL4VPsCECFv.3Z.IcM0CzHRBt2iBve0eBmgHYOv9w2JFAa', 'default.png', 'Enseignant.e', 'renaud.eppstein@univ-eiffel.fr', NULL, NULL),
+('j.leyla', 'Jaoued', 'Leyla', 23, '$2y$10$hhWVMlGqPWhf1f2k.PTDpOp3MHHFeWPBVNM7JJ02hDCmaifBBtFFK', 'default.png', 'Enseignant.e', 'leyla.jaoued@univ-eiffel.fr', NULL, NULL),
+('h.tony', 'Houziaux', 'Tony', 24, '$2y$10$1hyGlVm4J3DSe2yXhyztd.6W9zoMDp.dNVgRKicTV.5nHloPwVP2y', 'default.png', 'Enseignant.e', 'tonyhouziaux@gmail.com', NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
