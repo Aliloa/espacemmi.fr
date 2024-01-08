@@ -9,6 +9,13 @@
 </head>
 
 <body>
+<?php
+    session_start();
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
+    ?>
 
     <!-- Logo Accueil -->
     <a href='accueil.php'><img src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>

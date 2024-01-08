@@ -16,6 +16,13 @@ include("connexion.php");
 </head>
 
 <body>
+<?php
+    session_start();
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
+    ?>
 
     <?php
     $requete = "SELECT * FROM travail_a_faire ORDER BY date DESC";
