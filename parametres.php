@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='css/style_accueil.css'>
+    <link rel='stylesheet' href='css/style_navigation.css'>
 
     <title>Paramètres</title>
 </head>
@@ -115,5 +115,6 @@
     <!-- <a href="index.php">Se déconnecter</a> -->
 
 </body>
+<script src="js/script_accueil.js"></script>
 
 </html>

@@ -6,7 +6,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Espace MMI | Accueil</title>
     <link rel='icon' href='img/favicon.png'>
-    <link rel='stylesheet' href='css/style_accueil.css'>
+    <link rel='stylesheet' href='css/style_navigation.css'>
     <link rel='stylesheet' href='css/style_ajout_menu.css'>
 </head>
 
