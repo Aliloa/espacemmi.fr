@@ -176,18 +176,21 @@
                 </a>
                 <?php
                 include('connexion.php');
-                $requete = "SELECT * FROM cours ORDER BY id_cours DESC LIMIT 2 ";
+                $requete = "SELECT * FROM cours, utilisateurs ORDER BY id_cours DESC LIMIT 2 ";
+                
                 $stmt = $db->query($requete);
                 $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
                 foreach ($resultat as $cours) {
+                    $chemindoc = "documents/" . $cours["document"];
+
                     echo "<div class='cours'>
-                            <img src='{$cours["img"]}' alt=''>
                             <div>
-                                <h2>{$cours["cours"]}</h2>
-                                <p> Crée par {$cours["prof"]}</p>
+                               <a href='{$chemindoc}' download> <h2>{$cours["cours"]}</h2> </a>
+                                <p> Crée par {$cours["externe_prof"]}</p>
                             </div>
                         </div>";
                 }
+
                 ?>
             </div>
             <div class='bloc-4'>

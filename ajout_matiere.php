@@ -16,7 +16,7 @@
     <a href="backofficeprof.php">Retour</a>
 
 
-    <form action="traitematiere.php" method="POST" enctype='multipart/form-data'>
+    <form action="traitematiere.php" method="POST" enctype="multipart/form-data">
         <h1>Ajouter une matière</h1>
 
         <label for="module">Nom du la matière</label>
@@ -33,7 +33,7 @@
 
 
 
-        <button type="submit" name='ajoutercours'>Ajouter</button>
+        <button type="submit" name='ajoutmatiere'>Ajouter</button>
 
 
     </form>
@@ -50,7 +50,6 @@
     $stmt->execute();
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($result);
 
 
     foreach ($result as $matiere) {
