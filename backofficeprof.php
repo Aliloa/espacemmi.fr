@@ -19,7 +19,11 @@
 <a href="absenceprof.php">Ajouter les absences</a>
 
 
+<a href="ajout_matiere.php">Ajouter une matière</a>
+
+
 <a href="ajout_cours.php">Ajouter un cours</a>
+
 
   
 

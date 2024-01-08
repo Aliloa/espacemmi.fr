@@ -19,13 +19,12 @@
     <form action="traitecours.php" method="POST">
         <h1>Ajouter un cours</h1>
 
-        <label for="module">Nom du module</label>
-        <input type="text" id="module" name="module" required>
+        <label for="module">Nom du cours</label>
+        <input type="text" id="module" name="cours" required>
 
 
         <label for="co">Coefficient</label>
         <input type="number" id="co" name="coef" required min="0" max="20">
-
 
 
 
@@ -41,9 +40,6 @@
         <input type="submit" name="deconnect" value="Se déconnecter">
     </form>
 </body>
-        <!-- <div>
-            <input type="file" name="fichier" size="30" required> <br>ajouter une photo
-            <input type="submit" name="upload" value="Uploader"><br> <br>
-        </div> -->
+ 
 
 </html>

@@ -14,7 +14,7 @@
     include("connexion.php");
 
     if (isset($_POST['ajoutercours'])) {
-        $module = $_POST['module'];
+        $module = $_POST['cours'];
         $coef = $_POST['coef'];
 
 
