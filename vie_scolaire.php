@@ -221,7 +221,7 @@
         </div>
 
         <?php
-        $requete = "SELECT * FROM abscence_retard ORDER BY id_abs DESC";
+        $requete = "SELECT * FROM abscence_retard, utilisateurs ORDER BY id_abs DESC WHERE ext_cours = cours";
         $stmt = $db->query($requete);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
