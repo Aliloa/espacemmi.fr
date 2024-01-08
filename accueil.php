@@ -6,6 +6,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Espace MMI | Accueil</title>
     <link rel='icon' href='img/favicon.png'>
+    <link rel='stylesheet' href='css/style_navigation.css'>
     <link rel='stylesheet' href='css/style_accueil.css'>
 </head>
 
@@ -110,7 +111,7 @@
                     }
                     ?>
 
-                    <!-- <p>Moi dans la vie, j'aime bien la nourriture</p> -->
+
             </div>
         </div>
         <!-- FIN PHP   -->
@@ -244,11 +245,11 @@
 
                 foreach ($result as $user) {
                     echo "<div class='kelis-2'>
-            <img src='upload/{$user['photoprofil']}' alt=''>
-            <p>{$user['login']}</p>
-            <p class='p'>En ligne</p>
-          </div>";
-                }
+                            <img src='upload/{$user['photoprofil']}' alt=''>
+                            <p>{$user['login']}</p>
+                            <p class='p'>En ligne</p>
+                        </div>";
+                    }
                 ?>
 
             </div>
