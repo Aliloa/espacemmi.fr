@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ajouter un cours</title>
 </head>
 
 <body>
@@ -16,7 +16,8 @@
     }
     ?>
     <a href="backofficeprof.php">Retour</a>
-    <form action="traitecours.php" method="POST">
+
+    <form action="traitecours.php" method="POST" enctype="multipart/form-data">
         <h1>Ajouter un cours</h1>
 
         <label for="module">Nom du cours</label>
@@ -26,8 +27,30 @@
         <label for="co">Coefficient</label>
         <input type="number" id="co" name="coef" required min="0" max="20">
 
+        <h1>Choisissez la matière pour votre prochain cours :</h1>
+        <label for="matiere">Matière :</label>
+        <select name="matierechoisi" id="matiere" required>
 
+            <?php
+            include("connexion.php");
+            if (isset($_SESSION["login"])) {
+                $requete = 'SELECT * FROM grossematiere, utilisateurs WHERE login=:login';
+                $stmt = $db->prepare($requete);
+                $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+                $stmt->execute();
 
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                var_dump($result);
+                foreach ($result as $matiere) {
+                    echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
+                }
+            }
+            ?>
+
+        </select>
+
+        <p>Votre document</p>
+        <input type="file" name="document" accept=".pdf, .odt, .pptx, .docx, .xlsx" required> <br>
 
 
         <button type="submit" name='ajoutercours'>Ajouter</button>
@@ -36,10 +59,37 @@
     </form>
 
 
+
     <form action="deconnexion.php" action='GET'>
         <input type="submit" name="deconnect" value="Se déconnecter">
     </form>
+    <?php
+    include("connexion.php");
+    if (isset($_SESSION["login"])) {
+
+        $requete = "SELECT cours.*, grossematiere.nom_mat
+                    FROM cours
+                    INNER JOIN grossematiere ON cours.ext_matiere = grossematiere.id_matiere
+                    INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs
+                    WHERE utilisateurs.login = :login AND utilisateurs.role = 'Enseignant.e'";
+
+        $stmt = $db->prepare($requete);
+        $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($resultat as $cours) {
+            echo "<p>{$cours['cours']} - Matière : {$cours['nom_mat']}</p>";
+            // Vous pouvez ajouter d'autres détails du cours ici si nécessaire
+        }
+    }
+?>
+
+
+
+
+    </form>
 </body>
- 
+
 
 </html>
