@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 08 jan. 2024 à 01:45
+-- Généré le : lun. 08 jan. 2024 à 11:10
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -85,19 +85,21 @@ CREATE TABLE IF NOT EXISTS `cours` (
   `prof` varchar(50) NOT NULL,
   `img` varchar(50) NOT NULL,
   `externe_prof` int NOT NULL,
+  `coef` int NOT NULL,
   PRIMARY KEY (`id_cours`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cours`
 --
 
-INSERT INTO `cours` (`id_cours`, `cours`, `prof`, `img`, `externe_prof`) VALUES
-(1, 'Protocole SAE 3.02', 'Renault Einpstein', 'img/1-dev.png', 0),
-(2, 'Marketing POST 8890', 'Leyla Jaoued', 'img/1-comp.png', 0),
-(3, 'Protocole Narratif Bande Son', 'Karim Pierrre Chabane', 'img/1-conc', 0),
-(4, 'Display Grid', 'Gaelle Charpentier', 'img/1-dev.png', 0),
-(5, 'Consigne production sonore', 'Tony Houziaux', 'img/1-conc', 0);
+INSERT INTO `cours` (`id_cours`, `cours`, `prof`, `img`, `externe_prof`, `coef`) VALUES
+(1, 'Protocole SAE 3.02', 'Renault Einpstein', 'img/1-dev.png', 0, 0),
+(2, 'Marketing POST 8890', 'Leyla Jaoued', 'img/1-comp.png', 0, 0),
+(3, 'Protocole Narratif Bande Son', 'Karim Pierrre Chabane', 'img/1-conc', 0, 0),
+(4, 'Display Grid', 'Gaelle Charpentier', 'img/1-dev.png', 0, 0),
+(5, 'Consigne production sonore', 'Tony Houziaux', 'img/1-conc', 0, 0),
+(6, 'Hébergement', '', '', 20, 2);
 
 -- --------------------------------------------------------
 
