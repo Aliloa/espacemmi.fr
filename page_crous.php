@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/style_crous.css" />
     <link rel='stylesheet' href='css/style_navigation.css'>
+    <link rel='stylesheet' href='css/dark_mode.css'>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
@@ -54,7 +55,7 @@
                 <div class='icon-photo'>
                     <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
-                    <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
+                    <button onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
                     <div class='photo-2'>
@@ -284,6 +285,8 @@
      crossorigin=""></script>
 
 </html>
+
+<script src='js/script_dark_mode.js'></script>
 
 <script>
     var map = L.map('map').setView([48.83930298535587, 2.584485412835638], 13);
