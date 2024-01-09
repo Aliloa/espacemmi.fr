@@ -92,7 +92,7 @@
     </nav>
 
 
-    <form action="traiteinscription.php" method="POST">
+    <form action="./traitement/traiteinscription.php" method="POST">
         <h1>Inscription</h1>
 
         <label for="login">Login</label>
@@ -176,7 +176,7 @@
                 <img src='img/croix.png' alt='fermer' class='fermer'>
                 <div class='mention'>
                     <p>Êtes-vous sûr de vouloir effacer définitivement {$users["login"]} ?</p>
-                    <a href='traitesuppression.php?id={$users["id_utilisateurs"]}' class='btn btn-warning' id='lienSuppression'>Oui</a>
+                    <a href='./traitement/traitesuppression.php?id={$users["id_utilisateurs"]}' class='btn btn-warning' id='lienSuppression'>Oui</a>
                     <a href='javascript:void(0);' class='btn btn-secondary' onclick='annulerSuppression()'>Non</a>
                 </div>
             </div>";
@@ -238,7 +238,7 @@
 
     function afficherPopupConfirmation(userId) {
         let lienSuppression = document.getElementById('lienSuppression');
-        lienSuppression.href = 'traitesuppression.php?id=' + userId;
+        lienSuppression.href = './traitement/traitesuppression.php?id=' + userId;
 
         popup.style.display = 'block';
     }

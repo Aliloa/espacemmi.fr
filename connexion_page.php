@@ -22,7 +22,7 @@ session_start();
 
 
 <div class="formulaire">
-<form action="traiter_connexion.php" method="GET">
+<form action="./traitement/traiter_connexion.php" method="GET">
 <?php
 if (isset($_GET["erreur"])) {
     echo "Vous vous êtes trompés, veuillez recommencez";
