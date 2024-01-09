@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/style_crous.css" />
     <link rel='stylesheet' href='css/style_navigation.css'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
     <title>Espace MMI | Menu</title>
     <link rel="icon" href="img/favicon.png">
 
@@ -169,15 +172,15 @@
                     <h1>Menu hebdomadaire</h1>
                     <div class="card shadow">
                         <div class="infos">
-                            <h2>Restaurant universitaire EISEE:</h2>
+                            <h2>Restaurant universitaire ESIEE:</h2>
                             <div class="flex">
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
                                     <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
-          echo "<a href='ajouter_menu.php?lieu=EISEE'><button class='btn add'>Ajouter menu</button></a>";
+          echo "<a href='ajouter_menu.php?lieu=ESIEE'><button class='btn add'>Ajouter menu</button></a>";
         } ?>
-                                    <a href="menu_du_jour.php?lieu=EISEE"><button class="btn">Voir le menu</button></a>
+                                    <a href="menu_du_jour.php?lieu=ESIEE"><button class="btn">Voir le menu</button></a>
                             </div>
                         </div>
                         <hr class="border">
@@ -211,8 +214,8 @@
                 <section class="decouvrez_resto">
                     <h1>Découvrez nos Restaurants Universitaires</h1>
                     <div>
-                        Ajouter une map
-                        <img src="img/carte.png" alt="" style="width:100%;">
+                        <div id="map"></div>
+                        
                     </div>
                 </section>
 
@@ -276,5 +279,32 @@
 
 </body>
 <script src="js/script_accueil.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 
 </html>
+
+<script>
+    var map = L.map('map').setView([48.83930298535587, 2.584485412835638], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// map.getContainer().style.filter = 'grayscale(100%)';
+
+
+  var esiee = L.marker([48.83930298535587, 2.584485412835638],
+  {alt: 'restaurant esiee'}).addTo(map).bindPopup('Restaurant universitaire ESIEE'),
+
+    copernic    = L.marker([48.83915815998255, 2.5865923016626855],
+  {alt: 'restaurant copernic'}).addTo(map).bindPopup('Restaurant universitaire Copernic'),
+
+    gustave    = L.marker([48.83782595966588, 2.587036191587554],
+  {alt: 'cafeteria gustave eiffel'}).addTo(map).bindPopup('Cafétéria IUT Gustave-Eiffel'),
+    golden    = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+
+
+
+</script>
