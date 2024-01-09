@@ -78,7 +78,6 @@
         $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($resultat);
 
 
         foreach ($resultat as $cours) {

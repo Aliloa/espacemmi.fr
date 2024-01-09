@@ -67,7 +67,6 @@ if (isset($_SESSION["login"])) {
     $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($result);
 
 
     foreach ($result as $matiere) {

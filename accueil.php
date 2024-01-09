@@ -363,7 +363,7 @@
 
         echo "<div class='cours'>
                 <div>
-                    <a href='{$chemindoc}' download target='_blank'><h2>{$cours["cours"]}</h2></a>
+                    <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2></a>
                     <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
                 </div>
               </div>";
