@@ -30,6 +30,7 @@ body {
 main {
     max-width: 1100px;
     margin: auto;
+    max-width: 95%;
 }
 /* PAGE MENU */
 .card {
@@ -37,6 +38,7 @@ main {
     text-align: center;
     border-radius: 15px;
     background-color: white;
+    position: relative;
 }
 .today img {
     height: 9rem;
@@ -87,19 +89,29 @@ main {
     color: white;
     border: none;
 }
-.desktop button {
+.btn {
     background-color: var(--Leviolet);
     color: white;
     max-width: 180px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 10px;
-    border-radius: 2rem;
+    border-radius: 15px;
     border: none;
     padding: 0.75rem;
     width: 30%;
-    min-width: 80px;
+    margin-bottom: 10px;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background-color: black;
+}
+.delete {
+    background-color: rgb(252, 65, 65);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: solid 3px white;
+    min-width: fit-content;
 }
 .menu_autre .card {
     height: fit-content;
@@ -145,7 +157,7 @@ h2 {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.693);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     overflow: hidden;
@@ -171,6 +183,7 @@ h2 {
     position: relative;
     height: 85vh;
     border-radius: 15px;
+    margin: auto;
 }
 .carousel {
     border-radius: 15px;

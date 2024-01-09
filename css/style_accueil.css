@@ -24,7 +24,7 @@
 .bloc-2 {
     background-color: var(--main);
     margin: 4rem 0;
-    height: 240px;
+    height: 300px;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25)
 }
 
@@ -122,10 +122,72 @@
     background-color: var(--black);
 }
 
-.bloc-7{
+.bloc-7, .wake, .line{
     display: none;
 }
 
+.edt{
+    display: flex;
+    overflow-x: scroll;
+}
+
+.hour{
+    padding-left: 2rem ;
+}
+
+.hour-0{
+    margin: auto;
+}
+
+#planning h2{
+    font-size: 0.75rem;
+}
+
+.edt-p p:first-child,
+.edt-p p:nth-child(2){
+    font-size: 0.9rem;
+}
+
+
+.edt-p p:nth-child(3), .hour {
+font-size: 0.625em;
+}
+
+.edt-p{
+    background-color: var(--purple);
+    color: var(--main);
+    border-radius:10px ;
+    padding: 1.5rem 1rem 1rem;
+    margin: 1rem;
+    width: 50vw;
+    height: 95px;
+
+}
+
+button{
+    background-color: transparent;
+    border: 1px transparent;
+}
+
+.bloc-2 .vp, .bloc-2 h2{
+text-align: center;
+}
+
+.pre-next{
+    position: relative;
+    bottom: -25px;
+    display: flex;
+    gap: 210px;
+    justify-content: center;
+}
+
+.pre-next button{
+    cursor: pointer;
+}
+
+.bloc-2 .vp{
+    margin: 0;
+}
 
 
 
@@ -169,10 +231,83 @@
         right: 59px;
     }
 
+    .edt-p p:nth-child(3), .hour {
+        font-size: 0.75em;
+    }
+
+    .edt-p p:first-child, .edt-p p:nth-child(2) {
+        font-size: 1rem;
+    }
+
+    .edt-p{
+        width: 40vw;
+        height: 105px;
+
+    }
+
 }
 
 
 @media screen and (min-width: 1024px) {
+
+    .wake{
+        display: block;
+        width: 10px;
+        position: absolute;
+       color: #85858A;
+       font-size: 0.75rem;
+       padding-top: 1rem;
+    }
+
+    .wake p{
+        line-height: 4.5;
+        padding-left: 2rem;
+    }
+
+
+    .edt {
+        display: block;
+        padding-top: 1rem;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        padding-left: 3rem;
+    }
+
+    .edt-p {
+        width: 70%;
+        height: 45px;
+        padding: 1.5rem;
+    
+    }  
+    
+    .edt-p p{
+        margin: 0;
+    
+    } 
+
+    .edt-p p:nth-child(3), .hour {
+        font-size: 0.75em;
+        font-weight: 200;
+        padding-top: 10px;
+    }
+
+    .line{
+        display: block;
+        position: relative;
+        top: 40px;
+        width: 20vw;
+        height: 2px;
+        margin: auto;
+    }
+
+
+    .bloc-2 .vp {
+        padding-top: 1rem;
+    }
+
+    .hour{
+        display: none;
+    }
 
     .container {
         max-width: 90vw;
@@ -190,7 +325,7 @@
     }
 
     .bloc-2 {
-        height: 75vh;
+        height: 585px;
         border-radius: 28px;
         grid-column: 3 / 4;
         grid-row: 1 / 4;

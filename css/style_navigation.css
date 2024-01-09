@@ -151,6 +151,7 @@ ul li:nth-child(5) a {
 
 .profil-2 p {
     margin: 0;
+    text-transform: uppercase;
     color: var(--grey);
     font-weight: 500;
 }
