@@ -31,7 +31,7 @@
         <label for="matiere">Matière :</label>
         <select name="matierechoisi" id="matiere" required>
 
-        
+
             <?php
             include("connexion.php");
 
@@ -70,26 +70,23 @@
     include("connexion.php");
     if (isset($_SESSION["login"])) {
 
-        $requete = "SELECT cours.*, grossematiere.nom_mat
-                    FROM cours
-                    INNER JOIN grossematiere ON cours.ext_matiere = grossematiere.id_matiere
-                    INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs
-                    WHERE utilisateurs.login = :login AND utilisateurs.role = 'Enseignant.e'";
+
+        // Requete qui sélectionne tout de cours, mais nom de la matire pour grossematiere puis fait les liens avec les clés externes et récupère login pour afficher les modules du prof connecté
+        $requete = "SELECT cours.*, grossematiere.nom_mat FROM cours INNER JOIN grossematiere ON cours.ext_matiere = grossematiere.id_matiere INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs WHERE utilisateurs.login = :login AND utilisateurs.role = 'Enseignant.e'";        
 
         $stmt = $db->prepare($requete);
         $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
         $stmt->execute();
         $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($resultat);
+
 
         foreach ($resultat as $cours) {
             echo "<p>{$cours['cours']} - Matière : {$cours['nom_mat']}</p>";
         }
-    }
+    
+}
     ?>
-
-
-
-
     </form>
 </body>
 

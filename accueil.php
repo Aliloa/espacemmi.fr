@@ -27,7 +27,7 @@
             <!-- Navigation desktop -->
             <nav class='navigation'>
                 <ul class='choix'>
-                    <li><a href=''>Mes cours</a></li>
+                    <li><a href='cours.php'>Mes cours</a></li>
                     <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                     <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                     <li><a href='page_crous.php'>Crous</a></li>
@@ -189,7 +189,7 @@
 
         echo "<div class='cours'>
                 <div>
-                    <a href='{$chemindoc}' download><h2>{$cours["cours"]}</h2></a>
+                    <a href='{$chemindoc}' download target='_blank'><h2>{$cours["cours"]}</h2></a>
                     <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
                 </div>
               </div>";

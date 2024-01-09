@@ -30,6 +30,20 @@
         <p>ajouter une photo pour votre matière</p>
         <input type="file" name="fichier" size="30" required> <br> 
 
+        <fieldset>
+  <legend>Choisissez le type de votre module:</legend>
+
+  <div>
+    <input type="radio" id="sae" name="cours" value="SAE" checked />
+    <label for="sae">SAE</label>
+  </div>
+
+  <div>
+    <input type="radio" id="ressource" name="cours" value="Ressources" />
+    <label for="ressource">Ressource</label>
+  </div>
+
+</fieldset>
 
 
 
@@ -43,33 +57,18 @@
         <input type="submit" name="deconnect" value="Se déconnecter">
     </form>
 
-    <!-- <hp
-    include("connexion.php");
-    $requete = 'SELECT * FROM grossematiere';
-    $stmt = $db->query($requete);
-    $stmt->execute();
-
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-    foreach ($result as $matiere) {
-        echo "        <p>{$matiere['nom_mat']}</p>
-
-        <img src='matiere/{$matiere["illustration"]}' alt=''>";
-    }
-?> -->
 
 <?php
 include("connexion.php");
 
 if (isset($_SESSION["login"])) {
-    $requete = "SELECT * FROM grossematiere INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs WHERE utilisateurs.login = :login AND utilisateurs.role = 'Enseignant.e'";
-
+    $requete = "SELECT * FROM grossematiere, utilisateurs WHERE prof_ext = id_utilisateurs AND utilisateurs.login = :login AND role = 'Enseignant.e'";
     $stmt = $db->prepare($requete);
     $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
     $stmt->execute();
-    
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($result);
+
 
     foreach ($result as $matiere) {
         echo "<p>{$matiere['nom_mat']}</p>
