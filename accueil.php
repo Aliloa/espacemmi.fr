@@ -345,20 +345,26 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <?php
-                include('connexion.php');
-                $requete = "SELECT * FROM cours ORDER BY id_cours DESC LIMIT 2 ";
-                $stmt = $db->query($requete);
-                $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-                foreach ($resultat as $cours) {
-                    echo "<div class='cours'>
-                            <img src='{$cours["img"]}' alt=''>
-                            <div>
-                                <h2>{$cours["cours"]}</h2>
-                                <p> Crée par {$cours["prof"]}</p>
-                            </div>
-                        </div>";
-                }
-                ?>
+    include('connexion.php');
+    $requete = "SELECT cours.*, utilisateurs.nom, utilisateurs.prenom
+                FROM cours
+                INNER JOIN utilisateurs ON cours.externe_prof = utilisateurs.id_utilisateurs
+                ORDER BY id_cours DESC LIMIT 2";
+
+    $stmt = $db->query($requete);
+    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($resultat as $cours) {
+        $chemindoc = "documents/" . $cours["document"];
+
+        echo "<div class='cours'>
+                <div>
+                    <a href='{$chemindoc}' download><h2>{$cours["cours"]}</h2></a>
+                    <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
+                </div>
+              </div>";
+    }
+?>
 
             </div>
 
@@ -390,8 +396,22 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <div class='graphique'>
-                    <!-- graphique -->
+                <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
+
+                <!-- <script>
+                    const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+                    </script> -->
             </div>
 
 
