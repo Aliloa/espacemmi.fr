@@ -118,7 +118,12 @@
     </header>
 
     <main>
-        <h1>Ajouter le menu du jour</h1>
+
+    <?php
+    $lieu = isset($_GET['lieu']) ? $_GET['lieu'] : '';
+    ?>
+
+        <h1>Ajouter le menu du jour à: <?php echo $lieu; ?></h1>
 
         <form action="traite_ajout_menu.php" method="POST">
             <div class="flex">
@@ -162,7 +167,14 @@
 
                 <label for="date">Date:</label>
                 <input type="date" name="date" id="date" required>
+
+                <input type="hidden" name="lieu" value="<?php echo $lieu; ?>">
             </fieldset>
+
+            <?php if (isset($_GET['dateerr'])) {
+    echo "<p class='red'>Cette date existe déjà pour ce lieu. Veuillez choisir une autre date.</p>";
+}
+?>
 
             <input type="submit" name="soumettre">
         </form>

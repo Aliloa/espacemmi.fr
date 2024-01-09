@@ -166,35 +166,42 @@
             <main class="container">
 
                 <section class="menu_hebdomadaire">
-                    <h1 class="fs-4 fw-bold ms-3">Menu hebdomadaire</h1>
-                    <div class="card rounded-4 shadow">
+                    <h1>Menu hebdomadaire</h1>
+                    <div class="card shadow">
                         <div class="infos">
                             <h2>Restaurant universitaire EISEE:</h2>
                             <div class="flex">
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
-                                <button class="btn"><a href="menu_du_jour.php">Voir le menu</a></button>
+                                    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+          echo "<a href='ajouter_menu.php?lieu=EISEE'><button class='btn add'>Ajouter menu</button></a>";
+        } ?>
+                                    <a href="menu_du_jour.php?lieu=EISEE"><button class="btn">Voir le menu</button></a>
                             </div>
                         </div>
-                        <hr class="border border-3 m-1">
+                        <hr class="border">
                         <div class="infos">
                             <h2>Restaurant universitaire Copernic:</h2>
                             <div class="flex">
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
-                                <button class="btn"><a href="menu_du_jour.php">Voir le menu</a></button>
+
+                                    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+          echo "<a href='ajouter_menu.php?lieu=Copernic'><button class='btn add'>Ajouter menu</button></a>";
+        } ?>
+                                    <a href="menu_du_jour.php?lieu=Copernic"><button class="btn">Voir le menu</button></a>
                             </div>
                         </div>
-                        <hr class="border border-3 m-1">
+                        <hr class="border">
                         <div class="infos">
                             <h2>Menu de la caféteria</h2>
                             <div class="flex">
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
-                                <button class="btn"><a href="documents/menu.pdf">Voir le menu</a></button>
+                                <a href="documents/menu.pdf"><button class="btn">Voir le menu</button></a>
                             </div>
                         </div>
                     </div>
@@ -202,7 +209,7 @@
 
                 <!-- La carte -->
                 <section class="decouvrez_resto">
-                    <h1 class="fs-4 fw-bold">Découvrez nos Restaurants Universitaires</h1>
+                    <h1>Découvrez nos Restaurants Universitaires</h1>
                     <div>
                         Ajouter une map
                         <img src="img/carte.png" alt="" style="width:100%;">
@@ -215,40 +222,40 @@
         </div>
 
         <aside class="container horaires">
-            <div class="card shadow rounded-4">
+            <div class="card shadow">
 
-                <h1 class="p-3 fs-4 fw-bold">Horaires des Restaurants :</h1>
+                <h1>Horaires des Restaurants :</h1>
 
                 <div class="flex">
                     <p>Lundi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Mardi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Mercredi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Jeudi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Vendredi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Samedi:</p>
                     <p>Fermé</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Dimanche:</p>
                     <p>Fermé</p>
