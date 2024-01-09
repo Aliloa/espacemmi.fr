@@ -14,10 +14,9 @@ body {
 
 
 .logo img{
-
-margin: 20px;
-
+    margin: 2rem 0 0 3rem;
 }
+
 
 .logo img:nth-child(2) {
     display: none;
@@ -43,8 +42,7 @@ margin: 20px;
 
 
 .image1 img{
-    width: 250px;
-    right: 10px;
+    width: 300px;
     position: absolute;
     bottom: 5%;
     z-index: -1;
@@ -72,7 +70,7 @@ margin: 20px;
     text-align: left;
     color: aliceblue;
     width: 300px;
-    margin: 20px;
+    margin: 4rem;
 
 }
 
