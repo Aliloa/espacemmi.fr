@@ -19,7 +19,7 @@
 <div class="formulaire">
 <h1>Moyenne</h1>
 
-<form action="./traitement/traite_moyenne.php" method="post">
+<form action="traite_moyenne.php" method="post">
 <label for="matiere">Matière</label>
 <input type="input" id="matiere" name="matiere" required>
 <label for="note">Note</label>

@@ -16,7 +16,7 @@
     <a href="backofficeprof.php">Retour</a>
 
 
-    <form action="./traitement/traitematiere.php" method="POST" enctype="multipart/form-data">
+    <form action="traitematiere.php" method="POST" enctype="multipart/form-data">
         <h1>Ajouter une matière</h1>
 
         <label for="module">Nom du la matière</label>

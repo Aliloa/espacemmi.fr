@@ -32,14 +32,14 @@
 
 
     <div class="formulaire">
-    <form action="./traitement/traiter_mdp_mail.php" method="post">
+    <form action="traiter_mdp_mail.php" method="post">
     <p>Vous avez oublié votre mot de passe? Renseignez votre mail</p>
     <label for="mail">Mail</label>
     <input type="email" id="mail" name="mail" required>
 
 
     <div class="bouton1">
-    <a href="./traitement/traiter_connexion.php">Envoyer</a>
+    <a href="traiter_connexion.php">Envoyer</a>
     </div>
 </form>
     </div>

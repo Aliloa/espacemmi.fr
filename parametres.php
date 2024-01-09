@@ -101,7 +101,7 @@
     }
     ?>
 
-    <form action="./traitement/traiteprofil.php" method="POST" enctype="multipart/form-data">
+    <form action="traiteprofil.php" method="POST" enctype="multipart/form-data">
         <div>
             <input type="file" name="fichier" size="30" required> <br>Pour ajouter une photo de profil
             <input type="submit" name="upload" value="Uploader"><br> <br>
@@ -109,7 +109,7 @@
     </form>
 
 
-    <form action="./traitement/traiteprofil.php" method="POST">
+    <form action="traiteprofil.php" method="POST">
         <div>
             <label for="bio">Changer la bio ?</label>
             <input type="text" id='bio' name="bio" required> <br>

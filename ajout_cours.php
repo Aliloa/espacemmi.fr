@@ -17,7 +17,7 @@
     ?>
     <a href="backofficeprof.php">Retour</a>
 
-    <form action="./traitement/traitecours.php" method="POST" enctype="multipart/form-data">
+    <form action="traitecours.php" method="POST" enctype="multipart/form-data">
         <h1>Ajouter un cours</h1>
 
         <label for="module">Nom du cours</label>

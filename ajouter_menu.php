@@ -125,7 +125,7 @@
 
         <h1>Ajouter le menu du jour à: <?php echo $lieu; ?></h1>
 
-        <form action="./traitement/traite_ajout_menu.php" method="POST">
+        <form action="traite_ajout_menu.php" method="POST">
             <div class="flex">
             <fieldset>
             <label for="entree_un">Entrée:</label>

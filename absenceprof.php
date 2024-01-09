@@ -13,7 +13,7 @@
         exit();
     }
     ?>
-<form action="./traitement/traiteinscription.php" method="POST">
+<form action="traiteinscription.php" method="POST">
         <h1>Inscription</h1>
 
         <label for="login">Login</label>
