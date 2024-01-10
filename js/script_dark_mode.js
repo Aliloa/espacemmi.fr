@@ -26,9 +26,9 @@ function toggleDarkMode() {
     var boutons = document.querySelectorAll(".dark_mode");
     var burger_menu = document.querySelector(".img_menu");
     if (body.classList.contains('dark-body')) {
-        logo.src = './img/logo_light.png';
+        logo.src = './img/logo-blanc.svg';
         boutons.forEach(function(bouton){
-            bouton.src = './img/soleil.png';
+            bouton.src = './img/soleil.svg';
         })
         burger_menu.src = './img/menu_white.png';
         

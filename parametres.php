@@ -118,9 +118,9 @@
     </form>
 
 
-    <form action="deconnexion.php" action='GET'>
-        <input type="submit" name="deconnect" value="Se déconnecter">
-    </form>
+    
+
+
 
 
 </body>
