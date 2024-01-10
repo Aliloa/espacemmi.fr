@@ -325,6 +325,7 @@ input:hover {
     .choix {
         display: flex;
         gap: 3rem;
+        padding-left: 0;
     }
 
     .input {
@@ -347,6 +348,14 @@ input:hover {
     .logo {
         cursor: pointer;
         height: 20px;
+    }
+
+    #btnDeconnexion {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+        border: none;
     }
 
 }
@@ -391,4 +400,5 @@ input:hover {
 .dark_button {
     background: none;
     border: none;
+    height: 20px;
 }

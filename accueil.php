@@ -52,13 +52,11 @@
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
                     <img class='logo' src='./img/1-lettre.svg' alt="page d'accueil">
-                    <img class='logo' src='./img/1-notif.svg' alt="page d'accueil">
-
                     <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
                     
 
 
-                    <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
+                    <!-- PHP - LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
                     <div class='photo-2'>
 
                         <?php
@@ -79,6 +77,11 @@
 
                     </div>
                     <!-- FIN PHP-->
+                    <form action="deconnexion.php" method="GET">
+                        <button type="submit" name="deconnect" id="btnDeconnexion">
+                            <img src="img/1-logout.svg" alt="Déconnexion">
+                        </button>
+                    </form>
 
                 </div>
             </nav>

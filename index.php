@@ -18,7 +18,7 @@
         
         <div class="logo-0">
 
-            <img src="img/logo-blanc.png">
+            <img src="img/logo-blanc.svg">
             <img src="img/logo-long-blanc.png">
 
         </div>
