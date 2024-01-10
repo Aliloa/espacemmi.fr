@@ -228,11 +228,13 @@
         </div>
 
         <?php
-        $requete = "SELECT * FROM abscence_retard, cours WHERE ext_cours = cours ORDER BY id_abs DESC";
+        $requete = "SELECT abscence_retard.*, cours.cours AS nom_cours FROM abscence_retard
+            INNER JOIN cours ON abscence_retard.cours = cours.id_cours
+            ORDER BY id_abs DESC";
+
         $stmt = $db->query($requete);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
-
         <div class='bloc-3a'>
             <div class="bouton">
                 <h1>Absences et retards</h1>
@@ -247,43 +249,46 @@
                     </div>
                     <div class="cours_classe">
                         <h3>
-                            <?php echo $result['cours']; ?>
+                            <?php echo $result['nom_cours']; ?>
                         </h3>
                         <h3>
                             <?php echo "Le " . $result['date']; ?>
                         </h3>
                     </div>
                 <?php } ?>
-
-
-            </div>
-
-        </div>
-
-        <?php
-
-        $requete = "SELECT * FROM notes ORDER BY id_note DESC";
-        $stmt = $db->query($requete);
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-
-        <div class='bloc-4a'>
-            <div class="bouton">
-                <h1>Les moyennes</h1>
-                <?php foreach ($results as $result) { ?>
-                    <div class='matiere-date'>
-                        <h2>
-                            <?php echo $result['nom_note']; ?>
-                        </h2>
-                        <p class='small-date'>
-                            <?php echo "{$result['notes']} /20"; ?>
-                        </p>
-                    </div>
-
-                <?php } ?>
-
             </div>
         </div>
+
+
+
+    </div>
+
+    </div>
+
+    <?php
+
+    $requete = "SELECT * FROM notes ORDER BY id_note DESC";
+    $stmt = $db->query($requete);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    ?>
+
+    <div class='bloc-4a'>
+        <div class="bouton">
+            <h1>Les moyennes</h1>
+            <?php foreach ($results as $result) { ?>
+                <div class='matiere-date'>
+                    <h2>
+                        <?php echo $result['nom_note']; ?>
+                    </h2>
+                    <p class='small-date'>
+                        <?php echo "{$result['notes']} /20"; ?>
+                    </p>
+                </div>
+
+            <?php } ?>
+
+        </div>
+    </div>
 
     </div>
     <footer>
