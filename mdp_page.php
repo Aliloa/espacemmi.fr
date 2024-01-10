@@ -31,7 +31,7 @@ session_start();
 
         if ($row) {
             $id = $row['id_utilisateurs'];
-            echo 'ID Utilisateur: ' . $id;
+            echo '<p style="display:none;"> ID Utilisateur: ' . $id . '</p>';
         } else {
             echo 'User not found';
         }
