@@ -25,7 +25,8 @@
         <div class='menu'>
 
             <!-- Logo Accueil -->
-            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
+            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil"
+                    aria-current="currentpage"></a>
 
             <!-- Navigation desktop -->
             <nav class='navigation'>
@@ -51,8 +52,9 @@
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
                     <img class='logo' src='./img/1-lettre.svg' alt="page d'accueil">
-                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
-                    
+                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
+                            alt="mode sombre"></button>
+
 
 
                     <!-- PHP - LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
@@ -113,14 +115,14 @@
                                     <div class='profil-2'>";
 
 
-                                echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
-                                echo "<p>{$result['promotion']}</p>";
+                        echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
+                        echo "<p>{$result['promotion']}</p>";
 
-                                echo "       </div>
+                        echo "       </div>
                                 </div>
                                 <div class='profil-3'>
                                 <h2>À propos</h2>";
-                                echo "<p>{$result['bio']}</p> 
+                        echo "<p>{$result['bio']}</p> 
                                 </div>
                             </div>";
 
@@ -152,8 +154,10 @@
                             <p>Messagerie</p>
                         </div>
                         <div class='tool'>
-                        <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre">
-                            <p>Mode sombre</p></button>
+                            <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
+                                    src='./img/1-moon.svg' alt="mode sombre">
+                                <p>Mode sombre</p>
+                            </button>
                         </div>
                     </div>
 
@@ -194,7 +198,7 @@
                 <img src='img/1-perso.png' alt=''>
 
             </div>
-            
+
 
             <div class='bloc-2'>
 
@@ -203,7 +207,7 @@
                     <button id="suivant"><img src="img/1-right.svg" alt="suivant"></button>
                 </div>
 
-                <div class="wake"> 
+                <div class="wake">
                     <p>8h 9h 10h 11h 13h 14h 15h 16h 17h</p>
                 </div>
 
@@ -238,11 +242,11 @@
                     $result = file_get_contents($apiUrl, false, $context);
                     $response = json_decode($result, true);
                     $planningData = $response; // Les données qu'on a obtenu
-
+                    
                     if (isset($response['error'])) {
                         echo "API Error: " . $response['error']['message'];
                     } else {
-                    
+
                         // Organisation des données dans un emploi du temps quotidien
                         $planning = [];
 
@@ -313,7 +317,7 @@
                         if (suiviJourActuel < 0) {
                             suiviJourActuel = 0;
 
-                        //  Garantit que suiviJourActuel reste dans les limites du tableau des clés de planning.
+                            //  Garantit que suiviJourActuel reste dans les limites du tableau des clés de planning.
                         } else if (suiviJourActuel >= Object.keys(planning).length) {
                             suiviJourActuel = Object.keys(planning).length - 1;
                         }
@@ -347,25 +351,25 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <?php
-                    include('connexion.php');
-                    $requete = "SELECT cours.*, utilisateurs.nom, utilisateurs.prenom
+                include('connexion.php');
+                $requete = "SELECT cours.*, utilisateurs.nom, utilisateurs.prenom
                                 FROM cours
                                 INNER JOIN utilisateurs ON cours.externe_prof = utilisateurs.id_utilisateurs
                                 ORDER BY id_cours DESC LIMIT 2";
 
-                    $stmt = $db->query($requete);
-                    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $stmt = $db->query($requete);
+                $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    foreach ($resultat as $cours) {
-                        $chemindoc = "documents/" . $cours["document"];
+                foreach ($resultat as $cours) {
+                    $chemindoc = "documents/" . $cours["document"];
 
-                        echo "<div class='cours'>
+                    echo "<div class='cours'>
                                 <div>
                                     <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2></a>
                                     <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
                                 </div>
                             </div>";
-                    }
+                }
                 ?>
 
             </div>
@@ -398,77 +402,77 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <div class='graphique'>
-    <canvas id="histogramme" width="500" height="400"></canvas>
-</div>
+                    <canvas id="histogramme" width="500" height="400"></canvas>
+                </div>
 
-<?php
-include('connexion.php');
+                <?php
+                include('connexion.php');
 
 $requete = $db->query("SELECT * FROM notes ORDER BY date_note DESC LIMIT 7");
 
-$data = $requete->fetchAll(PDO::FETCH_ASSOC);
+                $data = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-$notes = [];
-$matiere = [];
+                $notes = [];
+                $matiere = [];
 
-foreach ($data as $row) {
-    $notes[] = $row["notes"];
-    $matiere[] = $row["nom_note"];
-}
-?>
-
-<script>
-const ctx = document.getElementById('histogramme');
-
-// Supposons que $matiere est un tableau de noms de matières en PHP
-const matiere = <?= json_encode($matiere) ?>;
-
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: matiere,
-        
-        datasets: [{
-            label: 'Notes',
-            data: <?= json_encode($notes) ?>,
-            backgroundColor: "#0D99FF",
-            borderColor: "#0D99FF",
-            borderWidth: 1,
-            borderRadius: 50
-        }]
-    },
-    options: {
-        scales: {
-            x: {
-                grid: {
-                    display: false
+                foreach ($data as $row) {
+                    $notes[] = $row["notes"];
+                    $matiere[] = $row["nom_note"];
                 }
-                
-            },
-            y: {
-                grid: {
-                    display: false
-                },
-                beginAtZero: true
-            }
-        },
-        plugins: {
-            title: {
-                display: false
-            },
-            legend: {
-                display: false
-            }
-        }
-    }
-});
+                ?>
 
-</script>
+                <script>
+                    const ctx = document.getElementById('histogramme');
+
+                    // Supposons que $matiere est un tableau de noms de matières en PHP
+                    const matiere = <?= json_encode($matiere) ?>;
+
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: matiere,
+
+                            datasets: [{
+                                label: 'Notes',
+                                data: <?= json_encode($notes) ?>,
+                                backgroundColor: "#0D99FF",
+                                borderColor: "#0D99FF",
+                                borderWidth: 1,
+                                borderRadius: 50
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    grid: {
+                                        display: false
+                                    }
+
+                                },
+                                y: {
+                                    grid: {
+                                        display: false
+                                    },
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                title: {
+                                    display: false
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+
+                </script>
 
 
 
-</div>
-                
+            </div>
+
 
 
 
