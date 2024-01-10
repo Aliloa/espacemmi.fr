@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 10 jan. 2024 à 16:32
+-- Généré le : mer. 10 jan. 2024 à 18:44
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -33,7 +33,10 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
   `titre` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `nombre` time NOT NULL,
-  `cours` varchar(255) NOT NULL,
+  `ext_cours` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `eleve` int NOT NULL,
+  `prof` int NOT NULL,
+  `justificatif` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`id_abs`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -41,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
 -- Déchargement des données de la table `abscence_retard`
 --
 
-INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `cours`) VALUES
-(1, 'absence', '2023-12-13', '02:00:00', ''),
-(2, 'absence', '2024-01-07', '02:00:00', '');
+INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `ext_cours`, `eleve`, `prof`, `justificatif`) VALUES
+(1, 'absence', '2023-12-13', '02:00:00', '14', 16, 0, ''),
+(2, 'absence', '2024-01-07', '02:00:00', '11', 13, 0, '');
 
 -- --------------------------------------------------------
 
@@ -175,20 +178,21 @@ CREATE TABLE IF NOT EXISTS `notes` (
   `ext_eleve` int NOT NULL,
   `coef_cours` int NOT NULL,
   `coef_matiere` int NOT NULL,
+  `date_note` date NOT NULL,
   PRIMARY KEY (`id_note`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `notes`
 --
 
-INSERT INTO `notes` (`notes`, `id_note`, `nom_note`, `ext_module`, `ext_prof`, `ext_cours`, `ext_eleve`, `coef_cours`, `coef_matiere`) VALUES
-(18, 21, 'Contrôle', '15', 22, 15, 16, 4, 3),
-(18, 22, 'Oral usability', '15', 22, 15, 13, 15, 15),
-(18, 12, 'TPTEST', '15', 22, 14, 0, 0, 0),
-(17, 14, '1amphi', '7', 23, 12, 0, 0, 0),
-(14, 17, 'Contrôle amphi', '7', 23, 12, 16, 2, 3),
-(5, 18, 'un oral', '7', 23, 12, 18, 2, 3);
+INSERT INTO `notes` (`notes`, `id_note`, `nom_note`, `ext_module`, `ext_prof`, `ext_cours`, `ext_eleve`, `coef_cours`, `coef_matiere`, `date_note`) VALUES
+(18, 21, 'DST dev', '15', 22, 15, 16, 4, 3, '2023-11-15'),
+(18, 22, 'Oral usability', '15', 22, 15, 13, 15, 15, '2023-09-30'),
+(18, 12, 'TPTEST', '15', 22, 14, 0, 0, 0, '2023-12-23'),
+(14, 17, 'Contrôle amphi', '7', 23, 12, 16, 2, 3, '2023-12-28'),
+(5, 18, 'un oral', '7', 23, 12, 18, 2, 3, '2024-01-05'),
+(15, 23, 'Note Dataviz', '15', 22, 15, 16, 15, 15, '2024-01-10');
 
 -- --------------------------------------------------------
 
