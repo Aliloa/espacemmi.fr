@@ -8,6 +8,9 @@
     <link rel='icon' href='img/favicon.png'>
     <link rel='stylesheet' href='css/style_navigation.css'>
     <link rel='stylesheet' href='css/style_accueil.css'>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel='stylesheet' href='css/dark_mode.css'>
 </head>
 
@@ -393,23 +396,77 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <div class='graphique'>
-                <canvas id="myChart" width="400" height="400"></canvas>
-                </div>
+    <canvas id="histogramme" width="500" height="400"></canvas>
+</div>
 
-                <!-- <script>
-                    const config = {
-                    type: 'bar',
-                    data: data,
-                    options: {
-                    scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                    }
-                    },
-                    };
-                </script> -->
-            </div>
+<?php
+include('connexion.php');
+
+$requete = $db->query("SELECT * FROM notes ORDER BY date DESC LIMIT 7");
+
+$data = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+$notes = [];
+$matiere = [];
+
+foreach ($data as $row) {
+    $notes[] = $row["notes"];
+    $matiere[] = $row["nom_note"];
+}
+?>
+
+<script>
+const ctx = document.getElementById('histogramme');
+
+// Supposons que $matiere est un tableau de noms de matières en PHP
+const matiere = <?= json_encode($matiere) ?>;
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: matiere,
+        
+        datasets: [{
+            label: 'Notes',
+            data: <?= json_encode($notes) ?>,
+            backgroundColor: "#0D99FF",
+            borderColor: "#0D99FF",
+            borderWidth: 1,
+            borderRadius: 50
+        }]
+    },
+    options: {
+        scales: {
+            x: {
+                grid: {
+                    display: false
+                }
+                
+            },
+            y: {
+                grid: {
+                    display: false
+                },
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            title: {
+                display: false
+            },
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+</script>
+
+
+
+</div>
+                
 
 
 
