@@ -277,7 +277,7 @@
             <?php foreach ($results as $result) { ?>
                 <div class='matiere-date'>
                     <h2>
-                        <?php echo $result['matiere']; ?>
+                        <?php echo $result['nom_note']; ?>
                     </h2>
                     <p class='small-date'>
                         <?php echo "{$result['notes']} /20"; ?>
