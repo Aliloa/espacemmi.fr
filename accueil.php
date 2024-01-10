@@ -405,7 +405,7 @@
 <?php
 include('connexion.php');
 
-$requete = $db->query("SELECT * FROM notes ORDER BY date DESC LIMIT 7");
+$requete = $db->query("SELECT * FROM notes ORDER BY date_note DESC LIMIT 7");
 
 $data = $requete->fetchAll(PDO::FETCH_ASSOC);
 
