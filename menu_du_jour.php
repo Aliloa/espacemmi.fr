@@ -173,6 +173,23 @@
         $stmtDernier->bindParam(':lieu', $lieu, PDO::PARAM_STR);
         $stmtDernier->execute();
         $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
+
+        //LES DATES AVEC LES NOMS DES JOURS
+
+                    // Traduire les jours de la semaine
+                    $dayNames = [
+                        'Monday'    => 'Lundi',
+                        'Tuesday'   => 'Mardi',
+                        'Wednesday' => 'Mercredi',
+                        'Thursday'  => 'Jeudi',
+                        'Friday'    => 'Vendredi',
+                        'Saturday'  => 'Samedi',
+                        'Sunday'    => 'Dimanche',
+                        ];
+
+        $date_dernier = new DateTime($dernierElement['date'], new DateTimeZone('Europe/Paris'));            
+        $jour_anglais_d = $date_dernier->format('l');                
+        $nom_jour_dernier = $dayNames[$jour_anglais_d];
         ?>
 
         <h1>Menu de la semaine CROUS <?php echo $lieu; ?></h1>
@@ -204,7 +221,11 @@
                     <!-- première slide -->
                     <div class="carousel-item">
                         <h2 class="m-0 date">
-                            <?php echo date('d/m', strtotime($dernierElement['date'])); ?>
+                            <?php 
+                            echo $nom_jour_dernier . " ";
+                            echo date('d/m', strtotime($dernierElement['date']));
+                             ?>
+                            
                         </h2>
                         <div class="card">
                             <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
@@ -246,11 +267,16 @@
                     <!-- Toutes les autres slides -->
                     <?php
                     foreach ($tableauResult as $result) {
+
+                        $date = new DateTime($result['date'], new DateTimeZone('Europe/Paris'));            
+        $jour_anglais = $date->format('l');                
+        $nom_jour = $dayNames[$jour_anglais];
+
                         $result['entre'] = str_replace(', ', '<br>', $result['entre']);
                         $result['plat'] = str_replace(', ', '<br>', $result['plat']);
                         $result['dessert'] = str_replace(', ', '<br>', $result['dessert']);
                         echo "<div class='carousel-item'>";
-                        echo "<h2 class='m-0 date'>" . date('d/m', strtotime($result['date'])) . "</h2>";
+                        echo "<h2 class='m-0 date'>" . $nom_jour . " " . date('d/m', strtotime($result['date'])) . "</h2>";
                         echo "<div class='card'>";
                         if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
                         echo "<a href='supprimer_menu.php?id=" . $result['id'] . "' '<button class='btn delete' id='" . $result['id'] . "'>supprimer</button></a>";}
@@ -286,7 +312,9 @@
         <section class="container today desktop">
             <div class="menu_ajd">
                 <div>
-                    <h2 class="fs-5"><?php echo date('d/m', strtotime($dernierElement['date'])); ?></h2>
+                    <h2 class="fs-5"><?php 
+                    echo $nom_jour_dernier . " ";
+                    echo date('d/m', strtotime($dernierElement['date'])); ?></h2>
                 </div>
                 <div class="card shadow violet">
                     <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
@@ -328,10 +356,13 @@
 
                 <?php
                 foreach ($tableauResult as $result) {
+                    $date = new DateTime($result['date'], new DateTimeZone('Europe/Paris'));            
+        $jour_anglais = $date->format('l');                
+        $nom_jour = $dayNames[$jour_anglais];
                     $result['plat'] = str_replace(', ', '<br>', $result['plat']);
                     echo "<div class='menu_autre'>";
                     echo "<div>
-                            <h2 class='fs-5'>" . date("d/m", strtotime($result['date'])) . "</h2>
+                            <h2 class='fs-5'>" . $nom_jour . " " . date("d/m", strtotime($result['date'])) . "</h2>
                         </div>";
                     echo "<div class='card shadow'>";
                     echo "<div>
