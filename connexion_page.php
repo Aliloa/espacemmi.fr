@@ -1,9 +1,3 @@
-
-<?php
-    session_start();
-    ?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,11 +12,15 @@
 
 <body>
 
+    <?php
+    session_start();
+    ?>
+
     <main class="main-2">
 
         <div class="logo-1">
-            <a href="index.php"><img src="img/logo.svg"></a>
-            <a href="index.php"><img src="img/logo-long.png"></a>
+            <a href="index.php"><img src="img/logo.svg" alt="page d'accueil de l'ent"></a>
+            <a href="index.php"><img src="img/logo-long.png" alt="page d'accueil de l'ent"></a>
         </div>
 
 
