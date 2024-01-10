@@ -167,6 +167,22 @@
 
 
 
+    <form action="traitemessagerie.php" method="POST" enctype="multipart/form-data">
+
+    <label for="objet">L'objet de votre message </label>
+    <textarea name="" id="objet" cols="30" rows="10"></textarea>
+
+    <p>Votre destinataire</p>
+    <select name="" id="">
+        <option value="0">Qui ?</option>
+        <option value="0">à Kelis</option>
+        <option value="0">à Eppstein</option>
+        <option value="0">à tous</option>
+    </select>
+
+
+    </form>
+
 
 </body>
 </html>
