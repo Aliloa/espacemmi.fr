@@ -8,7 +8,9 @@
     <link rel='icon' href='img/favicon.png'>
     <link rel='stylesheet' href='css/style_navigation.css'>
     <link rel='stylesheet' href='css/style_accueil.css'>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <link rel='stylesheet' href='css/dark_mode.css'>
 </head>
 
@@ -24,7 +26,7 @@
         <div class='menu'>
 
             <!-- Logo Accueil -->
-            <a href='accueil.php'><img src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
+            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
 
             <!-- Navigation desktop -->
             <nav class='navigation'>
@@ -49,10 +51,10 @@
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
-                    <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
+                    <img class='logo' src='./img/1-lettre.svg' alt="page d'accueil">
+                    <img class='logo' src='./img/1-notif.svg' alt="page d'accueil">
 
-                    <button onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
+                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
                     
 
 
@@ -84,7 +86,7 @@
             <!-- Navigation mobile & tablette -->
             <div class='menu-burger'>
 
-                <span id='burger-menu'> <img src='./img/menu.svg' alt='menu'></span>
+                <span id='burger-menu'> <img class="img_menu" src='./img/menu.svg' alt='menu'></span>
 
                 <nav class='burger'>
 
@@ -148,8 +150,8 @@
                             <p>Messagerie</p>
                         </div>
                         <div class='tool'>
-                            <img src='img/1-moon.svg' alt=''>
-                            <p>Mode sombre</p>
+                        <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre">
+                            <p>Mode sombre</p></button>
                         </div>
                     </div>
 
@@ -194,7 +196,6 @@
 
             <div class='bloc-2'>
 
-
                 <div class="pre-next">
                     <button id="precedent"> <img src="img/1-left.svg" alt="précédent"></button>
                     <button id="suivant"><img src="img/1-right.svg" alt="suivant"></button>
@@ -207,7 +208,6 @@
                 <img class="line" src="img/1-line.png" alt="">
 
                 <div id="planning">
-
 
                     <?php
 
@@ -241,37 +241,37 @@
                         echo "API Error: " . $response['error']['message'];
                     } else {
                     
-                    // Organisation des données dans un emploi du temps quotidien
-                    $planning = [];
+                        // Organisation des données dans un emploi du temps quotidien
+                        $planning = [];
 
-                    foreach ($planningData as $event) {
-                        $day = (new DateTime())->setTimestamp($event['start'])->format('l j F Y');
+                        foreach ($planningData as $event) {
+                            $day = (new DateTime())->setTimestamp($event['start'])->format('l j F Y');
 
-                        $formatEDT = [
-                            'start_time' => date('H:i', $event['start']),
-                            'end_time' => date('H:i', $event['end']),
-                            'title' => isset($event['title']) ? $event['title'] : '',
-                            'trainer' => isset($event['trainer']) ? $event['trainer'] : '',
-                            'location' => implode(', ', $event['location']),
-                        ];
+                            $formatEDT = [
+                                'start_time' => date('H:i', $event['start']),
+                                'end_time' => date('H:i', $event['end']),
+                                'title' => isset($event['title']) ? $event['title'] : '',
+                                'trainer' => isset($event['trainer']) ? $event['trainer'] : '',
+                                'location' => implode(', ', $event['location']),
+                            ];
 
-                        $planning[$day][] = $formatEDT;
-                    }
+                            $planning[$day][] = $formatEDT;
+                        }
 
-                    // Trier les jours par ordre chronologique
-                    uksort($planning, function ($a, $b) {
-                        return strtotime($a) - strtotime($b);
-                    });
-
-
-                    // Trier les événements de chaque jour par heure de début
-                    foreach ($planning as &$events) {
-                        usort($events, function ($a, $b) {
-                            return strtotime($a['start_time']) - strtotime($b['start_time']);
+                        // Trier les jours par ordre chronologique
+                        uksort($planning, function ($a, $b) {
+                            return strtotime($a) - strtotime($b);
                         });
-                    }
 
-                }
+
+                        // Trier les événements de chaque jour par heure de début
+                        foreach ($planning as &$events) {
+                            usort($events, function ($a, $b) {
+                                return strtotime($a['start_time']) - strtotime($b['start_time']);
+                            });
+                        }
+
+                    }
                     ?>
 
                 </div>
@@ -310,6 +310,7 @@
                         // Vérifie si l'index est en dehors des limites
                         if (suiviJourActuel < 0) {
                             suiviJourActuel = 0;
+
                         //  Garantit que suiviJourActuel reste dans les limites du tableau des clés de planning.
                         } else if (suiviJourActuel >= Object.keys(planning).length) {
                             suiviJourActuel = Object.keys(planning).length - 1;
@@ -328,14 +329,9 @@
                         updateDay(1);
                     });
 
-                    // Affichage du contenu du premier jour lors du chargement de la page
+                    // Affichage du contenu du jour actuel lors du chargement de la page
                     voirEDT();
                 </script>
-
-
-                <a href='planning.php'>
-                    <p class='vp'>voir plus</p>
-                </a>
 
             </div>
 
@@ -349,26 +345,26 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <?php
-    include('connexion.php');
-    $requete = "SELECT cours.*, utilisateurs.nom, utilisateurs.prenom
-                FROM cours
-                INNER JOIN utilisateurs ON cours.externe_prof = utilisateurs.id_utilisateurs
-                ORDER BY id_cours DESC LIMIT 2";
+                    include('connexion.php');
+                    $requete = "SELECT cours.*, utilisateurs.nom, utilisateurs.prenom
+                                FROM cours
+                                INNER JOIN utilisateurs ON cours.externe_prof = utilisateurs.id_utilisateurs
+                                ORDER BY id_cours DESC LIMIT 2";
 
-    $stmt = $db->query($requete);
-    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $stmt = $db->query($requete);
+                    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($resultat as $cours) {
-        $chemindoc = "documents/" . $cours["document"];
+                    foreach ($resultat as $cours) {
+                        $chemindoc = "documents/" . $cours["document"];
 
-        echo "<div class='cours'>
-                <div>
-                    <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2></a>
-                    <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
-                </div>
-              </div>";
-    }
-?>
+                        echo "<div class='cours'>
+                                <div>
+                                    <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2></a>
+                                    <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
+                                </div>
+                            </div>";
+                    }
+                ?>
 
             </div>
 
@@ -422,10 +418,14 @@ foreach ($data as $row) {
 <script>
 const ctx = document.getElementById('histogramme');
 
+// Supposons que $matiere est un tableau de noms de matières en PHP
+const matiere = <?= json_encode($matiere) ?>;
+
 new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: <?= json_encode($matiere) ?>,
+        labels: matiere,
+        
         datasets: [{
             label: 'Notes',
             data: <?= json_encode($notes) ?>,
@@ -441,6 +441,7 @@ new Chart(ctx, {
                 grid: {
                     display: false
                 }
+                
             },
             y: {
                 grid: {
@@ -456,15 +457,16 @@ new Chart(ctx, {
             legend: {
                 display: false
             }
-        },
-        
+        }
     }
 });
+
 </script>
 
 
 
 </div>
+                
 
 
 
@@ -512,10 +514,8 @@ new Chart(ctx, {
 
             </div>
 
-
-
-
         </div>
+
     </main>
 
     <footer>

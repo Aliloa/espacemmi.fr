@@ -14,42 +14,41 @@
 <body>
 
 
-    <main>
+    <main class="main-1">
+        
+        <div class="logo-0">
 
-        <div class="main-1">
-            <div class="logo-0">
+            <img src="img/logo-blanc.png">
+            <img src="img/logo-long-blanc.png">
 
-                <img src="img/logo_petit.png">
-                <img src="img/Logo.png">
+        </div>
+
+        <div class="information">
+            <div class="information_main">
+                <h1>Bienvenue sur le site Intranet MMI</h1>
+                <h2>L'ENT Eiffel est maintenant disponible sur le site intranet étudiant et enseignant.</h2>
+
+                <p>Explorez nos ressources pédagogiques, échangez avec vos pairs, et découvrez les services offerts
+                    par
+                    le
+                    CROUS. Notre communauté aspire à promouvoir l'excellence académique et le bien-être de
+                    tous ses membres.
+                </p>
+
+
+                <div class="links-container">
+                    <a href="connexion_page.php">Connexion</a>
+                </div>
 
             </div>
 
-            <div class="information">
-                <div class="information_main">
-                    <h1>Bienvenue sur le site Intranet MMI</h1>
-                    <h2>L'ENT Eiffel est maintenant disponible sur le site intranet étudiant et enseignant.</h2>
-
-                    <p>Explorez nos ressources pédagogiques, échangez avec vos pairs, et découvrez les services offerts
-                        par
-                        le
-                        CROUS. Notre communauté aspire à promouvoir l'excellence académique et le bien-être de
-                        tous ses membres.
-                    </p>
-
-
-                    <div class="links-container">
-                        <a href="connexion_page.php">Connexion</a>
-                    </div>
-
-                </div>
-
-                <div class="image1">
-                    <img src="img/image-index.svg">
-                </div>
-
+            <div class="image1">
+                <img src="img/image-index.svg">
             </div>
 
         </div>
+
+
 
     </main>
 

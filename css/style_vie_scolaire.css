@@ -5,7 +5,7 @@ div[class^="bloc-"] {
     padding: 2rem 2rem 4rem 2rem;
 }
 
-.bloc-1 {
+.bloc-1a {
     border-radius: 30px ;
     background-color: white;
     grid-column: 1;
@@ -16,11 +16,11 @@ div[class^="bloc-"] {
     overflow-y: auto;   
   }
 
-  .bloc-1::-webkit-scrollbar {
+  .bloc-1a::-webkit-scrollbar {
     width: 10px;
 }
 
-.bloc-1::-webkit-scrollbar-thumb {
+.bloc-1a::-webkit-scrollbar-thumb {
     background-color: #6C63FF;
     border-radius: 30px;
 }
@@ -41,7 +41,7 @@ div[class^="bloc-"] {
 
 
 
-.bloc-1 h3{
+.bloc-1a h3{
     color: rgb(138, 138, 138);
     font-size: 0.8rem;
     font-weight: 400;
@@ -52,7 +52,7 @@ div[class^="bloc-"] {
 
 
 
-.bloc-2{
+.bloc-2a{
     grid-column: 2;
     grid-row: 1;
     background-color: white;
@@ -78,18 +78,18 @@ div[class^="bloc-"] {
 
 }
 
-.bloc-2::-webkit-scrollbar {
+.bloc-2a::-webkit-scrollbar {
     width: 10px;
 }
 
-.bloc-2::-webkit-scrollbar-thumb {
+.bloc-2a::-webkit-scrollbar-thumb {
     background-color: #6C63FF;
     border-radius: 30px;
 }
 
 
 
-.bloc-3{
+.bloc-3a{
     background-color: white;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -101,16 +101,16 @@ div[class^="bloc-"] {
     position: relative;
 }
 
-.bloc-3::-webkit-scrollbar {
+.bloc-3a::-webkit-scrollbar {
     width: 10px;
 }
 
-.bloc-3::-webkit-scrollbar-thumb {
+.bloc-3a::-webkit-scrollbar-thumb {
     background-color: #6C63FF;
     border-radius: 30px;
 }
 
-.bloc-4{
+.bloc-4a{
     background-color: white;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -122,11 +122,11 @@ div[class^="bloc-"] {
     position: relative;
 }
 
-.bloc-4::-webkit-scrollbar::-webkit-scrollbar {
+.bloc-4a::-webkit-scrollbar::-webkit-scrollbar {
     width: 10px;
 }
 
-.bloc-4:-webkit-scrollbar-thumb {
+.bloc-4a:-webkit-scrollbar-thumb {
     background-color: #6C63FF;
     border-radius: 30px;
 }
