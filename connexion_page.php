@@ -1,75 +1,81 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace MMI | Connexion</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Inter:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style_inscription.css">
+    <link rel="stylesheet" href="css/style_navigation.css">
     <link rel="icon" href="img/favicon.png">
 
 </head>
+
 <body>
-    <div class="main">
-    <div class="logo">
-    <a href="index.php"><img src="img/logo(2).png"></a>
-</div>
+
+    <?php
+    session_start();
+    ?>
+
+    <main class="main-2">
+
+        <div class="logo-0">
+            <a href="index.php"><img src="img/logo.svg"></a>
+            <a href="index.php"><img src="img/logo(2).png"></a>
+        </div>
 
 
-<div class="formulaire">
-<form action="traiter_connexion.php" method="GET">
-<?php
-if (isset($_GET["erreur"])) {
-    echo "Vous vous êtes trompés, veuillez recommencez";
-    // echo "<a href='inscription_page.php?erreur=login'>Créez un compte</a>";
+        <div class="formulaire">
 
-}
-?>
-<h1>Connexion</h1>
+            
+            <form action="traiter_connexion.php" method="GET">
+                <?php
+                if (isset($_GET["erreur"])) {
+                    echo "Vous vous êtes trompés, veuillez recommencez";
+                    // echo "<a href='inscription_page.php?erreur=login'>Créez un compte</a>";
+                
+                }
+                ?>
 
-    <label for="mail">Login</label>
-    <input type="text" id="mail" name="login_user" required>
-    <label for="password">Mot de passe</label>
-    <input type="password" id="password" name="password" required>
-    <div class="bouton1">
-    <input type='submit' value='Se connecter'>
-    </div>
-    <span>Vous avez oublié votre mot de passe ? Alors retrouvez le <a href="mdp_page.php">ici !</a></span>
+                <h1>Connexion</h1>
+
+                <label for="mail">Login</label>
+                <br>
+                <input class="bouton2" type="text" id="mail" name="login_user" required><br>
+
+                <label for="password">Mot de passe</label><br>
+                <input class="bouton2" type="password" id="password" name="password" required>
 
 
-</form>
+                <div class="bouton1">
+                    <input type='submit' value='Se connecter'>
+                </div>
 
-</div>
-<div class="image2">
-    <img src="img/main_image.png">
-</div>
-    </div>
+                <span>Vous avez oublié votre mot de passe ? Alors retrouvez le <a href="mdp_page.php">ici !</a></span>
+
+
+            </form>
+
+            <div class="image2">
+                <img src="img/main_image.svg">
+            </div>
+
+        </div>
+
+
+
+
+    </main>
+
+
+
     <footer>
-        <div class="mentions-legales" onclick="openModal()">Mentions Légales</div>
+        <a href='mentions_legales.html'>
+            <p> Mentions légales </p>
+        </a>
     </footer>
 
-     <!-- Modal -->
-     <div id="myModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation();">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Mentions Légales</h2>
-            <p>Ajoutez ici le contenu de vos mentions légales.</p>
-        </div>
-    </div>
 
-    <script>
-        function openModal() {
-            document.getElementById('myModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-    </script>
 </body>
+
 </html>
