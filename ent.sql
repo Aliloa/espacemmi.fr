@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 10 jan. 2024 à 16:29
+-- Généré le : mer. 10 jan. 2024 à 16:32
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `ent`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `abscence_retard`
+--
+
+DROP TABLE IF EXISTS `abscence_retard`;
+CREATE TABLE IF NOT EXISTS `abscence_retard` (
+  `id_abs` int NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `nombre` time NOT NULL,
+  `cours` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_abs`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `abscence_retard`
+--
+
+INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `cours`) VALUES
+(1, 'absence', '2023-12-13', '02:00:00', ''),
+(2, 'absence', '2024-01-07', '02:00:00', '');
 
 -- --------------------------------------------------------
 
