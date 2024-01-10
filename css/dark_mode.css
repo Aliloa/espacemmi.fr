@@ -1,0 +1,24 @@
+/* DARK MODE */
+
+:root {
+
+    /* Dark mode */
+    --dark_background: #0B1437;
+    --dark_main: #111C44;
+
+}
+
+.dark-body {
+    background-color: var(--dark_background) !important;
+    color: white !important;
+}
+
+/* Ajoutez des styles spécifiques pour le mode sombre au besoin */
+.dark-mode {
+    background-color: var(--dark_main) !important;
+    color: white !important;
+}
+
+.white-text {
+    color: white !important;
+}

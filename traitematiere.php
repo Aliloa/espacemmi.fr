@@ -14,6 +14,7 @@ include("connexion.php");
 if (isset($_POST['ajoutmatiere'])) {
     $module = $_POST['matiere'];
     $coef = $_POST['coef'];
+    $type = $_POST['cours'];
     $login = $_SESSION["login"];
 
     $content_dir = 'matiere/'; // dossier où sera déplacé le fichier
@@ -29,19 +30,14 @@ if (isset($_POST['ajoutmatiere'])) {
         exit("Impossible de copier le fichier dans $content_dir");
     }
 
-    $requete = "INSERT INTO grossematiere (nom_mat, coefficient, illustration, prof_ext) VALUES (:cours, :coef, :photo, :externe_prof)";
+    $requete = "INSERT INTO grossematiere (nom_mat, coefficient, illustration, type, prof_ext) VALUES (:cours, :coef, :photo, :type, :externe_prof)";
     $stmt = $db->prepare($requete);
     $stmt->bindValue(":cours", $module, PDO::PARAM_STR);
     $stmt->bindValue(":coef", $coef, PDO::PARAM_INT);
     $stmt->bindValue(":photo", $name_file, PDO::PARAM_STR);
+    $stmt->bindValue(":type", $type, PDO::PARAM_STR);
     $stmt->bindValue(":externe_prof", $_SESSION["id"], PDO::PARAM_INT);
     $stmt->execute();
-
-    // $requeteProfesseur = "SELECT * FROM utilisateurs WHERE nom = :nomProfesseur AND prenom = :prenomProfesseur AND role = 'Enseignant.e'";
-    // $stmtProfesseur = $db->prepare($requeteProfesseur);
-    // $stmtProfesseur->bindValue(":nomProfesseur", $nomProfesseur, PDO::PARAM_STR);
-    // $stmtProfesseur->bindValue(":prenomProfesseur", $prenomProfesseur, PDO::PARAM_STR);
-    // $stmtProfesseur->execute();
 
     if ($stmt->rowCount()) {
         header('Location: ajout_matiere.php?added_successfully');

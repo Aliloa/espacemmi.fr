@@ -120,3 +120,12 @@ section, aside {
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
+/* CARTE */
+
+#map { height: 470px;
+    border-radius: 15px; }
+
+.leaflet-marker-icon {
+    filter: none;
+}

@@ -19,24 +19,38 @@
     <h1>Mes cours</h1>
 
     <div>
-    </div>
+    <h1> Filtré par </h1>
+
+    <form action="filtrecours.php" method="GET">
+            <div class="input-container">
+                <select name="filter" id="filter" aria-label="Filtrer dans le site">
+                    <option value="0">Filtrer</option>
+                    <option value="1">SAE</option>
+                    <option value="2">Ressources</option>
+                </select>
+                <input type="submit" value="Valider">
+            </div>
+        </form>
 
 
-    <?php
-    include('connexion.php');
-    $requete = "SELECT * FROM grossematiere ORDER BY id_cours";
-    $stmt = $db->query($requete);
-    $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-    foreach ($resultat as $cours) {
-        echo "<div class='cours'>
-                            <img src='matiere/{$cours["img"]}' alt=''>
-                            <div>
-                                <h2>{$cours["cours"]}</h2>
-                                <p> Crée par {$cours["prof"]}</p>
-                            </div>
-                        </div>";
-    }
-    ?>
+
+        <?php
+include('connexion.php');
+
+$requete = "SELECT *, nom, prenom from grossematiere, utilisateurs WHERE prof_ext = id_utilisateurs AND role = 'Enseignant.e' ORDER BY id_matiere DESC";
+$stmt = $db->query($requete);
+$resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($resultat as $cours) {
+    echo "<div class='cours'>
+        <div>
+            <h2>{$cours["nom_mat"]}</h2>
+            <p> Créé par {$cours["nom"]} {$cours["prenom"]}</p>
+        </div>
+    </div>";
+}
+?>
+
 </body>
 
 </html>
