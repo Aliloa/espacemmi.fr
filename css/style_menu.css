@@ -98,6 +98,7 @@ main {
     padding: 0.75rem;
     width: 30%;
     margin-bottom: 10px;
+    min-width: fit-content;
     cursor: pointer;
     transition: 0.2s;
 }

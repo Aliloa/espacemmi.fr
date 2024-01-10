@@ -19,8 +19,8 @@
         <div class="main-1">
             <div class="logo-0">
 
-                <img src="img/logo_petit.png">
-                <img src="img/Logo.png">
+                <img src="img/logo-blanc.png">
+                <img src="img/logo-long-blanc.png">
 
             </div>
 

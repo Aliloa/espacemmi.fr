@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/style_vie_etudiante.css">
     <link rel='stylesheet' href='css/style_navigation.css'>
 
+    <link rel='stylesheet' href='css/dark_mode.css'>
+
 
 </head>
 
@@ -23,16 +25,16 @@
         exit();
     }
     ?>
-    <header>
+        <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
-            <a href='accueil.php'><img src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
+            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
 
             <!-- Navigation desktop -->
             <nav class='navigation'>
                 <ul class='choix'>
-                    <li><a href=''>Mes cours</a></li>
+                    <li><a href='cours.php'>Mes cours</a></li>
                     <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                     <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                     <li><a href='page_crous.php'>Crous</a></li>
@@ -54,7 +56,10 @@
                 <div class='icon-photo'>
                     <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
-                    <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
+
+                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
+                    
+
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
                     <div class='photo-2'>
@@ -66,26 +71,29 @@
                             $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
                             $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
                             $stmt->execute();
-
                             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
                             if ($result) {
-                                echo "<a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
-                            } else {
-                                header('Location:index.php?erreur=access_denied');
+                                echo "
+                                <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
                             }
                         }
                         ?>
 
                     </div>
                     <!-- FIN PHP-->
+
                 </div>
             </nav>
 
             <!-- Navigation mobile & tablette -->
             <div class='menu-burger'>
-                <span id='burger-menu'> <img src='./img/menu.svg' alt='menu'></span>
+
+                <span id='burger-menu'> <img class="img_menu" src='./img/menu.svg' alt='menu'></span>
+
                 <nav class='burger'>
+
+
                     <!-- PHP/ STRUCTURE POUR ADAPTER A L UTILISATEUR   -->
                     <?php
                     include('connexion.php');
@@ -96,61 +104,68 @@
                         $stmt->execute();
                         $result = $stmt->fetch(PDO::FETCH_ASSOC);
                         echo "
-                    <div class='kelis'>
-                        <div class='profil-1'>
-                            <a href='parametres.php'>
-                                <div class='photo-1'>
-                                <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
+                            <div class='kelis'>
+                                <div class='profil-1'>
+                                    <a href='parametres.php'>
+                                        <div class='photo-1'>
+                                        <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
+                                        </div>
+                                    </a>
+                                    <div class='profil-2'>";
+
+
+                                echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
+                                echo "<p>{$result['promotion']}</p>";
+
+                                echo "       </div>
                                 </div>
-                            </a>
-                            <div class='profil-2'>";
-
-
-                        echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
-                        echo "<p>{$result['promotion']}</p>";
-
-                        echo "       </div>
-                        </div>
-                        <div class='profil-3'>
-                        <h2>À propos</h2>";
-                        echo "<p>{$result['bio']}</p>";
+                                <div class='profil-3'>
+                                <h2>À propos</h2>";
+                                echo "<p>{$result['bio']}</p> 
+                                </div>
+                            </div>";
 
                     }
                     ?>
+                    <!-- FIN PHP   -->
 
 
+                    <ul class='choix-2'>
+                        <li><a href=''>Mes cours</a></li>
+                        <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
+                        <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
+                        <li><a href='page_crous.php'>Crous</a></li>
+                        <li><a href=''>Déconnexion</a></li>
+                    </ul>
+
+
+                    <div class='tools'>
+                        <div class='tool'>
+                            <img src='img/1-notif.svg' alt=''>
+                            <p>Notifications</p>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-param.png' alt=''>
+                            <p>Paramètres</p>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-lettre.svg' alt=''>
+                            <p>Messagerie</p>
+                        </div>
+                        <div class='tool'>
+                        <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre">
+                            <p>Mode sombre</p></button>
+                        </div>
+                    </div>
+
+                </nav>
+
+                <div class='overlay'></div>
+
             </div>
+
         </div>
-        <!-- FIN PHP   -->
-        <ul class='choix-2'>
-            <li><a href=''>Mes cours</a></li>
-            <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
-            <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
-            <li><a href='page_crous.php'>Crous</a></li>
-            <li><a href=''>Déconnexion</a></li>
-        </ul>
-        <div class='tools'>
-            <div class='tool'>
-                <img src='img/1-notif.svg' alt=''>
-                <p>Notifications</p>
-            </div>
-            <div class='tool'>
-                <img src='img/1-param.png' alt=''>
-                <p>Paramètres</p>
-            </div>
-            <div class='tool'>
-                <img src='img/1-lettre.svg' alt=''>
-                <p>Messagerie</p>
-            </div>
-            <div class='tool'>
-                <img src='img/1-moon.svg' alt=''>
-                <p>Mode sombre</p>
-            </div>
-        </div>
-        </nav>
-        <div class='overlay'></div>
-        </div>
-        </div>
+
     </header>
 
 
@@ -247,5 +262,6 @@
 </body>
 
 <script src="js/script_accueil.js"></script>
+<script src='js/script_dark_mode.js'></script>
 
 </html>
