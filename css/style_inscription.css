@@ -121,7 +121,7 @@ input {
     margin-bottom: 2rem;
 }
 
-.bouton1 input, .bouton1 a {
+.bouton1 input, .bouton1 button {
     cursor: pointer;
     background-color: #604CF9;
     border: 1px solid transparent;
@@ -133,7 +133,7 @@ input {
     border-radius: 9px;
 }
 
-.bouton1 input:hover, .bouton1 a:hover {
+.bouton1 input:hover, .bouton1 button:hover {
     background-color: #000000;
 }
 
