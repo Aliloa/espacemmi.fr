@@ -131,11 +131,6 @@ div[class^="bloc-"] {
     border-radius: 30px;
 }
 
-
-.bouton{
-    display: flex;
-}
-
 .bouton a {
     margin-top: 10px;
     margin-left: 150px;
