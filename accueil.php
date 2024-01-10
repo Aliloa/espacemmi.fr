@@ -409,16 +409,18 @@
                 include('connexion.php');
 
 
-$requete = "SELECT DATE_FORMAT(date_note, '%d/%m') AS nouvelledate, notes.* FROM notes ORDER BY nouvelledate DESC LIMIT 7";
-$stmt = $db->query($requete);
+                $requete = "SELECT DATE_FORMAT(date_note, '%d/%m') AS nouvelledate, notes.* FROM notes ORDER BY nouvelledate DESC LIMIT 7";
+                $stmt = $db->query($requete);
 
                 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 $notes = [];
+                $nom_notes = [];
                 $matiere = [];
 
                 foreach ($data as $row) {
                     $notes[] = $row["notes"];
+                    $nom_note[] = $row["nom_note"];
                     $matiere[] = $row["nouvelledate"];
                 }
                 ?>
@@ -428,6 +430,7 @@ $stmt = $db->query($requete);
 
                     // Supposons que $matiere est un tableau de noms de matières en PHP
                     const matiere = <?= json_encode($matiere) ?>;
+                    const nom_note = <?= json_encode($nom_note) ?>;
 
                     new Chart(ctx, {
                         type: 'bar',
@@ -456,7 +459,7 @@ $stmt = $db->query($requete);
                                         display: false
                                     },
                                     beginAtZero: true,
-                                    max : 20
+                                    max: 20,
                                     // j'ai ajouté max 20 mais jsp où t'as fait pour faire de 2 en 2
                                 }
                             },
@@ -466,8 +469,10 @@ $stmt = $db->query($requete);
                                 },
                                 legend: {
                                     display: false
-                                }
+                                },
+
                             }
+
                         }
                     });
 
