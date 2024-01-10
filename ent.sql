@@ -33,12 +33,12 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
   `titre` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `nombre` time NOT NULL,
-  `ext_cours` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ext_cours` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `eleve` int NOT NULL,
   `prof` int NOT NULL,
-  `justificatif` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `justificatif` text CHARACTER SET utf8mb4,
   PRIMARY KEY (`id_abs`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `abscence_retard`
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `controle` (
   `enseignant` varchar(255) NOT NULL,
   `ext_enseignant` int NOT NULL,
   PRIMARY KEY (`id_controle`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `controle`
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `cours` (
   `coef` int DEFAULT NULL,
   `ext_matiere` int NOT NULL,
   PRIMARY KEY (`id_cours`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `cours`
@@ -115,9 +115,9 @@ CREATE TABLE IF NOT EXISTS `crous` (
   `dessert` varchar(100) NOT NULL,
   `date` date NOT NULL,
   `image_plat` varchar(200) NOT NULL,
-  `lieu` enum('ESIEE','Copernic') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `lieu` enum('ESIEE','Copernic') CHARACTER SET utf8mb4,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `crous`
@@ -145,10 +145,10 @@ CREATE TABLE IF NOT EXISTS `grossematiere` (
   `nom_mat` text NOT NULL,
   `coefficient` int NOT NULL,
   `illustration` text NOT NULL,
-  `type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `type` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `prof_ext` int NOT NULL,
   PRIMARY KEY (`id_matiere`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `grossematiere`
@@ -171,8 +171,8 @@ DROP TABLE IF EXISTS `notes`;
 CREATE TABLE IF NOT EXISTS `notes` (
   `notes` float NOT NULL,
   `id_note` int NOT NULL AUTO_INCREMENT,
-  `nom_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `ext_module` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nom_note` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `ext_module` varchar(800) CHARACTER SET utf8mb4 NOT NULL,
   `ext_prof` int NOT NULL,
   `ext_cours` int NOT NULL,
   `ext_eleve` int NOT NULL,
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `notes` (
   `coef_matiere` int NOT NULL,
   `date_note` date NOT NULL,
   PRIMARY KEY (`id_note`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `notes`
@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `travail_a_faire` (
   `enseignant` varchar(255) NOT NULL,
   `tache_prof` int NOT NULL,
   PRIMARY KEY (`id_travail`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `travail_a_faire`
@@ -230,21 +230,21 @@ INSERT INTO `travail_a_faire` (`id_travail`, `travail`, `date`, `enseignant`, `t
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `login` varchar(100) NOT NULL,
-  `nom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `prenom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nom` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+  `prenom` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
   `id_utilisateurs` int NOT NULL AUTO_INCREMENT,
   `mot_de_passe` varchar(255) NOT NULL,
   `photoprofil` text NOT NULL,
   `role` varchar(800) NOT NULL,
-  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `promotion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `bio` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `email` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+  `promotion` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `bio` varchar(500) CHARACTER SET utf8mb4 DEFAULT NULL,
   PRIMARY KEY (`id_utilisateurs`),
   UNIQUE KEY `nom` (`nom`),
   UNIQUE KEY `prenom` (`prenom`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Déchargement des données de la table `utilisateurs`
