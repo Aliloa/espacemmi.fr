@@ -440,7 +440,7 @@ $stmt = $db->query($requete);
                                 backgroundColor: "#0D99FF",
                                 borderColor: "#0D99FF",
                                 borderWidth: 1,
-                                borderRadius: 50
+                                // borderRadius: 50
                             }]
                         },
                         options: {
@@ -455,7 +455,9 @@ $stmt = $db->query($requete);
                                     grid: {
                                         display: false
                                     },
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    max : 20
+                                    // j'ai ajouté max 20 mais jsp où t'as fait pour faire de 2 en 2
                                 }
                             },
                             plugins: {
