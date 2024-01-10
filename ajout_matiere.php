@@ -70,7 +70,7 @@ if (isset($_SESSION["login"])) {
 
 
     foreach ($result as $matiere) {
-        echo "<p>{$matiere['nom_mat']}</p>
+        echo "<p>{$matiere['nom_mat']}, {$matiere['type']}</p>
               <img src='matiere/{$matiere["illustration"]}' alt=''>";
     }
 }

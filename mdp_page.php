@@ -1,5 +1,10 @@
+<?php
+include('connexion.php');
+session_start();
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +19,26 @@
 </head>
 
 <body>
+    <?php
+
+    $requete = "SELECT id_utilisateurs FROM utilisateurs";
+    $stmt = $db->prepare($requete);
+
+    $result = $stmt->execute();
+
+    if ($result) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            $id = $row['id_utilisateurs'];
+            echo 'ID Utilisateur: ' . $id;
+        } else {
+            echo 'User not found';
+        }
+    } else {
+        echo 'Error executing the query';
+    }
+    ?>
 
     <div class="main-2">
 
@@ -27,17 +52,15 @@
 
         <div class="formulaire">
 
-
             <form action="traiter_mdp_mail.php" method="post">
 
-                <p>Vous avez oublié votre mot de passe? Renseignez votre mail.</p>
+                <p>Vous avez oublié votre mot de passe? Renseignez votre mail</p>
 
-                <label for="mail">Mail</label><br>
+                <label for="mail">Mail</label>
                 <input class="bouton2" type="email" id="mail" name="mail" required>
 
-
                 <div class="bouton1">
-                    <a href="traiter_connexion.php">Envoyer</a>
+                    <button type="submit">Envoyer</button>
                 </div>
             </form>
 
@@ -55,28 +78,8 @@
         </a>
     </footer>
 
-    <!-- <footer>
-        <div class="mentions-legales" onclick="openModal()">Mentions Légales</div>
-    </footer> -->
 
-    <!-- Modal -->
-    <!-- <div id="myModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation();">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Mentions Légales</h2>
-            <p>Ajoutez ici le contenu de vos mentions légales.</p>
-        </div>
-    </div>
 
-    <script>
-        function openModal() {
-            document.getElementById('myModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none';
-        }
-    </script> -->
 </body>
 
 </html>
