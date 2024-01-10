@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<?php
+    <?php
     session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
@@ -22,11 +22,12 @@
     }
     ?>
 
-<header>
+    <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
-            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
+            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil"
+                    aria-current="currentpage"></a>
 
             <!-- Navigation desktop -->
             <nav class='navigation'>
@@ -54,8 +55,9 @@
                     <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
 
-                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
-                    
+                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
+                            alt="mode sombre"></button>
+
 
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
@@ -111,14 +113,14 @@
                                     <div class='profil-2'>";
 
 
-                                echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
-                                echo "<p>{$result['promotion']}</p>";
+                        echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
+                        echo "<p>{$result['promotion']}</p>";
 
-                                echo "       </div>
+                        echo "       </div>
                                 </div>
                                 <div class='profil-3'>
                                 <h2>À propos</h2>";
-                                echo "<p>{$result['bio']}</p> 
+                        echo "<p>{$result['bio']}</p> 
                                 </div>
                             </div>";
 
@@ -150,8 +152,10 @@
                             <p>Messagerie</p>
                         </div>
                         <div class='tool'>
-                        <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre">
-                            <p>Mode sombre</p></button>
+                            <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
+                                    src='./img/1-moon.svg' alt="mode sombre">
+                                <p>Mode sombre</p>
+                            </button>
                         </div>
                     </div>
 
@@ -176,6 +180,8 @@
     ?>
 
     <div class='container'>
+
+
         <div class='bloc-1a'>
             <h1>Travail à faire</h1>
             <?php foreach ($results as $result) { ?>
@@ -204,53 +210,55 @@
         <div class='bloc-2a'>
             <div class="bouton">
                 <h1>Contrôle à venir</h1>
-            <?php foreach ($results as $result) { ?>
-                <div class='matiere-date'>
-                    <h2>
-                        <?php echo $result['controle']; ?>
-                    </h2>
-                    <p class='small-date'>
-                        <?php echo "Rendu: {$result['date']}"; ?>
-                    </p>
-                </div>
-                <h3>
-                    <?php echo $result['enseignant']; ?>
-                </h3>
-            <?php } ?>
+                <?php foreach ($results as $result) { ?>
+                    <div class='matiere-date'>
+                        <h2>
+                            <?php echo $result['controle']; ?>
+                        </h2>
+                        <p class='small-date'>
+                            <?php echo "Rendu: {$result['date']}"; ?>
+                        </p>
+                    </div>
+                    <h3>
+                        <?php echo $result['enseignant']; ?>
+                    </h3>
+                <?php } ?>
 
+            </div>
         </div>
 
         <?php
         $requete = "SELECT * FROM abscence_retard, cours WHERE ext_cours = cours ORDER BY id_abs DESC";
-        $stmt = $db->query($requete);   
+        $stmt = $db->query($requete);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <div class='bloc-3a'>
             <div class="bouton">
                 <h1>Absences et retards</h1>
-            <?php foreach ($results as $result) { ?>
-                <div class='matiere-date'>
-                    <h2>
-                        <?php echo $result['titre']; ?>
-                    </h2>
-                    <p class='small-date'>
-                        <?php echo "{$result['nombre']}"; ?>
-                    </p>
-                </div>
-                <div class="cours_classe">
-                    <h3>
-                        <?php echo $result['cours']; ?>
-                    </h3>
-                    <h3>
-                        <?php echo "Le " . $result['date']; ?>
-                    </h3>
-                </div>
-            <?php } ?>
+                <?php foreach ($results as $result) { ?>
+                    <div class='matiere-date'>
+                        <h2>
+                            <?php echo $result['titre']; ?>
+                        </h2>
+                        <p class='small-date'>
+                            <?php echo "{$result['nombre']}"; ?>
+                        </p>
+                    </div>
+                    <div class="cours_classe">
+                        <h3>
+                            <?php echo $result['cours']; ?>
+                        </h3>
+                        <h3>
+                            <?php echo "Le " . $result['date']; ?>
+                        </h3>
+                    </div>
+                <?php } ?>
 
+
+            </div>
 
         </div>
-
 
         <?php
 
@@ -262,21 +270,22 @@
         <div class='bloc-4a'>
             <div class="bouton">
                 <h1>Les moyennes</h1>
-            <?php foreach ($results as $result) { ?>
-                <div class='matiere-date'>
-                    <h2>
-                        <?php echo $result['nom_note']; ?>
-                    </h2>
-                    <p class='small-date'>
-                        <?php echo "{$result['notes']} /20"; ?>
-                    </p>
-                </div>
+                <?php foreach ($results as $result) { ?>
+                    <div class='matiere-date'>
+                        <h2>
+                            <?php echo $result['nom_note']; ?>
+                        </h2>
+                        <p class='small-date'>
+                            <?php echo "{$result['notes']} /20"; ?>
+                        </p>
+                    </div>
 
-            <?php } ?>
+                <?php } ?>
 
+            </div>
         </div>
-    </div>
 
+    </div>
     <footer>
         <a href='mentions_legales.html'>
             <p> Mentions légales </p>
@@ -292,4 +301,5 @@
 <script src='js/script_accueil.js'></script>
 
 <script src='js/script_dark_mode.js'></script>
+
 </html>

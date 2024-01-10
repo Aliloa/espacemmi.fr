@@ -325,7 +325,7 @@ text-align: center;
     }
 
     .bloc-2 {
-        height: 585px;
+        height: 550px;
         border-radius: 28px;
         grid-column: 3 / 4;
         grid-row: 1 / 4;
