@@ -15,7 +15,7 @@ if (isset($_POST['ajoutnote'])) {
     $nomnote= $_POST['note_name'];
     $note = $_POST['notedonnee'];
     $choseneleve = $_POST['note_eleve'];
-    $chosencours = $_POST['courschoisi'];
+    $chosencours = $_SESSION['chosencours'];
     $chosenmatiere = $_POST['matierechoisi'];
     
 
@@ -26,21 +26,18 @@ if (isset($_POST['ajoutnote'])) {
     $stmt = $db->prepare($requete);
     $stmt->bindValue(":note", $note, PDO::PARAM_INT);
     $stmt->bindValue(":titre", $nomnote, PDO::PARAM_STR);
-    $stmt->bindValue(":eleve", $choseneleve, PDO::PARAM_INT);
-    $stmt->bindValue(":cours", $chosencours, PDO::PARAM_INT);
     $stmt->bindValue(":module", $chosenmatiere, PDO::PARAM_INT);
     $stmt->bindValue(":externe_prof", $_SESSION["id"], PDO::PARAM_INT);
-
-    // $stmt->bindValue(":coef_cours", $coef, PDO::PARAM_INT);
-    // $stmt->bindValue(":coef_matiere", $coef, PDO::PARAM_INT);
-    // , :coef_cours, :coef_matiere
+    $stmt->bindValue(":cours", $chosencours, PDO::PARAM_INT);
+    $stmt->bindValue(":eleve", $choseneleve, PDO::PARAM_INT);
     $stmt->execute();
-    var_dump($nomnote, $note, $choseneleve, $chosencours, $chosenmatiere, $_SESSION["id"]);
 
 
     if ($stmt->rowCount()) {
         header('Location: ajoutnotes.php?added_successfully');
         echo"Votre matière a bien été ajoutée";
+        var_dump($nomnote, $note, $choseneleve, $chosencours, $chosenmatiere, $_SESSION["id"]);
+
     } else {
         echo "L'ajout du cours a échoué. Veuillez réessayer.";
     }
@@ -49,5 +46,8 @@ if (isset($_POST['ajoutnote'])) {
 ?>
 
 
+<!--     // $stmt->bindValue(":coef_cours", $coef, PDO::PARAM_INT);
+    // $stmt->bindValue(":coef_matiere", $coef, PDO::PARAM_INT);
+    // , :coef_cours, :coef_matiere -->
 </body>
 </html>
