@@ -408,16 +408,18 @@
                 <?php
                 include('connexion.php');
 
-$requete = $db->query("SELECT * FROM notes ORDER BY date_note DESC LIMIT 7");
 
-                $data = $requete->fetchAll(PDO::FETCH_ASSOC);
+$requete = "SELECT DATE_FORMAT(date_note, '%d/%m') AS nouvelledate, notes.* FROM notes ORDER BY nouvelledate DESC LIMIT 7";
+$stmt = $db->query($requete);
+
+                $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 $notes = [];
                 $matiere = [];
 
                 foreach ($data as $row) {
                     $notes[] = $row["notes"];
-                    $matiere[] = $row["nom_note"];
+                    $matiere[] = $row["nouvelledate"];
                 }
                 ?>
 
