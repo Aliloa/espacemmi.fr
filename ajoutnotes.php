@@ -16,8 +16,69 @@
     }
     ?>
 
+
+<form action="ajoutnotes.php" method="GET">
+
+<h1>Choisissez le cours auquel vous associez la note</h1>
+<label for="cours">Cours :</label>
+<select name="courschoisi" id="cours" required>
+    <?php
+    include("connexion.php");
+
+    if (isset($_SESSION["login"])) {
+        $requete = 'SELECT * FROM cours WHERE externe_prof = :idProfesseur AND coef IS NOT NULL';
+        $stmt = $db->prepare($requete);
+        $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($result as $cours) {
+            echo "<option value='{$cours['id_cours']}'>{$cours['cours']}</option>";
+        }
+    }
+    ?>
+
+</select>
+<a href="ajoutnotes.php">Reset</a>
+<input type="submit" name='choixcours' value='Cours'>
+</form>
+
+
+
+
+
     <form action="traitenote.php" method="POST" enctype="multipart/form-data">
 
+
+    <h1>Choisissez la matière à laquelle vous associez la note</h1>
+        <label for="matiere">Matière :</label>
+        <select name="matierechoisi" id="matiere" required>
+
+            <?php
+            include("connexion.php");
+
+            if (isset($_GET['choixcours'])) {
+                $chosencours = $_GET['courschoisi'];
+                $_SESSION['chosencours'] = $chosencours;
+
+                $requete = 'SELECT * FROM grossematiere, cours WHERE grossematiere.id_matiere = cours.ext_matiere AND grossematiere.prof_ext = :idProfesseur AND cours.id_cours = :idCours';
+
+
+                $stmt = $db->prepare($requete);
+                $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
+                $stmt->bindValue(':idCours', $chosencours, PDO::PARAM_INT);
+                $stmt->execute();
+
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($result as $matiere) {
+                    echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
+                }
+            }
+            ?>
+
+        </select>
 
         <label for="name">Le nom de la note</label>
         <input type="text" name='note_name' id="name" required>
@@ -29,6 +90,7 @@
         <h1>Choisissez l'élève à qui vous attribuez la note</h1>
         <label for="eleve">Étudiant :</label>
         <select name="note_eleve" id="eleve" required>
+            <option value="0">Choisir un étudiant.e</option>
             <?php
             include("connexion.php");
 
@@ -38,68 +100,16 @@
 
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                foreach ($result as $cours) {
-                    echo "<option value='{$cours['id_utiliateurs']}'>{$cours['nom']} {$cours['prenom']} {$cours['promotion']}</option>";
+                foreach ($result as $eleve) {
+                    echo "<option value='{$eleve['id_utilisateurs']}'>{$eleve['nom']} {$eleve['prenom']} {$eleve['promotion']}</option>";
                 }
             }
+            
             ?>
+</select>
+
 
         </select>
-
-
-        <h1>Choisissez le cours auquel vous associez la note</h1>
-        <label for="cours">Matière :</label>
-        <select name="courschoisi" id="cours" required>
-            <?php
-            include("connexion.php");
-
-            if (isset($_SESSION["login"])) {
-                $requete = 'SELECT * FROM cours WHERE externe_prof = :idProfesseur AND coef IS NOT NULL';
-                $stmt = $db->prepare($requete);
-                $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
-                $stmt->execute();
-
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($result as $cours) {
-                    echo "<option value='{$cours['id_cours']}'>{$cours['cours']}</option>";
-                }
-            }
-            ?>
-
-        </select>
-
-
-
-        <h1>Choisissez la matière à laquelle vous associez la note</h1>
-        <label for="matiere">Matière :</label>
-        <select name="matierechoisi" id="matiere" required>
-
-            <?php
-            include("connexion.php");
-
-            if (isset($_SESSION["login"])) {
-                $requete = 'SELECT * FROM grossematiere WHERE prof_ext = :idProfesseur';
-                $stmt = $db->prepare($requete);
-                $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
-                $stmt->execute();
-
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($result as $matiere) {
-                    echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
-                }
-            }
-            ?>
-        </select>
-
-
-
-
-
-
-
-
         <button type="submit" name='ajoutnote'>Ajouter</button>
 
 

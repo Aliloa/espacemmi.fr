@@ -81,7 +81,10 @@
 
 
         foreach ($resultat as $cours) {
-            echo "<p>{$cours['cours']} - Matière : {$cours['nom_mat']}</p>";
+            $chemindoc = "documents/" . $cours["document"];
+
+            echo "<p>{$cours['cours']} - Matière : {$cours['nom_mat']}</p>
+            <a href='{$chemindoc}'>{$cours["document"]} </a> </br></br>";
         }
     
 }
