@@ -29,6 +29,11 @@ div[class^="etude"] {
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25)
 }
 
+.etude-1 a{
+    display: block;
+    width: 90px;
+}
+
 .view {
     background-color: var(--purple);
     width: 75px;
