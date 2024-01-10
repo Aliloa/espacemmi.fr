@@ -24,7 +24,7 @@
         <div class='menu'>
 
             <!-- Logo Accueil -->
-            <a href='accueil.php'><img src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
+            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
 
             <!-- Navigation desktop -->
             <nav class='navigation'>
@@ -52,7 +52,7 @@
                     <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
 
-                    <button onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
+                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
                     
 
 
@@ -84,7 +84,7 @@
             <!-- Navigation mobile & tablette -->
             <div class='menu-burger'>
 
-                <span id='burger-menu'> <img src='./img/menu.svg' alt='menu'></span>
+                <span id='burger-menu'> <img class="img_menu" src='./img/menu.svg' alt='menu'></span>
 
                 <nav class='burger'>
 
@@ -148,8 +148,8 @@
                             <p>Messagerie</p>
                         </div>
                         <div class='tool'>
-                            <img src='img/1-moon.svg' alt=''>
-                            <p>Mode sombre</p>
+                        <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre">
+                            <p>Mode sombre</p></button>
                         </div>
                     </div>
 
