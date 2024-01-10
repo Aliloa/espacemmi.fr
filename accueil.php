@@ -402,14 +402,14 @@
                     <p class='vp'>voir plus</p>
                 </a>
                 <div class='graphique'>
-                    <canvas id="histogramme" width="500" height="400"></canvas>
+                    <canvas id="histogramme" width="500" height="400" style="padding: 20px;"></canvas>
                 </div>
 
                 <?php
                 include('connexion.php');
 
 
-                $requete = "SELECT DATE_FORMAT(date_note, '%d/%m') AS nouvelledate, notes.* FROM notes ORDER BY nouvelledate DESC LIMIT 7";
+                $requete = "SELECT DATE_FORMAT(date_note, '%d/%m') AS nouvelledate, notes.* FROM notes ORDER BY nouvelledate DESC LIMIT 6";
                 $stmt = $db->query($requete);
 
                 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
