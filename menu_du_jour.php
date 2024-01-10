@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/style_menu.css" />
     <link rel="stylesheet" type="text/css" href="./css/style_navigation.css" />
+    <link rel='stylesheet' href='css/dark_mode.css'>
     <title>Espace mmi menu</title>
 
 </head>
@@ -52,7 +53,7 @@
                 <div class='icon-photo'>
                     <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
-                    <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
+                    <button onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
                     <div class='photo-2'>
@@ -152,26 +153,46 @@
     </header>
 
     <main>
-        <?php
-        if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
-          echo"  <a href='ajouter_menu.php'><button>Ajouter menu</button></a>";
 
-        }
-        ?>
         <?php
-        include("connexion.php");
-        // première requete pour avoir tous les menus de la base de données, sauf le dernier
-        $requete = "SELECT * FROM crous ORDER BY date ASC LIMIT 1, " . PHP_INT_MAX;
+        // Récupérer la date d'aujourd'hui au format SQL
+        $dateAujourdhui = date("Y-m-d");
+        $lieu = isset($_GET['lieu']) ? $_GET['lieu'] : '';
+       // Sélectionner les menus après aujourd'hui, exclure le premier, et limiter à 4 résultats
+        $requete = "SELECT * FROM crous WHERE date >= :aujourdhui AND lieu = :lieu ORDER BY date ASC LIMIT 1, 4";
         $stmt = $db->prepare($requete);
+        $stmt->bindParam(':aujourdhui', $dateAujourdhui, PDO::PARAM_STR);
+        $stmt->bindParam(':lieu', $lieu, PDO::PARAM_STR);
         $stmt->execute();
         $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // seconde requete pour avoir seulement le dernier élement de la bdd
-        $requeteDernier = "SELECT * FROM crous ORDER BY date ASC LIMIT 1";
+        $requeteDernier = "SELECT * FROM crous WHERE date >= :aujourdhui AND lieu = :lieu ORDER BY date ASC LIMIT 1";
         $stmtDernier = $db->prepare($requeteDernier);
+        $stmtDernier->bindParam(':aujourdhui', $dateAujourdhui, PDO::PARAM_STR);
+        $stmtDernier->bindParam(':lieu', $lieu, PDO::PARAM_STR);
         $stmtDernier->execute();
         $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
+
+        //LES DATES AVEC LES NOMS DES JOURS
+
+                    // Traduire les jours de la semaine
+                    $dayNames = [
+                        'Monday'    => 'Lundi',
+                        'Tuesday'   => 'Mardi',
+                        'Wednesday' => 'Mercredi',
+                        'Thursday'  => 'Jeudi',
+                        'Friday'    => 'Vendredi',
+                        'Saturday'  => 'Samedi',
+                        'Sunday'    => 'Dimanche',
+                        ];
+
+        $date_dernier = new DateTime($dernierElement['date'], new DateTimeZone('Europe/Paris'));            
+        $jour_anglais_d = $date_dernier->format('l');                
+        $nom_jour_dernier = $dayNames[$jour_anglais_d];
         ?>
+
+        <h1>Menu de la semaine CROUS <?php echo $lieu; ?></h1>
 
 
         <!-- Carousel version mobile, avec Bootstrap -->
@@ -200,9 +221,15 @@
                     <!-- première slide -->
                     <div class="carousel-item">
                         <h2 class="m-0 date">
-                            <?php echo date('d/m', strtotime($dernierElement['date'])); ?>
+                            <?php 
+                            echo $nom_jour_dernier . " ";
+                            echo date('d/m', strtotime($dernierElement['date']));
+                             ?>
+                            
                         </h2>
                         <div class="card">
+                            <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+                             echo "<a href='supprimer_menu.php?id=" . $dernierElement['id'] . "' '<button class='btn delete' id='" . $dernierElement['id'] . "'>supprimer</button></a>"; } ?>
                             <div>
                                 <img src=" <?php
                                 echo $dernierElement['image_plat'];
@@ -237,15 +264,22 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Toutes kes autres slides -->
+                    <!-- Toutes les autres slides -->
                     <?php
                     foreach ($tableauResult as $result) {
+
+                        $date = new DateTime($result['date'], new DateTimeZone('Europe/Paris'));            
+        $jour_anglais = $date->format('l');                
+        $nom_jour = $dayNames[$jour_anglais];
+
                         $result['entre'] = str_replace(', ', '<br>', $result['entre']);
                         $result['plat'] = str_replace(', ', '<br>', $result['plat']);
                         $result['dessert'] = str_replace(', ', '<br>', $result['dessert']);
                         echo "<div class='carousel-item'>";
-                        echo "<h2 class='m-0 date'>" . date('d/m', strtotime($result['date'])) . "</h2>";
+                        echo "<h2 class='m-0 date'>" . $nom_jour . " " . date('d/m', strtotime($result['date'])) . "</h2>";
                         echo "<div class='card'>";
+                        if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+                        echo "<a href='supprimer_menu.php?id=" . $result['id'] . "' '<button class='btn delete' id='" . $result['id'] . "'>supprimer</button></a>";}
                         echo "<div>
                             <img src='" . $result['image_plat'] . "' alt='' class='card-img-top'>
                             <h3 class='fw-bold entre'>Entrée</h3>
@@ -278,13 +312,15 @@
         <section class="container today desktop">
             <div class="menu_ajd">
                 <div>
-                    <h2 class="fs-5">24/11</h2>
+                    <h2 class="fs-5"><?php 
+                    echo $nom_jour_dernier . " ";
+                    echo date('d/m', strtotime($dernierElement['date'])); ?></h2>
                 </div>
                 <div class="card shadow violet">
+                    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+                    echo "<a href='supprimer_menu.php?id=" . $dernierElement['id'] . "' '<button class='btn delete' id='" . $dernierElement['id'] . "'>supprimer</button></a>"; }?>
                     <div>
-                        <img src=" <?php
-                        echo $dernierElement['image_plat'];
-                        ?>" alt="" class="card-img-top">
+                        <img src="<?php echo $dernierElement['image_plat'];?>" alt="" class="card-img-top">
                         <h3 class="fw-bold entre">Entrée</h3>
                         <p>
                             <?php
@@ -320,10 +356,13 @@
 
                 <?php
                 foreach ($tableauResult as $result) {
+                    $date = new DateTime($result['date'], new DateTimeZone('Europe/Paris'));            
+        $jour_anglais = $date->format('l');                
+        $nom_jour = $dayNames[$jour_anglais];
                     $result['plat'] = str_replace(', ', '<br>', $result['plat']);
                     echo "<div class='menu_autre'>";
                     echo "<div>
-                            <h2 class='fs-5'>" . date("d/m", strtotime($result['date'])) . "</h2>
+                            <h2 class='fs-5'>" . $nom_jour . " " . date("d/m", strtotime($result['date'])) . "</h2>
                         </div>";
                     echo "<div class='card shadow'>";
                     echo "<div>
@@ -332,8 +371,10 @@
                         <p>" . $result['plat'] . "<br>
                         ...
                         </p>
-                        <button class='btn voir_plus rounded-5' id='" . $result['id'] . "'>voir plus</button>
-                    </div>";
+                        <button class='btn voir_plus' id='" . $result['id'] . "'>voir plus</button>";
+                        if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+                         echo "<a href='supprimer_menu.php?id=" . $result['id'] . "' '<button class='btn delete' id='" . $result['id'] . "'>supprimer</button></a>"; }
+                         echo "</div>";
                     echo "</div>
                     </div>";
                 }
@@ -385,5 +426,6 @@
 
 <script src="js/script_accueil.js"></script>
 <script src="js/script_crous.js"></script>
+<script src='js/script_dark_mode.js'></script>
 
 <html>

@@ -1,3 +1,8 @@
+<?php
+include('connexion.php');
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -12,8 +17,6 @@
 </head>
 <body>
 <?php
-include('connexion.php');
-session_start();
 
 $requete = "SELECT id_utilisateurs FROM utilisateurs";
 $stmt = $db->prepare($requete);
@@ -21,7 +24,6 @@ $stmt = $db->prepare($requete);
 $result = $stmt->execute();
 
 if ($result) {
-    // Fetch the data after execution
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row) {

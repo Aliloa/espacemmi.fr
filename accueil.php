@@ -8,6 +8,8 @@
     <link rel='icon' href='img/favicon.png'>
     <link rel='stylesheet' href='css/style_navigation.css'>
     <link rel='stylesheet' href='css/style_accueil.css'>
+
+    <link rel='stylesheet' href='css/dark_mode.css'>
 </head>
 
 <body>
@@ -27,7 +29,7 @@
             <!-- Navigation desktop -->
             <nav class='navigation'>
                 <ul class='choix'>
-                    <li><a href=''>Mes cours</a></li>
+                    <li><a href='cours.php'>Mes cours</a></li>
                     <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                     <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                     <li><a href='page_crous.php'>Crous</a></li>
@@ -49,7 +51,10 @@
                 <div class='icon-photo'>
                     <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
-                    <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
+
+                    <button onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
+                    
+
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
                     <div class='photo-2'>
@@ -72,13 +77,18 @@
 
                     </div>
                     <!-- FIN PHP-->
+
                 </div>
             </nav>
 
             <!-- Navigation mobile & tablette -->
             <div class='menu-burger'>
+
                 <span id='burger-menu'> <img src='./img/menu.svg' alt='menu'></span>
+
                 <nav class='burger'>
+
+
                     <!-- PHP/ STRUCTURE POUR ADAPTER A L UTILISATEUR   -->
                     <?php
                     include('connexion.php');
@@ -89,66 +99,78 @@
                         $stmt->execute();
                         $result = $stmt->fetch(PDO::FETCH_ASSOC);
                         echo "
-                    <div class='kelis'>
-                        <div class='profil-1'>
-                            <a href='parametres.php'>
-                                <div class='photo-1'>
-                                <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
+                            <div class='kelis'>
+                                <div class='profil-1'>
+                                    <a href='parametres.php'>
+                                        <div class='photo-1'>
+                                        <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
+                                        </div>
+                                    </a>
+                                    <div class='profil-2'>";
+
+
+                                echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
+                                echo "<p>{$result['promotion']}</p>";
+
+                                echo "       </div>
                                 </div>
-                            </a>
-                            <div class='profil-2'>";
-
-
-                        echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
-                        echo "<p>{$result['promotion']}</p>";
-
-                        echo "       </div>
-                        </div>
-                        <div class='profil-3'>
-                        <h2>À propos</h2>";
-                        echo "<p>{$result['bio']}</p>";
+                                <div class='profil-3'>
+                                <h2>À propos</h2>";
+                                echo "<p>{$result['bio']}</p> 
+                                </div>
+                            </div>";
 
                     }
                     ?>
+                    <!-- FIN PHP   -->
 
 
+                    <ul class='choix-2'>
+                        <li><a href=''>Mes cours</a></li>
+                        <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
+                        <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
+                        <li><a href='page_crous.php'>Crous</a></li>
+                        <li><a href=''>Déconnexion</a></li>
+                    </ul>
+
+
+                    <div class='tools'>
+                        <div class='tool'>
+                            <img src='img/1-notif.svg' alt=''>
+                            <p>Notifications</p>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-param.png' alt=''>
+                            <p>Paramètres</p>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-lettre.svg' alt=''>
+                            <p>Messagerie</p>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-moon.svg' alt=''>
+                            <p>Mode sombre</p>
+                        </div>
+                    </div>
+
+                </nav>
+
+                <div class='overlay'></div>
+
             </div>
+
         </div>
-        <!-- FIN PHP   -->
-        <ul class='choix-2'>
-            <li><a href=''>Mes cours</a></li>
-            <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
-            <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
-            <li><a href='page_crous.php'>Crous</a></li>
-            <li><a href=''>Déconnexion</a></li>
-        </ul>
-        <div class='tools'>
-            <div class='tool'>
-                <img src='img/1-notif.svg' alt=''>
-                <p>Notifications</p>
-            </div>
-            <div class='tool'>
-                <img src='img/1-param.png' alt=''>
-                <p>Paramètres</p>
-            </div>
-            <div class='tool'>
-                <img src='img/1-lettre.svg' alt=''>
-                <p>Messagerie</p>
-            </div>
-            <div class='tool'>
-                <img src='img/1-moon.svg' alt=''>
-                <p>Mode sombre</p>
-            </div>
-        </div>
-        </nav>
-        <div class='overlay'></div>
-        </div>
-        </div>
+
     </header>
 
+
+
     <main>
+
         <div class='container'>
+
             <div class='bloc-1'>
+
                 <div>
                     <?php
                     include('connexion.php');
@@ -164,12 +186,164 @@
                     <p>Bienvenue sur l'EntMMi, votre espace dédié au Multimédia et à l'Informatique. Explorez, et
                         découvrez les dernières informations disponibles.</p>
                 </div>
+
                 <img src='img/1-perso.png' alt=''>
+
             </div>
+            
+
             <div class='bloc-2'>
-                <!-- emploi du temps -->
+
+
+                <div class="pre-next">
+                    <button id="precedent"> <img src="img/1-left.svg" alt="précédent"></button>
+                    <button id="suivant"><img src="img/1-right.svg" alt="suivant"></button>
+                </div>
+
+                <div class="wake"> 
+                    <p>8h 9h 10h 11h 13h 14h 15h 16h 17h</p>
+                </div>
+
+                <img class="line" src="img/1-line.png" alt="">
+
+                <div id="planning">
+
+
+                    <?php
+
+                    // setlocale(LC_TIME, 'fr_FR.utf8'); // j'ai défini la langue locale en français pour traduire les données mais ça ne marche pas pardon population
+                    
+                    $apiUrl = 'https://entmmi.fr/api/ade-ics';
+
+                    $data = array(
+                        'ical_url' => 'https://edt.univ-eiffel.fr/jsp/custom/modules/plannings/anonymous_cal.jsp?resources=4905&projectId=25&calType=ical&nbWeeks=50',
+                        'raw_data' => false,
+                        'parsed_data' => true,
+                        'from' => strtotime('2023-12-18'),
+                        'to' => strtotime('2024-04-04'),
+                        'group' => 'B',
+                    );
+
+                    $options = [
+                        'http' => [
+                            'header' => "Content-type: application/json",
+                            'method' => 'POST',
+                            'content' => json_encode($data),
+                        ],
+                    ];
+
+                    $context = stream_context_create($options);
+                    $result = file_get_contents($apiUrl, false, $context);
+                    $response = json_decode($result, true);
+                    $planningData = $response; // Les données qu'on a obtenu
+
+                    if (isset($response['error'])) {
+                        echo "API Error: " . $response['error']['message'];
+                    } else {
+                    
+                    // Organisation des données dans un emploi du temps quotidien
+                    $planning = [];
+
+                    foreach ($planningData as $event) {
+                        $day = (new DateTime())->setTimestamp($event['start'])->format('l j F Y');
+
+                        $formatEDT = [
+                            'start_time' => date('H:i', $event['start']),
+                            'end_time' => date('H:i', $event['end']),
+                            'title' => isset($event['title']) ? $event['title'] : '',
+                            'trainer' => isset($event['trainer']) ? $event['trainer'] : '',
+                            'location' => implode(', ', $event['location']),
+                        ];
+
+                        $planning[$day][] = $formatEDT;
+                    }
+
+                    // Trier les jours par ordre chronologique
+                    uksort($planning, function ($a, $b) {
+                        return strtotime($a) - strtotime($b);
+                    });
+
+
+                    // Trier les événements de chaque jour par heure de début
+                    foreach ($planning as &$events) {
+                        usort($events, function ($a, $b) {
+                            return strtotime($a['start_time']) - strtotime($b['start_time']);
+                        });
+                    }
+
+                }
+                    ?>
+
+                </div>
+
+                <script>
+                    var planning = <?php echo json_encode($planning); ?>;
+                    var suiviJourActuel = 0;
+                    var container = document.getElementById('planning');
+                    var precedent = document.getElementById('precedent');
+                    var suivant = document.getElementById('suivant');
+
+                    function voirEDT() {
+                        // Affichage du contenu du jour
+                        var jourJ = Object.keys(planning)[suiviJourActuel];
+                        var contenuEDT = '<h2>' + jourJ + '</h2><div class="edt">';
+
+                        planning[jourJ].forEach(function (event) {
+                            contenuEDT += ` <div class="hour-0"> 
+                                                <p class="hour">${event['start_time']} - ${event['end_time']} </p> 
+                                                <div class="edt-p"> 
+                                                    <p>${event['title']}</p>
+                                                    <p>${event['trainer']} </p>
+                                                    <p>${event['location']}</p>
+                                                </div>
+                                            </div>`;
+                        });
+
+                        contenuEDT += '</div>';
+                        container.innerHTML = contenuEDT;
+                    }
+
+
+                    function updateDay(offset) {
+                        suiviJourActuel += offset;
+
+                        // Vérifie si l'index est en dehors des limites
+                        if (suiviJourActuel < 0) {
+                            suiviJourActuel = 0;
+                        //  Garantit que suiviJourActuel reste dans les limites du tableau des clés de planning.
+                        } else if (suiviJourActuel >= Object.keys(planning).length) {
+                            suiviJourActuel = Object.keys(planning).length - 1;
+                        }
+
+                        // Affichage du contenu du jour correspondant
+                        voirEDT();
+                    }
+
+                    // Ajout des gestionnaires d'événements pour les boutons "Précédent" et "Suivant"
+                    precedent.addEventListener('click', function () {
+                        updateDay(-1);
+                    });
+
+                    suivant.addEventListener('click', function () {
+                        updateDay(1);
+                    });
+
+                    // Affichage du contenu du premier jour lors du chargement de la page
+                    voirEDT();
+                </script>
+
+
+                <a href='planning.php'>
+                    <p class='vp'>voir plus</p>
+                </a>
+
             </div>
+
+
+
+
             <div class='bloc-3'>
+
                 <h1>Vos derniers cours ajoutés</h1>
                 <a href='derniers_cours.php'>
                     <p class='vp'>voir plus</p>
@@ -189,14 +363,18 @@
 
         echo "<div class='cours'>
                 <div>
-                    <a href='{$chemindoc}' download><h2>{$cours["cours"]}</h2></a>
-                    <p>Créé par {$cours["nom"]} {$cours["prenom"]}</p>
+                    <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2></a>
+                    <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
                 </div>
               </div>";
     }
 ?>
 
             </div>
+
+
+
+
             <div class='bloc-4'>
                 <h1>Forum</h1>
                 <a href='#'>
@@ -211,6 +389,11 @@
                 </div>
 
             </div>
+
+
+
+
+
             <div class='bloc-5'>
                 <h1>Vos dernières notes</h1>
                 <a href='vie_scolaire.php'>
@@ -234,6 +417,11 @@
 };
                     </script> -->
             </div>
+
+
+
+
+
             <div class='bloc-6'>
                 <h1>Menu du jour</h1>
                 <?php
@@ -254,6 +442,7 @@
             </div>
 
 
+
             <div class='bloc-7'>
 
                 <?php
@@ -270,7 +459,7 @@
                             <p>{$user['login']}</p>
                             <p class='p'>En ligne</p>
                         </div>";
-                    }
+                }
                 ?>
 
             </div>
@@ -290,5 +479,7 @@
 </body>
 
 <script src='js/script_accueil.js'></script>
+
+<script src='js/script_dark_mode.js'></script>
 
 </html>

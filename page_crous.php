@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/style_crous.css" />
     <link rel='stylesheet' href='css/style_navigation.css'>
+    <link rel='stylesheet' href='css/dark_mode.css'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
     <title>Espace MMI | Menu</title>
     <link rel="icon" href="img/favicon.png">
 
@@ -51,7 +55,7 @@
                 <div class='icon-photo'>
                     <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
-                    <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
+                    <button onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
 
                     <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
                     <div class='photo-2'>
@@ -166,35 +170,42 @@
             <main class="container">
 
                 <section class="menu_hebdomadaire">
-                    <h1 class="fs-4 fw-bold ms-3">Menu hebdomadaire</h1>
-                    <div class="card rounded-4 shadow">
+                    <h1>Menu hebdomadaire</h1>
+                    <div class="card shadow">
                         <div class="infos">
-                            <h2>Restaurant universitaire EISEE:</h2>
+                            <h2>Restaurant universitaire ESIEE:</h2>
                             <div class="flex">
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
-                                <button class="btn"><a href="menu_du_jour.php">Voir le menu</a></button>
+                                    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+          echo "<a href='ajouter_menu.php?lieu=ESIEE'><button class='btn add'>Ajouter menu</button></a>";
+        } ?>
+                                    <a href="menu_du_jour.php?lieu=ESIEE"><button class="btn">Voir le menu</button></a>
                             </div>
                         </div>
-                        <hr class="border border-3 m-1">
+                        <hr class="border">
                         <div class="infos">
                             <h2>Restaurant universitaire Copernic:</h2>
                             <div class="flex">
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
-                                <button class="btn"><a href="menu_du_jour.php">Voir le menu</a></button>
+
+                                    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+          echo "<a href='ajouter_menu.php?lieu=Copernic'><button class='btn add'>Ajouter menu</button></a>";
+        } ?>
+                                    <a href="menu_du_jour.php?lieu=Copernic"><button class="btn">Voir le menu</button></a>
                             </div>
                         </div>
-                        <hr class="border border-3 m-1">
+                        <hr class="border">
                         <div class="infos">
                             <h2>Menu de la caféteria</h2>
                             <div class="flex">
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
-                                <button class="btn"><a href="documents/menu.pdf">Voir le menu</a></button>
+                                <a href="documents/menu.pdf"><button class="btn">Voir le menu</button></a>
                             </div>
                         </div>
                     </div>
@@ -202,10 +213,10 @@
 
                 <!-- La carte -->
                 <section class="decouvrez_resto">
-                    <h1 class="fs-4 fw-bold">Découvrez nos Restaurants Universitaires</h1>
+                    <h1>Découvrez nos Restaurants Universitaires</h1>
                     <div>
-                        Ajouter une map
-                        <img src="img/carte.png" alt="" style="width:100%;">
+                        <div id="map"></div>
+                        
                     </div>
                 </section>
 
@@ -215,40 +226,40 @@
         </div>
 
         <aside class="container horaires">
-            <div class="card shadow rounded-4">
+            <div class="card shadow">
 
-                <h1 class="p-3 fs-4 fw-bold">Horaires des Restaurants :</h1>
+                <h1>Horaires des Restaurants :</h1>
 
                 <div class="flex">
                     <p>Lundi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Mardi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Mercredi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Jeudi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Vendredi:</p>
                     <p>11h30 - 14h</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Samedi:</p>
                     <p>Fermé</p>
                 </div>
-                <hr class="border m-1">
+                <hr class="border">
                 <div class="flex">
                     <p>Dimanche:</p>
                     <p>Fermé</p>
@@ -269,5 +280,34 @@
 
 </body>
 <script src="js/script_accueil.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
 
 </html>
+
+<script src='js/script_dark_mode.js'></script>
+
+<script>
+    var map = L.map('map').setView([48.83930298535587, 2.584485412835638], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// map.getContainer().style.filter = 'grayscale(100%)';
+
+
+  var esiee = L.marker([48.83930298535587, 2.584485412835638],
+  {alt: 'restaurant esiee'}).addTo(map).bindPopup('Restaurant universitaire ESIEE'),
+
+    copernic    = L.marker([48.83915815998255, 2.5865923016626855],
+  {alt: 'restaurant copernic'}).addTo(map).bindPopup('Restaurant universitaire Copernic'),
+
+    gustave    = L.marker([48.83782595966588, 2.587036191587554],
+  {alt: 'cafeteria gustave eiffel'}).addTo(map).bindPopup('Cafétéria IUT Gustave-Eiffel'),
+    golden    = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+
+
+
+</script>

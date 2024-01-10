@@ -13,10 +13,9 @@ include("connexion.php");
 
 if (isset($_POST['ajoutercours'])) {
     $cours = $_POST['cours'];
-    $coef = $_POST['coef'];
+    $coef = $_POST['coef'] = null;
     $login = $_SESSION["login"];
     $matierechoose = $_POST["matierechoisi"];
-    // $doc = $_POST["document"];
 
     $content_dir = 'documents/';
     $tmp_file = $_FILES['document']['tmp_name'];

@@ -1,1139 +1,273 @@
-*,
-*::before,
-*::after {
-  font-family: inherit;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800;900&display=swap');
+
+
+a {
+    text-decoration: none;
 }
+
 
 body {
-    background-color: #F5F6FB;
-    font-family: 'DM Sans', sans-serif;
-  
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    overflow-x: hidden;
 }
 
 
-
-.logo img{
-
-margin: 20px;
-
+.logo-0 img {
+    margin: 2rem 0 0 3rem;
+    height: 25px;
 }
 
-.logo img:nth-child(2) {
+.logo-0 img:nth-child(2),
+.logo-0 a:nth-child(2) {
     display: none;
 }
 
-.links-container{
 
-    margin-top: 20px;
+/* Page index.php */
+
+.main-1 {
+    background: linear-gradient(90deg, rgba(92, 45, 203, 1) 13%, rgba(94, 74, 250, 1) 100%);
+    min-height: 100vh;
+}
+
+
+.information_main {
+    padding: 3rem 4rem;
+    position: relative;
+    z-index: 2;
+}
+
+.information_main h1 {
+    font: 900 1.25rem "Inter", sans-serif;
+    padding-bottom: 1.5rem;
 
 }
- .links-container a {
-    color: aliceblue;
-    text-decoration: none;
+
+.information_main h2 {
+    font: 800 0.75rem "Inter", sans-serif;
+    padding-bottom: 1rem;
+}
+
+.information_main p {
+    font-size: 0.75rem;
+    padding-bottom: 1.5rem;
+}
+
+.links-container a {
     background-color: black;
-    padding: 8px;
-    margin-right: 20px;
+    font-weight: 300;
+    color: #ffffff;
+    padding: 10px 20px;
     border-radius: 25px;
     font-size: 0.7rem;
-    transition: background-color 0.3s ease; /* Smooth transition effect */
-
-
+    transition: background-color 0.3s ease;
 }
 
-
-.image1 img{
-    width: 250px;
-    right: 10px;
-    position: absolute;
-    bottom: 5%;
-    z-index: -1;
+.links-container a:hover {
+    background-color: rgba(0, 0, 0, 0.475);
 }
 
-
-.links-container a:hover{
-    background-color: #432290;
-}
-
-
-
-
-.main1{
-    background: rgb(92,45,203);
-    background: linear-gradient(90deg, rgba(92,45,203,1) 13%, rgba(94,74,250,1) 100%);
+.image1 img {
     width: 100%;
-    height: 100vh;
-    position: fixed;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
 }
-
-/* texte d'accueil */
-
-.information_main{
-    text-align: left;
-    color: aliceblue;
-    width: 300px;
-    margin: 20px;
-
-}
-
-.information_main h1{
-    font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    width: 250px;
-
-
-}
-.information_main h2{
-    font-family: 'DM Sans', sans-serif;
-        font-size: 0.9rem;
-        width: 200px;
-        margin-top: 20px;
-
-
-}
-
-
-
-.information_main p{
-    font-family: 'DM Sans', sans-serif;
-    width: 250px;
-    font-size: 0.8rem;
-    margin-top: 20px;
-
-}
-
-
 
 footer {
-    background-color: #000000;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.mentions-legales {
-    font-size: 0.8em;
-    margin-top: 10px;
-    cursor: pointer;
-    color: #fff;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-}
-
-/* media queries */
-
-@media screen and (min-width: 330px) {
-    .information_main{
-        text-align: left;
-        color: aliceblue;
-        width: 300px;
-        margin: 20px;
-    
-    }
-    
-    .information_main h1{
-        font-family: 'Inter', sans-serif;
-        font-size: 1.1rem;
-        width: 300px;
-    
-    
-    }
-    .information_main h2{
-        font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            width: 300px;
-            margin-top: 20px;
-    
-    
-    }
-       
-    
-    .information_main p{
-        font-family: 'DM Sans', sans-serif;
-        width: 300px;
-        font-size: 0.8rem;
-        margin-top: 20px;
-    
-}
-
-.image1 img{
-    width: 300px;
-    right: 30px;
-    position: absolute;
-    bottom: 5%;
-    z-index: -1;
-}
-
-.links-container{
-
-    margin-top: 20px;
-
-}
- .links-container a {
-    color: aliceblue;
-    text-decoration: none;
-    background-color: black;
-    padding: 8px;
-    margin-right: 20px;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease; /* Smooth transition effect */
-
-
-}
-
-.logo img:nth-child(2) {
-    display: none;
-}
-
-}
-
-
-@media screen and (min-width: 440px) {
-    .information_main{
-        text-align: left;
-        color: aliceblue;
-        margin: 20px;
-    
-    }
-    
-    .information_main h1{
-        font-family: 'Inter', sans-serif;
-        font-size: 2rem;
-        width: 500px;
-    
-    
-    }
-    .information_main h2{
-        font-family: 'DM Sans', sans-serif;
-            font-size: 1rem;
-            width: 450px;
-            margin-top: 20px;
-    
-    
-    }
-       
-    
-    .information_main p{
-        font-family: 'DM Sans', sans-serif;
-        width: 400px;
-        font-size: 1rem;
-        margin-top: 20px;
-    
-}
-
-.image1 img{
-    width: 300px;
-    right: 30px;
-    position: absolute;
-    bottom: 5%;
-    z-index: -1;
-}
-
-.links-container{
-
-    margin-top: 20px;
-
-}
- .links-container a {
-    color: aliceblue;
-    text-decoration: none;
-    background-color: black;
-    padding: 8px;
-    margin-right: 40px;
-    border-radius: 25px;
-    font-size: 1rem;
-    transition: background-color 0.3s ease; /* Smooth transition effect */
-
-
-}
-.logo img:nth-child(2) {
-    display: none;
-}
-}
-
-@media screen and (min-width: 740px) {
-
-    .image1 img {
-        width: 450px;
-       right: 30px;
-    position: absolute;
-    bottom: 5%;
-    z-index: -1;
-
-    }
-
-    .logo img:nth-child(2) {
-        display: none;
-    }
-}
-
-
-@media screen and (min-width: 1000px) {
-
-    .image1 img {
-     width: 550px;
-     right: 30px;
-     position: absolute;
-    bottom: 5%;
-    z-index: -1;
-    }
-
-    .logo img{
-        display: none;
-    }
-
-    .logo img:nth-child(2) {
-        display: block;
-    }
-}
-
-@media screen and (min-width: 1220px) {
-
-    .image1 img {
-        width: 550px;
-       right: 30px;
-       position: absolute;
-       bottom: 5%;
-       z-index: -1;
-       }
-
-
-    .information_main{
-        text-align: left;
-        color: aliceblue;
-        margin: 50px;
-    
-    }
-    
-    .information_main h1{
-        font-family: 'Inter', sans-serif;
-        font-size: 2.5rem;
-        width: 600px;
-    
-    
-    }
-    .information_main h2{
-        font-family: 'DM Sans', sans-serif;
-            font-size: 1.5rem;
-            width: 550px;
-            margin-top: 20px;
-    
-    
-    }
-       
-    
-    .information_main p{
-        font-family: 'DM Sans', sans-serif;
-        width: 550px;
-        font-size: 1.2rem;
-        margin-top: 30px;
-    
-}
-
-.links-container{
-    width: 550px;
-    margin-top: 35px;
-
-}
- .links-container a {
-    color: aliceblue;
-    text-decoration: none;
-    background-color: black;
-    padding: 8px;
-    margin-right: 40px;
-    border-radius: 25px;
-    font-size: 1.2rem;
-    transition: background-color 0.3s ease; /* Smooth transition effect */
-
-
-}
-
+    margin-top: 0 !important;
 }
 
 
 
-@media screen and (min-width: 1400px) {
-   
-    .image1 img {
-        width: 600px;
-        right: 30px;
-        position: absolute;
-       bottom: 5%;
-       z-index: -1;
-       }
-   
+/* Page connexion.php */
 
-       .information_main{
-        text-align: left;
-        color: aliceblue;
-        margin: 60px;
-    
-    }
-    
-    .information_main h1{
-        font-family: 'Inter', sans-serif;
-        font-size: 2.5rem;
-        width: 700px;
-    
-    
-    }
-    .information_main h2{
-        font-family: 'DM Sans', sans-serif;
-            font-size: 1.5rem;
-            width: 650px;
-            margin-top: 40px;
-    
-    
-    }
-       
-    
-    .information_main p{
-        font-family: 'DM Sans', sans-serif;
-        width: 650px;
-        font-size: 1.2rem;
-        margin-top: 40px;
-    
-}
-
-}
-
-
-/* page connexion et inscription */
-
-
-.mail_message{
-    padding: 20px;
-    width: 300px;
-    background-color: white;
-    border-radius: 20px;
-}
-
-.mail_message{
-    text-align: center;
-}
-.main{
+.main-2 {
     background-color: #F5F6FB;
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-
+    min-height: 100vh;
+    color: black;
 }
 
 form {
     background-color: #fff;
-    padding: 20px;
-    height: 500px;
-    width: 300px;
-    margin-left:5px;
-    border-radius: 30px;
+    padding: 2.5rem;
+    height: 460px;
+    width: 50vw;
+    margin: 2rem auto;
+    border-radius: 20px;
 
 }
 
-
-.formulaire h1 {
-    text-align: center;
-    color: #000000;
+form h1 {
+    font-size: 1.25rem;
 }
 
-.formulaire a {
-    text-decoration: none;
-    color:#604CF9 ;
+.image2 {
+    position: relative;
+    bottom: 75px;
+    width: 260px;
+    left: 3rem;
 }
 
-
-label {
-    display: block;
-    margin-bottom:0.2rem;
-    color: #000000;
+form a {
+    color: #604CF9;
 }
 
 input {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 1rem;
-    box-sizing: border-box;
-    border: 1px solid #c9bfbf;
     border-radius: 9px;
-    font-size: 1.2rem;
-    
+    margin-bottom: 2rem;
 }
 
-.choix{
-    margin: 0.3rem;
-}
-
-.radio{
-    margin: 0.4rem;
-}
-
-.bouton a {
+.bouton1 input {
+    cursor: pointer;
     background-color: #604CF9;
+    border: 1px solid transparent;
     color: #fff;
-    padding: 10px 90px;
-    border-radius: 9px;
-    width: 100%;
-    /* margin-top: 30px; */
+    padding: 0.938rem;
     font-size: 1.2rem;
+    width: 100%;
+    transition: background-color 0.3s ease;;
 }
 
-.bouton1 a {
+.bouton1 input:hover {
+    background-color: #000000;
+}
+
+.bouton1 input {
     background-color: #604CF9;
+    border: 1px solid transparent;
     color: #fff;
-    padding: 10px 70px;
-    width: 100%;
-    text-align: center;
-    border-radius: 9px;
+    padding: 0.938rem;
     font-size: 1.2rem;
-    text-decoration: none; 
-    display: inline-block; 
+    width: 100%;
 }
 
-.bouton1 a:hover {
-    background-color: aliceblue;
-    border: 1px solid #604CF9; 
-    color: #604CF9;
-}
-
-
-.bouton a:hover {
-    background-color: aliceblue;
-    border:1px solid #604CF9;
-    color: #604CF9;
-    
-}
-
-span {
-    display: block;
-    text-align: center;
+.bouton2 {
+    border: 1px solid #292929;
+    padding: 0.938rem 0 0.938rem 0.938rem;
     margin-top: 10px;
-    text-decoration: none;
-    color: #000000;
-    font-size: 1rem;
-}
-
-
-
-.image2 img{
-    position: absolute;
-    width: 120px;
-    bottom: 7%;
-    left:-20px;
-  
-}
-
-.image3 img{
-    width: 200px;
-    bottom: 10%;
-    left:-20px;
-    position: absolute;
+    width: 90%;
 
 }
 
 
-@media screen and (min-width: 420px) {
-    form {
-        background-color: #fff;
-        padding: 20px;
-        height: 500px;
-        width: 400px;
-        margin-left:50px;
-        border-radius: 30px;
-    
-    }
-    
-    .mail_message{
-        padding: 20px;
-        width: 400px;
-        background-color: white;
-        border-radius: 20px;
+@media screen and (min-width: 425px) {
+
+    .information_main {
+        padding: 3rem 6rem;
     }
 
-    
+    .bouton2 {
+        width: 95%;
 
-    .formulaire h1 {
-        text-align: center;
-        color: #000000;
     }
-    
-    .formulaire a {
-        text-decoration: none;
-        color:#604CF9 ;
-    }
-    
-    
-    label {
-        display: block;
-        margin-bottom:0.2rem;
-        color: #000000;
-    }
-    
-    input {
-        width: 100%;
-        padding: 5px;
-        margin-bottom: 1rem;
-        box-sizing: border-box;
-        border: 1px solid #c9bfbf;
-        color: a;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        
-    }
-    .bouton a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 140px;
-        border-radius: 9px;
-        width: 100%;
-        font-size: 1.2rem;
-    }
-    
-    .bouton1 a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 70px;
-    width: 100%;
-    text-align: center;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        text-decoration: none; 
-        display: inline-block; 
-    }
-    
-    .bouton1 a:hover {
-        background-color: aliceblue;
-        border: 1px solid #604CF9; 
-        color: #604CF9;
-    }
-    
+
 }
 
-@media screen and (min-width: 700px) {
-    form {
-        background-color: #fff;
-        padding: 20px;
-        height: 500px;
-        width: 400px;
-        margin-left:150px;
-        border-radius: 30px;
-    
-    }
+@media screen and (min-width: 500px) {
 
-    .mail_message{
-
-        width: 500px;
-        height: 100vh;
+    .image1 img {
+        width: 60%;
+        float: right;
         position: absolute;
         right: 0;
-        background-color: white;
-        padding: 20px;
-        border-radius: 0px;
-        top: 0;
     }
-    
-    
-    .formulaire h1 {
-        text-align: center;
-        color: #000000;
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .image1 img {
+        width: 50%;
     }
-    
-    .formulaire a {
-        text-decoration: none;
-        color:#604CF9 ;
+
+    .information_main h1 {
+        font: 900 2rem "Inter", sans-serif;
+
     }
-    
-    
-    label {
+
+    .information_main h2 {
+        font: 800 1.25rem "Inter", sans-serif;
+        letter-spacing: 0.3px;
+        width: 60vw;
+    }
+
+    .information_main p {
+        font-size: 1rem;
+        font-weight: 300;
+        width: 60vw;
+        letter-spacing: 1px;
+    }
+
+    .image2 {
+        bottom: 99px;
+        left: 9rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    .information_main {
+        padding: 9rem 7rem;
+    }
+
+    .logo-0 img:first-child {
+        display: none;
+    }
+
+    .logo-0 img:nth-child(2) {
         display: block;
-        margin-bottom:0.2rem;
-        color: #000000;
+        margin: 0;
+        padding: 3rem 0 0 5rem;
     }
-    
-    input {
-        width: 100%;
-        padding: 5px;
-        margin-bottom: 1rem;
-        box-sizing: border-box;
-        border: 1px solid #c9bfbf;
-        color: a;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        
+
+    .image1 img {
+        width: 500px;
+        right: 2rem;
     }
-    .bouton a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 140px;
-        border-radius: 9px;
-        width: 100%;
-        /* margin-top: 30px; */
-        font-size: 1.2rem;
+
+    .information_main h2,
+    .information_main p {
+        width: 45vw;
+    }
+
+    .formulaire {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+    }
+
+    form,
+    .image2 {
+        width: 45vw;
+        min-height: 90vh;
+    }
+
+    form {
+        background-color: #fff;
+        padding: 8rem 3rem 0rem 3rem;
+        margin: 0;
+        border-radius: 0;
+        position: relative;
+        z-index: 2;
+
+    }
+
+    form h1 {
+        font-size: 2rem;
+    }
+
+    .bouton2 {
+        height: 2rem;
     }
 
     .image2 img{
+        width: 20vw;
         position: absolute;
-        width: 220px;
-        bottom: 7%;
-        left:-20px;
-      
-    }
-    
-    .image3 img{
-        width: 200px;
-        bottom: 10%;
-        left:-20px;
-        position: absolute;
-    
-
-    }
-    
-    .bouton1 a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 70px;
-    width: 100%;
-    text-align: center;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        text-decoration: none; 
-        display: inline-block; 
-    }
-    
-    .bouton1 a:hover {
-        background-color: aliceblue;
-        border: 1px solid #604CF9; 
-        color: #604CF9;
-    }
-    
-}
-
-
-@media screen and (min-width: 900px) {
-    form {
-        background-color: #fff;
-        padding: 20px;
-        height: 500px;
-        width: 400px;
-        margin-left:350px;
-        border-radius: 30px;
-    
+        bottom: 0;
+        z-index: 1;
     }
 
-    .mail_message{
 
-        width: 500px;
-        height: 100vh;
-        position: absolute;
-        right: 0;
-        background-color: white;
-        padding: 20px;
-        border-radius: 0px;
-        top: 0;
-    }
-    
-    
-    .formulaire h1 {
-        text-align: center;
-        color: #000000;
-    }
-    
-    .formulaire a {
-        text-decoration: none;
-        color:#604CF9 ;
-    }
-    
-    
-    label {
-        display: block;
-        margin-bottom:0.2rem;
-        color: #000000;
-    }
-    
-    input {
-        width: 100%;
-        padding: 5px;
-        margin-bottom: 1rem;
-        box-sizing: border-box;
-        border: 1px solid #c9bfbf;
-        color: a;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        
-    }
-    .bouton a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 140px;
-        border-radius: 9px;
-        width: 100%;
-        /* margin-top: 30px; */
-        font-size: 1.2rem;
-    }
-
-    .image2 img{
-        position: absolute;
-        width: 320px;
-        bottom: 7%;
-        left:-20px;
-      
-    }
-    
-    .image3 img{
-        width: 200px;
-        bottom: 10%;
-        left:-20px;
-        position: absolute;
-    
-    }
-
-    .bouton1 a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 70px;
-    width: 100%;
-    text-align: center;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        text-decoration: none; 
-        display: inline-block; 
-    }
-    
-    .bouton1 a:hover {
-        background-color: aliceblue;
-        border: 1px solid #604CF9; 
-        color: #604CF9;
-    }
-    
-    
-}
-
-@media screen and (min-width: 1000px) {
-    form {
-        background-color: #fff;
-        padding: 20px;
-        height: 100vh;
-        width: 400px;
-        margin-right:10px;
-        border-radius: 0px;
-        position: absolute;
-        right: 0;
-        top: 0;
-    
-    }
-    
-    .mail_message{
-
-        width: 500px;
-        height: 100vh;
-        position: absolute;
-        right: 0;
-        background-color: white;
-        padding: 20px;
-        border-radius: 0px;
-        top: 0;
-    }
-    
-    .formulaire h1 {
-        text-align: center;
-        color: #000000;
-    }
-    
-    .formulaire a {
-        text-decoration: none;
-        color:#604CF9 ;
-    }
-    
-    
-    label {
-        display: block;
-        margin-bottom:0.2rem;
-        color: #000000;
-    }
-    
-    input {
-        width: 100%;
-        padding: 5px;
-        margin-bottom: 3rem;
-        box-sizing: border-box;
-        border: 1px solid #c9bfbf;
-        color: a;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        
-    }
-    .bouton a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 140px;
-        border-radius: 9px;
-        width: 100%;
-        /* margin-top: 30px; */
-        font-size: 1.2rem;
-    }
-
-    .image2 img{
-        position: absolute;
-        width: 320px;
-        bottom: 10%;
-        left:90px;
-      
-    }
-    
-    .image3 img{
-        width: 300px;
-        bottom: 10%;
-        left:90px;
-        position: absolute;
-    
-    }
-
-    .bouton1 a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 70px;
-    width: 100%;
-    text-align: center;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        text-decoration: none; 
-        display: inline-block; 
-    }
-    
-    .bouton1 a:hover {
-        background-color: aliceblue;
-        border: 1px solid #604CF9; 
-        color: #604CF9;
-    }
-    
-    
-}
-
-
-@media screen and (min-width: 1200px) {
-    form {
-        background-color: #fff;
-        padding: 20px;
-        height: 100vh;
-        width: 400px;
-        margin-right:10px;
-        border-radius: 0px;
-        position: absolute;
-        right: 0;
-        top: 0;
-    
-    }
-
-    .mail_message{
-
-        width: 500px;
-        height: 100vh;
-        position: absolute;
-        right: 0;
-        background-color: white;
-        padding: 20px;
-        border-radius: 0px;
-        top: 0;
-    }
-    
-    
-    .formulaire h1 {
-        text-align: center;
-        color: #000000;
-    }
-    
-    .formulaire a {
-        text-decoration: none;
-        color:#604CF9 ;
-    }
-    
-    
-    label {
-        display: block;
-        margin-bottom:0.2rem;
-        color: #000000;
-    }
-    
-    input {
-        width: 100%;
-        padding: 5px;
-        margin-bottom: 3rem;
-        box-sizing: border-box;
-        border: 1px solid #c9bfbf;
-        color: a;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        
-    }
-    .bouton a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 140px;
-        border-radius: 9px;
-        width: 100%;
-        /* margin-top: 30px; */
-        font-size: 1.2rem;
-    }
-
-    .image2 img{
-        position: absolute;
-        width: 400px;
-        bottom: 10%;
-        left:150px;
-      
-    }
-    
-    .image3 img{
-        width: 400px;
-        bottom: 10%;
-        left:150px;
-        position: absolute;
-    
-    }
-
-    .bouton1 a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 70px;
-    width: 100%;
-    text-align: center;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        text-decoration: none; 
-        display: inline-block; 
-    }
-    
-    .bouton1 a:hover {
-        background-color: aliceblue;
-        border: 1px solid #604CF9; 
-        color: #604CF9;
-    }
-    
-    
-}
-
-@media screen and (min-width: 1400px) {
-    form {
-        background-color: #fff;
-        padding: 20px;
-        height: 100vh;
-        width: 400px;
-        margin-right:10px;
-        border-radius: 0px;
-        position: absolute;
-        right: 0;
-        top: 0;
-    
-    }
-
-    .mail_message{
-
-        width: 500px;
-        height: 100vh;
-        position: absolute;
-        right: 0;
-        background-color: white;
-        padding: 20px;
-        border-radius: 0px;
-        top: 0;
-    }
-    
-    
-    .formulaire h1 {
-        text-align: center;
-        color: #000000;
-    }
-    
-    .formulaire a {
-        text-decoration: none;
-        color:#604CF9 ;
-    }
-    
-    
-    label {
-        display: block;
-        margin-bottom:0.2rem;
-        color: #000000;
-    }
-    
-    input {
-        width: 100%;
-        padding: 5px;
-        margin-bottom: 3rem;
-        box-sizing: border-box;
-        border: 1px solid #c9bfbf;
-        color: a;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        
-    }
-    .bouton a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 140px;
-        border-radius: 9px;
-        width: 100%;
-        /* margin-top: 30px; */
-        font-size: 1.2rem;
-    }
-
-    .image2 img{
-        position: absolute;
-        width: 400px;
-        bottom: 10%;
-        left:200px;
-      
-    }
-    
-    .image3 img{
-        width: 400px;
-        bottom: 10%;
-        left:200px;
-        position: absolute;
-    
-    }
-    .bouton1 a {
-        background-color: #604CF9;
-        color: #fff;
-        padding: 10px 70px;
-    width: 100%;
-    text-align: center;
-        border-radius: 9px;
-        font-size: 1.2rem;
-        text-decoration: none; 
-        display: inline-block; 
-    }
-    
-    .bouton1 a:hover {
-        background-color: aliceblue;
-        border: 1px solid #604CF9; 
-        color: #604CF9;
-    }
-    
 }
