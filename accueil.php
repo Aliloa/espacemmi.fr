@@ -10,7 +10,6 @@
     <link rel='stylesheet' href='css/style_accueil.css'>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel='stylesheet' href='css/dark_mode.css'>
 </head>
 
