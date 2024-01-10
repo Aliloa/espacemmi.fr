@@ -228,9 +228,10 @@
         </div>
 
         <?php
-        $requete = "SELECT abscence_retard.*, cours.cours AS nom_cours FROM abscence_retard
-            INNER JOIN cours ON abscence_retard.cours = cours.id_cours
-            ORDER BY id_abs DESC";
+      $requete = "SELECT abscence_retard.id_abs, abscence_retard.titre, abscence_retard.date, abscence_retard.nombre, cours.cours
+      FROM abscence_retard, cours
+      WHERE abscence_retard.cours = cours.id_cours
+      ORDER BY abscence_retard.id_abs DESC";
 
         $stmt = $db->query($requete);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -249,7 +250,7 @@
                     </div>
                     <div class="cours_classe">
                         <h3>
-                            <?php echo $result['nom_cours']; ?>
+                            <?php echo $result['cours']; ?>
                         </h3>
                         <h3>
                             <?php echo "Le " . $result['date']; ?>
