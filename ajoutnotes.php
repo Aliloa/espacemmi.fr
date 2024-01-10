@@ -34,7 +34,11 @@
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($result as $cours) {
-                    echo "<option value='{$cours['id_cours']}'>{$cours['cours']}</option>";
+                    if ($cours['id_cours'] == $_GET['courschoisi']) {
+                        $selected = 'selected';
+                    } else {
+                        $selected = '';
+                    }                    echo "<option value='{$cours['id_cours']}' $selected>{$cours['cours']}</option>";
                 }
             }
             ?>
@@ -61,6 +65,8 @@
             if (isset($_GET['choixcours'])) {
                 $chosencours = $_GET['courschoisi'];
                 $_SESSION['chosencours'] = $chosencours;
+                $_SESSION['id_cours'] = $matiere['id_cours'];
+
 
                 $requete = 'SELECT * FROM grossematiere, cours WHERE grossematiere.id_matiere = cours.ext_matiere AND grossematiere.prof_ext = :idProfesseur AND cours.id_cours = :idCours';
 
@@ -73,9 +79,9 @@
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($result as $matiere) {
-                    // $_SESSION['id_matiere'] = $matiere['id_matiere'];
-                    $_SESSION['coef_cours'] = $matiere['coef'];
-                    $_SESSION['coef_matiere'] = $matiere['coefficient'];
+                    $_SESSION['id_matiere'] = $matiere['id_matiere'];
+                    // $_SESSION['coef_cours'] = $matiere['coef'];
+                    // $_SESSION['coef_matiere'] = $matiere['coefficient'];
                     echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
                 }
             }
@@ -89,7 +95,7 @@
         <input type="text" name='note_name' id="name" required>
 
         <label for="note">La note attribué</label>
-        <input type="number" name='notedonnee' id="note" min="0" max="20" required>
+        <input type="number" name='notedonnee' id="note" step="0.01" required>
 
 
         <h1>Choisissez l'élève à qui vous attribuez la note</h1>
