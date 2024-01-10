@@ -228,16 +228,17 @@
         </div>
 
         <?php
+
         $requete = "SELECT abscence_retard.id_abs, abscence_retard.titre, abscence_retard.date, abscence_retard.nombre, cours.cours
             FROM abscence_retard, cours
-            WHERE abscence_retard.cours = cours.id_cours
+            WHERE abscence_retard.ext_cours = cours.id_cours
             ORDER BY abscence_retard.id_abs DESC";
 
         $stmt = $db->query($requete);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
-
+        
         <div class='bloc-3a'>
             <div class="bouton">
                 <h1>Absences et retards</h1>
