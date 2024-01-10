@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 09 jan. 2024 à 17:04
+-- Généré le : mer. 10 jan. 2024 à 16:32
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -33,9 +33,7 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
   `titre` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `nombre` time NOT NULL,
-  `ext_cours` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `prof` int NOT NULL,
-  `justificatif` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `cours` varchar(255) NOT NULL,
   PRIMARY KEY (`id_abs`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -43,9 +41,9 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
 -- Déchargement des données de la table `abscence_retard`
 --
 
-INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `ext_cours`, `prof`, `justificatif`) VALUES
-(1, 'absence', '2023-12-13', '02:00:00', '2', 0, ''),
-(2, 'absence', '2024-01-07', '02:00:00', '3', 0, '');
+INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `cours`) VALUES
+(1, 'absence', '2023-12-13', '02:00:00', ''),
+(2, 'absence', '2024-01-07', '02:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -87,18 +85,18 @@ CREATE TABLE IF NOT EXISTS `cours` (
   `coef` int DEFAULT NULL,
   `ext_matiere` int NOT NULL,
   PRIMARY KEY (`id_cours`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cours`
 --
 
 INSERT INTO `cours` (`id_cours`, `cours`, `document`, `externe_prof`, `coef`, `ext_matiere`) VALUES
-(14, 'TP mini projet', 'TP miniblog_S3_2023.pdf', 22, NULL, 9),
-(12, 'Marketing POST 8890', 'post-5345-Principe de marketing(1).pptx', 23, NULL, 7),
+(14, 'TP mini projet', 'TP miniblog_S3_2023.pdf', 22, 3, 9),
+(12, 'Marketing POST 8890', 'post-5345-Principe de marketing.pptx', 23, 2, 7),
 (13, 'Consigne production sonore', 'SAE_3.02_-_Les_sons_de_lhorrifique_en_BD__de_lillustration_de_roman.pdf', 24, NULL, 8),
-(11, 'Display Grid', 'TP2-grid.zip', 21, 0, 6),
-(15, 'Protocole SAE 3.02', 'SAÉ 301 V1_2023-1.pdf', 22, NULL, 9);
+(11, 'Display Grid', 'TP2-grid.zip', 21, NULL, 6),
+(15, 'Protocole SAE 3.02', 'SAÉ 301 V1_2023.pdf', 22, 4, 15);
 
 -- --------------------------------------------------------
 
@@ -135,28 +133,6 @@ INSERT INTO `crous` (`id`, `entre`, `plat`, `dessert`, `date`, `image_plat`, `li
 -- --------------------------------------------------------
 
 --
--- Structure de la table `forum`
---
-
-DROP TABLE IF EXISTS `forum`;
-CREATE TABLE IF NOT EXISTS `forum` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(50) NOT NULL,
-  `commentaire` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `forum`
---
-
-INSERT INTO `forum` (`id`, `login`, `commentaire`) VALUES
-(1, 'kelis', 'pitié qu\'on en finisse de cet ent maudit'),
-(2, 'user_broken', 'comment vesqui un devoir coeff 10 svp ?');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `grossematiere`
 --
 
@@ -166,23 +142,21 @@ CREATE TABLE IF NOT EXISTS `grossematiere` (
   `nom_mat` text NOT NULL,
   `coefficient` int NOT NULL,
   `illustration` text NOT NULL,
+  `type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `prof_ext` int NOT NULL,
   PRIMARY KEY (`id_matiere`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `grossematiere`
 --
 
-INSERT INTO `grossematiere` (`id_matiere`, `nom_mat`, `coefficient`, `illustration`, `prof_ext`) VALUES
-(2, 'Hébergement', 5, 'matiere_m.berthet.png', 20),
-(3, 'superjoie', 4, 'matiere_m.berthet.png', 20),
-(4, 'franchement', 20, 'matiere_m.berthetfranchement.png', 20),
-(5, 'omggg', 4, 'matiere_m.berthet_omggg.png', 20),
-(6, 'Intégration web', 3, 'matiere_c.gaelle_Intégration web.png', 21),
-(7, 'Marketing', 3, 'matiere_j.leyla_Marketing.png', 23),
-(8, 'Sound design', 1, 'matiere_h.tony_Sound design.png', 24),
-(9, 'Développement back', 3, 'matiere_e.renaud_Dev back.png', 22);
+INSERT INTO `grossematiere` (`id_matiere`, `nom_mat`, `coefficient`, `illustration`, `type`, `prof_ext`) VALUES
+(15, 'Sae 303 Dataviz', 3, 'matiere_e.renaud_Sae 303 Dataviz.png', 'SAE', 22),
+(6, 'Intégration web', 3, 'matiere_c.gaelle_Intégration web.png', 'Ressources', 21),
+(7, 'Marketing', 3, 'matiere_j.leyla_Marketing.png', 'Ressources', 23),
+(8, 'Sound design', 1, 'matiere_h.tony_Sound design.png', 'Ressources', 24),
+(9, 'Développement back', 2, 'matiere_e.renaud_Développement back.png', 'Ressources', 22);
 
 -- --------------------------------------------------------
 
@@ -192,30 +166,29 @@ INSERT INTO `grossematiere` (`id_matiere`, `nom_mat`, `coefficient`, `illustrati
 
 DROP TABLE IF EXISTS `notes`;
 CREATE TABLE IF NOT EXISTS `notes` (
-  `notes` varchar(255) NOT NULL,
+  `notes` float NOT NULL,
   `id_note` int NOT NULL AUTO_INCREMENT,
-  `matiere` varchar(255) NOT NULL,
-  `module` varchar(800) NOT NULL,
-  `professeur` varchar(255) NOT NULL,
+  `nom_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ext_module` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `ext_prof` int NOT NULL,
+  `ext_cours` int NOT NULL,
+  `ext_eleve` int NOT NULL,
+  `coef_cours` int NOT NULL,
+  `coef_matiere` int NOT NULL,
   PRIMARY KEY (`id_note`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `notes`
 --
 
-INSERT INTO `notes` (`notes`, `id_note`, `matiere`, `module`, `professeur`, `ext_prof`) VALUES
-('18', 1, 'Anglais', '', 'Alexandre Leroy', 0),
-('12', 2, 'Représentation et Traitement de l\'information', '', 'Florence Bister', 0),
-('9', 3, 'Gestion de projet', '', '', 0),
-('10', 4, 'Ux design', '', '', 0),
-('20', 5, 'Communication et rhétorique', '', '', 0),
-('14', 6, 'Marketing', '', '', 0),
-('12', 7, 'Intégration web', '', '', 0),
-('8', 8, 'Développement web back', '', '', 0),
-('17', 9, 'Anglais web', '', '', 0),
-('8', 10, 'Droit', '', '', 0);
+INSERT INTO `notes` (`notes`, `id_note`, `nom_note`, `ext_module`, `ext_prof`, `ext_cours`, `ext_eleve`, `coef_cours`, `coef_matiere`) VALUES
+(18, 21, 'Contrôle', '15', 22, 15, 16, 4, 3),
+(18, 22, 'Oral usability', '15', 22, 15, 13, 15, 15),
+(18, 12, 'TPTEST', '15', 22, 14, 0, 0, 0),
+(17, 14, '1amphi', '7', 23, 12, 0, 0, 0),
+(14, 17, 'Contrôle amphi', '7', 23, 12, 16, 2, 3),
+(5, 18, 'un oral', '7', 23, 12, 18, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -276,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 INSERT INTO `utilisateurs` (`login`, `nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
 ('Anchu', 'Fatimarajan', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'titititi'),
 ('Alilo', 'Zhyla', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'Membre du CROUS', 'alina@gmail.com', NULL, NULL),
-('kelis', 'Oshoffa', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'mmi2', NULL),
+('kelis', 'Oshoffa', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'MMI2', NULL),
 ('c.gaelle', 'Charpentier', 'Gaëlle', 21, '$2y$10$cF.Hon4PfAh9z6oLQvL0F.B11NA57.974N2yVdZEJEJQfa9.SX9N6', 'default.png', 'Enseignant.e', 'gaelle.charpentier@univ-eiffel.fr', NULL, NULL),
 ('Admin', 'Admin', 'Admin', 17, '$2y$10$PwueylyOGxe1/ma1GyfN4OdjAC65xPB247Fr1p6ztobzzyxQJb9LK', 'default.png', 'Enseignant.e', 'fatimarajananchana@gmail.com', NULL, NULL),
 ('c.loana', 'Chalach', 'Loana', 18, '$2y$10$2BHq1NZWGm9gkS8IXxQ40e5wE6C8BHSAAAocvZkSzk7NXyo2AAGA.', 'default.png', 'Étudiant.e', 'loana@gmail.com', 'MMI2', NULL),

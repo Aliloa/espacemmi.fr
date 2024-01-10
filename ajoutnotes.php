@@ -95,7 +95,7 @@
         <input type="text" name='note_name' id="name" required>
 
         <label for="note">La note attribué</label>
-        <input type="number" name='notedonnee' id="note" step="0.01" required>
+        <input type="number" name='notedonnee' id="note" min="0" step="0.01" required>
 
 
         <h1>Choisissez l'élève à qui vous attribuez la note</h1>

@@ -21,18 +21,17 @@ if (isset($_POST['ajoutnote'])) {
     $chosencours = $_SESSION['chosencours'];
     $chosenmatiere = $_SESSION['id_matiere'];
 
-    // Récupérer les IDs réels de cours et grossematiere
-    $requeteIDs = 'SELECT id_cours, ext_matiere FROM cours WHERE id_cours = :idCours';
-    $stmtIDs = $db->prepare($requeteIDs);
+    $requeteid = 'SELECT id_cours, ext_matiere FROM cours WHERE id_cours = :idCours';
+    $stmtIDs = $db->prepare($requeteid);
     $stmtIDs->bindValue(':idCours', $chosencours, PDO::PARAM_INT);
     $stmtIDs->execute();
     $resultIDs = $stmtIDs->fetch(PDO::FETCH_ASSOC);
 
     $idCours = $resultIDs['id_cours'];
-    $idMatiere = $chosenmatiere; // Utilisation de l'ID de matière récupérée
+    $idMatiere = $chosenmatiere;
 
-    $requete = "INSERT INTO notes (notes, nom_note, ext_module, ext_prof, ext_cours, ext_eleve, coef_cours, coef_matiere) 
-                VALUES (:note, :titre, :module, :externe_prof, :cours, :eleve, :coef_cours, :coef_matiere)";
+    $requete = "INSERT INTO notes (notes, nom_note, ext_module, ext_prof, ext_cours, ext_eleve, coef_cours, coef_matiere, date_note) 
+    VALUES (:note, :titre, :module, :externe_prof, :cours, :eleve, :coef_cours, :coef_matiere, NOW())";
 
     $stmt = $db->prepare($requete);
     $stmt->bindValue(":note", $note, PDO::PARAM_INT);
