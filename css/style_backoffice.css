@@ -1,0 +1,95 @@
+.contain-back{
+    min-height: 70vh;
+}
+
+.h1{
+    padding-left: 4rem;
+}
+
+.ajouter{
+    background-color: white;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    margin: 2rem;
+    padding: 2rem;
+    border-radius: 28px;
+}
+
+.ajouter-1{
+    width: 60vw;
+    margin: auto;
+    background-color: white;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 28px;
+}
+
+.ajouter a{
+    display: block;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    
+}
+
+.reinst{
+  padding: 0 !important;
+  border: none !important;
+}
+
+.ajouter a:hover{
+    opacity: 0.5;
+}
+
+.ajouter a:last-child{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 1px var(--bg);
+}
+
+
+.ajouter input, .ajouter select{
+   margin: 0.5rem 0 1rem 0;
+   padding: 0.5rem;
+   background-color: var(--bg);
+   border: transparent;
+   border-radius: 10px;
+}
+
+.ajouter button, input[type="submit"]{
+    cursor: pointer;
+    background-color: var(--purple);
+    border: transparent;
+    border-radius: 15px;
+    padding: 0.75rem 1rem;
+    color: var(--main);
+    transition: background-color 0.3s ease;
+}
+
+.ajouter button:hover, input[type="submit"]:hover{
+    background-color: #000000;
+}
+
+input[type="file"]{
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0px;
+}
+
+form p {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px){
+
+.bloc-1 img {
+    position: absolute;
+    top: 110px;
+    height: 181px;
+    right: 59px;
+}
+
+.bloc-1{
+    margin: 2rem !important;
+}
+}
