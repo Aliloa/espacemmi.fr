@@ -62,6 +62,7 @@ if ($stmt->rowCount()) {
 }  else{
     header('Location:connexion_page.php?erreur=user_not_found');
     exit();
+
 }
 ?>
 

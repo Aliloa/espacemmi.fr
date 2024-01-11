@@ -198,6 +198,7 @@
                 <a href='newmessage.php?id_mess={$message["id_message"]}'>
                 Lire le contenu</a>
 
+                <p> Contenu : {$message["contenu_mss"]} </p> 
                  
             </div> <br><br>
           </div>";
