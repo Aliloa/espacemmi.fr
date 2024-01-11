@@ -18,7 +18,8 @@
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
-    } if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e'){
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
         header('Location: backofficeprof.php?access_denied');
 
 
@@ -146,11 +147,15 @@
                     <div class='tools'>
                         <div class='tool'>
                             <img class="param" src='img/1-param.png' alt=''>
-                            <a href='profil.php'><p>Profil</p></a>
+                            <a href='profil.php'>
+                                <p>Profil</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <img class="lettre" src='img/1-lettre.svg' alt=''>
-                            <a href='messagerie.php'><p>Messagerie</p></a>
+                            <a href='messagerie.php'>
+                                <p>Messagerie</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
@@ -497,69 +502,65 @@
                 <?php
                 // seconde requete pour avoir seulement l'élement de la bdd de la date qui se rapproche de ajoudhui
                 $dateAujourdhui = date("Y-m-d");
-        $requeteDernier = "SELECT * FROM crous WHERE date >= :aujourdhui AND lieu = 'ESIEE' ORDER BY date ASC LIMIT 1";
-        $stmtDernier = $db->prepare($requeteDernier);
-        $stmtDernier->bindParam(':aujourdhui', $dateAujourdhui, PDO::PARAM_STR);
-        $stmtDernier->execute();
-        $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
-
-        // Traduire les jours de la semaine
-        $dayNames = [
-            'Monday' => 'Lundi',
-            'Tuesday' => 'Mardi',
-            'Wednesday' => 'Mercredi',
-            'Thursday' => 'Jeudi',
-            'Friday' => 'Vendredi',
-            'Saturday' => 'Samedi',
-            'Sunday' => 'Dimanche',
-        ];
-
-        $date_dernier = new DateTime($dernierElement['date'], new DateTimeZone('Europe/Paris'));
-        $jour_anglais_d = $date_dernier->format('l');
-        $nom_jour_dernier = $dayNames[$jour_anglais_d];
+                $requeteDernier = "SELECT * FROM crous WHERE date >= :aujourdhui AND lieu = 'ESIEE' ORDER BY date ASC LIMIT 1";
+                $stmtDernier = $db->prepare($requeteDernier);
+                $stmtDernier->bindParam(':aujourdhui', $dateAujourdhui, PDO::PARAM_STR);
+                $stmtDernier->execute();
+                $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
                 ?>
+
                 <div class='menu_autre'>
+                    <div>
+                        <h1>Menu du jour
+                        </h1>
+                    </div>
+                    <div class='card shadow'>
                         <div>
-                        <h1>Menu du <?php echo $nom_jour_dernier . " " . date('d/m', strtotime($dernierElement['date'])); ?> (ESIEE) </h1>
-                        </div>
-                        <div class='card shadow'>
-                        <div>
-                        <img src="<?php echo $dernierElement['image_plat']; ?>" alt='' class='card-img-top'>
-                        <h3 class='entre'>Plat</h3>
-                        <p> <?php
+                            <img src="<?php echo $dernierElement['image_plat']; ?>" alt='' class='card-img-top'>
+                            <h3 class='entre'>Plat</h3>
+                            <p>
+                                <?php
                                 $dernierElement['plat'] = str_replace(', ', '<br>', $dernierElement['plat']);
                                 echo $dernierElement['plat'];
                                 ?> <br>
-                        ...
-                        </p>
-                        <button class='btn voir_plus' id=' <?php echo $dernierElement['id'] ?>'>voir plus</button>
-                        </div>
+                                ...
+                            </p>
+                            <button class='btn voir_plus' id=' <?php echo $dernierElement['id'] ?>'>voir plus</button>
                         </div>
                     </div>
+                </div>
             </div>
 
             <!-- POP UP MENU SU JOUR -->
             <section class='bon_pop_up pop_up today' id='<?php echo $dernierElement['id'] ?>'>
-                        <h2 class='m-0 date'> <?php echo date('d/m', strtotime($dernierElement['date'])); ?></h2>
-                        <div class='card'>
-                            <div>
-                                <img src='<?php echo $dernierElement['image_plat']; ?>' alt='' class='card-img-top'>
-                                <h3 class='fw-bold entre'>Entrée</h3>
-                                <p><?php echo str_replace(', ', '<br>', $dernierElement['entre']); ?></p>
-                            </div>
-                            <hr class='border border-3'>
-                            <div>
-                                <h3 class='fw-bold'>Plat</h3>
-                                <p><?php echo $dernierElement['plat']; ?></p>
-                            </div>
-                            <hr class='border border-3'>
-                            <div>
-                                <h3 class='fw-bold'>Dessert</h3>
-                                <p><?php echo str_replace(', ', '<br>', $dernierElement['dessert']); ?></p>
-                            </div>
-                        </div>
-                    </section>
-        
+                <h2 class='m-0 date'>
+                    <?php echo date('d/m', strtotime($dernierElement['date'])); ?>
+                </h2>
+                <div class='card'>
+                    <div>
+                        <img src='<?php echo $dernierElement['image_plat']; ?>' alt='' class='card-img-top'>
+                        <h3 class='fw-bold entre'>Entrée</h3>
+                        <p>
+                            <?php echo str_replace(', ', '<br>', $dernierElement['entre']); ?>
+                        </p>
+                    </div>
+                    <hr class='border border-3'>
+                    <div>
+                        <h3 class='fw-bold'>Plat</h3>
+                        <p>
+                            <?php echo $dernierElement['plat']; ?>
+                        </p>
+                    </div>
+                    <hr class='border border-3'>
+                    <div>
+                        <h3 class='fw-bold'>Dessert</h3>
+                        <p>
+                            <?php echo str_replace(', ', '<br>', $dernierElement['dessert']); ?>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
 
 
 
