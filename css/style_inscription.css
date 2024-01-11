@@ -64,7 +64,7 @@ body {
 
 
 .information_main {
-    padding: 6rem 4rem;
+    padding: 8rem 4rem;
     position: relative;
     z-index: 2;
 }
@@ -178,7 +178,6 @@ input {
 form p{
     font-size: 1.5rem;
     font-weight: 800;
-    width: 500px;
     padding-bottom: 1rem;
 }
 
@@ -304,5 +303,8 @@ form p{
         z-index: 1;
     }
 
+    form p{
+        width: 500px;
+    }
 
 }
