@@ -43,6 +43,8 @@ include("connexion.php");
 
 <a href="ajout_cours.php">Ajouter un cours</a>
 
+<a href="ajout_travail.php">Ajouter un travail à faire</a>
+
 
   
 
