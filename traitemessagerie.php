@@ -56,15 +56,12 @@ session_start();
         $stmt->bindValue(':solooutous', $solooutous, PDO::PARAM_STR);
         
         if ($solooutous == 'solo') {
-            // Si 'solo', alors lier le destinataire spécifique
             $stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_INT);
         }
         
-        // Exécuter la requête
         $stmt->execute();
         
 
-        // Vérifier le succès de l'insertion
         if ($stmt->rowCount()) {
             header('Location:messagerie.php?successfully_sended');
         } else {
