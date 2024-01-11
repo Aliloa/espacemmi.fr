@@ -4,7 +4,7 @@ function toggleDarkMode() {
     let body = document.body;
     body.classList.toggle('dark-body');
 
-    let cards = document.querySelectorAll(".card, .bloc-7, .cours, .bloc-2, .graphique, .burger, .etude-1, .bloc-1a, .bloc-2a, .bloc-3a, .bloc-4a");
+    let cards = document.querySelectorAll(".card, .bloc-7, .cours, .bloc-2, .graphique, .burger, .etude-1, .bloc-1a, .bloc-2a, .bloc-3a, .bloc-4a, hr");
     cards.forEach(function(card) {
         card.classList.toggle('dark-mode');
     })

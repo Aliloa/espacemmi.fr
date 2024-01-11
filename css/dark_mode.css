@@ -22,3 +22,7 @@
 .white-text {
     color: white !important;
 }
+
+hr.dark-mode {
+    border: solid var(--dark_background) !important;
+}

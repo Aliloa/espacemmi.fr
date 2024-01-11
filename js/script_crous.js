@@ -8,12 +8,15 @@ voir_plus.forEach(function(element) {
         let clicked = this.id;
         console.log(clicked);
         
-        let bon_pop_up;
-        pop_ups.forEach(function(pop_up) {
-            if (pop_up.id === clicked) {
-                bon_pop_up = pop_up;
-            }
-        });
+        let bon_pop_up = document.querySelector('.bon_pop_up');
+
+if (!bon_pop_up) {
+    pop_ups.forEach(function(pop_up) {
+        if (pop_up.id === clicked) {
+            bon_pop_up = pop_up;
+        }
+    });
+}
 console.log(bon_pop_up);
 
 bon_pop_up.style.display = "flex";

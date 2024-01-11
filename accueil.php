@@ -490,23 +490,72 @@
 
 
             <div class='bloc-6'>
-                <h1>Menu du jour</h1>
                 <?php
-                include('connexion.php');
-                $requete = "SELECT * FROM crous ORDER BY date ASC LIMIT 1";
-                $stmt = $db->query($requete);
-                $resultat = $stmt->fetchall(PDO::FETCH_ASSOC);
-                foreach ($resultat as $menu) {
-                    echo "<div class='card'>
-                        <img src = {$menu['image_plat']} alt=''>
-                        <h2>Plat du jour</h2>
-                        <p> {$menu['plat']}</p> <br> 
-                        <p>...  </p>
-                        <a href='menu_du_jour.php'><p class='btn'>voir plus</p></a>
-                    </div>";
-                }
+                // seconde requete pour avoir seulement l'élement de la bdd de la date qui se rapproche de ajoudhui
+                $dateAujourdhui = date("Y-m-d");
+        $requeteDernier = "SELECT * FROM crous WHERE date >= :aujourdhui AND lieu = 'ESIEE' ORDER BY date ASC LIMIT 1";
+        $stmtDernier = $db->prepare($requeteDernier);
+        $stmtDernier->bindParam(':aujourdhui', $dateAujourdhui, PDO::PARAM_STR);
+        $stmtDernier->execute();
+        $dernierElement = $stmtDernier->fetch(PDO::FETCH_ASSOC);
+
+        // Traduire les jours de la semaine
+        $dayNames = [
+            'Monday' => 'Lundi',
+            'Tuesday' => 'Mardi',
+            'Wednesday' => 'Mercredi',
+            'Thursday' => 'Jeudi',
+            'Friday' => 'Vendredi',
+            'Saturday' => 'Samedi',
+            'Sunday' => 'Dimanche',
+        ];
+
+        $date_dernier = new DateTime($dernierElement['date'], new DateTimeZone('Europe/Paris'));
+        $jour_anglais_d = $date_dernier->format('l');
+        $nom_jour_dernier = $dayNames[$jour_anglais_d];
                 ?>
+                <div class='menu_autre'>
+                        <div>
+                        <h1>Menu du <?php echo $nom_jour_dernier . " " . date('d/m', strtotime($dernierElement['date'])); ?> (ESIEE) </h1>
+                        </div>
+                        <div class='card shadow'>
+                        <div>
+                        <img src="<?php echo $dernierElement['image_plat']; ?>" alt='' class='card-img-top'>
+                        <h3 class='entre'>Plat</h3>
+                        <p> <?php
+                                $dernierElement['plat'] = str_replace(', ', '<br>', $dernierElement['plat']);
+                                echo $dernierElement['plat'];
+                                ?> <br>
+                        ...
+                        </p>
+                        <button class='btn voir_plus' id=' <?php echo $dernierElement['id'] ?>'>voir plus</button>
+                        </div>
+                        </div>
+                    </div>
             </div>
+
+            <!-- POP UP MENU SU JOUR -->
+            <section class='bon_pop_up pop_up today' id='<?php echo $dernierElement['id'] ?>'>
+                        <h2 class='m-0 date'> <?php echo date('d/m', strtotime($dernierElement['date'])); ?></h2>
+                        <div class='card'>
+                            <div>
+                                <img src='<?php echo $dernierElement['image_plat']; ?>' alt='' class='card-img-top'>
+                                <h3 class='fw-bold entre'>Entrée</h3>
+                                <p><?php echo str_replace(', ', '<br>', $dernierElement['entre']); ?></p>
+                            </div>
+                            <hr class='border border-3'>
+                            <div>
+                                <h3 class='fw-bold'>Plat</h3>
+                                <p><?php echo $dernierElement['plat']; ?></p>
+                            </div>
+                            <hr class='border border-3'>
+                            <div>
+                                <h3 class='fw-bold'>Dessert</h3>
+                                <p><?php echo str_replace(', ', '<br>', $dernierElement['dessert']); ?></p>
+                            </div>
+                        </div>
+                    </section>
+        
 
 
 
@@ -545,6 +594,7 @@
 
 <script src='js/script_accueil.js'></script>
 <script src='js/script_dark_mode.js'></script>
+<script src="js/script_crous.js"></script>
 
 
 </html>

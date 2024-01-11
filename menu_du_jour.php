@@ -190,7 +190,7 @@
         $stmt->execute();
         $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // seconde requete pour avoir seulement le dernier élement de la bdd
+        // seconde requete pour avoir seulement l'élement de la bdd de la date qui se rapproche de ajoudhui
         $requeteDernier = "SELECT * FROM crous WHERE date >= :aujourdhui AND lieu = :lieu ORDER BY date ASC LIMIT 1";
         $stmtDernier = $db->prepare($requeteDernier);
         $stmtDernier->bindParam(':aujourdhui', $dateAujourdhui, PDO::PARAM_STR);
