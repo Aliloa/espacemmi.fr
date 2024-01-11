@@ -18,6 +18,10 @@
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
+    } if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e'){
+        header('Location: backofficeprof.php?access_denied');
+
+
     }
     ?>
     <header>
