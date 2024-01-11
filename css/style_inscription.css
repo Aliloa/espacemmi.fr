@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800;900&display=swap');
 
 
-a {
-    text-decoration: none;
-}
 
 
 body {
@@ -141,9 +138,7 @@ form h1 {
     left: 3rem;
 }
 
-form a {
-    color: #604CF9;
-}
+
 
 input {
     border-radius: 9px;

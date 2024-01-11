@@ -51,13 +51,13 @@
                     <input type='submit' value='Se connecter'>
                 </div>
 
-                <span>Vous avez oublié votre mot de passe ? Alors retrouvez le <a href="mdp_page.php">ici !</a></span>
+                <span>Vous avez oublié votre mot de passe ? Retrouvez le <a href="mdp_page.php" style="text-decoration: underline; color:  #604CF9;">lien de récupération de mot de passe ici ! </a></span>
 
 
             </form>
 
             <div class="image2">
-                <img src="img/main_image.svg">
+                <img src="img/main_image.svg" alt="">
             </div>
 
         </div>
