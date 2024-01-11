@@ -25,7 +25,36 @@ body {
     display: none;
 }
 
+#custom-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 80px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+#custom-popup p {
+    margin: 0; 
+    font-size: 1rem;
+    color: black;
+}
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#custom-popup {
+    animation: fadeIn 0.5s ease-in-out; /* Apply the animation to the popup */
+}
 /* Page index.php */
 
 .main-1 {
@@ -252,7 +281,7 @@ form p{
 
     form {
         background-color: #fff;
-        padding: 8rem 3rem 0rem 3rem;
+        padding: 4rem 3rem 0rem 3rem;
         margin: 0;
         border-radius: 0;
         position: relative;

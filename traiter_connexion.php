@@ -3,6 +3,25 @@ session_start();
 
 include("connexion.php");
 
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace MMI | Mot de passe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_inscription.css">
+    <link rel="icon" href="img/favicon.png">
+</head>
+
+<body>
+    <?php
+
 $requete = "SELECT * FROM utilisateurs WHERE login=:login";
 $stmt = $db->prepare($requete);
 $stmt->bindValue(':login', $_GET["login_user"], PDO::PARAM_STR);
@@ -29,8 +48,16 @@ if ($stmt->rowCount()) {
         header('Location:connexion_page.php?erreur=mdp');
         exit();
     }
-        header("Location: accueil.php");
-        exit();
+        echo "<div id='custom-popup'>";
+                echo "<p>Connexion réussi ! </p>";
+                echo "</div>";
+
+                echo "<script>";
+                echo "setTimeout(function() {";
+                echo "   window.location.href = 'accueil.php';";
+                echo "}, 2000);";
+                echo "</script>";
+            exit(); 
     
 }  else{
     header('Location:connexion_page.php?erreur=user_not_found');
@@ -39,3 +66,6 @@ if ($stmt->rowCount()) {
 
 }
 ?>
+
+</body>
+</html>

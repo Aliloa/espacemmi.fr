@@ -1,32 +1,61 @@
+
+
+
 <?php
 include('connexion.php');
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace MMI | Mot de passe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style_inscription.css">
+    <link rel="icon" href="img/favicon.png">
+</head>
+
+<body>
+    
+<?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login = $_POST['login_user'];
-    $mdp = password_hash($_POST['mdp1'], PASSWORD_DEFAULT);
+    $mdp = $_POST['mdp1'];
 
+    $checkLoginQuery = "SELECT * FROM utilisateurs WHERE login = :login";
+    $checkStmt = $db->prepare($checkLoginQuery);
+    $checkStmt->bindParam(':login', $login);
+    $checkStmt->execute();
 
-    $requetecherchelogin = "SELECT * FROM utilisateurs WHERE login = :login";
-    $stmtuser = $db->prepare($requetecherchelogin);
-    $stmtuser->bindParam(':login', $login);
-    $stmtuser->execute();
+    if ($checkStmt->rowCount() > 0) {
+        $mot_de_passe_hash = password_hash($mdp, PASSWORD_DEFAULT);
 
-    if ($stmtuser->rowCount()) {
+        $updateQuery = "UPDATE utilisateurs SET mot_de_passe = :mot_de_passe WHERE login = :login";
 
-        $requete = "UPDATE utilisateurs SET mot_de_passe = :mot_de_passe WHERE login = :login";
-
-        $stmt = $db->prepare($requete);
-        $stmt->bindValue(':mot_de_passe', $mdp);
-        $stmt->bindValue(':login', $login);
+        $stmt = $db->prepare($updateQuery);
+        $stmt->bindParam(':mot_de_passe', $mot_de_passe_hash);
+        $stmt->bindParam(':login', $login);
 
         if ($stmt->execute()) {
-            echo 'Mot de passe mis à jour avec succès!';
-            header("Location: connexion_page.php"); 
+           echo "<div id='custom-popup'>";
+                echo "<p>Mot de passe mis à jour!</p>";
+                echo "</div>";
+
+                echo "<script>";
+                echo "setTimeout(function() {";
+                echo "   window.location.href = 'connexion_page.php';";
+                echo "}, 2000);";
+                echo "</script>";
             exit(); 
         } else {
             echo 'Erreur lors de la mise à jour du mot de passe.';
-            die($stmt);
+            print_r($stmt->errorInfo()); 
         }
     } else {
         echo 'Le login n\'existe pas';
@@ -35,30 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo 'Erreur lors de la soumission du formulaire.';
 }
 ?>
-<!-- 
 
-<php
+</body>
 
-
-    $testlogin = "SELECT * FROM utilisateurs WHERE nom=:nom AND prenom = :prenom AND login = :login";
-    $stmt = $db->prepare($testlogin);
-    $stmt->bindValue(":nom", $nom, PDO::PARAM_STR);
-    $stmt->bindValue(":prenom", $prenom, PDO::PARAM_STR);
-    $stmt->bindValue(":login", $login, PDO::PARAM_STR);
-    $stmt->execute();
-    if ($stmt->rowCount()) {
-        echo "Ce login n'est pas disponible";
-        // exit();
-        header('Location:Inscription_page.php?erreur=login');
-    }
-
-    $stmt->execute();
-    
-    if ($stmt->rowCount()) {
-        header('Location:administration.php?added_successfully');
-    } else {
-        echo "ça n'a pas marché veuillez recommencer.";
-        die($stmt);
-    }  ;
-
-    ?> -->
