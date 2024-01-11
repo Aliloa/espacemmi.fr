@@ -11,6 +11,7 @@ include("connexion.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_accueil.css'>
     <link rel='stylesheet' href='css/style_navigation.css'>
+    <link rel='stylesheet' href='css/dark_mode.css'>
     <title>Espace MMI | admninistration</title>
 </head>
 
@@ -182,10 +183,8 @@ include("connexion.php");
                             </a>
                         </div>
                         <div class='tool'>
-                            <img class="lettre" src='img/1-lettre.svg' alt=''>
-                            <a href='messagerie.php'>
-                                <p>Messagerie</p>
-                            </a>
+                            <img class='lettre' src='img/1-lettre.svg' alt=''>
+                            <a href='messagerie.php'><p>Messagerie</p></a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'

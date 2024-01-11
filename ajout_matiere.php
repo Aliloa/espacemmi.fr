@@ -16,12 +16,12 @@ include("connexion.php");
 </head>
 
 <body>
-<?php
+    <?php
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
-   
+
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
         header('Location: page_crous.php?access_denied');
     }
@@ -190,7 +190,7 @@ include("connexion.php");
             <h1 class="h1">Ajouter une matière</h1>
 
             <form class="ajouter" action="traitematiere.php" method="POST" enctype="multipart/form-data">
-                
+
                 <label for="module">Nom du la matière</label>
                 <input type="text" id="module" name="matiere" required>
 
@@ -225,23 +225,40 @@ include("connexion.php");
             </form>
 
 
-            <?php
-            include("connexion.php");
+            <div>
 
-            if (isset($_SESSION["login"])) {
-                $requete = "SELECT * FROM grossematiere, utilisateurs WHERE prof_ext = id_utilisateurs AND utilisateurs.login = :login AND role = 'Enseignant.e'";
-                $stmt = $db->prepare($requete);
-                $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
-                $stmt->execute();
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                <h1 class="h1">Vos matières ajoutées</h1>
 
 
-                foreach ($result as $matiere) {
-                    echo "<p>{$matiere['nom_mat']}, {$matiere['type']}</p>
-              <img src='matiere/{$matiere["illustration"]}' alt=''>";
+                <?php
+                include("connexion.php");
+
+                if (isset($_SESSION["login"])) {
+                    $requete = "SELECT * FROM grossematiere, utilisateurs WHERE prof_ext = id_utilisateurs AND utilisateurs.login = :login AND role = 'Enseignant.e'";
+                    $stmt = $db->prepare($requete);
+                    $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+                    foreach ($result as $cours) {
+                        echo "<div class='cours'>
+                   
+                            <img src='matiere/{$cours["illustration"]}' alt=''>
+
+                            <div>
+                                <h2>{$cours["nom_mat"]}</h2>
+                                <p> Créé par {$cours["nom"]} {$cours["prenom"]}</p> 
+                            </div>
+
+                        </div>";
+                    }
+                } else {
+                    echo "<p> Vous n'avez pas encore de matières ajoutées </p>";
                 }
-            }
-            ?>
+                ?>
+
+            </div>
 
         </div>
 

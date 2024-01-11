@@ -155,13 +155,13 @@ include("connexion.php");
 
                     <div class='tools'>
                         <div class='tool'>
-                            <img class="param" src='img/1-param.png' alt=''>
+                            <img class="param" src='img/1-param.png' alt='consulter mon profil'>
                             <a href='profil.php'>
                                 <p>Profil</p>
                             </a>
                         </div>
                         <div class='tool'>
-                            <img class="lettre" src='img/1-lettre.svg' alt=''>
+                            <img class="lettre" src='img/1-lettre.svg' alt='consulter ma messagerie'>
                             <a href='messagerie.php'>
                                 <p>Messagerie</p>
                             </a>
@@ -173,7 +173,7 @@ include("connexion.php");
                             </button>
                         </div>
                         <div class='tool'>
-                            <img class="logout" src='img/1-logout.svg' alt=''>
+                            <img class="logout" src='img/1-logout.svg' alt='se déconnecter'>
                             <form action="deconnexion.php" method="GET">
                                 <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
                                     Déconnexion

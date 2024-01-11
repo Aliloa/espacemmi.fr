@@ -17,7 +17,7 @@ function toggleDarkMode() {
         texte.classList.toggle('white-text');
     })
 
-    let autres = document.querySelectorAll(".input");
+    let autres = document.querySelectorAll(".input, input, select");
     autres.forEach(function(autre) {
         autre.classList.toggle('dark-body');
     })
