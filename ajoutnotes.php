@@ -217,7 +217,7 @@ include("connexion.php");
 
                 </select>
                 <a class="reinst" href="ajoutnotes.php">Réinitialiser</a>
-                <input type="submit" name='choixcours' value='Cours'>
+                <input type="submit" name='choixcours' value='Ajouter'>
             </form>
 
 
