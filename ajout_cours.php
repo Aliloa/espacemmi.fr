@@ -16,13 +16,13 @@ include("connexion.php");
 </head>
 
 <body>
-<?php
-    
+    <?php
+
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
-    
+
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
         header('Location: page_crous.php?access_denied');
     }
@@ -235,29 +235,39 @@ include("connexion.php");
             </form>
 
 
-            <?php
-            include("connexion.php");
-            if (isset($_SESSION["login"])) {
+            <div>
 
-                // Requete qui sélectionne tout de cours, mais nom de la matire pour grossematiere puis fait les liens avec les clés externes et récupère login pour afficher les modules du prof connecté
-                $requete = "SELECT cours.*, grossematiere.nom_mat FROM cours INNER JOIN grossematiere ON cours.ext_matiere = grossematiere.id_matiere INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs WHERE utilisateurs.login = :login AND utilisateurs.role = 'Enseignant.e'";
+                <h1 class="h1">Vos cours ajoutés</h1>
 
-                $stmt = $db->prepare($requete);
-                $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
-                $stmt->execute();
-                $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                <?php
+                include("connexion.php");
+                if (isset($_SESSION["login"])) {
+
+                    // Requete qui sélectionne tout de cours, mais nom de la matire pour grossematiere puis fait les liens avec les clés externes et récupère login pour afficher les modules du prof connecté
+                    $requete = "SELECT cours.*, grossematiere.nom_mat FROM cours INNER JOIN grossematiere ON cours.ext_matiere = grossematiere.id_matiere INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs WHERE utilisateurs.login = :login AND utilisateurs.role = 'Enseignant.e'";
+
+                    $stmt = $db->prepare($requete);
+                    $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
+                    $stmt->execute();
+                    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-                foreach ($resultat as $cours) {
-                    $chemindoc = "documents/" . $cours["document"];
+                    foreach ($resultat as $cours) {
+                        $chemindoc = "documents/" . $cours["document"];
 
-                    echo "<p>{$cours['cours']} - Matière : {$cours['nom_mat']}</p>
-            <a href='{$chemindoc}'>{$cours["document"]} </a> </br></br>";
+                        echo "<div class='cours'>
+                    <div>
+                            <p>{$cours['cours']} - Matière : {$cours['nom_mat']}</p>
+                            <a href='{$chemindoc}'>{$cours["document"]}</a>  
+                            </div>
+                        </div>";
+                    }
+                } else {
+                    echo "<p> Vous n'avez pas encore de cours ajoutés </p>";
                 }
+                ?>
 
-            }
-            ?>
-
+            </div>
 
         </div>
     </main>
