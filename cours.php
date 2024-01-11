@@ -216,10 +216,10 @@ include("connexion.php");
 
                 foreach ($resultat as $cours) {
                     echo "<div class='cours'>
-                
+                <a href='coursindividuel.php?id_matiere={$cours["id_matiere"]}'>
                         <h2>{$cours["nom_mat"]}</h2>
                         <p> Créé par {$cours["nom"]} {$cours["prenom"]}</p>
-                
+                </a>
                 </div>";
                 }
                 ?>

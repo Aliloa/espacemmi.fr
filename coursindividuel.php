@@ -1,5 +1,10 @@
+<?php
+session_start();
+include("connexion.php");
+?>
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +13,22 @@
 </head>
 <body>
 <?php
-    session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
-
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
+        header('Location: backofficeprof.php?access_denied');
+    }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
         header('Location: page_crous.php?access_denied');
     }
-
-
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
     ?>
-    <header>
+
+<header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -45,18 +53,19 @@
                             </path>
                         </g>
                     </svg>
-                    <input class='input' type='search' placeholder='Search' />
+                    <label for="barre de recherche"></label>
+                    <input id="barre de recherche" class='input' type='search' placeholder='Search' />
                 </div>
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <img class='logo' src='./img/1-lettre.svg' alt="page d'accueil">
+                    <a href='messagerie.php'><img class='logo' src='./img/1-lettre.svg' alt="messagerie"></a>
                     <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
                             alt="mode sombre"></button>
 
 
 
-                    <!-- PHP - LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
+                    <!-- PHP - LIEN VERS LA PAGE profil.php POUR MODIF LA PDP-->
                     <div class='photo-2'>
 
                         <?php
@@ -131,32 +140,35 @@
 
 
                     <ul class='choix-2'>
-                        <li><a href=''>Mes cours</a></li>
+                        <li><a href='cours.php'>Mes cours</a></li>
                         <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                         <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                         <li><a href='page_crous.php'>Crous</a></li>
-                        <li><a href=''>Déconnexion</a></li>
                     </ul>
 
 
                     <div class='tools'>
                         <div class='tool'>
-                            <img src='img/1-notif.svg' alt=''>
-                            <p>Notifications</p>
-                        </div>
-                        <div class='tool'>
                             <img src='img/1-param.png' alt=''>
-                            <p>Paramètres</p>
+                            <a href='profil.php'><p>Profil</p></a>
                         </div>
                         <div class='tool'>
                             <img src='img/1-lettre.svg' alt=''>
-                            <p>Messagerie</p>
+                            <a href='messagerie.php'><p>Messagerie</p></a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
                                     src='./img/1-moon.svg' alt="mode sombre">
                                 <p>Mode sombre</p>
                             </button>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-logout.svg' alt=''>
+                            <form action="deconnexion.php" method="GET">
+                                <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
+                                    Déconnexion
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -170,48 +182,32 @@
 
     </header>
 
-    <main>
-        <div class="email-container">
-            <div class="email-preview" onclick="toggleContent(this)">
-                <div class="email-sender">
-                    <div class="sender-avatar"></div>
-                    <span>John Doe</span>
-                </div>
-                <div class="email-details">
-                    <span>21 Janvier, 10:30 AM</span>
-                    <span>Nouvelles importantes</span>
-                </div>
-            </div>
-            <div class="email-content">
-                <p>Cher étudiant,</p>
-                <p>Voici quelques nouvelles importantes pour vous...</p>
-            </div>
-        </div>
+<?php
+include("connexion.php");
 
-        <div class="email-container">
-            <div class="email-preview" onclick="toggleContent(this)">
-                <div class="email-sender">
-                    <div class="sender-avatar"></div>
-                    <span>Jane Smith</span>
-                </div>
-                <div class="email-details">
-                    <span>20 Janvier, 15:45 PM</span>
-                    <span>Rappel: Projet à rendre</span>
-                </div>
-            </div>
-            <div class="email-content">
-                <p>Cher étudiant,</p>
-                <p>Rappelez-vous que le projet doit être rendu d'ici la fin de la semaine...</p>
-            </div>
-        </div>
+if (isset($_GET["id_matiere"])) {
+    $id_matiere = $_GET["id_matiere"];
+} else {
+    $id_matiere = "12"; // Vous pouvez définir une valeur par défaut ou traiter autrement cette situation
+}
 
-        <a href="unmessage.php">Écrire un nouveau message</a>
+$requete = "SELECT * FROM cours WHERE ext_matiere = :id_matiere";
+$stmt = $db->prepare($requete);
+$stmt->bindValue(':id_matiere', $id_matiere, PDO::PARAM_INT);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    </main>
+if ($stmt->rowCount()){
+foreach ($result as $uncours) {
+    $chemindoc = "documents/" . $uncours["document"];
 
+    echo "<a href='{$chemindoc}' target='_blank'>{$uncours['cours']}</a> <br> ";
+}
+}else{
+    echo "Aucun cours trouvé pour cette matière.";
 
+}
+?>
 
 </body>
-<script src='js/script_accueil.js'></script>
-<script src='js/script_dark_mode.js'></script>
 </html>
