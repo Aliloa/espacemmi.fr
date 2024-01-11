@@ -3,8 +3,15 @@ div[class^="bloc-"] {
     overflow-x: hidden;
     margin: 2rem auto;
     padding: 2rem 2rem 4rem 2rem;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    background-color: var(--main);
+    overflow-y: auto;
+    border-radius: 30px;
 }
 
+div[class^="bloc-"] h1{
+    margin-bottom: 1.5rem;
+}
 
 div[class^="bloc-"]::-webkit-scrollbar  {
     width: 10px;
@@ -15,96 +22,67 @@ div[class^="bloc-"]::-webkit-scrollbar-thumb   {
     border-radius: 30px;
 }
 
-
-
 div[class^="bloc-"] p {
     margin-top: 0;
 }
 
-.bloc-1a {
-    border-radius: 30px;
-    background-color: white;
-    grid-column: 1;
-    grid-row: 1/3;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-    height: 60vh;
-    overflow-y: auto;
+div[class^="bloc-"] h2{
+    margin-bottom: 0;
+    max-width: 125px;
 }
 
-.bloc-1a h2, .bloc-2a h2{
-    margin-bottom: 0;
+.bloc-2a .matiere-date, .bloc-4a .matiere-date, .bloc-3a .matiere-date {
+    margin-bottom: 1rem;
+}
+
+.bloc-1a {
+    grid-column: 1;
+    grid-row: 1/3;
+    height: 60vh;
+}
+
+.bloc-2a {
+    grid-column: 2;
+    grid-row: 1;
+    height: 25vh;
+}
+
+.bloc-3a {
+    grid-column: 2;
+    grid-row: 2;
+    height: 25vh;
+}
+
+.bloc-4a {
+    grid-column: 3;
+    grid-row: 1/3;
+    height: 60vh;
 }
 
 .bloc-1a  p, .bloc-2a p{
     font-size: 0.75rem;
 }
 
+.bloc-3a p{
+    margin: 0;
+}
+
 .matiere-date {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-}
-
-.bloc-4a .matiere-date {
-    padding-bottom: 1rem;
 }
 
 .matiere-date p {
     font-size: 0.8rem;
     color: rgb(100, 99, 99);
     margin-top: 25px;
-    width: 100px;
-
-
-}
-
-
-
-
-
-.bloc-2a {
-    grid-column: 2;
-    grid-row: 1;
-    background-color: white;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
-    padding: 20px;
-    overflow-y: auto;
-    height: 25vh;
-
-
 }
 
 .container h2 {
     font-size: 1rem;
     font-weight: 500;
 
-}
-
-
-.bloc-3a {
-    background-color: white;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
-    padding: 20px;
-    grid-column: 2;
-    grid-row: 2;
-    height: 25vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-.bloc-4a {
-    background-color: white;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
-    padding: 20px;
-    grid-column: 3;
-    grid-row: 1/3;
-    height: 60vh;
-    overflow-y: auto;
-    position: relative;
 }
 
 .bouton a {
