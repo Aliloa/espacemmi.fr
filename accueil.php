@@ -548,21 +548,21 @@ include("connexion.php");
                 <div class='card'>
                     <div>
                         <img src='<?php echo $dernierElement['image_plat']; ?>' alt='' class='card-img-top'>
-                        <h3 class='fw-bold entre'>Entrée</h3>
+                        <h3 class='entre'>Entrée</h3>
                         <p>
                             <?php echo str_replace(', ', '<br>', $dernierElement['entre']); ?>
                         </p>
                     </div>
-                    <hr class='border border-3'>
-                    <div>
-                        <h3 class='fw-bold'>Plat</h3>
+                    <hr class='border'>
+                    <div class="bien_centrer">
+                        <h3>Plat</h3>
                         <p>
                             <?php echo $dernierElement['plat']; ?>
                         </p>
                     </div>
                     <hr class='border border-3'>
-                    <div>
-                        <h3 class='fw-bold'>Dessert</h3>
+                    <div class="bien_centrer">
+                        <h3>Dessert</h3>
                         <p>
                             <?php echo str_replace(', ', '<br>', $dernierElement['dessert']); ?>
                         </p>
