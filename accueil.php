@@ -21,9 +21,11 @@
     }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
         header('Location: backofficeprof.php?access_denied');
-
-
     }
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
+
     ?>
     <header>
         <div class='menu'>
