@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("connexion.php");
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -16,7 +21,13 @@
 
 
 <?php
-session_start();
+
+    
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
+        header('Location: backofficeprof.php?access_denied');
+    }
+    
+
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();

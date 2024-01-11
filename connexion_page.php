@@ -17,6 +17,8 @@ include("connexion.php");
 
 <body>
 
+
+
     <main class="main-2">
 
         <div class="logo-1">
@@ -75,5 +77,6 @@ include("connexion.php");
 
 
 </body>
-
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 </html>

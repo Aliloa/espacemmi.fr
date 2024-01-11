@@ -21,7 +21,7 @@ include('connexion.php');
         header('Location: backofficeprof.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
-        header('Location: backofficeprof.php?access_denied');
+        header('Location: page_crous.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
         header('Location: administration.php?access_denied');
@@ -202,4 +202,6 @@ include('connexion.php');
 
 
 </body>
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 </html>

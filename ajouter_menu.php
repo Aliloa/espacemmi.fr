@@ -206,7 +206,7 @@ include("connexion.php");
     </footer>
 
 </body>
-
 <script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 
 </html>

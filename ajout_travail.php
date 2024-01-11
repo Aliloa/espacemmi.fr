@@ -17,7 +17,7 @@
     }
    
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
-        header('Location: page_crous.php?access_denied');
+        header('Location: backofficeprof.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
         header('Location: administration.php?access_denied');
@@ -25,31 +25,14 @@
 
     ?>
 
-    <?php include('connexion.php'); ?>
-    <form action="traite_absence.php" method="POST">
-        <h1>Ajouter absence /retard</h1>
+    <form action="traite_travail.php" method="POST">
+        <h1>Ajouter un travail à faire</h1>
 
-        <label for="eleve">Eleve</label>
-        <select name="eleve">
-            <?php
-            $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE role="Étudiant.e"');
-            $stmt->execute();
-            $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($tableauResult as $result) {
-                echo "<option value='" . $result['id_utilisateurs'] . "'>" . $result['nom'] . " " . $result['prenom'] . "</option>";
-            }
-            ?>
-        </select> <br>
+        <label for="travail">Travail</label>
+        <textarea name="travail" cols="30" rows="10"></textarea>
 
         <label for="nom">Date</label>
         <input type="date" name="date" required> <br>
-
-        <label for="debut">De</label>
-        <input type="time" name="debut" required> <br>
-
-        <label for="fin">A</label>
-        <input type="time" name="fin" required> <br>
-
 
         <select name="matiere" id="matiere" required>
 
@@ -75,22 +58,8 @@
         </select>
 
 
-        <br>
-
-        <div>
-            <input class="radio" type="radio" id="absence" name="titre" value="Absence" />
-            <label for="absence">Absence</label>
-
-            <input class="radio" type="radio" id="retard" name="titre" value="Retard" />
-            <label for="retard">Retard</label>
-        </div>
-
-
-
         <button type="submit" name='soumettre'>S'inscrire</button>
     </form>
 </body>
-<script src='js/script_accueil.js'></script>
-<script src='js/script_dark_mode.js'></script>
 
 </html>
