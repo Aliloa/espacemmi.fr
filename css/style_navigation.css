@@ -10,7 +10,7 @@ body{
 :root {
     --main: #ffffff;
     --black: #000000;
-    --purple: #6C63FF;
+    --purple: #4038b7;
     --bg: #f5f6fb;
     --grey: #414141;
     --blue: #1a1545;
@@ -22,7 +22,7 @@ body{
 }
 
 *::-webkit-scrollbar-track {
-    background-color: var(--main);
+    background-color: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -172,6 +172,13 @@ ul li:nth-child(5) a {
     padding: 1rem;
 }
 
+.btnDeconnexion{
+    font-size: 0.75rem;
+    background-color: transparent;
+    border: transparent;
+    padding: 0
+}
+
 .kelis {
     padding-bottom: 1rem;
 }
@@ -180,6 +187,10 @@ ul li:nth-child(5) a {
 .tools {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+}
+
+.tool a{
+    padding: 0;
 }
 
 .tool {
@@ -219,6 +230,16 @@ footer {
 footer a {
     color: var(--main);
     font-weight: 300;
+}
+
+.fda ul{
+    display: flex;
+    align-items: center;
+}
+
+.fda li{
+    margin: 1rem;
+    font-weight: 600;
 }
 
 
@@ -356,8 +377,12 @@ input:hover {
         height: 20px;
         object-fit: cover;
         border: none;
+        background-color: transparent;
     }
 
+    .fda ul{
+        margin-left: 2rem;
+    }
 }
 
 

@@ -1,0 +1,72 @@
+.bloc-2 {
+   display: none;
+}
+
+.ajt-cours{
+    margin: 2rem;
+}
+
+.bloc-3-bis h2 {
+    padding: 0 2rem;
+}
+
+.cours h3{
+    margin: 0 0 10px 0;
+}
+
+
+button{
+    background-color: transparent;
+    border: 1px transparent;
+}
+
+
+
+@media screen and (min-width: 1024px) {
+
+    .wake{
+        display: block;
+        width: 10px;
+        position: absolute;
+       color: #85858A;
+       font-size: 0.75rem;
+       padding-top: 1rem;
+    }
+
+
+    .container {
+        max-width: 90vw;
+        margin: 0 auto;
+        padding-bottom: 5rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+    }
+
+
+    .bloc-2 {
+        display: block;
+        height: 550px;
+        border-radius: 28px;
+        grid-column: 3 / 4;
+        grid-row: 1 / 4;
+    }
+
+    .bloc-3-bis {
+        grid-column: 1/ 3;
+        grid-row: 2/ 5;
+    }
+
+
+    .fda ul {
+        margin: 0 0 1rem;
+    }
+
+    .ajt-cours{
+        margin: 0;
+        overflow-y: scroll;
+        max-height: 570px;
+    }
+
+}
+

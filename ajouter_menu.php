@@ -48,7 +48,7 @@
                     <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
                     <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
 
-                    <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
+                    <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE profil.php POUR MODIF LA PDP-->
                     <div class='photo-2'>
 
                         <?php
@@ -57,7 +57,7 @@
                         $stmt = $db->query('SELECT * FROM utilisateurs');
                         $result = $stmt->fetch(PDO::FETCH_ASSOC);
                         // if (isset($_SESSION['login'])) {
-                            // echo " <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt=''></a>";
+                            // echo " <a href='profil.php'> <img src='upload/{$result['photoprofil']}' alt=''></a>";
                         // }
                         ?>
                     </div>
@@ -72,7 +72,7 @@
                     <!-- PHP/ STRUCTURE POUR ADAPTER A L UTILISATEUR   -->
                     <div class='kelis'>
                         <div class='profil-1'>
-                            <a href='parametres.php'>
+                            <a href='profil.php'>
                                 <div class='photo-1'></div>
                             </a>
                             <div class='profil-2'>

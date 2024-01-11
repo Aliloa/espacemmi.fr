@@ -8,9 +8,8 @@
     <link rel='icon' href='img/favicon.png'>
     <link rel='stylesheet' href='css/style_navigation.css'>
     <link rel='stylesheet' href='css/style_accueil.css'>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel='stylesheet' href='css/dark_mode.css'>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -46,18 +45,19 @@
                             </path>
                         </g>
                     </svg>
-                    <input class='input' type='search' placeholder='Search' />
+                    <label for="barre de recherche"></label>
+                    <input id="barre de recherche" class='input' type='search' placeholder='Search' />
                 </div>
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <img class='logo' src='./img/1-lettre.svg' alt="page d'accueil">
+                    <a href='messagerie.php'><img class='logo' src='./img/1-lettre.svg' alt="messagerie"></a>
                     <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
                             alt="mode sombre"></button>
 
 
 
-                    <!-- PHP - LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
+                    <!-- PHP - LIEN VERS LA PAGE profil.php POUR MODIF LA PDP-->
                     <div class='photo-2'>
 
                         <?php
@@ -71,7 +71,7 @@
 
                             if ($result) {
                                 echo "
-                                <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
+                                <a href='profil.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
                             }
                         }
                         ?>
@@ -107,7 +107,7 @@
                         echo "
                             <div class='kelis'>
                                 <div class='profil-1'>
-                                    <a href='parametres.php'>
+                                    <a href='profil.php'>
                                         <div class='photo-1'>
                                         <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
                                         </div>
@@ -132,32 +132,35 @@
 
 
                     <ul class='choix-2'>
-                        <li><a href=''>Mes cours</a></li>
+                        <li><a href='cours.php'>Mes cours</a></li>
                         <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                         <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                         <li><a href='page_crous.php'>Crous</a></li>
-                        <li><a href=''>Déconnexion</a></li>
                     </ul>
 
 
                     <div class='tools'>
                         <div class='tool'>
-                            <img src='img/1-notif.svg' alt=''>
-                            <p>Notifications</p>
-                        </div>
-                        <div class='tool'>
                             <img src='img/1-param.png' alt=''>
-                            <p>Paramètres</p>
+                            <a href='profil.php'><p>Profil</p></a>
                         </div>
                         <div class='tool'>
                             <img src='img/1-lettre.svg' alt=''>
-                            <p>Messagerie</p>
+                            <a href='messagerie.php'><p>Messagerie</p></a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
                                     src='./img/1-moon.svg' alt="mode sombre">
                                 <p>Mode sombre</p>
                             </button>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-logout.svg' alt=''>
+                            <form action="deconnexion.php" method="GET">
+                                <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
+                                    Déconnexion
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -364,10 +367,8 @@
                     $chemindoc = "documents/" . $cours["document"];
 
                     echo "<div class='cours'>
-                                <div>
                                     <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2></a>
                                     <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
-                                </div>
                             </div>";
                 }
                 ?>
@@ -408,7 +409,7 @@
                 <?php
                 include('connexion.php');
 
-$requete = $db->query("SELECT * FROM notes ORDER BY date_note DESC LIMIT 7");
+                $requete = $db->query("SELECT * FROM notes ORDER BY date_note DESC LIMIT 7");
 
                 $data = $requete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -435,8 +436,8 @@ $requete = $db->query("SELECT * FROM notes ORDER BY date_note DESC LIMIT 7");
                             datasets: [{
                                 label: 'Notes',
                                 data: <?= json_encode($notes) ?>,
-                                backgroundColor: "#0D99FF",
-                                borderColor: "#0D99FF",
+                                backgroundColor: "#6C63FF",
+                                borderColor: "#6C63FF",
                                 borderWidth: 1,
                                 borderRadius: 50
                             }]
@@ -533,7 +534,7 @@ $requete = $db->query("SELECT * FROM notes ORDER BY date_note DESC LIMIT 7");
 </body>
 
 <script src='js/script_accueil.js'></script>
-
 <script src='js/script_dark_mode.js'></script>
+
 
 </html>

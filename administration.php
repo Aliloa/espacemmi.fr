@@ -67,7 +67,7 @@
             <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
             <img class='logo' src='./img/1-moon.svg' alt="page d' accueil">
 
-            <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
+            <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE profil.php POUR MODIF LA PDP-->
             <div class='photo-2'>
 
                 <?php
@@ -81,7 +81,7 @@
 
                     if ($result) {
                         echo "
-                    <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
+                    <a href='profil.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
                     }
                 }
                 ?>

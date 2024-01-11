@@ -1,0 +1,64 @@
+.photo-3 {
+    width: 200px;
+    height: 200px;
+    background-color: var(--bg);
+    border-radius: 50%;
+}
+
+.mon-profil{
+    width: 60vw;
+    margin: auto;
+}
+
+.mon-profil h1{
+    margin-bottom: 1rem;
+}
+
+.mon-profil p, .formu-1{
+    border-radius: 10px;
+    background-color: var(--main);
+    padding: 1.5rem;
+}
+
+.mon-profil p, .formu-1{
+    margin-bottom: 3rem;
+}
+
+.formu-1{
+    background-color: var(--main);
+    margin-bottom: 1rem;
+}
+
+.formulaire{
+    width: 88vw;
+    margin: auto;
+}
+
+.formu-1 label{
+    font-weight: 600;
+    padding-bottom: 1rem;
+}
+
+.formu-1 input{
+    margin-top: 1rem;
+}
+
+input[type="submit"] {
+    background-color: var(--purple);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #000000;
+}
+
+@media screen and (min-width: 768px) {
+    .formulaire{
+        width: 60vw;
+    }
+}

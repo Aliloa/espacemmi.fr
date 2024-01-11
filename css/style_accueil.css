@@ -54,9 +54,6 @@
 
 .cours {
     background-color: var(--main);
-    display: flex;
-    gap: 20px;
-    align-items: center;
     margin-bottom: 1rem;
     padding: 1.5rem;
     border-radius: 10px;
@@ -110,10 +107,10 @@
 
 .btn {
     background-color: var(--purple);
-    margin: 1.5rem auto !important;
+    margin: 1rem auto !important;
     width: 75px;
-    padding: 0.3rem;
-    border-radius: 20px;
+    padding: 0.75rem;
+    border-radius: 15px;
     color: var(--main);
     transition: 0.5s ease;
 }
@@ -393,7 +390,7 @@ text-align: center;
     }
 
     .p{
-        color: #01B574;
+        color: #01744a;
         font-weight: 500;
     }
 

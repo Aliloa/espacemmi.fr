@@ -29,16 +29,17 @@ h2 {
     font-size: 1.2rem;
 }
 .presentation p {
-    background-color: var(--Leviolet);
+    background-color: var(--purple);
     color: white;
-    padding: 20px;
+    padding: 2rem;
+    margin: 2rem;
     border-radius: 15px;
 }
 section, aside {
-    margin-top: 3rem;
+    margin: 2rem;
 }
 .infos {
-    padding: 5px;
+    padding: 1.5rem;
 }
 .menu_hebdomadaire a {
     color: white !important;
@@ -47,7 +48,7 @@ section, aside {
     min-width: fit-content;
 }
 .btn {
-    background-color: var(--Leviolet);
+    background-color: var(--purple);
     color: white;
     max-width: 180px;
     border-radius: 15px;
@@ -74,14 +75,14 @@ section, aside {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding: 5px;
+    padding: 1.5rem;
 }
 
 .flex_tout {
-    max-width: 95%;
+    max-width: 90%;
     margin: auto;
 }
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
     .flex_tout {
         display: flex;
         justify-content: center;
@@ -89,7 +90,8 @@ section, aside {
     main {
         display: flex;
         flex-direction: row-reverse;
-        gap: 50px;
+        gap: 1rem;
+        padding-top: 2rem;
     }
     section, aside {
         margin: 0 !important;
@@ -107,6 +109,23 @@ section, aside {
     }
     .decouvrez_resto {
         width: 60%;
+    }
+
+    .presentation p{
+        margin: 0;
+    }
+
+    .horaires{
+        font-size: 0.75rem;
+
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .horaires{
+        font-size: 1rem;
+
     }
 }
 

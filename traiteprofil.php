@@ -26,7 +26,7 @@ if (isset($_POST['upload'])) {
     $stmt->bindValue(":upload", $name_file, PDO::PARAM_STR);
     $stmt->execute();
 
-    header('Location:parametres.php?modification_success');
+    header('Location:profil.php?modification_success');
     exit();
 }    
 
@@ -39,11 +39,11 @@ if (isset($_POST['changerbio'])) {
     $stmt->bindValue(":login", $_SESSION["login"], PDO::PARAM_STR);
     $stmt->execute();
 
-    header('Location:parametres.php?modification_success');
+    header('Location:profil.php?modification_success');
     exit(); 
 
 }
-// header('Location:parametres.php?erreur=inconnu');
+// header('Location:profil.php?erreur=inconnu');
 
 ?>
 

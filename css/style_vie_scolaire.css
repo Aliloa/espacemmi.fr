@@ -5,29 +5,49 @@ div[class^="bloc-"] {
     padding: 2rem 2rem 4rem 2rem;
 }
 
+
+div[class^="bloc-"]::-webkit-scrollbar  {
+    width: 10px;
+}
+
+div[class^="bloc-"]::-webkit-scrollbar-thumb   {
+    background-color: var(--purple);
+    border-radius: 30px;
+}
+
+
+
+div[class^="bloc-"] p {
+    margin-top: 0;
+}
+
 .bloc-1a {
-    border-radius: 30px ;
+    border-radius: 30px;
     background-color: white;
     grid-column: 1;
     grid-row: 1/3;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-    
     height: 60vh;
-    overflow-y: auto;   
-  }
-
-  .bloc-1a::-webkit-scrollbar {
-    width: 10px;
+    overflow-y: auto;
 }
 
-.bloc-1a::-webkit-scrollbar-thumb {
-    background-color: #6C63FF;
-    border-radius: 30px;
+.bloc-1a h2, .bloc-2a h2{
+    margin-bottom: 0;
 }
 
-  .matiere-date {
+.bloc-1a  p, .bloc-2a p{
+    font-size: 0.75rem;
+}
+
+.matiere-date {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+}
+
+.bloc-4a .matiere-date {
+    padding-bottom: 1rem;
 }
 
 .matiere-date p {
@@ -41,18 +61,9 @@ div[class^="bloc-"] {
 
 
 
-.bloc-1a h3{
-    color: rgb(138, 138, 138);
-    font-size: 0.8rem;
-    font-weight: 400;
-    margin-top: 1px;
-
-}
 
 
-
-
-.bloc-2a{
+.bloc-2a {
     grid-column: 2;
     grid-row: 1;
     background-color: white;
@@ -65,31 +76,14 @@ div[class^="bloc-"] {
 
 }
 
-.container h2{
+.container h2 {
     font-size: 1rem;
     font-weight: 500;
 
 }
 
-.container h3{
-    color: rgb(138, 138, 138);
-    font-size: 0.8rem;
-    font-weight: 400;
 
-}
-
-.bloc-2a::-webkit-scrollbar {
-    width: 10px;
-}
-
-.bloc-2a::-webkit-scrollbar-thumb {
-    background-color: #6C63FF;
-    border-radius: 30px;
-}
-
-
-
-.bloc-3a{
+.bloc-3a {
     background-color: white;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -101,16 +95,7 @@ div[class^="bloc-"] {
     position: relative;
 }
 
-.bloc-3a::-webkit-scrollbar {
-    width: 10px;
-}
-
-.bloc-3a::-webkit-scrollbar-thumb {
-    background-color: #6C63FF;
-    border-radius: 30px;
-}
-
-.bloc-4a{
+.bloc-4a {
     background-color: white;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -120,15 +105,6 @@ div[class^="bloc-"] {
     height: 60vh;
     overflow-y: auto;
     position: relative;
-}
-
-.bloc-4a::-webkit-scrollbar::-webkit-scrollbar {
-    width: 10px;
-}
-
-.bloc-4a:-webkit-scrollbar-thumb {
-    background-color: #6C63FF;
-    border-radius: 30px;
 }
 
 .bouton a {
@@ -145,7 +121,7 @@ div[class^="bloc-"] {
         margin: auto;
     }
 
-    .container{
+    .container {
         max-width: 80vw;
         height: 70vh;
         margin: 0 auto;
@@ -156,7 +132,3 @@ div[class^="bloc-"] {
 
 
 }
-
-
-/* formulaire */
-

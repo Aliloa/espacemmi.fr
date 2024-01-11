@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+
+.wrapper{
+    margin: 3rem;
+    min-height: 70vh;
+}
+
+.h1{
+    padding-left: 3rem;
+    font-size: 2rem;
+}
+
+.filtre{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.filtre p{
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.cours{
+    background-color: var(--main);
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25)
+}
+
+
+.cours-container p{
+    margin: 0;
+}
+
+.input-container input{
+    background-color: var(--purple);
+    border: transparent;
+    color: var(--main);
+    height: 2rem;
+    transition: background-color 0.3s ease;
+    padding-right: 1rem;
+    border-top-right-radius: 9px;
+    border-bottom-right-radius: 9px;
+    font-size: 0.75rem;
+}
+
+.input-container input:hover{
+    background-color: #000000;
+}
+
+#filter{
+    height: 2rem;
+    border: transparent;
+    padding-left: 0.5rem;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    font-size: 0.75rem;
+}
+
+@media screen and (min-width: 375px) {
+
+    .filtre p,.input-container input,#filter{
+        font-size: 0.9rem;
+    }
+
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+    .cours-container {
+        column-count: 2;
+        max-width: 85vw;
+        margin: 0 auto;
+        column-gap: 2rem;
+    }
+    
+    .cours {
+        margin-bottom: 20px; 
+        break-inside: avoid; 
+    }
+
+}

@@ -29,7 +29,8 @@
         <div class='menu'>
 
             <!-- Logo Accueil -->
-            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil" aria-current="currentpage"></a>
+            <a href='accueil.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil"
+                    aria-current="currentpage"></a>
 
             <!-- Navigation desktop -->
             <nav class='navigation'>
@@ -49,19 +50,19 @@
                             </path>
                         </g>
                     </svg>
-                    <input class='input' type='search' placeholder='Search' />
+                    <label for="barre de recherche"></label>
+                    <input id="barre de recherche" class='input' type='search' placeholder='Search' />
                 </div>
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <img class='logo' src='./img/1-lettre.svg' alt="page d' accueil">
-                    <img class='logo' src='./img/1-notif.svg' alt="page d' accueil">
-
-                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre"></button>
-                    
+                    <a href='messagerie.php'><img class='logo' src='./img/1-lettre.svg' alt="messagerie"></a>
+                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
+                            alt="mode sombre"></button>
 
 
-                    <!-- PHP - AJOUTEZ LE LIEN POUR LA D2CONEXION ET LE LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
+
+                    <!-- PHP - LIEN VERS LA PAGE profil.php POUR MODIF LA PDP-->
                     <div class='photo-2'>
 
                         <?php
@@ -75,13 +76,18 @@
 
                             if ($result) {
                                 echo "
-                                <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
+                                <a href='profil.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
                             }
                         }
                         ?>
 
                     </div>
                     <!-- FIN PHP-->
+                    <form action="deconnexion.php" method="GET">
+                        <button type="submit" name="deconnect" id="btnDeconnexion">
+                            <img src="img/1-logout.svg" alt="Déconnexion">
+                        </button>
+                    </form>
 
                 </div>
             </nav>
@@ -106,7 +112,7 @@
                         echo "
                             <div class='kelis'>
                                 <div class='profil-1'>
-                                    <a href='parametres.php'>
+                                    <a href='profil.php'>
                                         <div class='photo-1'>
                                         <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
                                         </div>
@@ -114,14 +120,14 @@
                                     <div class='profil-2'>";
 
 
-                                echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
-                                echo "<p>{$result['promotion']}</p>";
+                        echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
+                        echo "<p>{$result['promotion']}</p>";
 
-                                echo "       </div>
+                        echo "       </div>
                                 </div>
                                 <div class='profil-3'>
                                 <h2>À propos</h2>";
-                                echo "<p>{$result['bio']}</p> 
+                        echo "<p>{$result['bio']}</p> 
                                 </div>
                             </div>";
 
@@ -131,30 +137,35 @@
 
 
                     <ul class='choix-2'>
-                        <li><a href=''>Mes cours</a></li>
+                        <li><a href='cours.php'>Mes cours</a></li>
                         <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                         <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                         <li><a href='page_crous.php'>Crous</a></li>
-                        <li><a href=''>Déconnexion</a></li>
                     </ul>
 
 
                     <div class='tools'>
                         <div class='tool'>
-                            <img src='img/1-notif.svg' alt=''>
-                            <p>Notifications</p>
-                        </div>
-                        <div class='tool'>
                             <img src='img/1-param.png' alt=''>
-                            <p>Paramètres</p>
+                            <a href='profil.php'><p>Profil</p></a>
                         </div>
                         <div class='tool'>
                             <img src='img/1-lettre.svg' alt=''>
-                            <p>Messagerie</p>
+                            <a href='messagerie.php'><p>Messagerie</p></a>
                         </div>
                         <div class='tool'>
-                        <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg' alt="mode sombre">
-                            <p>Mode sombre</p></button>
+                            <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
+                                    src='./img/1-moon.svg' alt="mode sombre">
+                                <p>Mode sombre</p>
+                            </button>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-logout.svg' alt=''>
+                            <form action="deconnexion.php" method="GET">
+                                <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
+                                    Déconnexion
+                                </button>
+                            </form>
                         </div>
                     </div>
 

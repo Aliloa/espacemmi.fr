@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_navigation.css'>
-    <link rel='stylesheet' href='css/style_cours.css'>
-    <link rel='stylesheet' href='css/dark_mode.css'>
-    <title>Espace MMI | Mes Cours</title>
+    <link rel='stylesheet' href='css/style_profil.css'>
+    <title>Espace MMI | Profil</title>
 </head>
 
 <body>
@@ -20,7 +19,7 @@
     }
     ?>
 
-    <header>
+<header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -45,12 +44,13 @@
                             </path>
                         </g>
                     </svg>
-                    <input class='input' type='search' placeholder='Search' />
+                    <label for="barre de recherche"></label>
+                    <input id="barre de recherche" class='input' type='search' placeholder='Search' />
                 </div>
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <img class='logo' src='./img/1-lettre.svg' alt="page d'accueil">
+                    <a href='messagerie.php'><img class='logo' src='./img/1-lettre.svg' alt="messagerie"></a>
                     <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
                             alt="mode sombre"></button>
 
@@ -131,32 +131,35 @@
 
 
                     <ul class='choix-2'>
-                        <li><a href=''>Mes cours</a></li>
+                        <li><a href='cours.php'>Mes cours</a></li>
                         <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                         <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                         <li><a href='page_crous.php'>Crous</a></li>
-                        <li><a href=''>Déconnexion</a></li>
                     </ul>
 
 
                     <div class='tools'>
                         <div class='tool'>
-                            <img src='img/1-notif.svg' alt=''>
-                            <p>Notifications</p>
-                        </div>
-                        <div class='tool'>
                             <img src='img/1-param.png' alt=''>
-                            <p>Paramètres</p>
+                            <a href='profil.php'><p>Profil</p></a>
                         </div>
                         <div class='tool'>
                             <img src='img/1-lettre.svg' alt=''>
-                            <p>Messagerie</p>
+                            <a href='messagerie.php'><p>Messagerie</p></a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
                                     src='./img/1-moon.svg' alt="mode sombre">
                                 <p>Mode sombre</p>
                             </button>
+                        </div>
+                        <div class='tool'>
+                            <img src='img/1-logout.svg' alt=''>
+                            <form action="deconnexion.php" method="GET">
+                                <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
+                                    Déconnexion
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -170,51 +173,66 @@
 
     </header>
 
+
     <main>
 
-        <h1 class="h1"> Mes cours</h1>
 
-        <div class="wrapper">
+        <nav class="fda" aria-label="Breadcrumb">
+            <ul class="ul">
+                <li><a href="accueil.php">Accueil</a></li><span> 〉 </span>
+                <li>Profil</li>
+            </ul>
+        </nav>
 
 
-            <div class="filtre">
-                <p> Filtré par: </p>
 
-                <form action="filtrecours.php" method="GET">
-                    <div class="input-container">
-                        <select name="filter" id="filter" aria-label="Filtrer dans le site">
-                            <option value="0">Filtrer</option>
-                            <option value="1">SAE</option>
-                            <option value="2">Ressources</option>
-                        </select>
-                        <input type="submit" value="Valider">
-                    </div>
-                </form>
+        <?php
+        include('connexion.php');
+
+        if (isset($_SESSION["login"])) {
+            $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
+            $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+            $stmt->execute();
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+                echo "<div class='mon-profil'>
+                        <h1> Photo actuelle</h1>
+                        <div class='photo-3'>
+                            <img class='photo-3' src='upload/{$result['photoprofil']}' alt=''>
+                        </div>
+                        <h1>Biographie</h1>
+                        <p>{$result['bio']}</p>
+                    </div>";
+            } else {
+                header('Location:index.php?erreur=access_denied');
+                exit();
+            }
+        }
+        ?>
+
+        <form class="formulaire" action="traiteprofil.php" method="POST" enctype="multipart/form-data">
+
+            <h1>Modifier</h1>
+            <div class="formu-1">
+                <label for="photo"> Changer la photo de profil</label><br>
+                <input type="file" id='photo' name="fichier" size="30" required><br>
+                <input type="submit" name="upload" value="Enregistrer">
             </div>
+        </form>
 
 
-            <div class="cours-container">
-
-                <?php
-                include('connexion.php');
-
-                $requete = "SELECT *, nom, prenom from grossematiere, utilisateurs WHERE prof_ext = id_utilisateurs AND role = 'Enseignant.e' ORDER BY id_matiere DESC";
-                $stmt = $db->query($requete);
-                $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($resultat as $cours) {
-                    echo "<div class='cours'>
-                
-                        <h2>{$cours["nom_mat"]}</h2>
-                        <p> Créé par {$cours["nom"]} {$cours["prenom"]}</p>
-                
-                </div>";
-                }
-                ?>
-
+        <form class="formulaire" action="traiteprofil.php" method="POST">
+            <div class="formu-1">
+                <label for="bio">Changer la biographie</label><br>
+                <input type="text" id='bio' name="bio" required> <br>
+                <input type="submit" name="changerbio" value="Enregistrer">
             </div>
+        </form>
 
-        </div>
+
+
 
     </main>
 
@@ -226,7 +244,6 @@
 
 </body>
 
-<script src='js/script_accueil.js'></script>
-<script src='js/script_dark_mode.js'></script>
+<script src="js/script_accueil.js"></script>
 
 </html>
