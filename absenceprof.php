@@ -14,10 +14,19 @@
 
     <?php
     session_start();
+    include("connexion.php");
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
+
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+        header('Location: page_crous.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
+
     ?>
 
     <header>
@@ -202,13 +211,21 @@
 
 
                 <label for="matiere">Matière</label><br>
-                <select name="matiere">
+                <select name="matiere" id="matiere" required>
                     <?php
-                    $stmt = $db->prepare('SELECT * FROM cours');
-                    $stmt->execute();
-                    $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach ($tableauResult as $result) {
-                        echo "<option value='" . $result['id_cours'] . "'>" . $result['cours'] . "</option>";
+                    include("connexion.php");
+
+                    if (isset($_SESSION["login"])) {
+                        $requete = 'SELECT * FROM grossematiere WHERE prof_ext = :idProfesseur';
+                        $stmt = $db->prepare($requete);
+                        $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
+                        $stmt->execute();
+
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach ($result as $matiere) {
+                            echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
+                        }
                     }
                     ?>
                 </select> <br>

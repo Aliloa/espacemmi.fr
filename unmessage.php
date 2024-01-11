@@ -1,3 +1,8 @@
+<?php
+session_start();
+include('connexion.php');
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,11 +13,20 @@
 </head>
 <body>
 <?php
-    session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
+        header('Location: backofficeprof.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+        header('Location: page_crous.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
+
     ?>
 
 <header>
@@ -172,6 +186,9 @@
     <label for="objet">L'objet de votre message </label>
     <textarea name="" id="objet" cols="30" rows="10"></textarea>
 
+    <label for="piece">Une pièce jointe ?</label>
+    <input type="file" id="piece">
+
     <p>Votre destinataire</p>
     <select name="" id="">
         <option value="0">Qui ?</option>
@@ -185,4 +202,6 @@
 
 
 </body>
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 </html>

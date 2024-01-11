@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("connexion.php");
+?>
+
 <!DOCTYPE html>
 <html lang='fr'>
 
@@ -14,16 +19,20 @@
 
 <body>
     <?php
-    session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
         header('Location: backofficeprof.php?access_denied');
-
-
     }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+        header('Location: page_crous.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
+
     ?>
     <header>
         <div class='menu'>
@@ -539,21 +548,21 @@
                 <div class='card'>
                     <div>
                         <img src='<?php echo $dernierElement['image_plat']; ?>' alt='' class='card-img-top'>
-                        <h3 class='fw-bold entre'>Entrée</h3>
+                        <h3 class='entre'>Entrée</h3>
                         <p>
                             <?php echo str_replace(', ', '<br>', $dernierElement['entre']); ?>
                         </p>
                     </div>
-                    <hr class='border border-3'>
-                    <div>
-                        <h3 class='fw-bold'>Plat</h3>
+                    <hr class='border'>
+                    <div class="bien_centrer">
+                        <h3>Plat</h3>
                         <p>
                             <?php echo $dernierElement['plat']; ?>
                         </p>
                     </div>
                     <hr class='border border-3'>
-                    <div>
-                        <h3 class='fw-bold'>Dessert</h3>
+                    <div class="bien_centrer">
+                        <h3>Dessert</h3>
                         <p>
                             <?php echo str_replace(', ', '<br>', $dernierElement['dessert']); ?>
                         </p>

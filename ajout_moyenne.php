@@ -1,9 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION['login'])) {
-        header('Location: index.php?access_denied');
-        exit();
-    }
+    include("connexion.php");
     ?>  
 
 <!DOCTYPE html>
@@ -15,7 +12,20 @@
 <link rel="stylesheet" href="css/style_vie_scolaire.css">
 <link rel="icon" href="img/favicon.png"></head>
 <body>
+<?php
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
+    
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+        header('Location: page_crous.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
 
+    ?>
 <div class="formulaire">
 <h1>Moyenne</h1>
 
@@ -30,4 +40,6 @@
 </div>
 
 </body>
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 </html>

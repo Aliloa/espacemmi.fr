@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("connexion.php");
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -50,11 +55,19 @@
 }
     </style>
 <?php
-    session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
+    
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+        header('Location: page_crous.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Étudiant.e') {
+        header('Location: accueil.php?access_denied');
+    }
+    
+
     ?>
 
 <header>
@@ -386,5 +399,6 @@
 
 
 </body>
-
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 </html>

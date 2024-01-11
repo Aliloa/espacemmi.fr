@@ -24,12 +24,12 @@
 
     $requete = "SELECT * FROM utilisateurs WHERE login=:login";
     $stmt = $db->prepare($requete);
-    $stmt->bindValue(':login', $_GET["login_user"], PDO::PARAM_STR);
+    $stmt->bindValue(':login', $_POST["login_user"], PDO::PARAM_STR);
     $stmt->execute();
 
     if ($stmt->rowCount()) {
         $result = $stmt->fetch();
-        if (password_verify($_GET["password"], $result["mot_de_passe"])) {
+        if (password_verify($_POST["password"], $result["mot_de_passe"])) {
             $_SESSION["login"] = $result["login"];
             $_SESSION["role"] = $result["role"];
             $_SESSION["id"] = $result["id_utilisateurs"];
@@ -50,15 +50,15 @@
         }
         echo "<div id='custom-popup'>";
         echo "<p>Connexion réussi ! </p>";
-        echo "</div>";
+        echo "</div>"; ?>
 
-        echo "<script>";
-        echo "setTimeout(function() {";
-        echo "   window.location.href = 'accueil.php';";
-        echo "}, 2000);";
-        echo "</script>";
-        exit();
+        <script>
+            setTimeout(function() {
+                window.location.href = 'accueil.php';
+            }, 2000);
+        </script>
 
+<?php
     } else {
         header('Location:connexion_page.php?erreur=user_not_found');
         exit();

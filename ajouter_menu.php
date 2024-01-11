@@ -1,3 +1,8 @@
+<?php
+session_start();
+include("connexion.php");
+?>
+
 <!DOCTYPE html>
 <html lang='fr'>
 
@@ -11,8 +16,21 @@
 </head>
 
 <body>
-    <?php
-    session_start();
+<?php
+    if (!isset($_SESSION['login'])) {
+        header('Location: index.php?access_denied');
+        exit();
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
+        header('Location: backofficeprof.php?access_denied');
+    }
+   
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Étudiant.e') {
+        header('Location: accueil.php?access_denied');
+    }
 
     ?>
     <header>
@@ -188,7 +206,7 @@
     </footer>
 
 </body>
-
 <script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 
 </html>
