@@ -22,8 +22,14 @@ include("connexion.php");
     
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
         header('Location: page_crous.php?access_denied');
+
     }
     
+
+   
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Étudiant.e') {
+        header('Location: accueil.php?access_denied');
+    }
 
     ?>
 

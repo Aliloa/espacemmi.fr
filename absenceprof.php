@@ -1,18 +1,16 @@
-<?php
-session_start();
-include("connexion.php");
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-<?php
-    
+    <?php
+    session_start();
+    include("connexion.php");
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
@@ -26,18 +24,19 @@ include("connexion.php");
     }
 
     ?>
-<?php include('connexion.php'); ?>
-<form action="traite_absence.php" method="POST">
+
+    <?php include('connexion.php'); ?>
+    <form action="traite_absence.php" method="POST">
         <h1>Ajouter absence /retard</h1>
 
-             <label for="eleve">Eleve</label>
-        <select name="eleve">     
+        <label for="eleve">Eleve</label>
+        <select name="eleve">
             <?php
             $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE role="Étudiant.e"');
             $stmt->execute();
             $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach ($tableauResult as $result) {
-                echo "<option value='". $result['id_utilisateurs']."'>". $result['nom']." " . $result['prenom'] ."</option>";
+                echo "<option value='" . $result['id_utilisateurs'] . "'>" . $result['nom'] . " " . $result['prenom'] . "</option>";
             }
             ?>
         </select> <br>
@@ -52,29 +51,44 @@ include("connexion.php");
         <input type="time" name="fin" required> <br>
 
 
-        <label for="matiere">Matière</label>
-        <select name="matiere">     
+        <select name="matiere" id="matiere" required>
+
+
             <?php
-            $stmt = $db->prepare('SELECT * FROM grossematiere');
-            $stmt->execute();
-            $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($tableauResult as $result) {
-                echo "<option value='". $result['id_matiere'] . "'>". $result['nom_mat'] . "</option>";
+            include("connexion.php");
+
+            if (isset($_SESSION["login"])) {
+                $requete = 'SELECT * FROM grossematiere WHERE prof_ext = :idProfesseur';
+                $stmt = $db->prepare($requete);
+                $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
+                $stmt->execute();
+
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($result as $matiere) {
+                    echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
+                }
             }
             ?>
-        </select> <br>
+
+
+        </select>
+
+
+        <br>
 
         <div>
-    <input class="radio" type="radio" id="absence" name="titre" value="Absence" />
-    <label for="absence">Absence</label>
-    
-    <input class="radio" type="radio" id="retard" name="titre" value="Retard" />
-    <label for="retard">Retard</label>
-</div>
+            <input class="radio" type="radio" id="absence" name="titre" value="Absence" />
+            <label for="absence">Absence</label>
+
+            <input class="radio" type="radio" id="retard" name="titre" value="Retard" />
+            <label for="retard">Retard</label>
+        </div>
 
 
 
         <button type="submit" name='soumettre'>S'inscrire</button>
     </form>
 </body>
+
 </html>

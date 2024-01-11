@@ -1,4 +1,5 @@
 <?php
+    session_start();
 include('connexion.php');
 
 // Vérifiez si l'identifiant du commentaire à supprimer est présent dans l'URL
