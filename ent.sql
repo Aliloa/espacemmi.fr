@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 11 jan. 2024 à 12:01
+-- Généré le : jeu. 11 jan. 2024 à 13:44
 -- Version du serveur : 8.2.0
 -- Version de PHP : 8.2.13
 
@@ -30,23 +30,25 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `abscence_retard`;
 CREATE TABLE IF NOT EXISTS `abscence_retard` (
   `id_abs` int NOT NULL AUTO_INCREMENT,
-  `titre` varchar(255) NOT NULL,
+  `titre` enum('Absence','Retard') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `date` date NOT NULL,
-  `nombre` time NOT NULL,
+  `debut` time NOT NULL,
+  `fin` time NOT NULL,
   `ext_cours` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `eleve` int NOT NULL,
   `prof` int NOT NULL,
   `justificatif` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`id_abs`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `abscence_retard`
 --
 
-INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `nombre`, `ext_cours`, `eleve`, `prof`, `justificatif`) VALUES
-(1, 'absence', '2023-12-13', '02:00:00', '14', 16, 0, ''),
-(2, 'absence', '2024-01-07', '02:00:00', '11', 13, 0, '');
+INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `debut`, `fin`, `ext_cours`, `eleve`, `prof`, `justificatif`) VALUES
+(1, 'Absence', '2023-12-13', '02:00:00', '00:00:00', '14', 16, 0, ''),
+(2, 'Absence', '2024-01-07', '02:00:00', '00:00:00', '11', 13, 0, ''),
+(3, 'Retard', '2024-01-13', '16:28:00', '16:30:00', '13', 13, 0, NULL);
 
 -- --------------------------------------------------------
 
