@@ -23,6 +23,7 @@
         header('Location: administration.php?access_denied');
     }
 
+
     ?>
 
     <form action="traite_travail.php" method="POST">

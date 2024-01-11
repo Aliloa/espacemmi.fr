@@ -186,6 +186,9 @@ include('connexion.php');
     <label for="objet">L'objet de votre message </label>
     <textarea name="" id="objet" cols="30" rows="10"></textarea>
 
+    <label for="piece">Une pièce jointe ?</label>
+    <input type="file" id="piece">
+
     <p>Votre destinataire</p>
     <select name="" id="">
         <option value="0">Qui ?</option>
