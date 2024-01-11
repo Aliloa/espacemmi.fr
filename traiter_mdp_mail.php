@@ -7,17 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['mail'];
 
     // Vérifier si l'e-mail existe dans la base de données
-    $query = "SELECT * FROM utilisateurs WHERE email = :email";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':email', $email);
+    $requete = "SELECT * FROM utilisateurs WHERE email = :email";
+    $stmt = $db->prepare($requete);
+    $stmt->bindValue(':email', $email);
     $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
+    if ($resultat) {
         $to = $email;
         $subject = 'Réinitialisation du mot de passe';
         
-        $resetLink = 'http://espacemmichamps.fr/formulaire_mdp.php'; 
+        $resetLink = 'https://espacemmichamps.fr/formulaire_mdp.php'; 
         
         $body = "Bonjour, veuillez cliquer sur le lien suivant pour procéder à la réinitialisation de votre mot de passe : <a href='$resetLink'>réinitialiser le mot de passe</a>";
         

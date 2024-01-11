@@ -53,7 +53,7 @@ session_start();
                     var messageErreur = document.getElementById("messageErreur");
 
                     if (mdp1 !== mdp2) {
-                        messageErreur.innerHTML = "Le deuxième mot de passe ne correspond pas au premier.";
+                        messageErreur.innerHTML = "Les mots de passe ne correspondent pas.";
                         return false;
                     } else {
                         messageErreur.innerHTML = "";

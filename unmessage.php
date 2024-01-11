@@ -65,7 +65,7 @@
 
                             if ($result) {
                                 echo "
-                                <a href='parametres.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
+                                <a href='profil.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
                             }
                         }
                         ?>
@@ -101,7 +101,7 @@
                         echo "
                             <div class='kelis'>
                                 <div class='profil-1'>
-                                    <a href='parametres.php'>
+                                    <a href='profil.php'>
                                         <div class='photo-1'>
                                         <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
                                         </div>
