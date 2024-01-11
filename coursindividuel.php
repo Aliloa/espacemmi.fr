@@ -10,7 +10,7 @@ include("connexion.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_navigation.css'>
-    <link rel='stylesheet' href='css/style_backoffice.css'>
+    <link rel='stylesheet' href='css/style_cours.css'>
     <link rel='stylesheet' href='css/dark_mode.css'>
     <title>Espace MMI | Cours</title>
 </head>
@@ -191,8 +191,16 @@ include("connexion.php");
 
     </header>
 
-    <main>
+    <main class="fini">
 
+        <nav class="fda" aria-label="Breadcrumb">
+            <ul class="ul">
+                <li><a href="cours.php">Mes Cours</a></li><span> 〉 </span>
+                <li>Cours</li>
+            </ul>
+        </nav>
+
+        <div class="wrapper">
         <?php
         include("connexion.php");
 
@@ -212,17 +220,28 @@ include("connexion.php");
             foreach ($result as $uncours) {
                 $chemindoc = "documents/" . $uncours["document"];
 
-                echo "<a href='{$chemindoc}' target='_blank'>{$uncours['cours']}</a> <br> ";
+                echo "<div class='cours'>
+                <a class='padding' href='{$chemindoc}' target='_blank'><h2>{$uncours["cours"]}</h2>
+                </div>";
             }
         } else {
             echo "Aucun cours trouvé pour cette matière.";
 
         }
         ?>
+        </div>
     </main>
 
 
+    <footer>
+        <a href='mentions_legales.html'>
+            <p> Mentions légales </p>
+        </a>
+    </footer>
 
 </body>
+
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 
 </html>

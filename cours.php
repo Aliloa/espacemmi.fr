@@ -184,11 +184,11 @@ include("connexion.php");
 
     <main>
 
-        <h1 class="h1"> Mes cours</h1>
+       
 
         <div class="wrapper">
-
-
+                    
+            <h1 class="h1"> Mes cours</h1>
             <div class="filtre">
                 <p> Filtré par: </p>
 
@@ -203,8 +203,7 @@ include("connexion.php");
                     </div>
                 </form>
             </div>
-                    
-            <img src="" alt="">
+
 
             <div class="cours-container">
 

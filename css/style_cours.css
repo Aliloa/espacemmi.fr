@@ -7,7 +7,6 @@
 }
 
 .h1{
-    padding-left: 3rem;
     font-size: 2rem;
 }
 
@@ -34,16 +33,28 @@
     display: flex;
 }
 
+.padding{
+    padding: 1.5rem 0 1rem 1.5rem;
+}
+
 .cours img{
     object-fit: cover;
-    width: 117px;
-    height: 100px;
+    width: 90px;
+    border-top-left-radius: 10px ;
+    border-bottom-left-radius: 10px ;
+}
+
+.cours h2, .cours p{
+  font-size: 0.75rem;
 }
 
 .cours div{
     padding: 1.5rem;
 }
 
+.fini{
+    min-height: 70vh;
+}
 
 .cours-container p{
     margin: 0;
@@ -80,6 +91,14 @@
         font-size: 0.9rem;
     }
 
+    .cours h2{
+        font-size: 1rem;
+      }
+
+      .cours img{
+        height: 100px;
+    }
+
 }
 
 
@@ -96,6 +115,10 @@
     .cours {
         margin-bottom: 20px; 
         break-inside: avoid; 
+    }
+
+    .h1, .filtre{
+        margin-left: 4rem;
     }
 
 }
