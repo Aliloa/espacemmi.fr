@@ -90,5 +90,7 @@
         <button type="submit" name='soumettre'>S'inscrire</button>
     </form>
 </body>
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
 
 </html>
