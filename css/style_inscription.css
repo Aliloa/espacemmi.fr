@@ -13,7 +13,8 @@ body {
 }
 
 
-.logo-0 img, .logo-1 img {
+.logo-0 img,
+.logo-1 img {
     position: absolute;
     top: 2rem;
     left: 3rem;
@@ -26,19 +27,19 @@ body {
 }
 
 #custom-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 80px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 3px rgba(92, 45, 203, 1);
-            z-index: 1;
-        }
-        
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 80px;
+    background-color: var(--bg);
+    border-radius: 20px;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
+
 #custom-popup p {
-    margin: 0; 
+    margin: 0;
     font-size: 1rem;
     color: black;
 }
@@ -47,14 +48,17 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
 }
 
 #custom-popup {
-    animation: fadeIn 0.5s ease-in-out; /* Apply the animation to the popup */
+    animation: fadeIn 0.5s ease-in-out;
+    /* Apply the animation to the popup */
 }
+
 /* Page index.php */
 
 .main-1 {
@@ -150,7 +154,8 @@ input {
     margin-bottom: 2rem;
 }
 
-.bouton1 input, .bouton1 button {
+.bouton1 input,
+.bouton1 button {
     cursor: pointer;
     background-color: #604CF9;
     border: 1px solid transparent;
@@ -162,7 +167,8 @@ input {
     border-radius: 9px;
 }
 
-.bouton1 input:hover, .bouton1 button:hover {
+.bouton1 input:hover,
+.bouton1 button:hover {
     background-color: #000000;
 }
 
@@ -175,7 +181,7 @@ input {
 
 }
 
-form p{
+form p {
     font-size: 1.5rem;
     font-weight: 800;
     padding-bottom: 1rem;
@@ -242,16 +248,19 @@ form p{
         padding: 11rem 7rem;
     }
 
-    .logo-0 img:first-child,.logo-1 a:first-child {
+    .logo-0 img:first-child,
+    .logo-1 a:first-child {
         display: none;
     }
 
-    .logo-0 img:nth-child(2),.logo-1 a:nth-child(2) {
+    .logo-0 img:nth-child(2),
+    .logo-1 a:nth-child(2) {
         display: block;
         margin: 0;
     }
 
-    .logo-0 img:nth-child, .logo-1 img:nth-child(2){
+    .logo-0 img:nth-child,
+    .logo-1 img:nth-child(2) {
         left: 5rem;
         top: 2.5rem;
     }
@@ -296,18 +305,15 @@ form p{
         height: 2rem;
     }
 
-    .image2 img{
+    .image2 img {
         width: 20vw;
         position: absolute;
         bottom: 0;
         z-index: 1;
     }
 
-    form p{
+    form p {
         width: 500px;
     }
 
 }
-
-
-
