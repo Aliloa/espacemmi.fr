@@ -199,7 +199,7 @@ include("connexion.php");
         if (isset($_GET["id_matiere"])) {
             $id_matiere = $_GET["id_matiere"];
         } else {
-            $id_matiere = "12"; // Vous pouvez définir une valeur par défaut ou traiter autrement cette situation
+            $id_matiere = "12";
         }
 
         $requete = "SELECT * FROM cours WHERE ext_matiere = :id_matiere";

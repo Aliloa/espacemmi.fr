@@ -173,36 +173,36 @@
     </header>
 
     <main>
-    <?php
-include('connexion.php');
+        <?php
+        include('connexion.php');
 
-$destinataire = $_SESSION['login'];
+        $destinataire = $_SESSION['id'];
+        $requete = "SELECT messages.*, expediteur.nom, expediteur.prenom, expediteur.photoprofil
+    FROM messages
+ INNER JOIN utilisateurs AS destinataire ON messages.destinataire = destinataire.id_utilisateurs INNER JOIN utilisateurs AS expediteur ON messages.expediteur = expediteur.id_utilisateurs
+ WHERE messages.destinataire = :destinataire ORDER BY messages.date_mess";
 
-$requete = "SELECT messages.*, utilisateurs.nom AS nom_expediteur, utilisateurs.prenom AS prenom_expediteur, utilisateurs.photoprofil AS photoprofil_expediteur
-            FROM messages, utilisateurs
-            WHERE messages.destinataire = :destinataire
-            AND messages.expediteur = utilisateurs.login
-            ORDER BY messages.date_mess DESC";
 
-$stmt = $db->prepare($requete);
-$stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_STR);
-$stmt->execute();
+        $stmt = $db->prepare($requete);
+        $stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_STR);
+        $stmt->execute();
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-var_dump($resultat);
-
-foreach ($resultat as $message) {
-    echo "<div class='message'>
+        foreach ($resultat as $message) {
+            echo "<div class='message'>
             <div>
+            <p> Date : {$message["date_mess"]} </p>
                 <h2> {$message["objet"]}</h2>
-                <p> Envoyé par : {$message["nom_expediteur"]} {$message["prenom_expediteur"]} </p> 
-                <img src='upload/{$message["photoprofil_expediteur"]}'>
-                <p> Contenu : {$message["contenu_mss"]} </p> 
-                <p> Date : {$message["date_mess"]} </p> 
+                <p> Envoyé par : {$message["nom"]} {$message["prenom"]} </p> 
+                <img src='upload/{$message["photoprofil"]}'>
+                <a href='newmessage.php?id_mess={$message["id_message"]}'>
+                Lire le contenu</a>
+
+                 
             </div> <br><br>
           </div>";
-}
-?>
+        }
+        ?>
 
 
 

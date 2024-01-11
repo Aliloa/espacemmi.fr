@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_navigation.css'>
     <title>Document</title>
 </head>
+
 <body>
-<?php
+    <?php
     session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
@@ -25,7 +27,7 @@
 
     ?>
 
-<header>
+    <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -176,9 +178,36 @@
     </header>
 
 
+    <?php
+    include("connexion.php");
+
+    if (isset($_GET["id_mess"])) {
+        $mess = $_GET["id_mess"];
+
+        $requete = "SELECT * FROM messages, utilisateurs WHERE id_message = :mess AND expediteur = id_utilisateurs";
+        $stmt = $db->prepare($requete);
+        $stmt->bindValue(':mess', $mess, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($stmt->rowCount()) {
+            echo "{$result['nom']} {$result['prenom']} <br>
+            <img src='upload/{$result['photoprofil']}'> <br>
+            {$result['contenu_mss']}<br>
+
+            ";
+        } else {
+            echo "Aucun message trouvé.";
+        }
+    } else {
+        echo "ID du message non spécifié.";
+    }
+    ?>
+
 
 
 </body>
 <script src='js/script_accueil.js'></script>
 <script src='js/script_dark_mode.js'></script>
+
 </html>
