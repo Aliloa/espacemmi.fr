@@ -76,7 +76,6 @@
                         ?>
 
                     </div>
-                    <!-- FIN PHP-->
                     <form action="deconnexion.php" method="GET">
                         <button type="submit" name="deconnect" id="btnDeconnexion">
                             <img src="img/1-logout.svg" alt="Déconnexion">

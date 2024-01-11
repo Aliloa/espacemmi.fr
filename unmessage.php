@@ -14,7 +14,8 @@
         exit();
     }
     ?>
-    <header>
+
+<header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -164,45 +165,23 @@
 
     </header>
 
-    <main>
-        <div class="email-container">
-            <div class="email-preview" onclick="toggleContent(this)">
-                <div class="email-sender">
-                    <div class="sender-avatar"></div>
-                    <span>John Doe</span>
-                </div>
-                <div class="email-details">
-                    <span>21 Janvier, 10:30 AM</span>
-                    <span>Nouvelles importantes</span>
-                </div>
-            </div>
-            <div class="email-content">
-                <p>Cher étudiant,</p>
-                <p>Voici quelques nouvelles importantes pour vous...</p>
-            </div>
-        </div>
 
-        <div class="email-container">
-            <div class="email-preview" onclick="toggleContent(this)">
-                <div class="email-sender">
-                    <div class="sender-avatar"></div>
-                    <span>Jane Smith</span>
-                </div>
-                <div class="email-details">
-                    <span>20 Janvier, 15:45 PM</span>
-                    <span>Rappel: Projet à rendre</span>
-                </div>
-            </div>
-            <div class="email-content">
-                <p>Cher étudiant,</p>
-                <p>Rappelez-vous que le projet doit être rendu d'ici la fin de la semaine...</p>
-            </div>
-        </div>
 
-        <a href="unmessage.php">Écrire un nouveau message</a>
+    <form action="traitemessagerie.php" method="POST" enctype="multipart/form-data">
 
-    </main>
+    <label for="objet">L'objet de votre message </label>
+    <textarea name="" id="objet" cols="30" rows="10"></textarea>
 
+    <p>Votre destinataire</p>
+    <select name="" id="">
+        <option value="0">Qui ?</option>
+        <option value="0">à Kelis</option>
+        <option value="0">à Eppstein</option>
+        <option value="0">à tous</option>
+    </select>
+
+
+    </form>
 
 
 </body>
