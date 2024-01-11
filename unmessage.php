@@ -5,14 +5,16 @@ include('connexion.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_navigation.css'>
     <title>Document</title>
 </head>
+
 <body>
-<?php
+    <?php
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
@@ -29,7 +31,7 @@ include('connexion.php');
 
     ?>
 
-<header>
+    <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -54,18 +56,19 @@ include('connexion.php');
                             </path>
                         </g>
                     </svg>
-                    <input class='input' type='search' placeholder='Search' />
+                    <label for="barre de recherche"></label>
+                    <input id="barre de recherche" class='input' type='search' placeholder='Search' />
                 </div>
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <img class='logo' src='./img/1-lettre.svg' alt="page d'accueil">
+                    <a href='messagerie.php'><img class='lettre' src='./img/1-lettre.svg' alt="messagerie"></a>
                     <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
                             alt="mode sombre"></button>
 
 
 
-                    <!-- PHP - LIEN VERS LA PAGE PARAMETRES.PHP POUR MODIF LA PDP-->
+                    <!-- PHP - LIEN VERS LA PAGE profil.php POUR MODIF LA PDP-->
                     <div class='photo-2'>
 
                         <?php
@@ -88,7 +91,7 @@ include('connexion.php');
                     <!-- FIN PHP-->
                     <form action="deconnexion.php" method="GET">
                         <button type="submit" name="deconnect" id="btnDeconnexion">
-                            <img src="img/1-logout.svg" alt="Déconnexion">
+                            <img class="logout" src="img/1-logout.svg" alt="Déconnexion">
                         </button>
                     </form>
 
@@ -140,32 +143,39 @@ include('connexion.php');
 
 
                     <ul class='choix-2'>
-                        <li><a href=''>Mes cours</a></li>
+                        <li><a href='cours.php'>Mes cours</a></li>
                         <li><a href='vie_etudiante.php'>Vie étudiante</a></li>
                         <li><a href='vie_scolaire.php'>Vie scolaire</a></li>
                         <li><a href='page_crous.php'>Crous</a></li>
-                        <li><a href=''>Déconnexion</a></li>
                     </ul>
 
 
                     <div class='tools'>
                         <div class='tool'>
-                            <img src='img/1-notif.svg' alt=''>
-                            <p>Notifications</p>
+                            <img class="param" src='img/1-param.png' alt=''>
+                            <a href='profil.php'>
+                                <p>Profil</p>
+                            </a>
                         </div>
                         <div class='tool'>
-                            <img src='img/1-param.png' alt=''>
-                            <p>Paramètres</p>
-                        </div>
-                        <div class='tool'>
-                            <img src='img/1-lettre.svg' alt=''>
-                            <p>Messagerie</p>
+                            <img class="lettre" src='img/1-lettre.svg' alt=''>
+                            <a href='messagerie.php'>
+                                <p>Messagerie</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
                                     src='./img/1-moon.svg' alt="mode sombre">
                                 <p>Mode sombre</p>
                             </button>
+                        </div>
+                        <div class='tool'>
+                            <img class="logout" src='img/1-logout.svg' alt=''>
+                            <form action="deconnexion.php" method="GET">
+                                <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
+                                    Déconnexion
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -180,28 +190,43 @@ include('connexion.php');
     </header>
 
 
-
     <form action="traitemessagerie.php" method="POST" enctype="multipart/form-data">
 
-    <label for="objet">L'objet de votre message </label>
-    <textarea name="" id="objet" cols="30" rows="10"></textarea>
+        <label for="objet">Titre de votre message</label>
+        <input type="text" id="objet">
 
-    <label for="piece">Une pièce jointe ?</label>
-    <input type="file" id="piece">
+        <label for="contenu">Le contenu de votre message</label>
+        <textarea name="" id="contenu" cols="30" rows="10"></textarea> <br><br>
 
-    <p>Votre destinataire</p>
-    <select name="" id="">
-        <option value="0">Qui ?</option>
-        <option value="0">à Kelis</option>
-        <option value="0">à Eppstein</option>
-        <option value="0">à tous</option>
-    </select>
+        <label for="piece">Une pièce jointe ?</label>
+        <input type="file" id="piece">
+
+        <p>Votre destinataire</p>
+        <?php include('connexion.php'); ?>
+        <form action="traite_absence.php" method="POST">
+
+            <label for="eleve">Qui?</label>
+            <select name="eleve">
+                <option value="0">Choisir</option>
+                <?php
+                $requete = 'SELECT * FROM utilisateurs WHERE ROLE = "Étudiant.e" OR ROLE = "Enseignant.e" ORDER BY CASE WHEN ROLE = "Enseignant.e" THEN 1 ELSE 2 END';
+                $stmt = $db->prepare($requete);
+                $stmt->execute();
+                $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($tableauResult as $result) {
+                    echo "<option value='" . $result['id_utilisateurs'] . "'>" . $result['nom'] . " " . $result['prenom'] . " (" . $result['role']. ") " . "</option>";
+                }
+                ?>
+            </select> <br>
+
+            <input type="submit" name="newmessage">
 
 
-    </form>
+        </form>
 
 
 </body>
 <script src='js/script_accueil.js'></script>
 <script src='js/script_dark_mode.js'></script>
+
 </html>

@@ -385,8 +385,8 @@ include("connexion.php");
                     $chemindoc = "documents/" . $cours["document"];
 
                     echo "<div class='cours'>
-                                    <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2></a>
-                                    <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p>
+                                    <a href='{$chemindoc}' target='_blank'><h2>{$cours["cours"]}</h2>
+                                    <p>Créé par {$cours["prenom"]} {$cours["nom"]}</p></a>
                             </div>";
                 }
                 ?>
