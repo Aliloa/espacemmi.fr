@@ -1,3 +1,8 @@
+<?php
+session_start();
+include('connexion.php');
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,7 +13,6 @@
 </head>
 <body>
 <?php
-    session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
