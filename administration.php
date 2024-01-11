@@ -167,15 +167,18 @@
 
     foreach ($result as $users) {
         if ($users['login'] !== 'Admin') {
-
+            $pop_upId = "supprimer_user_" . $users['id_utilisateurs']; // ID unique pour chaque modal
+    
             echo "
             <p>{$users['id_utilisateurs']}, {$users['login']}, {$users['nom']}, {$users['prenom']}, {$users['email']}, {$users['role']} {$users['promotion']} </p>
-            <a href='javascript:void(0);' class='btn btn-danger mention-ptit' onclick='afficherPopupConfirmation({$users["id_utilisateurs"]})'>Supprimer</a>
-                
-            <div class='popup-visible'>
+            <a href='javascript:void(0);' class='btn btn-danger mention-ptit' onclick='afficherPopupConfirmation({$users["id_utilisateurs"]}, \"{$users["login"]}\")'>Supprimer</a>";
+            
+            
+    
+            echo "<div class='popup-visible' id='{$pop_upId}'>
                 <img src='img/croix.png' alt='fermer' class='fermer'>
                 <div class='mention'>
-                    <p>Êtes-vous sûr de vouloir effacer définitivement {$users["login"]} ?</p>
+                    <p class='user'>Êtes-vous sûr de vouloir effacer définitivement {$users['login']} ?</p>
                     <a href='traitesuppression.php?id={$users["id_utilisateurs"]}' class='btn btn-warning' id='lienSuppression'>Oui</a>
                     <a href='javascript:void(0);' class='btn btn-secondary' onclick='annulerSuppression()'>Non</a>
                 </div>
@@ -236,9 +239,12 @@
 <script>
     let popup = document.querySelector('.popup-visible');
 
-    function afficherPopupConfirmation(userId) {
+    function afficherPopupConfirmation(userId, userLogin) {
         let lienSuppression = document.getElementById('lienSuppression');
         lienSuppression.href = 'traitesuppression.php?id=' + userId;
+
+        let user = document.querySelector('.user');
+        user.innerHTML = 'Êtes-vous sûr de vouloir effacer définitivement ' + userLogin + '?';
 
         popup.style.display = 'block';
     }
