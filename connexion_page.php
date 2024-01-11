@@ -1,8 +1,7 @@
 <?php
-session_start();
-include("connexion.php");
-?>
-
+    session_start();
+    include('connexion.php');
+    ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,7 +16,7 @@ include("connexion.php");
 
 <body>
 
-
+    
 
     <main class="main-2">
 
@@ -34,6 +33,7 @@ include("connexion.php");
                 <?php
                 if (isset($_GET["erreur"])) {
                     echo "Vous vous êtes trompés, veuillez recommencez";
+                    // echo "<a href='inscription_page.php?erreur=login'>Créez un compte</a>";
                 
                 }
                 ?>
@@ -77,6 +77,5 @@ include("connexion.php");
 
 
 </body>
-<script src='js/script_accueil.js'></script>
-<script src='js/script_dark_mode.js'></script>
+
 </html>
