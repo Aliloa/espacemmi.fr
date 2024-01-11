@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 11 jan. 2024 à 13:44
--- Version du serveur : 8.2.0
--- Version de PHP : 8.2.13
+-- Généré le : jeu. 11 jan. 2024 à 15:26
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,21 +34,23 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
   `date` date NOT NULL,
   `debut` time NOT NULL,
   `fin` time NOT NULL,
-  `ext_cours` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `eleve` int NOT NULL,
+  `matiere_ext` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `prof` int NOT NULL,
+  `eleve` int NOT NULL,
   `justificatif` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`id_abs`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `abscence_retard`
 --
 
-INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `debut`, `fin`, `ext_cours`, `eleve`, `prof`, `justificatif`) VALUES
-(1, 'Absence', '2023-12-13', '02:00:00', '00:00:00', '14', 16, 0, ''),
-(2, 'Absence', '2024-01-07', '02:00:00', '00:00:00', '11', 13, 0, ''),
-(3, 'Retard', '2024-01-13', '16:28:00', '16:30:00', '13', 13, 0, NULL);
+INSERT INTO `abscence_retard` (`id_abs`, `titre`, `date`, `debut`, `fin`, `matiere_ext`, `prof`, `eleve`, `justificatif`) VALUES
+(1, 'Absence', '2023-12-13', '02:00:00', '00:00:00', '8', 0, 16, ''),
+(2, 'Absence', '2024-01-07', '02:00:00', '00:00:00', '15', 0, 13, ''),
+(3, 'Retard', '2024-01-13', '16:28:00', '16:30:00', '6', 0, 13, NULL),
+(5, 'Absence', '2024-01-11', '10:30:00', '12:30:00', '9', 0, 16, NULL),
+(6, 'Absence', '2024-01-10', '08:15:00', '12:15:00', '7', 23, 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -136,28 +138,6 @@ INSERT INTO `crous` (`id`, `entre`, `plat`, `dessert`, `date`, `image_plat`, `li
 (12, 'Velouté de potiron à la crème fraîche, Bruschetta à la tomate et mozzarella', 'Pâtes carbonara, Magret de canard à l\'orange, Poisson en croûte d\'amandes', 'Mousse au chocolat noir, Tarte aux pommes caramélisées, Sorbet au citron', '2024-01-23', 'https://img.cuisineaz.com/1024x1024/2015/10/12/i6388-magret-de-canard-a-l-orange-au-miel.jpg', 'Copernic'),
 (15, 'Carpaccio de saumon aux agrumes, Salade de chèvre chaud au miel', 'Filet de boeuf, Risotto aux champignons, Poulet rôti', 'Tiramisu aux fruits rouges, Crème brûlée à la vanille, Fondant au chocolat', '2024-01-25', 'https://img.cuisineaz.com/660x660/2017/09/04/i132139-risotto-aux-champignons-au-companion.jpeg', 'Copernic'),
 (16, 'Soupe de potiron, Ceviche de poisson', 'Poulet curry coco, Filet mignon aux champignons, Lasagnes végétariennes', 'Tarte aux pommes, Mousse au chocolat, Panna cotta aux fruits rouges, Fondue au chocolat avec fruits ', '2024-01-24', 'https://i.pinimg.com/564x/a5/81/56/a58156cbd213bb58cdc4d24160c6b2c9.jpg', 'Copernic');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `forum`
---
-
-DROP TABLE IF EXISTS `forum`;
-CREATE TABLE IF NOT EXISTS `forum` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(50) NOT NULL,
-  `commentaire` varchar(500) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `forum`
---
-
-INSERT INTO `forum` (`id`, `login`, `commentaire`) VALUES
-(1, 'kelis', 'pitié qu\'on en finisse de cet ent maudit'),
-(2, 'user_broken', 'comment vesqui un devoir coeff 10 svp ?');
 
 -- --------------------------------------------------------
 
@@ -294,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`login`, `nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
-('f.anchana', 'Fatimarajan', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'J\'adore Kirbyyyy'),
+('f.anchana', 'Fatimarajan', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_f.anchana.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'J\'adore Kirbyyyy'),
 ('Alilo', 'Zhyla', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'Membre du CROUS', 'alina@gmail.com', NULL, NULL),
 ('o.kelis', 'Oshoffa', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'MMI2', NULL),
 ('c.gaelle', 'Charpentier', 'Gaëlle', 21, '$2y$10$cF.Hon4PfAh9z6oLQvL0F.B11NA57.974N2yVdZEJEJQfa9.SX9N6', 'default.png', 'Enseignant.e', 'gaelle.charpentier@univ-eiffel.fr', NULL, NULL),
