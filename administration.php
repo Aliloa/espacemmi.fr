@@ -11,6 +11,7 @@ include("connexion.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_accueil.css'>
     <link rel='stylesheet' href='css/style_navigation.css'>
+    <link rel='stylesheet' href='css/dark_mode.css'>
     <title>Espace MMI | admninistration</title>
 </head>
 
@@ -101,7 +102,7 @@ include("connexion.php");
 
                 <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
                 <div class='icon-photo'>
-                    <a href='messagerie.php'><img class='logo' src='./img/1-lettre.svg' alt="messagerie"></a>
+                    <a href='messagerie.php'><img class='lettre' src='./img/1-lettre.svg' alt="messagerie"></a>
                     <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
                             alt="mode sombre"></button>
 
@@ -130,7 +131,7 @@ include("connexion.php");
                     <!-- FIN PHP-->
                     <form action="deconnexion.php" method="GET">
                         <button type="submit" name="deconnect" id="btnDeconnexion">
-                            <img src="img/1-logout.svg" alt="Déconnexion">
+                            <img class="logout" src="img/1-logout.svg" alt="Déconnexion">
                         </button>
                     </form>
 
@@ -195,7 +196,7 @@ include("connexion.php");
                             <a href='profil.php'><p>Profil</p></a>
                         </div>
                         <div class='tool'>
-                            <img src='img/1-lettre.svg' alt=''>
+                            <img class='lettre' src='img/1-lettre.svg' alt=''>
                             <a href='messagerie.php'><p>Messagerie</p></a>
                         </div>
                         <div class='tool'>
@@ -205,7 +206,7 @@ include("connexion.php");
                             </button>
                         </div>
                         <div class='tool'>
-                            <img src='img/1-logout.svg' alt=''>
+                            <img class="logout" src='img/1-logout.svg' alt=''>
                             <form action="deconnexion.php" method="GET">
                                 <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
                                     Déconnexion
