@@ -250,8 +250,6 @@ include("connexion.php");
 
                         foreach ($result as $matiere) {
                             $_SESSION['id_matiere'] = $matiere['id_matiere'];
-                            // $_SESSION['coef_cours'] = $matiere['coef'];
-                            // $_SESSION['coef_matiere'] = $matiere['coefficient'];
                             echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
                         }
                     }
