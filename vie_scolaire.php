@@ -236,7 +236,7 @@
 
         <?php
 
-        $requete = "SELECT abscence_retard.id_abs, abscence_retard.titre, abscence_retard.date, abscence_retard.nombre, cours.cours
+        $requete = "SELECT abscence_retard.id_abs, abscence_retard.titre, abscence_retard.date, abscence_retard.debut, abscence_retard.fin, cours.cours
             FROM abscence_retard, cours
             WHERE abscence_retard.ext_cours = cours.id_cours
             ORDER BY abscence_retard.id_abs DESC";
@@ -255,7 +255,10 @@
                             <?php echo $result['titre']; ?>
                         </h2>
                         <p class='small-date'>
-                            <?php echo "{$result['nombre']}"; ?>
+                            <!-- montrer le temps d'absence en calculant la différence entre le début et la fin  -->
+                            <?php echo  (new DateTime($result['debut']))->diff(new DateTime($result['fin']))->format('%Hh %imin');
+ ?>
+                            
                         </p>
                     </div>
                     <div class="cours_classe">
