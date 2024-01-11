@@ -19,14 +19,8 @@ include('connexion.php');
         header('Location: index.php?access_denied');
         exit();
     }
-    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
-        header('Location: backofficeprof.php?access_denied');
-    }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
         header('Location: page_crous.php?access_denied');
-    }
-    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
-        header('Location: administration.php?access_denied');
     }
 
     ?>
@@ -203,7 +197,7 @@ include('connexion.php');
 
         <p>Votre destinataire</p>
         <?php include('connexion.php'); ?>
-        <form action="traite_absence.php" method="POST">
+        <form action="traitemessagerie.php" method="POST">
 
             <label for="eleve">Qui?</label>
             <select name="eleve">
@@ -214,9 +208,16 @@ include('connexion.php');
                 $stmt->execute();
                 $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($tableauResult as $result) {
-                    echo "<option value='" . $result['id_utilisateurs'] . "'>" . $result['nom'] . " " . $result['prenom'] . " (" . $result['role']. ") " . "</option>";
+                    echo "<option value='" . $result['id_utilisateurs'] . "'name='solo'>" . $result['nom'] . " " . $result['prenom'] . " (" . $result['role'] . ") " . "</option>";
                 }
                 ?>
+                <?php
+                    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
+
+              echo"  <option value='Tous' name='tous'>Tous</option>";
+                    }
+                ?>
+
             </select> <br>
 
             <input type="submit" name="newmessage">
