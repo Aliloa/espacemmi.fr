@@ -2,33 +2,32 @@
     session_start();
     include("connexion.php");
 
+
     if (isset($_POST['soumettre'])) {
         $travail = $_POST['travail'];
         $date = $_POST['date'];
-        $nomPrenom = $_SESSION['nom'] . ' ' . $_SESSION['prenom'];
         $matiere = $_POST['matiere'];
+
+        $requeteprof = "SELECT nom, prenom FROM utilisateurs WHERE login = :login";
+        $stmtprof = $db->prepare($requeteprof);
+        $stmtprof->bindValue(":login", $_SESSION['login'], PDO::PARAM_STR);
+        $stmtprof->execute();
+        $resultatprof = $stmtprof->fetch(PDO::FETCH_ASSOC);
+            $prof = $resultatprof['nom'] . " " .$resultatprof['prenom'];
     }
 
-    $requeteetudiant = "SELECT * FROM utilisateurs WHERE id_utilisateurs = :id_eleve";
-    $stmtetudiant = $db->prepare($requeteetudiant);
-    $stmtetudiant->bindValue(":id_eleve", $eleve, PDO::PARAM_INT);
-    $stmtetudiant->execute();
-    $resultatetudiant = $stmtetudiant->fetch(PDO::FETCH_ASSOC);
 
-    $requete = "INSERT INTO abscence_retard (titre, date, debut, fin, matiere_ext, prof, eleve) VALUES (:titre, :date, :debut, :fin, :matiere, :prof, :eleve)";
-    $stmt = $db->prepare($requete);
-    $stmt->bindValue(":eleve", $eleve, PDO::PARAM_STR);
-    $stmt->bindValue(":date", $date, PDO::PARAM_STR);
-    $stmt->bindValue(":debut", $debut, PDO::PARAM_STR);
-    $stmt->bindValue(":fin", $fin, PDO::PARAM_STR);
-    $stmt->bindValue(":matiere", $matiere, PDO::PARAM_STR);
-    $stmt->bindValue(":prof", $_SESSION["id"], PDO::PARAM_STR);
-    $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
+ $requete = "INSERT INTO travail_a_faire (travail, date, enseignant, tache_prof) VALUES (:travail, :date, :prof, :matiere)";
+            $stmt = $db->prepare($requete);
+            $stmt->bindValue(":travail", $travail, PDO::PARAM_STR);
+            $stmt->bindValue(":date", $date, PDO::PARAM_STR);
+            $stmt->bindValue(":prof", $prof, PDO::PARAM_STR);
+            $stmt->bindValue(":matiere", $matiere, PDO::PARAM_STR);
 
-    $stmt->execute();
+            $stmt->execute();
     
     if ($stmt->rowCount()) {
-        echo "Le retard de" .$resultatetudiant['nom'] . " ". $resultatetudiant['prenom']."a bien été ajouté";
+        echo "Le travail à faire: " .$travail . " a bien été ajouté pour le " . $date ;
         echo "<a href='absenceprof.php'>Revenir à l'ajout des absences</a>";
     } else {
         echo "ça n'a pas marché veuillez recommencer.";
