@@ -26,6 +26,9 @@ include("connexion.php");
     if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
         header('Location: administration.php?access_denied');
     }
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Étudiant.e') {
+        header('Location: accueil.php?access_denied');
+    }
 
     ?>
     <a href="backofficeprof.php">Retour</a>
