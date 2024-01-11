@@ -214,7 +214,7 @@ include('connexion.php');
                 <?php
                     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
 
-              echo"  <option value='Tous' name='tous'>Tous</option>";
+              echo"  <option value='Tous' name='tous'>Tous les élèves</option>";
                     }
                 ?>
 

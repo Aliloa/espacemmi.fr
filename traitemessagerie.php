@@ -55,7 +55,6 @@ session_start();
         // Vérifier le succès de l'insertion
         if ($stmt->rowCount()) {
             header('Location:messagerie.php?successfully_sended');
-            echo "Message envoyé avec succès !";
         } else {
             echo "Erreur lors de l'envoi du message.";
         }
