@@ -236,8 +236,7 @@ include('connexion.php');
                         <h2>{$result['controle']}</h2>
                         <p>{$result['enseignant']}</p>
                     </div>
-                    <p class='small-date'>
-                       Rendu: {$result['date']}
+                    <p class='small-date'> {$result['date']}
                     </p>
                 </div>";
             }

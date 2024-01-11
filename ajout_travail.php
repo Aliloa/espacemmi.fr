@@ -30,7 +30,7 @@
         <h1>Ajouter un travail à faire</h1>
 
         <label for="travail">Travail</label>
-        <textarea name="travail" cols="30" rows="10"></textarea>
+        <textarea name="travail" cols="30" rows="10" required></textarea>
 
         <label for="nom">Date</label>
         <input type="date" name="date" required> <br>
@@ -59,7 +59,7 @@
         </select>
 
 
-        <button type="submit" name='soumettre'>S'inscrire</button>
+        <button type="submit" name='soumettre'>Ajouter</button>
     </form>
 </body>
 

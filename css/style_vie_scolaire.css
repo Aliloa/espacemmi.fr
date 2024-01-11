@@ -70,7 +70,7 @@ div[class^="bloc-"] h2{
 .matiere-date {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; c'est plus beau sans à mon avis */
 }
 
 .matiere-date p {
