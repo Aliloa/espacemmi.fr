@@ -1,3 +1,9 @@
+<?php
+session_start();
+include("connexion.php");
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,11 +15,18 @@
 </head>
 <body>
 <?php
-    session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
+    
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
+        header('Location: backofficeprof.php?access_denied');
+    }
+    if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
+        header('Location: administration.php?access_denied');
+    }
+
     ?>
 
 <a href="absenceprof.php">Ajouter les absences</a>
