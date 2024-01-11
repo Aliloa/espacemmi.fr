@@ -28,7 +28,7 @@ include("connexion.php");
         <div class="formulaire">
 
             
-            <form action="traiter_connexion.php" method="GET">
+            <form action="traiter_connexion.php" method="POST">
                 <?php
                 if (isset($_GET["erreur"])) {
                     echo "Vous vous êtes trompés, veuillez recommencez";

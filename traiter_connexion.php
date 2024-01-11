@@ -24,12 +24,12 @@
 
     $requete = "SELECT * FROM utilisateurs WHERE login=:login";
     $stmt = $db->prepare($requete);
-    $stmt->bindValue(':login', $_GET["login_user"], PDO::PARAM_STR);
+    $stmt->bindValue(':login', $_POST["login_user"], PDO::PARAM_STR);
     $stmt->execute();
 
     if ($stmt->rowCount()) {
         $result = $stmt->fetch();
-        if (password_verify($_GET["password"], $result["mot_de_passe"])) {
+        if (password_verify($_POST["password"], $result["mot_de_passe"])) {
             $_SESSION["login"] = $result["login"];
             $_SESSION["role"] = $result["role"];
             $_SESSION["id"] = $result["id_utilisateurs"];
