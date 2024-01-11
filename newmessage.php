@@ -191,9 +191,13 @@
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($stmt->rowCount()) {
+            $chemindoc = "documents/" . $result["piece_jointe"];
+
             echo "{$result['nom']} {$result['prenom']} <br>
             <img src='upload/{$result['photoprofil']}'> <br>
             {$result['contenu_mss']}<br>
+            <a href='{$chemindoc}'> {$result['piece_jointe']}</a>  <br>
+
 
             ";
         } else {
