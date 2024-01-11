@@ -191,9 +191,13 @@
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($stmt->rowCount()) {
+            $chemindoc = "documents/" . $result["piece_jointe"];
+
             echo "{$result['nom']} {$result['prenom']} <br>
             <img src='upload/{$result['photoprofil']}'> <br>
             {$result['contenu_mss']}<br>
+            <a href='{$chemindoc}'> {$result['piece_jointe']}</a>  <br>
+
 
             ";
         } else {
@@ -203,6 +207,47 @@
         echo "ID du message non spécifié.";
     }
     ?>
+
+<?php
+include("connexion.php");
+
+if (isset($_GET["id_mess"]) && !empty($_GET["id_mess"])) {
+    $mess = $_GET["id_mess"];
+
+    // Pour afficher le message précédent en récupérant l'id dans la bdd
+    $requeteprecedente = "SELECT id_message, objet FROM messages WHERE id_message < :mess ORDER BY id_message DESC LIMIT 1";
+    $stmtprecedent = $db->prepare($requeteprecedente);
+    $stmtprecedent->bindValue(':mess', $mess, PDO::PARAM_INT);
+    $stmtprecedent->execute();
+    $messagePrecedent = $stmtprecedent->fetch(PDO::FETCH_ASSOC);
+
+    if ($messagePrecedent) {
+        echo "<a href='newmessage.php?id_mess={$messagePrecedent["id_message"]}' class='lien_message text-decoration-none uppercase dev'> &#8592;  Message Précédent </a>";
+    } else {
+        echo "<a href='messagerie.php'>Retour</a>";
+    }
+
+    // Pour afficher le prochain message en récupérant l'id dans la bdd
+    $requeteSuivant = "SELECT id_message, objet FROM messages WHERE id_message > :mess ORDER BY id_message ASC LIMIT 1";
+    $stmtSuivant = $db->prepare($requeteSuivant);
+    $stmtSuivant->bindValue(':mess', $mess, PDO::PARAM_INT);
+    $stmtSuivant->execute();
+    $messageSuivant = $stmtSuivant->fetch(PDO::FETCH_ASSOC);
+
+    if ($messageSuivant) {
+        echo "<a href='newmessage.php?id_mess={$messageSuivant["id_message"]}'> Message Suivant  &rarr;</a>";
+    } else {
+        echo "<a href='messagerie.php'>Retour</a>";
+    }
+} else {
+    // Gérer le cas où id_mess n'est pas défini ou vide
+    echo "<p>ID du message non spécifié.</p>";
+}
+?>
+
+
+
+
 
 
 

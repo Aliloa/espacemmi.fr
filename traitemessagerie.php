@@ -19,7 +19,6 @@ session_start();
 
         $objet = $_POST['objet'];
         $contenu = $_POST['contenu'];
-        // $expediteur = $_SESSION['login'];
         $destinataire = $_POST['eleve'];
 
         $content_dir = 'pieces_jointes/';
@@ -38,24 +37,33 @@ session_start();
 
         // Déterminer si le message est destiné à tous les étudiants
         $solooutous = ($_POST['eleve'] == 'Tous') ? 'tous' : 'solo';
-    
-       $requete = "INSERT INTO messages (objet, contenu_mss, expediteur, destinataire, piece_jointe, solooutous, date_mess) VALUES (:objet, :contenu, :expediteur, :destinataire, :piece_jointe, :solooutous, NOW())";
-
+        if ($solooutous == 'solo') {
+            // Si la sélection est 'solo', envoi du message à un destinataire spécifique
+            $requete = "INSERT INTO messages (objet, contenu_mss, expediteur, destinataire, piece_jointe, solooutous, date_mess) 
+                        VALUES (:objet, :contenu, :expediteur, :destinataire, :piece_jointe, :solooutous, NOW())";
+        } else {
+            // Si la sélection est 'tous', envoi du message à tous les élèves
+            $requete = "INSERT INTO messages (objet, contenu_mss, expediteur, destinataire, piece_jointe, solooutous, date_mess) 
+                        SELECT :objet, :contenu, :expediteur, id_utilisateurs, :piece_jointe, :solooutous, NOW() 
+                        FROM utilisateurs WHERE role = 'Étudiant.e'";
+        }
+        
         $stmt = $db->prepare($requete);
         $stmt->bindValue(':objet', $objet, PDO::PARAM_STR);
         $stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
-        $stmt->bindValue(':expediteur', $_SESSION["id"], PDO::PARAM_STR);
-        $stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_INT);
+        $stmt->bindValue(':expediteur', $_SESSION["id"], PDO::PARAM_INT);
         $stmt->bindValue(':piece_jointe', $name_file, PDO::PARAM_STR);
         $stmt->bindValue(':solooutous', $solooutous, PDO::PARAM_STR);
-
-        // Exécuter la requête
+        
+        if ($solooutous == 'solo') {
+            $stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_INT);
+        }
+        
         $stmt->execute();
+        
 
-        // Vérifier le succès de l'insertion
         if ($stmt->rowCount()) {
             header('Location:messagerie.php?successfully_sended');
-            echo "Message envoyé avec succès !";
         } else {
             echo "Erreur lors de l'envoi du message.";
         }
