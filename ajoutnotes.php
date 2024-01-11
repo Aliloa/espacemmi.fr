@@ -18,11 +18,11 @@ include("connexion.php");
         header('Location: index.php?access_denied');
         exit();
     }
-    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Enseignant.e') {
-        header('Location: backofficeprof.php?access_denied');
+    if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Étudiant.e') {
+        header('Location: accueil.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
-        header('Location: backofficeprof.php?access_denied');
+        header('Location: page_crous.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
         header('Location: administration.php?access_denied');
