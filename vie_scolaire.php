@@ -246,10 +246,11 @@ include('connexion.php');
                     </div>
                     <p>
                         <?php echo $result['enseignant']; ?>
-                    </p>
+                    </p><br>
                 <?php } ?>
 
             </div>
+            
         </div>
 
         <?php
@@ -279,10 +280,12 @@ include('connexion.php');
                         <p>
                             <?php echo $result['nom_mat']; ?>
                         </p>
-                        <p>
+                        <p class="cours_date">
                             <?php echo "Le " . $result['date']; ?>
                         </p>
                     </div>
+                    
+                    <br>
                 <?php } ?>
             </div>
         </div>
