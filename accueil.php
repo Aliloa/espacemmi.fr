@@ -237,7 +237,7 @@ include("connexion.php");
                 <div id="planning">
 
                     <?php
-
+                    
                     // setlocale(LC_TIME, 'fr_FR.utf8'); // j'ai défini la langue locale en français pour traduire les données mais ça ne marche pas pardon population
                     
                     $apiUrl = 'https://entmmi.fr/api/ade-ics';
