@@ -9,7 +9,10 @@ include("connexion.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel='stylesheet' href='css/style_navigation.css'>
+    <link rel='stylesheet' href='css/style_backoffice.css'>
+    <link rel='stylesheet' href='css/dark_mode.css'>
+    <title>Espace MMI | Backoffice</title>
 </head>
 
 <body>
@@ -30,116 +33,282 @@ include("connexion.php");
 
     ?>
 
+    <header>
+        <div class='menu'>
 
-    <form action="ajoutnotes.php" method="GET">
+            <!-- Logo Accueil -->
+            <a href='backofficeprof.php'><img class="logo" src='./img/logo.svg' alt="page d'accueil"
+                    aria-current="currentpage"></a>
 
-        <h1>Choisissez le cours auquel vous associez la note</h1>
-        <label for="cours">Cours :</label>
-        <select name="courschoisi" id="cours" required>
-            <?php
-            include("connexion.php");
+            <!-- Navigation desktop -->
+            <nav class='navigation'>
 
-            if (isset($_SESSION["login"])) {
-                $requete = 'SELECT * FROM cours WHERE externe_prof = :idProfesseur AND coef IS NOT NULL';
-                $stmt = $db->prepare($requete);
-                $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
-                $stmt->execute();
+                <!-- Barre de recherche -->
+                <div class='group'>
+                    <svg viewBox='0 0 24 24' aria-hidden='true' class='icon'>
+                        <g>
+                            <path
+                                d='M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z'>
+                            </path>
+                        </g>
+                    </svg>
+                    <label for="barre de recherche"></label>
+                    <input id="barre de recherche" class='input' type='search' placeholder='Search' />
+                </div>
 
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($result as $cours) {
-                    if ($cours['id_cours'] == $_GET['courschoisi']) {
-                        $selected = 'selected';
-                    } else {
-                        $selected = '';
-                    }                    echo "<option value='{$cours['id_cours']}' $selected>{$cours['cours']}</option>";
-                }
-            }
-            ?>
-
-        </select>
-        <a href="ajoutnotes.php">Reset</a>
-        <input type="submit" name='choixcours' value='Cours'>
-    </form>
+                <!-- minis icons + lien pdp permettant de se déconnecter et d'aller dans les paramètres  -->
+                <div class='icon-photo'>
+                    <a href='messagerie.php'><img class='lettre' src='./img/1-lettre.svg' alt="messagerie"></a>
+                    <button class="dark_button" onclick="toggleDarkMode()"><img class='dark_mode' src='./img/1-moon.svg'
+                            alt="mode sombre"></button>
 
 
 
+                    <!-- PHP - LIEN VERS LA PAGE profil.php POUR MODIF LA PDP-->
+                    <div class='photo-2'>
+
+                        <?php
+                        include('connexion.php');
+
+                        if (isset($_SESSION["login"])) {
+                            $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
+                            $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+                            $stmt->execute();
+                            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            if ($result) {
+                                echo "
+                                <a href='profil.php'> <img src='upload/{$result['photoprofil']}' alt='' class='photo-2'></a>";
+                            }
+                        }
+                        ?>
+
+                    </div>
+                    <!-- FIN PHP-->
+                    <form action="deconnexion.php" method="GET">
+                        <button type="submit" name="deconnect" id="btnDeconnexion">
+                            <img class="logout" src="img/1-logout.svg" alt="Déconnexion">
+                        </button>
+                    </form>
+
+                </div>
+            </nav>
+
+            <!-- Navigation mobile & tablette -->
+            <div class='menu-burger'>
+
+                <span id='burger-menu'> <img class="img_menu" src='./img/menu.svg' alt='menu'></span>
+
+                <nav class='burger'>
 
 
-    <form action="traitenote.php" method="POST" enctype="multipart/form-data">
+                    <!-- PHP/ STRUCTURE POUR ADAPTER A L UTILISATEUR   -->
+                    <?php
+                    include('connexion.php');
+
+                    if (isset($_SESSION["login"])) {
+                        $stmt = $db->prepare('SELECT * FROM utilisateurs WHERE login=:login');
+                        $stmt->bindValue(':login', $_SESSION["login"], PDO::PARAM_STR);
+                        $stmt->execute();
+                        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                        echo "
+                            <div class='kelis'>
+                                <div class='profil-1'>
+                                    <a href='profil.php'>
+                                        <div class='photo-1'>
+                                        <img src='upload/{$result['photoprofil']}' class='photo-1' alt=''>
+                                        </div>
+                                    </a>
+                                    <div class='profil-2'>";
 
 
-        <h1>Choisissez la matière à laquelle vous associez la note</h1>
-        <label for="matiere">Matière :</label>
-        <select name="matierechoisi" id="matiere" required>
+                        echo "<h1> {$result['prenom']} {$result['nom']}</h1>";
+                        echo "<p>{$result['promotion']}</p>";
 
-            <?php
-            include("connexion.php");
+                        echo "       </div>
+                                </div>
+                                <div class='profil-3'>
+                                <h2>À propos</h2>";
+                        echo "<p>{$result['bio']}</p> 
+                                </div>
+                            </div>";
 
-            if (isset($_GET['choixcours'])) {
-                $chosencours = $_GET['courschoisi'];
-                $_SESSION['chosencours'] = $chosencours;
-                $_SESSION['id_cours'] = $matiere['id_cours'];
+                    }
+                    ?>
+                    <!-- FIN PHP   -->
 
+                    <div class='tools'>
+                        <div class='tool'>
+                            <img class="param" src='img/1-param.png' alt=''>
+                            <a href='profil.php'>
+                                <p>Profil</p>
+                            </a>
+                        </div>
+                        <div class='tool'>
+                            <img class="lettre" src='img/1-lettre.svg' alt=''>
+                            <a href='messagerie.php'>
+                                <p>Messagerie</p>
+                            </a>
+                        </div>
+                        <div class='tool'>
+                            <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
+                                    src='./img/1-moon.svg' alt="mode sombre">
+                                <p>Mode sombre</p>
+                            </button>
+                        </div>
+                        <div class='tool'>
+                            <img class="logout" src='img/1-logout.svg' alt=''>
+                            <form action="deconnexion.php" method="GET">
+                                <button class="btnDeconnexion" type="submit" name="deconnect" id="btnDeconnexion">
+                                    Déconnexion
+                                </button>
+                            </form>
+                        </div>
+                    </div>
 
-                $requete = 'SELECT * FROM grossematiere, cours WHERE grossematiere.id_matiere = cours.ext_matiere AND grossematiere.prof_ext = :idProfesseur AND cours.id_cours = :idCours';
+                </nav>
 
+                <div class='overlay'></div>
 
-                $stmt = $db->prepare($requete);
-                $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
-                $stmt->bindValue(':idCours', $chosencours, PDO::PARAM_INT);
-                $stmt->execute();
+            </div>
 
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        </div>
 
-                foreach ($result as $matiere) {
-                    $_SESSION['id_matiere'] = $matiere['id_matiere'];
-                    // $_SESSION['coef_cours'] = $matiere['coef'];
-                    // $_SESSION['coef_matiere'] = $matiere['coefficient'];
-                    echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
-                }
-            }
-            ?>
-        </select>
+    </header>
 
+    <main>
 
+        <div class='contain-back'>
 
-
-        <label for="name">Le nom de la note</label>
-        <input type="text" name='note_name' id="name" required>
-
-        <label for="note">La note attribué</label>
-        <input type="number" name='notedonnee' id="note" min="0" step="0.01" required>
-
-
-        <h1>Choisissez l'élève à qui vous attribuez la note</h1>
-        <label for="eleve">Étudiant :</label>
-        <select name="note_eleve" id="eleve" required>
-            <option value="0">Choisir un étudiant.e</option>
-            <?php
-            include("connexion.php");
-
-            if (isset($_SESSION["login"])) {
-                $requete = "SELECT * FROM utilisateurs WHERE role = 'Étudiant.e' ORDER BY nom";
-                $stmt = $db->query($requete);
-
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($result as $eleve) {
-                    echo "<option value='{$eleve['id_utilisateurs']}'>{$eleve['nom']} {$eleve['prenom']} {$eleve['promotion']}</option>";
-                }
-            }
-
-            ?>
-        </select>
-
-
-        </select>
-        <button type="submit" name='ajoutnote'>Ajouter</button>
+            <nav class="fda" aria-label="Breadcrumb">
+                <ul class="ul">
+                    <li><a href="backofficeprof.php">Accueil</a></li><span> 〉 </span>
+                </ul>
+            </nav>
 
 
-    </form>
+            <h1 class="h1"> 1) Choisissez le cours auquel vous associez la note</h1>
+
+            <form class="ajouter" action="ajoutnotes.php" method="GET">
+
+                <label for="cours">Cours :</label>
+                <select name="courschoisi" id="cours" required>
+                    <?php
+                    include("connexion.php");
+
+                    if (isset($_SESSION["login"])) {
+                        $requete = 'SELECT * FROM cours WHERE externe_prof = :idProfesseur AND coef IS NOT NULL';
+                        $stmt = $db->prepare($requete);
+                        $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
+                        $stmt->execute();
+
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach ($result as $cours) {
+                            if ($cours['id_cours'] == $_GET['courschoisi']) {
+                                $selected = 'selected';
+                            } else {
+                                $selected = '';
+                            }
+                            echo "<option value='{$cours['id_cours']}' $selected>{$cours['cours']}</option>";
+                        }
+                    }
+                    ?>
+
+                </select>
+                <a class="reinst" href="ajoutnotes.php">Réinitialiser</a>
+                <input type="submit" name='choixcours' value='Ajouter'>
+            </form>
+
+
+
+            <h1 class="h1"> 2) Choisissez la matière à laquelle vous associez la note</h1>
+
+            <form class="ajouter" action="traitenote.php" method="POST" enctype="multipart/form-data">
+
+                <label for="matiere">Matière :</label>
+                <select name="matierechoisi" id="matiere" required>
+
+                    <?php
+                    include("connexion.php");
+
+                    if (isset($_GET['choixcours'])) {
+                        $chosencours = $_GET['courschoisi'];
+                        $_SESSION['chosencours'] = $chosencours;
+                        $_SESSION['id_cours'] = $matiere['id_cours'];
+
+
+                        $requete = 'SELECT * FROM grossematiere, cours WHERE grossematiere.id_matiere = cours.ext_matiere AND grossematiere.prof_ext = :idProfesseur AND cours.id_cours = :idCours';
+
+
+                        $stmt = $db->prepare($requete);
+                        $stmt->bindValue(':idProfesseur', $_SESSION["id"], PDO::PARAM_INT);
+                        $stmt->bindValue(':idCours', $chosencours, PDO::PARAM_INT);
+                        $stmt->execute();
+
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach ($result as $matiere) {
+                            $_SESSION['id_matiere'] = $matiere['id_matiere'];
+                            // $_SESSION['coef_cours'] = $matiere['coef'];
+                            // $_SESSION['coef_matiere'] = $matiere['coefficient'];
+                            echo "<option value='{$matiere['id_matiere']}'>{$matiere['nom_mat']}</option>";
+                        }
+                    }
+                    ?>
+                </select>
+
+
+
+
+                <label for="name">Le nom de la note</label>
+                <input type="text" name='note_name' id="name" required>
+
+                <label for="note">La note attribué</label>
+                <input type="number" name='notedonnee' id="note" min="0" step="0.01" required>
+
+
+                <h1>Choisissez l'élève à qui vous attribuez la note</h1>
+                <label for="eleve">Étudiant :</label>
+                <select name="note_eleve" id="eleve" required>
+                    <option value="0">Choisir un étudiant.e</option>
+                    <?php
+                    include("connexion.php");
+
+                    if (isset($_SESSION["login"])) {
+                        $requete = "SELECT * FROM utilisateurs WHERE role = 'Étudiant.e' ORDER BY nom";
+                        $stmt = $db->query($requete);
+
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach ($result as $eleve) {
+                            echo "<option value='{$eleve['id_utilisateurs']}'>{$eleve['nom']} {$eleve['prenom']} {$eleve['promotion']}</option>";
+                        }
+                    }
+
+                    ?>
+                </select>
+
+
+                </select>
+                <button type="submit" name='ajoutnote'>Ajouter</button>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <a href='mentions_legales.html'>
+            <p> Mentions légales </p>
+        </a>
+    </footer>
+
 </body>
+
 <script src='js/script_accueil.js'></script>
 <script src='js/script_dark_mode.js'></script>
+
 </html>

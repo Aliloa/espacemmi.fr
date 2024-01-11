@@ -33,7 +33,7 @@ body {
             padding: 80px;
             background-color: #fff;
             border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 3px rgba(92, 45, 203, 1);
             z-index: 1;
         }
         
@@ -185,7 +185,7 @@ form p{
 @media screen and (min-width: 425px) {
 
     .information_main {
-        padding: 3rem 6rem;
+        padding: 7rem 6rem;
     }
 
     .bouton2 {

@@ -42,7 +42,6 @@ div[class^="bloc-"] p {
 .matiere-date {
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
 }
 
@@ -52,16 +51,26 @@ div[class^="bloc-"] p {
 
 .matiere-date p {
     font-size: 0.8rem;
-    color: rgb(100, 99, 99);
-    margin-top: 25px;
-    width: 100px;
+    color: rgb(53, 53, 53);
 
 
 }
 
+.small-date p{
+    margin-top: 55px;
 
+}
 
+.cours_classe{
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 50px; */
+}
 
+.cours_classe{
+    color: rgb(121, 121, 121);
+    font-size: 0.8rem;
+}
 
 .bloc-2a {
     grid-column: 2;
