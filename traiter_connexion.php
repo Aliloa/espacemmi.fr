@@ -50,15 +50,15 @@
         }
         echo "<div id='custom-popup'>";
         echo "<p>Connexion réussi ! </p>";
-        echo "</div>";
+        echo "</div>"; ?>
 
-        echo "<script>";
-        echo "setTimeout(function() {";
-        echo "   window.location.href = 'accueil.php';";
-        echo "}, 2000);";
-        echo "</script>";
-        exit();
+        <script>
+            setTimeout(function() {
+                window.location.href = 'accueil.php';
+            }, 2000);
+        </script>
 
+<?php
     } else {
         header('Location:connexion_page.php?erreur=user_not_found');
         exit();
