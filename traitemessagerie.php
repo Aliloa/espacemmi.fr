@@ -19,35 +19,41 @@ session_start();
 
         $objet = $_POST['objet'];
         $contenu = $_POST['contenu'];
-        $expediteur = $_SESSION['login']; // Utilisateur connecté (expéditeur)
-        $destinataire = $_POST['eleve']; // ID du destinataire
-    
-        $piece_jointe = '';
-        if (!empty($_FILES['piece']['name'])) {
-            // Traitez la pièce jointe ici (téléchargement, stockage, etc.)
-            // Assurez-vous de sécuriser le traitement des fichiers téléchargés.
-            $piece_jointe = 'chemin/vers/votre/dossier/' . $_FILES['piece']['name'];
+        $expediteur = $_SESSION['login'];
+        $destinataire = $_POST['eleve'];
+
+        $content_dir = 'pieces_jointes/';
+        if ($_FILES['fichier']['size'] > 0) {
+
+        $tmp_file = $_FILES['fichier']['tmp_name'];
+        if (!is_uploaded_file($tmp_file)) {
+            exit("Le fichier est introuvable");
         }
+        $name_file = $_FILES['fichier']['name'];
+        if (!move_uploaded_file($tmp_file, $content_dir . $name_file)) {
+            exit("Impossible de copier le fichier dans $content_dir");
+        }
+        echo "Le fichier a bien été uploadé";
+    }
 
         // Déterminer si le message est destiné à tous les étudiants
         $solooutous = ($_POST['eleve'] == 'Tous') ? 'tous' : 'solo';
 
-        // Requête SQL pour insérer le message dans la table messages
-        $requete = "INSERT INTO messages (objet, contenu_mss, expediteur, destinataire, piece_jointe, solooutous)
-                VALUES (:objet, :contenu, :expediteur, :destinataire, :piece_jointe, :solooutous)";
+        $requete = "INSERT INTO messages (objet, contenu_mss, expediteur, destinataire, piece_jointe, solooutous) VALUES (:objet, :contenu, :expediteur, :destinataire, :piece_jointe, :solooutous)";
         $stmt = $db->prepare($requete);
         $stmt->bindValue(':objet', $objet, PDO::PARAM_STR);
         $stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
         $stmt->bindValue(':expediteur', $expediteur, PDO::PARAM_STR);
         $stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_INT);
-        $stmt->bindValue(':piece_jointe', $piece_jointe, PDO::PARAM_STR);
+        $stmt->bindValue(':piece_jointe', $name_file, PDO::PARAM_STR);
         $stmt->bindValue(':solooutous', $solooutous, PDO::PARAM_STR);
 
         // Exécuter la requête
         $stmt->execute();
 
         // Vérifier le succès de l'insertion
-        if ($stmt->rowCount() > 0) {
+        if ($stmt->rowCount()) {
+            header('Location:messagerie.php?successfully_sended');
             echo "Message envoyé avec succès !";
         } else {
             echo "Erreur lors de l'envoi du message.";

@@ -187,13 +187,13 @@ include('connexion.php');
     <form action="traitemessagerie.php" method="POST" enctype="multipart/form-data">
 
         <label for="objet">Titre de votre message</label>
-        <input type="text" id="objet">
+        <input type="text" id="objet" name='objet'>
 
         <label for="contenu">Le contenu de votre message</label>
-        <textarea name="" id="contenu" cols="30" rows="10"></textarea> <br><br>
+        <textarea name="contenu" id="contenu" cols="30" rows="10"></textarea> <br><br>
 
         <label for="piece">Une pièce jointe ?</label>
-        <input type="file" id="piece">
+        <input type="file" id="piece" name='fichier'>
 
         <p>Votre destinataire</p>
         <?php include('connexion.php'); ?>
