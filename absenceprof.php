@@ -43,11 +43,11 @@
         <label for="matiere">Matière</label>
         <select name="matiere">     
             <?php
-            $stmt = $db->prepare('SELECT * FROM cours');
+            $stmt = $db->prepare('SELECT * FROM grossematiere');
             $stmt->execute();
             $tableauResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach ($tableauResult as $result) {
-                echo "<option value='". $result['id_cours'] . "'>". $result['cours'] . "</option>";
+                echo "<option value='". $result['id_matiere'] . "'>". $result['nom_mat'] . "</option>";
             }
             ?>
         </select> <br>

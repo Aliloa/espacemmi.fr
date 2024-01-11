@@ -22,7 +22,7 @@
     }
     ?>
 
-<header>
+    <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -144,11 +144,15 @@
                     <div class='tools'>
                         <div class='tool'>
                             <img class="param" src='img/1-param.png' alt=''>
-                            <a href='profil.php'><p>Profil</p></a>
+                            <a href='profil.php'>
+                                <p>Profil</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <img class="lettre" src='img/1-lettre.svg' alt=''>
-                            <a href='messagerie.php'><p>Messagerie</p></a>
+                            <a href='messagerie.php'>
+                                <p>Messagerie</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
@@ -235,16 +239,14 @@
         </div>
 
         <?php
-
-        $requete = "SELECT abscence_retard.id_abs, abscence_retard.titre, abscence_retard.date, abscence_retard.debut, abscence_retard.fin, cours.cours
-            FROM abscence_retard, cours
-            WHERE abscence_retard.ext_cours = cours.id_cours
-            ORDER BY abscence_retard.id_abs DESC";
+        $requete = "SELECT abscence_retard.id_abs, abscence_retard.titre, abscence_retard.date, abscence_retard.debut, abscence_retard.fin, grossematiere.nom_mat
+        FROM abscence_retard
+        INNER JOIN grossematiere ON abscence_retard.matiere_ext = grossematiere.id_matiere
+        ORDER BY abscence_retard.id_abs DESC";
 
         $stmt = $db->query($requete);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
-
 
         <div class='bloc-3a'>
             <div class="bouton">
@@ -255,15 +257,13 @@
                             <?php echo $result['titre']; ?>
                         </h2>
                         <p class='small-date'>
-                            <!-- montrer le temps d'absence en calculant la différence entre le début et la fin  -->
-                            <?php echo  (new DateTime($result['debut']))->diff(new DateTime($result['fin']))->format('%Hh %imin');
- ?>
-                            
+                            <!-- montrer le temps d'absence en calculant la différence entre le début et la fin -->
+                            <?php echo (new DateTime($result['debut']))->diff(new DateTime($result['fin']))->format('%Hh %imin'); ?>
                         </p>
                     </div>
                     <div class="cours_classe">
                         <p>
-                            <?php echo $result['cours']; ?>
+                            <?php echo $result['nom_mat']; ?>
                         </p>
                         <p>
                             <?php echo "Le " . $result['date']; ?>
@@ -272,6 +272,7 @@
                 <?php } ?>
             </div>
         </div>
+
 
         <?php
 

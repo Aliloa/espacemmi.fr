@@ -12,7 +12,7 @@
         $titre = $_POST['titre'];
     }
 
-    $requete = "INSERT INTO abscence_retard (eleve, date, debut, fin, ext_cours, titre) VALUES (:eleve, :date, :debut, :fin, :matiere, :titre)";
+    $requete = "INSERT INTO abscence_retard (eleve, date, debut, fin, matiere_ext, titre) VALUES (:eleve, :date, :debut, :fin, :matiere, :titre)";
     $stmt = $db->prepare($requete);
     $stmt->bindValue(":eleve", $eleve, PDO::PARAM_STR);
     $stmt->bindValue(":date", $date, PDO::PARAM_STR);
