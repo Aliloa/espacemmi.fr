@@ -402,13 +402,6 @@ include("connexion.php");
                     <p class='vp'>voir plus</p>
                 </a>
 
-                <!-- <div class='cours'>
-                    <div>
-                        <h2>FATIMARAJAN Anchana</h2>
-                        <p>ent maudit puree</p>
-                    </div>
-                </div> -->
-
                 <?php
                 include('connexion.php');
                 $requete = "SELECT * FROM travail_a_faire ORDER BY date DESC LIMIT 2";
@@ -421,8 +414,7 @@ include("connexion.php");
                     echo "<div class='cours'>
                                     <div>
                                     <h2> {$cours["travail"]}</h2>
-                                    <p> Rendu : {$cours["date"]} </p> 
-                                    <p> Par : {$cours["enseignant"]} </p> 
+                                    <p> À rendre pour le {$cours["date"]} </p> 
                                     </div>
                             </div>";
                 }

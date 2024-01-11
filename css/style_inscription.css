@@ -146,7 +146,7 @@ form h1 {
 }
 
 form a {
-    color: #604CF9;
+    color: var(--purple);
 }
 
 input {
@@ -157,7 +157,7 @@ input {
 .bouton1 input,
 .bouton1 button {
     cursor: pointer;
-    background-color: #604CF9;
+    background-color: var(--purple);
     border: 1px solid transparent;
     color: #fff;
     padding: 0.938rem;
