@@ -206,7 +206,7 @@
                     <div class="card shadow">
                         <div class="infos">
                             <h2>Restaurant universitaire ESIEE:</h2>
-                            <div class="flex">
+                            <div>
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
@@ -219,7 +219,7 @@
                         <hr class="border">
                         <div class="infos">
                             <h2>Restaurant universitaire Copernic:</h2>
-                            <div class="flex">
+                            <div>
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
@@ -233,7 +233,7 @@
                         <hr class="border">
                         <div class="infos">
                             <h2>Menu de la caféteria</h2>
-                            <div class="flex">
+                            <div>
                                 <p>PAIEMENT POSSIBLE: <br>
                                     Carte bancaire <br>
                                     IZLY</p>
