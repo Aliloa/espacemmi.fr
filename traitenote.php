@@ -50,6 +50,7 @@ if (isset($_POST['ajoutnote'])) {
         unset($_SESSION['chosencours']);
         unset($_SESSION['id_matiere']);
     } else {
+        header('Location: ajoutnotes.php?error');
         echo "L'ajout de la note a échoué. Veuillez réessayer.";
     }
 }

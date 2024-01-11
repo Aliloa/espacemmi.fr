@@ -184,11 +184,11 @@ include("connexion.php");
 
     <main>
 
-        <h1 class="h1"> Mes cours</h1>
+       
 
         <div class="wrapper">
-
-
+                    
+            <h1 class="h1"> Mes cours</h1>
             <div class="filtre">
                 <p> Filtré par: </p>
 
@@ -216,11 +216,16 @@ include("connexion.php");
 
                 foreach ($resultat as $cours) {
                     echo "<div class='cours'>
-                <a href='coursindividuel.php?id_matiere={$cours["id_matiere"]}'>
-                        <h2>{$cours["nom_mat"]}</h2>
-                        <p> Créé par {$cours["nom"]} {$cours["prenom"]}</p>
-                </a>
-                </div>";
+                            <a href='coursindividuel.php?id_matiere={$cours["id_matiere"]}'>
+                                <img src='matiere/{$cours["illustration"]}' alt=''>
+
+                                <div>
+                                    <h2>{$cours["nom_mat"]}</h2>
+                                    <p> Créé par {$cours["nom"]} {$cours["prenom"]}</p> 
+                                </div>
+                                
+                            </a>
+                        </div>";
                 }
                 ?>
 

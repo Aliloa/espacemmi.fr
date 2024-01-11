@@ -4,9 +4,8 @@
 
 
     if (isset($_POST['soumettre'])) {
-        $travail = $_POST['travail'];
+        $titre = $_POST['titre'];
         $date = $_POST['date'];
-        $matiere = $_POST['matiere'];
 
         $requeteprof = "SELECT nom, prenom FROM utilisateurs WHERE login = :login";
         $stmtprof = $db->prepare($requeteprof);
@@ -17,18 +16,17 @@
     }
 
 
- $requete = "INSERT INTO travail_a_faire (travail, date, enseignant, tache_prof) VALUES (:travail, :date, :prof, :matiere)";
+ $requete = "INSERT INTO controle (controle, date, enseignant) VALUES (:titre, :date, :prof)";
             $stmt = $db->prepare($requete);
-            $stmt->bindValue(":travail", $travail, PDO::PARAM_STR);
+            $stmt->bindValue(":titre", $titre, PDO::PARAM_STR);
             $stmt->bindValue(":date", $date, PDO::PARAM_STR);
             $stmt->bindValue(":prof", $prof, PDO::PARAM_STR);
-            $stmt->bindValue(":matiere", $matiere, PDO::PARAM_STR);
 
             $stmt->execute();
     
     if ($stmt->rowCount()) {
-        echo "Le travail à faire: " .$travail . " a bien été ajouté pour le " . $date ;
-        echo "<a href='ajout_travail.php'>Revenir à l'ajout des devoirs</a>";
+        echo "Le controle à faire: " .$titre . " a bien été ajouté pour le " . $date ;
+        echo "<a href='ajout_controle.php'>Revenir à l'ajout des controles</a>";
     } else {
         echo "ça n'a pas marché veuillez recommencer.";
         die($stmt);

@@ -4,15 +4,20 @@ include("connexion.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_navigation.css'>
-    <title>Document</title>
+    <link rel='stylesheet' href='css/style_cours.css'>
+    <link rel='stylesheet' href='css/dark_mode.css'>
+    <title>Espace MMI | Cours</title>
 </head>
+
 <body>
-<?php
+
+    <?php
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
@@ -28,7 +33,7 @@ include("connexion.php");
     }
     ?>
 
-<header>
+    <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -150,11 +155,15 @@ include("connexion.php");
                     <div class='tools'>
                         <div class='tool'>
                             <img src='img/1-param.png' alt=''>
-                            <a href='profil.php'><p>Profil</p></a>
+                            <a href='profil.php'>
+                                <p>Profil</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <img src='img/1-lettre.svg' alt=''>
-                            <a href='messagerie.php'><p>Messagerie</p></a>
+                            <a href='messagerie.php'>
+                                <p>Messagerie</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
@@ -182,32 +191,57 @@ include("connexion.php");
 
     </header>
 
-<?php
-include("connexion.php");
+    <main class="fini">
 
-if (isset($_GET["id_matiere"])) {
-    $id_matiere = $_GET["id_matiere"];
-} else {
-    $id_matiere = "12"; // Vous pouvez définir une valeur par défaut ou traiter autrement cette situation
-}
+        <nav class="fda" aria-label="Breadcrumb">
+            <ul class="ul">
+                <li><a href="cours.php">Mes Cours</a></li><span> 〉 </span>
+                <li>Cours</li>
+            </ul>
+        </nav>
 
-$requete = "SELECT * FROM cours WHERE ext_matiere = :id_matiere";
-$stmt = $db->prepare($requete);
-$stmt->bindValue(':id_matiere', $id_matiere, PDO::PARAM_INT);
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        <div class="wrapper">
+        <?php
+        include("connexion.php");
 
-if ($stmt->rowCount()){
-foreach ($result as $uncours) {
-    $chemindoc = "documents/" . $uncours["document"];
+        if (isset($_GET["id_matiere"])) {
+            $id_matiere = $_GET["id_matiere"];
+        } else {
+            $id_matiere = "12";
+        }
 
-    echo "<a href='{$chemindoc}' target='_blank'>{$uncours['cours']}</a> <br> ";
-}
-}else{
-    echo "Aucun cours trouvé pour cette matière.";
+        $requete = "SELECT * FROM cours WHERE ext_matiere = :id_matiere";
+        $stmt = $db->prepare($requete);
+        $stmt->bindValue(':id_matiere', $id_matiere, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-}
-?>
+        if ($stmt->rowCount()) {
+            foreach ($result as $uncours) {
+                $chemindoc = "documents/" . $uncours["document"];
+
+                echo "<div class='cours'>
+                <a class='padding' href='{$chemindoc}' target='_blank'><h2>{$uncours["cours"]}</h2>
+                </div>";
+            }
+        } else {
+            echo "Aucun cours trouvé pour cette matière.";
+
+        }
+        ?>
+        </div>
+    </main>
+
+
+    <footer>
+        <a href='mentions_legales.html'>
+            <p> Mentions légales </p>
+        </a>
+    </footer>
 
 </body>
+
+<script src='js/script_accueil.js'></script>
+<script src='js/script_dark_mode.js'></script>
+
 </html>

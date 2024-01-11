@@ -19,7 +19,7 @@ include('connexion.php');
 </head>
 
 <body>
-<?php
+    <?php
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
@@ -209,20 +209,16 @@ include('connexion.php');
 
         <div class='bloc-1a'>
             <h1>Travail à faire</h1>
-            <?php foreach ($results as $result) { ?>
-                <div class='matiere-date'>
-                    <h2>
-                        <?php echo $result['travail']; ?>
-                    </h2>
-                    <p class='small-date'>
-                        <?php echo "Rendu: {$result['date']}"; ?>
-                    </p>
-                </div>
-                <p>
-                    <?php echo $result['enseignant']; ?>
-                </p>
-                <br>
-            <?php } ?>
+            <?php foreach ($results as $result) {
+                echo "<div class='matiere-date'>
+                        <div>
+                            <h2>{$result['travail']}</h2>
+                            <p>{$result['enseignant']}</p>
+                        </div>
+                        <p class='small-date'>Rendu: {$result['date']}</p>
+                    </div><br> ";
+            }
+            ?>
 
         </div>
 
@@ -233,32 +229,26 @@ include('connexion.php');
         ?>
 
         <div class='bloc-2a'>
-            <div class="bouton">
-                <h1>Contrôle à venir</h1>
-                <?php foreach ($results as $result) { ?>
-                    <div class='matiere-date'>
-                        <h2>
-                            <?php echo $result['controle']; ?>
-                        </h2>
-                        <p class='small-date'>
-                            <?php echo "Rendu: {$result['date']}"; ?>
-                        </p>
+            <h1>Contrôle à venir</h1>
+            <?php foreach ($results as $result) { echo"
+                <div class='matiere-date'>
+                    <div>
+                        <h2>{$result['controle']}</h2>
+                        <p>{$result['enseignant']}</p>
                     </div>
-                    <p>
-                        <?php echo $result['enseignant']; ?>
-                    </p><br>
-                <?php } ?>
+                    <p class='small-date'> {$result['date']}
+                    </p>
+                </div>";
+            }
+          ?>
 
-            </div>
-            
         </div>
 
         <?php
         $requete = "SELECT abscence_retard.id_abs, abscence_retard.titre, abscence_retard.date, abscence_retard.debut, abscence_retard.fin, grossematiere.nom_mat
-        FROM abscence_retard
-        INNER JOIN grossematiere ON abscence_retard.matiere_ext = grossematiere.id_matiere
-        ORDER BY abscence_retard.id_abs DESC";
-
+                    FROM abscence_retard
+                    INNER JOIN grossematiere ON abscence_retard.matiere_ext = grossematiere.id_matiere
+                    ORDER BY abscence_retard.id_abs DESC";
         $stmt = $db->query($requete);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
@@ -268,24 +258,22 @@ include('connexion.php');
                 <h1>Absences et retards</h1>
                 <?php foreach ($results as $result) { ?>
                     <div class='matiere-date'>
-                        <h2>
-                            <?php echo $result['titre']; ?>
-                        </h2>
+                        <div>
+                            <h2>
+                                <?php echo $result['titre']; ?>
+                            </h2>
+                            <p>
+                                <?php echo $result['nom_mat']; ?>
+                            </p>
+                            <p>
+                                <?php echo "Le " . $result['date']; ?>
+                            </p>
+                        </div>
                         <p class='small-date'>
                             <!-- montrer le temps d'absence en calculant la différence entre le début et la fin -->
                             <?php echo (new DateTime($result['debut']))->diff(new DateTime($result['fin']))->format('%Hh %imin'); ?>
                         </p>
                     </div>
-                    <div class="cours_classe">
-                        <p>
-                            <?php echo $result['nom_mat']; ?>
-                        </p>
-                        <p class="cours_date">
-                            <?php echo "Le " . $result['date']; ?>
-                        </p>
-                    </div>
-                    
-                    <br>
                 <?php } ?>
             </div>
         </div>
@@ -301,17 +289,17 @@ include('connexion.php');
         <div class='bloc-4a'>
             <div class="bouton">
                 <h1>Les moyennes</h1>
-                <?php foreach ($results as $result) { ?>
+                <?php foreach ($results as $result) { echo"
                     <div class='matiere-date'>
                         <h2>
-                            <?php echo $result['nom_note']; ?>
+                            {$result['nom_note']}
                         </h2>
                         <p class='small-date'>
-                            <?php echo "{$result['notes']} /20"; ?>
+                           {$result['notes']} /20
                         </p>
-                    </div>
-
-                <?php } ?>
+                    </div>";
+                }
+                ?>
 
             </div>
         </div>

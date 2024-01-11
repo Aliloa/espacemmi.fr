@@ -397,18 +397,28 @@ include("connexion.php");
 
 
             <div class='bloc-4'>
-                <h1>Forum</h1>
-                <a href='#'>
+                <h1>Travail à faire</h1>
+                <a href='vie_scolaire.php'>
                     <p class='vp'>voir plus</p>
                 </a>
 
-                <div class='cours'>
-                    <div>
-                        <h2>FATIMARAJAN Anchana</h2>
-                        <p>ent maudit puree</p>
-                    </div>
-                </div>
+                <?php
+                include('connexion.php');
+                $requete = "SELECT * FROM travail_a_faire ORDER BY date DESC LIMIT 2";
 
+                $stmt = $db->query($requete);
+                $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($resultat as $cours) {
+
+                    echo "<div class='cours'>
+                                    <div>
+                                    <h2> {$cours["travail"]}</h2>
+                                    <p> À rendre pour le {$cours["date"]} </p> 
+                                    </div>
+                            </div>";
+                }
+                ?>
             </div>
 
 
