@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php
+session_start();
+include("connexion.php");
+?>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_navigation.css'>
-    <link rel='stylesheet' href='css/style_cours.css'>
-    <link rel='stylesheet' href='css/dark_mode.css'>
-    <title>Espace MMI | Mes cours filtrés</title>
+    <title>Document</title>
 </head>
-
 <body>
-
 <?php
-    session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
@@ -22,12 +21,11 @@
         header('Location: backofficeprof.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
-        header('Location: backofficeprof.php?access_denied');
+        header('Location: page_crous.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["login"] === 'Admin') {
         header('Location: administration.php?access_denied');
     }
-
     ?>
 
 <header>
@@ -184,84 +182,32 @@
 
     </header>
 
+<?php
+include("connexion.php");
 
-    <main>
+if (isset($_GET["id_matiere"])) {
+    $id_matiere = $_GET["id_matiere"];
+} else {
+    $id_matiere = "12"; // Vous pouvez définir une valeur par défaut ou traiter autrement cette situation
+}
 
-        <h1 class="h1">Mes cours filtrés</h1>
+$requete = "SELECT * FROM cours WHERE ext_matiere = :id_matiere";
+$stmt = $db->prepare($requete);
+$stmt->bindValue(':id_matiere', $id_matiere, PDO::PARAM_INT);
+$stmt->execute();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        <div class="wrapper">
+if ($stmt->rowCount()){
+foreach ($result as $uncours) {
+    $chemindoc = "documents/" . $uncours["document"];
 
-            <div class="filtre">
-                <h1> Filtré par </h1>
+    echo "<a href='{$chemindoc}' target='_blank'>{$uncours['cours']}</a> <br> ";
+}
+}else{
+    echo "Aucun cours trouvé pour cette matière.";
 
-                <form action="filtrecours.php" method="GET">
-                    <div class="input-container">
-                        <select name="filter" id="filter" aria-label="Filtrer dans le site">
-                            <option value="0" <?php if ($_GET['filter'] == 0)
-                                echo 'selected'; ?>>Filtrer</option>
-                            <option value="1" <?php if ($_GET['filter'] == 1)
-                                echo 'selected'; ?>>SAE</option>
-                            <option value="2" <?php if ($_GET['filter'] == 2)
-                                echo 'selected'; ?>>Ressources</option>
-                        </select>
-                        <input type="submit" value="Valider">
-                    </div>
-                </form>
-            </div>
-
-
-            <div class="cours-container">
-
-                <?php
-                include("connexion.php");
-
-                if (isset($_GET['filter'])) {
-                    $filtrer = $_GET['filter'];
-                } else {
-                    $filtrer = 0;
-                }
-
-                $requete = "SELECT grossematiere.*, utilisateurs.nom, utilisateurs.prenom
-                FROM grossematiere
-                INNER JOIN utilisateurs ON grossematiere.prof_ext = utilisateurs.id_utilisateurs";
-
-                if ($filtrer != 0) {
-                    if ($filtrer == 1) {
-                        $requete .= " WHERE grossematiere.type = 'SAE'";
-                    } elseif ($filtrer == 2) {
-                        $requete .= " WHERE grossematiere.type = 'Ressources'";
-                    }
-                }
-
-                $requete .= " ORDER BY grossematiere.id_matiere DESC";
-
-                $stmt = $db->query($requete);
-                $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($resultat as $cours) {
-                    echo "<div class='cours'>
-                    <a href='coursindividuel.php?id_matiere={$cours["id_matiere"]}'>
-                    <h2>{$cours["nom_mat"]}</h2>
-                    <p> Créé par {$cours["nom"]} {$cours["prenom"]}</p>
-                </div> </a>";
-                }
-                ?>
-            </div>
-
-        </div>
-
-    </main>
-
-    
-    <footer>
-        <a href='mentions_legales.html'>
-            <p> Mentions légales </p>
-        </a>
-    </footer>
+}
+?>
 
 </body>
-
-<script src='js/script_accueil.js'></script>
-<script src='js/script_dark_mode.js'></script>
-
 </html>
