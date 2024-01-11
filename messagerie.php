@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='css/style_navigation.css'>
     <title>Document</title>
 </head>
+
 <body>
-<?php
+    <?php
     session_start();
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
@@ -171,39 +173,40 @@
     </header>
 
     <main>
-        <div class="email-container">
-            <div class="email-preview" onclick="toggleContent(this)">
-                <div class="email-sender">
-                    <div class="sender-avatar"></div>
-                    <span>John Doe</span>
-                </div>
-                <div class="email-details">
-                    <span>21 Janvier, 10:30 AM</span>
-                    <span>Nouvelles importantes</span>
-                </div>
-            </div>
-            <div class="email-content">
-                <p>Cher étudiant,</p>
-                <p>Voici quelques nouvelles importantes pour vous...</p>
-            </div>
-        </div>
+    <?php
+include('connexion.php');
 
-        <div class="email-container">
-            <div class="email-preview" onclick="toggleContent(this)">
-                <div class="email-sender">
-                    <div class="sender-avatar"></div>
-                    <span>Jane Smith</span>
-                </div>
-                <div class="email-details">
-                    <span>20 Janvier, 15:45 PM</span>
-                    <span>Rappel: Projet à rendre</span>
-                </div>
-            </div>
-            <div class="email-content">
-                <p>Cher étudiant,</p>
-                <p>Rappelez-vous que le projet doit être rendu d'ici la fin de la semaine...</p>
-            </div>
-        </div>
+$destinataire = $_SESSION['login'];
+
+$requete = "SELECT messages.*, utilisateurs.nom AS nom_expediteur, utilisateurs.prenom AS prenom_expediteur, utilisateurs.photoprofil AS photoprofil_expediteur
+            FROM messages, utilisateurs
+            WHERE messages.destinataire = :destinataire
+            AND messages.expediteur = utilisateurs.login
+            ORDER BY messages.date_mess DESC";
+
+$stmt = $db->prepare($requete);
+$stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_STR);
+$stmt->execute();
+
+$resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+var_dump($resultat);
+
+foreach ($resultat as $message) {
+    echo "<div class='message'>
+            <div>
+                <h2> {$message["objet"]}</h2>
+                <p> Envoyé par : {$message["nom_expediteur"]} {$message["prenom_expediteur"]} </p> 
+                <img src='upload/{$message["photoprofil_expediteur"]}'>
+                <p> Contenu : {$message["contenu_mss"]} </p> 
+                <p> Date : {$message["date_mess"]} </p> 
+            </div> <br><br>
+          </div>";
+}
+?>
+
+
+
+
 
         <a href="unmessage.php">Écrire un nouveau message</a>
 
@@ -214,4 +217,5 @@
 </body>
 <script src='js/script_accueil.js'></script>
 <script src='js/script_dark_mode.js'></script>
+
 </html>

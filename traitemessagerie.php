@@ -19,7 +19,7 @@ session_start();
 
         $objet = $_POST['objet'];
         $contenu = $_POST['contenu'];
-        $expediteur = $_SESSION['login'];
+        // $expediteur = $_SESSION['login'];
         $destinataire = $_POST['eleve'];
 
         $content_dir = 'pieces_jointes/';
@@ -38,12 +38,13 @@ session_start();
 
         // Déterminer si le message est destiné à tous les étudiants
         $solooutous = ($_POST['eleve'] == 'Tous') ? 'tous' : 'solo';
+    
+       $requete = "INSERT INTO messages (objet, contenu_mss, expediteur, destinataire, piece_jointe, solooutous, date_mess) VALUES (:objet, :contenu, :expediteur, :destinataire, :piece_jointe, :solooutous, NOW())";
 
-        $requete = "INSERT INTO messages (objet, contenu_mss, expediteur, destinataire, piece_jointe, solooutous) VALUES (:objet, :contenu, :expediteur, :destinataire, :piece_jointe, :solooutous)";
         $stmt = $db->prepare($requete);
         $stmt->bindValue(':objet', $objet, PDO::PARAM_STR);
         $stmt->bindValue(':contenu', $contenu, PDO::PARAM_STR);
-        $stmt->bindValue(':expediteur', $expediteur, PDO::PARAM_STR);
+        $stmt->bindValue(':expediteur', $_SESSION["id"], PDO::PARAM_STR);
         $stmt->bindValue(':destinataire', $destinataire, PDO::PARAM_INT);
         $stmt->bindValue(':piece_jointe', $name_file, PDO::PARAM_STR);
         $stmt->bindValue(':solooutous', $solooutous, PDO::PARAM_STR);
