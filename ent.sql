@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 10 jan. 2024 à 18:44
+-- Généré le : jeu. 11 jan. 2024 à 00:34
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -33,12 +33,12 @@ CREATE TABLE IF NOT EXISTS `abscence_retard` (
   `titre` varchar(255) NOT NULL,
   `date` date NOT NULL,
   `nombre` time NOT NULL,
-  `ext_cours` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `ext_cours` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `eleve` int NOT NULL,
   `prof` int NOT NULL,
-  `justificatif` text CHARACTER SET utf8mb4,
+  `justificatif` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   PRIMARY KEY (`id_abs`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `abscence_retard`
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `controle` (
   `enseignant` varchar(255) NOT NULL,
   `ext_enseignant` int NOT NULL,
   PRIMARY KEY (`id_controle`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `controle`
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `cours` (
   `coef` int DEFAULT NULL,
   `ext_matiere` int NOT NULL,
   PRIMARY KEY (`id_cours`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `cours`
@@ -115,9 +115,9 @@ CREATE TABLE IF NOT EXISTS `crous` (
   `dessert` varchar(100) NOT NULL,
   `date` date NOT NULL,
   `image_plat` varchar(200) NOT NULL,
-  `lieu` enum('ESIEE','Copernic') CHARACTER SET utf8mb4,
+  `lieu` enum('ESIEE','Copernic') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `crous`
@@ -145,10 +145,10 @@ CREATE TABLE IF NOT EXISTS `grossematiere` (
   `nom_mat` text NOT NULL,
   `coefficient` int NOT NULL,
   `illustration` text NOT NULL,
-  `type` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+  `type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `prof_ext` int NOT NULL,
   PRIMARY KEY (`id_matiere`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `grossematiere`
@@ -164,6 +164,23 @@ INSERT INTO `grossematiere` (`id_matiere`, `nom_mat`, `coefficient`, `illustrati
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id_message` int NOT NULL AUTO_INCREMENT,
+  `objet` varchar(800) NOT NULL,
+  `contenu_mss` text NOT NULL,
+  `expediteur` int NOT NULL,
+  `destinataire` int NOT NULL,
+  `piece_jointe` text NOT NULL,
+  PRIMARY KEY (`id_message`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `notes`
 --
 
@@ -171,8 +188,8 @@ DROP TABLE IF EXISTS `notes`;
 CREATE TABLE IF NOT EXISTS `notes` (
   `notes` float NOT NULL,
   `id_note` int NOT NULL AUTO_INCREMENT,
-  `nom_note` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `ext_module` varchar(800) CHARACTER SET utf8mb4 NOT NULL,
+  `nom_note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `ext_module` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `ext_prof` int NOT NULL,
   `ext_cours` int NOT NULL,
   `ext_eleve` int NOT NULL,
@@ -180,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `notes` (
   `coef_matiere` int NOT NULL,
   `date_note` date NOT NULL,
   PRIMARY KEY (`id_note`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `notes`
@@ -188,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `notes` (
 
 INSERT INTO `notes` (`notes`, `id_note`, `nom_note`, `ext_module`, `ext_prof`, `ext_cours`, `ext_eleve`, `coef_cours`, `coef_matiere`, `date_note`) VALUES
 (18, 21, 'DST dev', '15', 22, 15, 16, 4, 3, '2023-11-15'),
-(18, 22, 'Oral usability', '15', 22, 15, 13, 15, 15, '2023-09-30'),
+(20, 22, 'Oral usability', '15', 22, 15, 13, 15, 15, '2023-09-30'),
 (18, 12, 'TPTEST', '15', 22, 14, 0, 0, 0, '2023-12-23'),
 (14, 17, 'Contrôle amphi', '7', 23, 12, 16, 2, 3, '2023-12-28'),
 (5, 18, 'un oral', '7', 23, 12, 18, 2, 3, '2024-01-05'),
@@ -208,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `travail_a_faire` (
   `enseignant` varchar(255) NOT NULL,
   `tache_prof` int NOT NULL,
   PRIMARY KEY (`id_travail`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `travail_a_faire`
@@ -230,30 +247,30 @@ INSERT INTO `travail_a_faire` (`id_travail`, `travail`, `date`, `enseignant`, `t
 DROP TABLE IF EXISTS `utilisateurs`;
 CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `login` varchar(100) NOT NULL,
-  `nom` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
-  `prenom` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
+  `nom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `prenom` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_utilisateurs` int NOT NULL AUTO_INCREMENT,
   `mot_de_passe` varchar(255) NOT NULL,
   `photoprofil` text NOT NULL,
   `role` varchar(800) NOT NULL,
-  `email` varchar(200) CHARACTER SET utf8mb4 NOT NULL,
-  `promotion` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `bio` varchar(500) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `email` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `promotion` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `bio` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id_utilisateurs`),
   UNIQUE KEY `nom` (`nom`),
   UNIQUE KEY `prenom` (`prenom`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`login`, `nom`, `prenom`, `id_utilisateurs`, `mot_de_passe`, `photoprofil`, `role`, `email`, `promotion`, `bio`) VALUES
-('Anchu', 'Fatimarajan', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'titititi'),
+('f.anchana', 'Fatimarajan', 'Anchana', 13, '$2y$10$df6vZg0tHy/YSsynr8Obge8DoI9jPOP1JzXeoZzJweXlHM4yj4gT2', 'profil_Anchu.png', 'Étudiant.e', 'anchana.mlp@gmail.com', 'MMI2', 'J\'adore Kirbyyyy'),
 ('Alilo', 'Zhyla', 'Alina', 15, '$2y$10$p1RRb4DHd.gCIEvkGnUaAO5YEmD5P6mfovyYe92yaJxnXe3LTLVZm', 'default.png', 'Membre du CROUS', 'alina@gmail.com', NULL, NULL),
-('kelis', 'Oshoffa', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'MMI2', NULL),
+('o.kelis', 'Oshoffa', 'Kelis', 16, '$2y$10$i2SO7dXWh8mUfy.ZEcT8TuhgLdTUyrfIx2DFUpdYPc5MKh//hEV6W', '1-icon.png', 'Étudiant.e', 'keliskeren@gmail.com', 'MMI2', NULL),
 ('c.gaelle', 'Charpentier', 'Gaëlle', 21, '$2y$10$cF.Hon4PfAh9z6oLQvL0F.B11NA57.974N2yVdZEJEJQfa9.SX9N6', 'default.png', 'Enseignant.e', 'gaelle.charpentier@univ-eiffel.fr', NULL, NULL),
 ('Admin', 'Admin', 'Admin', 17, '$2y$10$PwueylyOGxe1/ma1GyfN4OdjAC65xPB247Fr1p6ztobzzyxQJb9LK', 'default.png', 'Enseignant.e', 'fatimarajananchana@gmail.com', NULL, NULL),
 ('c.loana', 'Chalach', 'Loana', 18, '$2y$10$2BHq1NZWGm9gkS8IXxQ40e5wE6C8BHSAAAocvZkSzk7NXyo2AAGA.', 'default.png', 'Étudiant.e', 'loana@gmail.com', 'MMI2', NULL),

@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $to = $email;
         $subject = 'Réinitialisation du mot de passe';
         
-        $resetLink = 'http://espacemmi.fr/formulaire_mdp.php'; 
+        $resetLink = 'http://espacemmichamps.fr/formulaire_mdp.php'; 
         
         $body = "Bonjour, veuillez cliquer sur le lien suivant pour procéder à la réinitialisation de votre mot de passe : <a href='$resetLink'>réinitialiser le mot de passe</a>";
         
