@@ -9,69 +9,31 @@ include("connexion.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='css/style_accueil.css'>
+    <link rel='stylesheet' href='css/style_backoffice.css'>
     <link rel='stylesheet' href='css/style_navigation.css'>
     <link rel='stylesheet' href='css/dark_mode.css'>
     <title>Espace MMI | admninistration</title>
 </head>
 
 <body>
-    <style>
-        .popup-visible {
-  z-index: 999;
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 80%;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 20px;
-  background-color: #252525;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  line-height: 2.5rem;
-  color: #D1CECE;
-  text-align: center;
-  border-radius: 22px;
-}
 
-.popup-visible img {
-  cursor: pointer;
-  width: 30px !important;
-  height: 30px !important;
-  position: absolute;
-  filter: contrast(0%);
-  top: 10px;
-  right: 10px;
-}
-
-.croix {
-  position: fixed;
-
-}
-
-.mention-ptit{
-  cursor: pointer;
-}
-    </style>
-<?php
+    <?php
     if (!isset($_SESSION['login'])) {
         header('Location: index.php?access_denied');
         exit();
     }
-    
+
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Membre du CROUS') {
         header('Location: page_crous.php?access_denied');
     }
     if (isset($_SESSION["role"]) && $_SESSION["role"] === 'Étudiant.e') {
         header('Location: accueil.php?access_denied');
     }
-    
+
 
     ?>
 
-<header>
+    <header>
         <div class='menu'>
 
             <!-- Logo Accueil -->
@@ -184,7 +146,9 @@ include("connexion.php");
                         </div>
                         <div class='tool'>
                             <img class='lettre' src='img/1-lettre.svg' alt=''>
-                            <a href='messagerie.php'><p>Messagerie</p></a>
+                            <a href='messagerie.php'>
+                                <p>Messagerie</p>
+                            </a>
                         </div>
                         <div class='tool'>
                             <button class="flex_bouton" onclick="toggleDarkMode()"><img class='dark_mode'
@@ -212,109 +176,130 @@ include("connexion.php");
 
     </header>
 
-
-    <form action="traiteinscription.php" method="POST">
-        <h1>Inscription</h1>
-
-        <label for="login">Login</label>
-        <input type="text" id="login" name="login" required>
+    <main>
 
 
+        <div class='contain-back'>
 
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" name="nom" required>
+            <nav class="fda" aria-label="Breadcrumb">
+                <ul class="ul">
+                    <li><a href="backofficeprof.php">Accueil</a></li><span> 〉 </span>
+                </ul>
+            </nav>
 
-        <label for="prenom">Prénom</label>
-        <input type="text" id="prenom" name="prenom" required>
+            <h1 class="h1">Inscription</h1>
 
-
-        <label for="mail">Email</label>
-        <input type="email" id="mail" name="email" required>
-
-
-        <fieldset required>
-            <legend>Choisissez votre rôle</legend>
-
-            <div>
-                <input class="radio" type="radio" id="eleve" name="role" value="Étudiant.e"
-                    onclick="activerChampPromotion()" />
-                <label class="choix" for="eleve">Étudiant.e</label>
-            </div>
-
-            <div>
-                <input class="radio" type="radio" id="prof" name="role" value="Enseignant.e" />
-                <label class="choix" for="prof">Professeur.e</label>
-            </div>
-
-            <div>
-                <input class="radio" type="radio" id="crous" name="role" value="Membre du CROUS" />
-                <label class="choix" for="crous">Membre du CROUS</label>
-            </div>
-        </fieldset>
+            <form class="ajouter" action="traiteinscription.php" method="POST">
 
 
-        <!-- Champ de promotion pour les étudiants -->
-        <div id="champPromotion" style="display: none;">
-            <label>Votre promotion :</label>
-            <label for="mmi1">MMI1</label>
-            <input type="radio" name="promotion" id="mmi1" value="MMI1">
-
-            <label for="mmi2">MMI2</label>
-            <input type="radio" name="promotion" id="mmi2" value="MMI2">
-
-            <label for="mmi3">MMI3</label>
-            <input type="radio" name="promotion" id="mmi3" value="MMI3">
-        </div>
-
-        <br>
+                <label for="login">Login</label>
+                <input type="text" id="login" name="login" required>
 
 
-        <label for="password">Entrez un mot de passe</label>
-        <input type="password" id="password" name="password" required>
+
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" required>
 
 
-        <label for="password2">Répétez le même mot de passe</label>
-        <input type="password" id="password2" name="password2" required>
-
-        <button type="submit" name='soumettre'>S'inscrire</button>
-    </form>
+                <label for="mail">Email</label>
+                <input type="email" id="mail" name="email" required>
 
 
-    <?php
-    include('connexion.php');
-    $stmt = $db->query('SELECT * FROM utilisateurs ORDER BY id_utilisateurs');
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                <fieldset required>
+                    <legend>Choisissez votre rôle</legend>
 
-    foreach ($result as $users) {
-        if ($users['login'] !== 'Admin') {
-            $pop_upId = "supprimer_user_" . $users['id_utilisateurs']; // ID unique pour chaque modal
-    
-            echo "
+                    <div>
+                        <input class="radio" type="radio" id="eleve" name="role" value="Étudiant.e"
+                            onclick="activerChampPromotion()" />
+                        <label class="choix" for="eleve">Étudiant.e</label>
+                    </div>
+
+                    <div>
+                        <input class="radio" type="radio" id="prof" name="role" value="Enseignant.e" />
+                        <label class="choix" for="prof">Professeur.e</label>
+                    </div>
+
+                    <div>
+                        <input class="radio" type="radio" id="crous" name="role" value="Membre du CROUS" />
+                        <label class="choix" for="crous">Membre du CROUS</label>
+                    </div>
+                </fieldset>
+
+
+                <!-- Champ de promotion pour les étudiants -->
+                <div id="champPromotion" style="display: none;">
+                    <label>Votre promotion :</label>
+                    <label for="mmi1">MMI1</label>
+                    <input type="radio" name="promotion" id="mmi1" value="MMI1">
+
+                    <label for="mmi2">MMI2</label>
+                    <input type="radio" name="promotion" id="mmi2" value="MMI2">
+
+                    <label for="mmi3">MMI3</label>
+                    <input type="radio" name="promotion" id="mmi3" value="MMI3">
+                </div>
+
+                <br>
+
+
+                <label for="password">Entrez un mot de passe</label>
+                <input type="password" id="password" name="password" required>
+
+
+                <label for="password2">Répétez le même mot de passe</label>
+                <input type="password" id="password2" name="password2" required>
+
+                <button type="submit" name='soumettre'>S'inscrire</button>
+            </form>
+
+
+            <?php
+            include('connexion.php');
+            $stmt = $db->query('SELECT * FROM utilisateurs ORDER BY id_utilisateurs');
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($result as $users) {
+                if ($users['login'] !== 'Admin') {
+                    $pop_upId = "supprimer_user_" . $users['id_utilisateurs']; // ID unique pour chaque modal
+            
+                    echo "
             <p>{$users['id_utilisateurs']}, {$users['login']}, {$users['nom']}, {$users['prenom']}, {$users['email']}, {$users['role']} {$users['promotion']} </p>
             <a href='javascript:void(0);' class='btn btn-danger mention-ptit' onclick='afficherPopupConfirmation({$users["id_utilisateurs"]}, \"{$users["login"]}\")'>Supprimer</a>";
-            
-            
-    
-            echo "<div class='popup-visible' id='{$pop_upId}'>
+
+
+
+                    echo "<div class='popup-visible' id='{$pop_upId}'>
                 <img src='img/croix.png' alt='fermer' class='fermer'>
                 <div class='mention'>
                     <p class='user'>Êtes-vous sûr de vouloir effacer définitivement {$users['login']} ?</p>
-                    <a href='traitesuppression.php?id={$users["id_utilisateurs"]}' class='btn btn-warning' id='lienSuppression'>Oui</a>
-                    <a href='javascript:void(0);' class='btn btn-secondary' onclick='annulerSuppression()'>Non</a>
+                    <a href='traitesuppression.php?id={$users["id_utilisateurs"]}' class='btn-oui' id='lienSuppression'>Oui</a>
+                    <a href='javascript:void(0);' class='btn-oui' onclick='annulerSuppression()'>Non</a>
                 </div>
             </div>";
-        }
-    }
-?>
+                }
+            }
+            ?>
 
 
 
-<form action="deconnexion.php" action='GET'>
-        <input type="submit" name="deconnect" value="Se déconnecter">
-    </form>
+            <form action="deconnexion.php" action='GET'>
+                <input type="submit" name="deconnect" value="Se déconnecter">
+            </form>
 
 
+        </div>
+    </main>
+
+
+    <footer>
+        <a href='mentions_legales.html'>
+            <p> Mentions légales </p>
+        </a>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -335,9 +320,9 @@ include("connexion.php");
         });
 
     </script>
-        <script>
-              // pour afficher la promotion si jamais on coche étudiant
-              var roleButtons = document.querySelectorAll('input[name="role"]');
+    <script>
+        // pour afficher la promotion si jamais on coche étudiant
+        var roleButtons = document.querySelectorAll('input[name="role"]');
         roleButtons.forEach(function (button) {
             button.addEventListener('click', function () {
                 activerChampPromotion();
@@ -357,36 +342,38 @@ include("connexion.php");
         }
     </script>
 
-<script>
-    let popup = document.querySelector('.popup-visible');
+    <script>
+        let popup = document.querySelector('.popup-visible');
 
-    function afficherPopupConfirmation(userId, userLogin) {
-        let lienSuppression = document.getElementById('lienSuppression');
-        lienSuppression.href = 'traitesuppression.php?id=' + userId;
+        function afficherPopupConfirmation(userId, userLogin) {
+            let lienSuppression = document.getElementById('lienSuppression');
+            lienSuppression.href = 'traitesuppression.php?id=' + userId;
 
-        let user = document.querySelector('.user');
-        user.innerHTML = 'Êtes-vous sûr de vouloir effacer définitivement ' + userLogin + '?';
+            let user = document.querySelector('.user');
+            user.innerHTML = 'Êtes-vous sûr de vouloir effacer définitivement ' + userLogin + '?';
 
-        popup.style.display = 'block';
-    }
+            popup.style.display = 'block';
+        }
 
-    function fermerPopup() {
-        popup.style.display = 'none';
-    }
+        function fermerPopup() {
+            popup.style.display = 'none';
+        }
 
-    function annulerSuppression() {
-        fermerPopup();
-    }
+        function annulerSuppression() {
+            fermerPopup();
+        }
 
-    let fermer = document.querySelector('.fermer');
-    fermer.addEventListener('click', function () {
-        fermerPopup();
-    });
-</script>
+        let fermer = document.querySelector('.fermer');
+        fermer.addEventListener('click', function () {
+            fermerPopup();
+        });
+    </script>
+
 
 
 
 </body>
 <script src='js/script_accueil.js'></script>
 <script src='js/script_dark_mode.js'></script>
+
 </html>
