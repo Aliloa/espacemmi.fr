@@ -1,4 +1,32 @@
-Dans le cadre d'un projet universitaire, nous devions réaliser un site de réservation.
+Dans le cadre d'un projet universitaire, nous devions réaliser la refont de notre ent.
+Voici le lien public de ce dernier: https://espacemmichamps.fr/
+
+Afin  d'installer un site et une base de données sur un serveur O2switch, voici les étapes à suivre:
+
+# Étape 1:
+Connectez-vous à votre compte O2Switch et accédez au gestionnaire de fichiers pour téléchargez tous les fichiers du site. Il suffira ensuite d'exporter la base de données via l'interface de gestion de base de données en cliquant sur phpMyAdmin.
+
+# Étape 2: 
+Créer une nouvelle base de données et un nouvel utilisateur pour le site sur l'espace compte. Il faut ensuite lier un utilisateur à la base de données. Créez-en un s'il le faut et ajouter lui tous les privilèges.
+
+# Étape 3: 
+Utiliser un client FTP (FileZilla, par exemple) pour transférer les fichiers du site vers le serveur O2switch ou importer directement les fichiers dans le répertoire choisi dans gestionnaire de fichiers. Il faut s'assurer que les permissions des fichiers et des répertoires sont correctes.
+
+
+# Étape 4: 
+Accéder à la gestion de la base de données sur le nouveau serveur et importez le fichier SQL que précédemment exporté.
+
+# Étape 5:
+Il faut s'assurer de modifier le fichier de configuration du site pour refléter les nouvelles informations de la base de données (nom de la base de données, nom d'utilisateur, mot de passe).
+
+# Étape 6:
+Accéder sur le site web sur le site à l'adresse espacemmichamps.fr et faire des tests pour vérifier que toutes les requêtes PHP fonctionnent correctement.
+
+# Étape 7:
+Plus tard, patienter le temps que l'option "Redirection HTTPS" soit disponible, puis activer l'option depuis l'espaces "Domaines" pour garantir la sécurité du site web.
+
+
+<!-- Dans le cadre d'un projet universitaire, nous devions réaliser un ent.
 Voici le lien public de ce dernier: https://espacemmichamps.fr/
 
 Afin de réinstaller un site et une base de données sur un serveur local XAMPP, en précisant l'URL locale à utiliser pour y accéder, voici les étapes à suivre:
@@ -21,4 +49,4 @@ Dans le document "connexion.php", modifiez les paramètres tels que le nom de la
 Retourner dans le navigateur Web de votre choix et saisissez l'URL "http://localhost/espacemmichamps.fr".
 Ce dernier affichera maintenant votre site réinstallé, accessible localement depuis votre machine via XAMPP
 
-# espacemmichamps.fr
+# espacemmichamps.fr -->
